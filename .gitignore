@@ -5,6 +5,7 @@ public
 
 .editorconfig
 babel.config.js
+jsconfig.json
 
 
 # local env files
