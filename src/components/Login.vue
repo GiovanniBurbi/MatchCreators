@@ -81,14 +81,14 @@
               color="indigo">
               </v-date-picker>
             </v-menu>
-            <v-row class="pt-4">
+            <v-row class="pt-4 pb-6">
             <v-icon class="pl-3">mdi-account</v-icon>
             <h2 class="pt-1 pl-2 font-weight-regular grey--text text--darken-1">Position</h2>
             </v-row>
             <position-field/>
           </v-form>
         </v-card-text>
-        <v-card-actions class="pb-4 pt-0">
+        <v-card-actions class="pb-4 pt-4">
           <v-btn x-large dark color="indigo" rounded block elevation="2">
             Let's start!
           </v-btn>

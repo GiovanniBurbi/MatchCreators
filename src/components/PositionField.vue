@@ -29,8 +29,6 @@ export default {
 </script>
 <style scoped>
 .container {
-  margin:30px auto;
-  padding: 5px auto;
   max-width: 450px;
 }
 .button {
