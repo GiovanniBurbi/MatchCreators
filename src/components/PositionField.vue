@@ -7,7 +7,7 @@
           <h1 class="position">Goalkeeper</h1>
         </div>
       </v-col>
-      <v-col cols="4">
+     <v-col cols="4">
         <div class="button">
           <img class="player-def" src="../assets/defender.png">
           <h1 class="position">Defender</h1>
@@ -37,10 +37,10 @@ export default {
   margin-right: auto;
   max-width: 80px;
   opacity: 30%;
-  /* filter: brightness(100); white */
-  /* filter: brightness(0); black*/
+/*   filter: brightness(100); white
+  filter: brightness(0); black */
 }
-.player-def {
+ .player-def {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -72,14 +72,11 @@ h1:after {
 .button {
   min-height: 80px;
   max-width: 100px;
-  fill-opacity: 20%;
   transform: scale(1);
   transition: transform 200ms ease-in-out;
 }
 .button:hover {
   cursor: pointer;
-/*   border: solid 1px rgba(63, 81, 181, 0.4);
-  border-radius: 20px; */
   transform: scale(1.1);
   transition: transform 200ms ease-in-out;
 }
