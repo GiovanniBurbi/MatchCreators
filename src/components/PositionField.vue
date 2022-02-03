@@ -31,35 +31,6 @@ export default {
 .container {
   max-width: 450px;
 }
-.button {
-  min-height: 80px;
-  max-width: 100px;
-  fill-opacity: 20%;
-  transform: scale(1);
-  transition: transform 200ms ease-in-out;
-}
-.button:hover {
-  cursor: pointer;
-/*   border: solid 1px rgba(63, 81, 181, 0.4);
-  border-radius: 20px; */
-  transform: scale(1.1);
-  transition: transform 200ms ease-in-out;
-}
-.button:hover .player-fw {
-  opacity: 100%;
-}
-.button:hover .player-def {
-  opacity: 100%;
-}
-.button:hover .player-gk {
-  opacity: 100%;
-}
-.button:hover h1 {
-  opacity: 100%;
-}
-.button:hover h1:after {
-  transform: scaleX(1);
-}
 .player-fw {
   display: block;
   margin-left: auto;
@@ -97,5 +68,34 @@ h1:after {
   transform: scaleX(0);
   transition: transform 200ms ease-in-out;
   opacity: 100%;
+}
+.button {
+  min-height: 80px;
+  max-width: 100px;
+  fill-opacity: 20%;
+  transform: scale(1);
+  transition: transform 200ms ease-in-out;
+}
+.button:hover {
+  cursor: pointer;
+/*   border: solid 1px rgba(63, 81, 181, 0.4);
+  border-radius: 20px; */
+  transform: scale(1.1);
+  transition: transform 200ms ease-in-out;
+}
+.button:hover .player-fw {
+  opacity: 100%;
+}
+.button:hover .player-def {
+  opacity: 100%;
+}
+.button:hover .player-gk {
+  opacity: 100%;
+}
+.button:hover h1 {
+  opacity: 100%;
+}
+.button:hover h1:after {
+  transform: scaleX(1);
 }
 </style>
