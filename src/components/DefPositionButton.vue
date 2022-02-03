@@ -42,6 +42,8 @@ export default {
 .button {
   min-height: 80px;
   max-width: 100px;
+  transform: scale(1);
+  transition: transform 100ms ease-in-out;
 }
 .player {
   display: block;
