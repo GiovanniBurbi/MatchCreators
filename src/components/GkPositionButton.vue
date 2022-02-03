@@ -28,7 +28,7 @@ export default {
     currentSelection(value) {
       if (value !== 'GK' && this.click === true) {
         this.click = false;
-        this.classes.pop();
+        this.classes = ['button'];
       }
     },
   },
@@ -48,6 +48,7 @@ export default {
     clicked() {
       if (!this.click) {
         this.click = true;
+        this.classes.push('selection');
         this.setRgtPosSelection('GK');
       }
     },
@@ -65,6 +66,7 @@ export default {
   max-width: 100px;
   transform: scale(1);
   transition: transform 150ms ease-in-out;
+  cursor: pointer;
 }
 .player {
   display: block;
@@ -98,7 +100,7 @@ export default {
 .zoom .position {
   opacity: 100%;
 }
-.zoom .position:after {
+.selection .position:after {
   transform: scaleX(1);
 }
 </style>
