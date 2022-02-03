@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
   name: 'GkPositionButton',
 
@@ -14,6 +16,21 @@ export default {
       classes: ['button'],
       click: false,
     };
+  },
+
+  computed: {
+    currentSelection() {
+      return this.$store.getters.getRgtPosSelection;
+    },
+  },
+
+  watch: {
+    currentSelection(value) {
+      if (value !== 'GK' && this.click === true) {
+        this.click = false;
+        this.classes.pop();
+      }
+    },
   },
 
   methods: {
@@ -27,8 +44,12 @@ export default {
         this.classes.pop();
       }
     },
+    ...mapMutations(['setRgtPosSelection']),
     clicked() {
-      this.click = true;
+      if (!this.click) {
+        this.click = true;
+        this.setRgtPosSelection('GK');
+      }
     },
   },
 };
@@ -43,7 +64,7 @@ export default {
   min-height: 80px;
   max-width: 100px;
   transform: scale(1);
-  transition: transform 100ms ease-in-out;
+  transition: transform 150ms ease-in-out;
 }
 .player {
   display: block;
@@ -51,13 +72,14 @@ export default {
   margin-right: auto;
   max-width: 58px;
   opacity: 40%;
+  transition: 150ms;
 }
 .position {
   color: rgba(63, 81, 181);
   font-size: 19px;
   font-weight: 400;
   text-align: center;
-  opacity: 20%;
+  opacity: 50%;
 }
 .position:after {
   display: block;
