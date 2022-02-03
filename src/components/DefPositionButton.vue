@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'DefPositionButton',
@@ -19,9 +19,7 @@ export default {
   },
 
   computed: {
-    currentSelection() {
-      return this.$store.getters.getRgtPosSelection;
-    },
+    ...mapGetters({ currentSelection: 'getRgtPosSelection' }),
   },
 
   watch: {
