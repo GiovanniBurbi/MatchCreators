@@ -11,17 +11,25 @@
         </v-card-title>
 
         <v-card-text class="pb-0 pt-2">
-          <v-form >
+          <v-form ref="login">
+
             <v-text-field color="indigo" label="Username"
-            clearable prepend-icon="mdi-account">
+            clearable prepend-icon="mdi-account"
+            :rules="[rules.required, rules.noSpaces]">
             </v-text-field>
-            <v-text-field color="indigo" label="Password"
-            clearable prepend-icon="mdi-lock"></v-text-field>
+
+           <v-text-field :rules="[rules.required, rules.noSpaces]"
+            :append-icon="showPsw ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="showPsw ? 'text' : 'password'"
+            color="indigo" label="Password" @click:append="showPsw = !showPsw"
+            clearable prepend-icon="mdi-lock">
+            </v-text-field>
+
           </v-form>
         </v-card-text>
 
-        <v-card-actions>
-          <v-btn x-large dark color="indigo" rounded block elevation="2">
+        <v-card-actions class="pt-4">
+          <v-btn @click="submitLogin" x-large dark color="indigo" rounded block elevation="2">
             Login
           </v-btn>
         </v-card-actions>
@@ -43,20 +51,31 @@
         </v-card-title>
 
         <v-card-text class="pb-0 pt-2">
-          <v-form >
+          <v-form ref="firstStepReg">
+
             <v-text-field color="indigo" label="Username"
-            clearable prepend-icon="mdi-account">
+            clearable prepend-icon="mdi-account" :counter="10"
+            :rules="[rules.required, rules.userMax, rules.noSpaces]">
             </v-text-field>
+
             <v-text-field color="indigo" label="Email"
-            clearable prepend-icon="mdi-email">
+            clearable prepend-icon="mdi-email"
+            :rules="[rules.required, rules.emailFormat, rules.noSpaces]"
+            hint="your-email-name@example.com">
             </v-text-field>
-            <v-text-field color="indigo" label="Password"
-            clearable prepend-icon="mdi-lock"></v-text-field>
+
+            <v-text-field :rules="[rules.required, rules.pswMin, rules.noSpaces]"
+            :append-icon="showPsw ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="showPsw ? 'text' : 'password'"
+            color="indigo" label="Password" @click:append="showPsw = !showPsw"
+            clearable prepend-icon="mdi-lock">
+            </v-text-field>
+
           </v-form>
         </v-card-text>
 
-        <v-card-actions>
-          <v-btn @click="step++" x-large dark color="indigo" rounded block elevation="2">
+        <v-card-actions class="pt-4">
+          <v-btn @click="submitReg" x-large dark color="indigo" rounded block elevation="2">
             Sign up
           </v-btn>
         </v-card-actions>
@@ -136,6 +155,14 @@ export default {
       activePicker: null,
       date: null,
       menu: false,
+      showPsw: false,
+      rules: {
+        required: (v) => !!v || 'Required',
+        userMax: (v) => v?.length <= 10 || 'Username must be less than 10 characters',
+        pswMin: (v) => v?.length >= 8 || 'Password must be at least 8 characters',
+        emailFormat: (v) => /.+@.+\...+/.test(v) || 'Email must be valid',
+        noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
+      },
     };
   },
   watch: {
@@ -146,6 +173,16 @@ export default {
   methods: {
     save(date) {
       this.$refs.menu.save(date);
+    },
+    submitReg() {
+      if (this.$refs.firstStepReg.validate()) {
+        this.step += 1;
+      }
+    },
+    submitLogin() {
+      if (this.$refs.login.validate()) {
+        console.log('ciao');
+      }
     },
   },
 };

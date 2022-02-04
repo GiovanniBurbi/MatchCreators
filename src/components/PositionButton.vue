@@ -1,7 +1,7 @@
 <template>
   <div :class="classes" @mouseover="hoverOver" @mouseout="hoverOut" @click="clicked">
     <img :class="fieldPos" :src="require(`@/assets/${fieldPos}.png`)">
-    <h1 class="position" style="text-transform:capitalize">{{ fieldPos }}</h1>
+    <h1 class="position">{{ fieldPos }}</h1>
   </div>
 </template>
 
@@ -103,6 +103,7 @@ export default {
   font-weight: 400;
   text-align: center;
   opacity: 50%;
+  text-transform: capitalize;
 }
 .position:after {
   display: block;
