@@ -2,30 +2,26 @@
   <div class="container">
     <v-row class="px-2">
       <v-col cols="4">
-        <gk-position-button></gk-position-button>
+        <position-button field-pos="goalkeeper"></position-button>
       </v-col>
      <v-col cols="4">
-       <def-position-button></def-position-button>
+       <position-button field-pos="defender"></position-button>
       </v-col>
       <v-col cols="4">
-        <fw-position-button></fw-position-button>
+        <position-button field-pos="forward"></position-button>
       </v-col>
     </v-row>
   </div>
 </template>
 <script>
 
-import GkPositionButton from '@/components/GkPositionButton.vue';
-import DefPositionButton from '@/components/DefPositionButton.vue';
-import FwPositionButton from '@/components/FwPositionButton.vue';
+import PositionButton from '@/components/PositionButton.vue';
 
 export default {
   name: 'PositionField',
 
   components: {
-    GkPositionButton,
-    DefPositionButton,
-    FwPositionButton,
+    PositionButton,
   },
 };
 </script>

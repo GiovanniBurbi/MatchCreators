@@ -1,7 +1,7 @@
 <template>
   <div :class="classes" @mouseover="hoverOver" @mouseout="hoverOut" @click="clicked">
-    <img class="player" src="../assets/defender.png">
-    <h1 class="position">Defender</h1>
+    <img :class="fieldPos" :src="require(`@/assets/${fieldPos}.png`)">
+    <h1 class="position" style="text-transform:capitalize">{{ fieldPos }}</h1>
   </div>
 </template>
 
@@ -9,7 +9,14 @@
 import { mapMutations, mapGetters } from 'vuex';
 
 export default {
-  name: 'DefPositionButton',
+  name: 'PositionButton',
+
+  props: {
+    fieldPos: {
+      type: String,
+      required: true,
+    },
+  },
 
   data() {
     return {
@@ -24,7 +31,7 @@ export default {
 
   watch: {
     currentSelection(value) {
-      if (value !== 'DEF' && this.click === true) {
+      if (value !== this.fieldPos && this.click === true) {
         this.click = false;
         this.classes = ['button'];
       }
@@ -47,7 +54,7 @@ export default {
       if (!this.click) {
         this.click = true;
         this.classes.push('selection');
-        this.setRgtPosSelection('DEF');
+        this.setRgtPosSelection(this.fieldPos);
       }
     },
   },
@@ -66,12 +73,28 @@ export default {
   transition: transform 150ms ease-in-out;
   cursor: pointer;
 }
-.player {
+.goalkeeper {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 58px;
+  opacity: 40%;
+  transition: 150ms;
+}
+.defender {
   display: block;
   margin-left: auto;
   margin-right: auto;
   max-width: 28px;
   opacity: 40%;
+  transition: 150ms;
+}
+.forward {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80px;
+  opacity: 35%;
   transition: 150ms;
 }
 .position {
@@ -92,13 +115,13 @@ export default {
 .zoom {
   transform: scale(1.1);
 }
-.zoom .player {
+.zoom img {
   opacity: 100%;
 }
 .zoom .position {
   opacity: 100%;
 }
-.selection .position:after{
+.selection .position:after {
   transform: scaleX(1);
 }
 </style>
