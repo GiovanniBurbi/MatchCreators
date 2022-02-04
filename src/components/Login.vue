@@ -105,7 +105,8 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field v-model="date" label="Birth date"
                 prepend-icon="mdi-calendar" color="indigo"
-                readonly clearable v-bind="attrs" v-on="on">
+                readonly clearable v-bind="attrs" v-on="on"
+                :rules="[rules.required]">
                 </v-text-field>
               </template>
 
@@ -118,9 +119,10 @@
 
             </v-menu>
 
-            <v-row class="pt-4 pb-6">
+            <v-row class="pt-4 pb-5">
             <v-icon class="pl-3">mdi-account</v-icon>
-            <h2 class="pt-1 pl-2 font-weight-regular grey--text text--darken-1">Position</h2>
+            <h3 class="pt-1 pl-3 font-weight-regular
+            grey--text text--darken-1" style="transform: scale(1.1);">Position</h3>
             </v-row>
 
             <position-field/>
@@ -128,7 +130,7 @@
           </v-form>
         </v-card-text>
 
-        <v-card-actions class="pb-4 pt-4">
+        <v-card-actions class="pb-4 pt-5">
           <v-btn x-large dark color="indigo" rounded block elevation="2">
             Let's start!
           </v-btn>
