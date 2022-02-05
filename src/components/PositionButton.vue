@@ -60,16 +60,16 @@ export default {
         this.classes.pop();
       }
     },
-    /* declare vuex mutation for state registrazionPositionSelection */
-    ...mapMutations(['setRgtPosSelection']),
+    /* declare vuex mutation for state registrationPositionSelection */
+    ...mapMutations({ setSelection: 'setRgtPosSelection' }),
     clicked() {
       /* if button was not pressed, change styling class to be permanent */
       if (!this.click) {
         this.click = true;
         this.classes.push('selection');
         /* set on vuex state this button position name (goalkeeper, defender, forward) */
-        this.setRgtPosSelection(this.fieldPos);
-        /* emit a signal to comunicate that one istance of this button has been pressed */
+        this.setSelection(this.fieldPos);
+        /* emit a signal to communicate that one instance of this button has been pressed */
         this.$emit('clicked');
       }
     },

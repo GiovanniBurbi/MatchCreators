@@ -203,6 +203,15 @@ export default {
         console.log('missing something here');
       }
     },
+    async fetchData() {
+      const res = await fetch('backend.json');
+      const val = await res.json();
+      console.log(val.matches);
+    },
+  },
+
+  mounted() {
+    this.fetchData();
   },
 };
 </script>

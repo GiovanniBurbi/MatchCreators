@@ -1,24 +1,20 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import positionInputField from './modules/positionInputField/index';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    registrationPositionSelection: '',
   },
   mutations: {
-    setRgtPosSelection(state, payload) {
-      state.registrationPositionSelection = payload;
-    },
+
   },
   actions: {
   },
   modules: {
+    posInputField: positionInputField,
   },
   getters: {
-    getRgtPosSelection(state) {
-      return state.registrationPositionSelection;
-    },
   },
 });
