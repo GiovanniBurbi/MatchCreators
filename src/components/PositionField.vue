@@ -55,7 +55,7 @@ export default {
 
   computed: {
     /* define getter of vuex state registrationPositionSelection */
-    ...mapGetters({ currentSelection: 'getRgtPosSelection' }),
+    ...mapGetters({ currentSelection: 'posInputField/getRgtPosSelection' }),
   },
 
   methods: {

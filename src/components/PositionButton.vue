@@ -31,7 +31,7 @@ export default {
   computed: {
     /* declare currentSelection as a method to get vuex state of
     registrationPositionSelection */
-    ...mapGetters({ currentSelection: 'getRgtPosSelection' }),
+    ...mapGetters({ currentSelection: 'posInputField/getRgtPosSelection' }),
   },
 
   watch: {
@@ -61,7 +61,7 @@ export default {
       }
     },
     /* declare vuex mutation for state registrationPositionSelection */
-    ...mapMutations({ setSelection: 'setRgtPosSelection' }),
+    ...mapMutations({ setSelection: 'posInputField/setRgtPosSelection' }),
     clicked() {
       /* if button was not pressed, change styling class to be permanent */
       if (!this.click) {
