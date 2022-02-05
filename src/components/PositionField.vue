@@ -26,9 +26,9 @@
     <v-divider :class="[error ? 'customError' : 'custom']">
     </v-divider>
 
-    <div v-if="error"
-    class="reduce font-weight-regular red--text text-accent-2">Required</div>
-    <div v-if="!error" style="visibility: hidden;">To keep space</div>
+  <div :class="['reduce font-weight-regular red--text text-accent-2', error ? 'expand' : 'shrink']">
+  Required
+  </div>
 
   </div>
 </template>
@@ -94,6 +94,19 @@ export default {
   filter: invert(46%) sepia(71%) saturate(3070%)
   hue-rotate(330deg) brightness(106%) contrast(109%);
 }
+
+.expand{
+  max-height: 50px;
+  transition: max-height .3s ease-in;
+  overflow: hidden;
+}
+
+.shrink{
+  max-height: 0;
+  transition: max-height .25s ease-out;
+  overflow: hidden;
+}
+
 .shake {
   animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
