@@ -15,10 +15,10 @@
 
             <v-text-field color="indigo" label="Username"
             clearable prepend-icon="mdi-account"
-            :rules="[rules.required,]">
+            :rules="[rules.required]">
             </v-text-field>
 
-           <v-text-field :rules="[rules.required,]"
+           <v-text-field :rules="[rules.required]"
             :append-icon="showPsw ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPsw ? 'text' : 'password'"
             color="indigo" label="Password" @click:append="showPsw = !showPsw"
@@ -152,6 +152,7 @@ export default {
       date: null,
       menu: false,
       showPsw: false,
+      /* rules for validate input in text-fields */
       rules: {
         required: (v) => !!v || 'Required',
         userMax: (v) => v?.length <= 10 || 'Username must be less than 10 characters',
@@ -163,29 +164,34 @@ export default {
   },
 
   computed: {
+    /* format date */
     dateFormatting() {
       return this.date ? format(parseISO(this.date), 'do MMMM yyyy') : '';
     },
   },
 
   watch: {
+    /* open menu on year selection when click on text-field */
     menu(val) {
       return val && setTimeout(() => { this.activePicker = 'YEAR'; });
     },
   },
 
   methods: {
+    /* save date on text field */
     save(date) {
       this.$refs.menu.save(date);
     },
-    submitFirstReg() {
-      if (this.$refs.firstStepReg.validate()) {
-        this.step += 1;
-      }
-    },
+    /* submit handlers of all windows */
     submitLogin() {
       if (this.$refs.login.validate()) {
         console.log('ciao');
+      }
+    },
+    submitFirstReg() {
+      if (this.$refs.firstStepReg.validate()) {
+        /* switch to window 3 (step=3) */
+        this.step += 1;
       }
     },
     submitFullReg() {
