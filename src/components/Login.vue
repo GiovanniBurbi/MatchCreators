@@ -15,10 +15,10 @@
 
             <v-text-field color="indigo" label="Username"
             clearable prepend-icon="mdi-account"
-            :rules="[]">
+            :rules="[rules.required,]">
             </v-text-field>
 
-           <v-text-field :rules="[]"
+           <v-text-field :rules="[rules.required,]"
             :append-icon="showPsw ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPsw ? 'text' : 'password'"
             color="indigo" label="Password" @click:append="showPsw = !showPsw"
@@ -123,7 +123,7 @@
           </v-form>
         </v-card-text>
 
-        <v-card-actions class="pb-4 pt-5">
+        <v-card-actions class="pb-4 pt-6">
           <v-btn @click="submitFullReg" x-large dark color="indigo" rounded block elevation="2">
             Let's start!
           </v-btn>
@@ -153,10 +153,10 @@ export default {
       showPsw: false,
       rules: {
         required: (v) => !!v || 'Required',
-        /* userMax: (v) => v?.length <= 10 || 'Username must be less than 10 characters',
+        userMax: (v) => v?.length <= 10 || 'Username must be less than 10 characters',
         pswMin: (v) => v?.length >= 8 || 'Password must be at least 8 characters',
         emailFormat: (v) => /.+@.+\...+/.test(v) || 'Email must be valid',
-        noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed', */
+        noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
       },
     };
   },
@@ -191,15 +191,13 @@ export default {
       }
     },
     submitFullReg() {
-      if (this.$refs.fullReg.validate()) {
-        console.log('bubu');
+      const posValid = this.$refs.pos.validate();
+      const dateValid = this.$refs.fullReg.validate();
+      if (posValid && dateValid) {
+        console.log('good');
+      } else {
+        console.log('missing something here');
       }
-      console.log('press');
-      this.$refs.pos.validate();
-
-      /* if (this.$store.getters.getRgtPosSelection === '') {
-         !!!!!!!!!!!!!!!!
-      } */
     },
   },
 };

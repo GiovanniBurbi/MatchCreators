@@ -3,11 +3,11 @@
 
     <v-row justify="start">
       <v-icon :class="[error ? 'icon iconError' : 'icon']">$position-icon</v-icon>
-      <h3 :class="['fieldName pt-1 pl-2 font-weight-regular',
+      <h3 :class="['fieldName pt-2 pl-2 font-weight-regular',
       error ? 'red--text text--accent-2 shake' : 'text--secondary']">Position</h3>
     </v-row>
 
-    <v-row class="px-2 pb-3">
+    <v-row :class="['pr-1 pl-6 pb-3', {'shake': error}]">
 
       <v-col cols="4">
         <position-button v-on:clicked="buttonClick" field-pos="goalkeeper"></position-button>
@@ -23,10 +23,10 @@
 
     </v-row>
 
-    <v-divider :class="[error ? 'customError' : 'custom']">
-    </v-divider>
+    <div :class="[error ? 'divider error' : 'divider']"></div>
 
-  <div :class="['reduce font-weight-regular red--text text-accent-2', error ? 'expand' : 'shrink']">
+  <div :class="['reduce font-weight-regular red--text text-accent-2 pl-5',
+  error ? 'expand' : 'shrink']">
   Required
   </div>
 
@@ -53,13 +53,13 @@ export default {
     validate() {
       if (this.$store.getters.getRgtPosSelection === '') {
         this.error = true;
+        return false;
       }
+      return true;
     },
     buttonClick() {
-      console.log('received');
       if (this.error) {
         this.error = false;
-        console.log('yooooo');
       }
     },
   },
@@ -77,6 +77,15 @@ export default {
 .customError {
   border-color: #FF5252 !important;
   opacity: 100%;
+}
+.divider {
+  height: 0.1px;
+  width: 385px;
+  border-bottom: 0.1px solid gray;
+  margin-left: 20px;
+}
+.error {
+  border-bottom: 0.1px solid #FF5252;
 }
 .container:hover .custom {
   opacity: 100%;
