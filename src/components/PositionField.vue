@@ -7,7 +7,7 @@
       error ? 'red--text text--accent-2 shake' : 'text--secondary']">Position</h3>
     </v-row>
 
-    <v-row :class="['pr-1 pl-6 pb-3', {'shake': error}]">
+    <v-row :class="['pl-6 pb-3', {'shake': error}]">
 
       <v-col cols="4">
         <position-button v-on:clicked="buttonClick" field-pos="goalkeeper"></position-button>
