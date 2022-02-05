@@ -37,7 +37,7 @@
   </div>
 </template>
 <script>
-
+import { mapGetters } from 'vuex';
 import PositionButton from '@/components/PositionButton.vue';
 
 export default {
@@ -53,10 +53,15 @@ export default {
     PositionButton,
   },
 
+  computed: {
+    /* define getter of vuex state registrationPositionSelection */
+    ...mapGetters({ currentSelection: 'getRgtPosSelection' }),
+  },
+
   methods: {
     /* method that verify if position form has been completed */
     validate() {
-      if (this.$store.getters.getRgtPosSelection === '') {
+      if (this.currentSelection === '') {
         /* change error value */
         this.error = true;
         return false;
