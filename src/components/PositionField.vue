@@ -1,15 +1,19 @@
 <template>
   <div class="container">
 
+    <!-- input field name -->
     <v-row justify="start">
+      <!-- change color based on error value -->
       <v-icon :class="[error ? 'icon iconError' : 'icon']">$position-icon</v-icon>
-      <h3 :class="['fieldName pt-2 pl-2 font-weight-regular',
+      <!-- change color and shake based on error value -->
+      <h3 :class="['pt-2 pl-2 font-weight-regular',
       error ? 'red--text text--accent-2 shake' : 'text--secondary']">Position</h3>
     </v-row>
 
     <v-row :class="['pl-6 pb-3', {'shake': error}]">
 
       <v-col cols="4">
+        <!-- listen for events of type clicked of this component -->
         <position-button v-on:clicked="buttonClick" field-pos="goalkeeper"></position-button>
       </v-col>
 
@@ -50,14 +54,17 @@ export default {
   },
 
   methods: {
+    /* method that verify if position form has been completed */
     validate() {
       if (this.$store.getters.getRgtPosSelection === '') {
+        /* change error value */
         this.error = true;
         return false;
       }
       return true;
     },
     buttonClick() {
+      /* reset error on position form selection if error had happened */
       if (this.error) {
         this.error = false;
       }
@@ -70,30 +77,22 @@ export default {
   max-width: 450px;
   max-height: 150px;
 }
-.custom {
-  border-color: gray !important;
-  opacity: 90%;
-}
-.customError {
-  border-color: #FF5252 !important;
-  opacity: 100%;
-}
 .divider {
   height: 0.1px;
   width: 385px;
   border-bottom: 0.1px solid gray;
   margin-left: 20px;
 }
+.container:hover .divider {
+  border-color: black;
+}
 .error {
   border-bottom: 0.1px solid #FF5252;
-}
-.container:hover .custom {
-  opacity: 100%;
-  border-color: black !important;
 }
 .reduce{
   font-size: 0.75rem;
 }
+/* sets svg icon color */
 .icon {
   /* gray darken-1 */
   filter: invert(50%) sepia(0%) saturate(7%) hue-rotate(138deg) brightness(90%) contrast(92%);
@@ -103,19 +102,18 @@ export default {
   filter: invert(46%) sepia(71%) saturate(3070%)
   hue-rotate(330deg) brightness(106%) contrast(109%);
 }
-
+/* error message transition */
 .expand{
   max-height: 50px;
   transition: max-height .3s ease-in;
   overflow: hidden;
 }
-
 .shrink{
   max-height: 0;
   transition: max-height .25s ease-out;
   overflow: hidden;
 }
-
+/* shake on error animation */
 .shake {
   animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
