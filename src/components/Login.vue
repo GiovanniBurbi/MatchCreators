@@ -99,21 +99,21 @@
         <v-card-text class="pb-0 pt-4">
           <v-form ref="fullReg">
 
-            <v-menu ref="menu" v-model="menu" :close-on-content-click="false"
+            <v-menu v-model="menu" :close-on-content-click="false"
             transition="scale-transition" offset-y min-width="auto">
 
               <template v-slot:activator="{ on, attrs }">
-                <v-text-field v-model="date" label="Birth date"
+                <v-text-field :value="dateFormatting" label="Birth date"
                 prepend-icon="mdi-calendar" color="indigo"
                 readonly clearable v-bind="attrs" v-on="on"
-                :rules="[rules.required]">
+                :rules="[rules.required]" @click:clear="date=null">
                 </v-text-field>
               </template>
 
               <v-date-picker v-model="date" :active-picker.sync="activePicker"
               :max="(new Date(Date.now() - (new Date()).
               getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
-              min="1950-01-01" @change="save"
+              min="1940-01-01" @change="menu = false"
               color="indigo">
               </v-date-picker>
 
@@ -136,6 +136,7 @@
 </template>
 
 <script>
+import { format, parseISO } from 'date-fns';
 import PositionField from './PositionField.vue';
 
 export default {
@@ -161,18 +162,15 @@ export default {
     };
   },
 
+  computed: {
+    dateFormatting() {
+      return this.date ? format(parseISO(this.date), 'do MMMM yyyy') : '';
+    },
+  },
+
   watch: {
     menu(val) {
       return val && setTimeout(() => { this.activePicker = 'YEAR'; });
-    },
-
-    '$store.state.registrationPositionSelection': {
-      deep: true,
-      handler(value) {
-        if (value !== '') {
-          this.posEmpty = false; /* !!!!!!!!!!!! */
-        }
-      },
     },
   },
 
