@@ -1,6 +1,6 @@
 <template>
   <div :class="classes" @mouseover="hoverOver" @mouseout="hoverOut" @click="clicked">
-    <img :class="fieldPos" :src="require(`@/assets/${fieldPos}.png`)">
+    <img :class="[fieldPos, 'playerImg']" :src="require(`@/assets/${fieldPos}.png`)">
     <h1 class="position">{{ fieldPos }}</h1>
   </div>
 </template>
@@ -12,6 +12,7 @@ export default {
   name: 'PositionButton',
 
   props: {
+    /* type of button, goalkeeper, defender or forward */
     fieldPos: {
       type: String,
       required: true,
@@ -20,17 +21,25 @@ export default {
 
   data() {
     return {
+      /* styling classes for the button based on mouse events */
       classes: ['button'],
+      /* flag,true when button has been pressed */
       click: false,
     };
   },
 
   computed: {
+    /* declare currentSelection as a method to get vuex state of
+    registrationPositionSelection */
     ...mapGetters({ currentSelection: 'getRgtPosSelection' }),
   },
 
   watch: {
+    /* method to watch vuex state change on registrationPositionSelection
+    using currentSelection method */
     currentSelection(value) {
+      /* If current selection is not this instance of button and was clicked
+      change click state e change styling classes for this instance */
       if (value !== this.fieldPos && this.click === true) {
         this.click = false;
         this.classes = ['button'];
@@ -40,21 +49,27 @@ export default {
 
   methods: {
     hoverOver() {
+      /* if button has not been pressed */
       if (!this.click) {
         this.classes.push('zoom');
       }
     },
     hoverOut() {
+      /* if button has not been pressed */
       if (!this.click) {
         this.classes.pop();
       }
     },
+    /* declare vuex mutation for state registrazionPositionSelection */
     ...mapMutations(['setRgtPosSelection']),
     clicked() {
+      /* if button was not pressed, change styling class to be permanent */
       if (!this.click) {
         this.click = true;
         this.classes.push('selection');
+        /* set on vuex state this button position name (goalkeeper, defender, forward) */
         this.setRgtPosSelection(this.fieldPos);
+        /* emit a signal to comunicate that one istance of this button has been pressed */
         this.$emit('clicked');
       }
     },
@@ -65,39 +80,35 @@ export default {
 <style scoped>
 .container {
   max-width: 450px;
-  background-color: white;
 }
 .button {
   min-height: 80px;
   max-width: 100px;
+  cursor: pointer;
+  /* transition for hoverOut */
   transform: scale(1);
   transition: transform 150ms ease-in-out;
-  cursor: pointer;
 }
-.goalkeeper {
+.playerImg{
+  /* centering img and default opacity*/
   display: block;
   margin-left: auto;
   margin-right: auto;
-  max-width: 58px;
   opacity: 40%;
   transition: 150ms;
+}
+/* custom sizes and opacity based on type of button */
+.goalkeeper {
+  max-width: 58px;
 }
 .defender {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
   max-width: 28px;
-  opacity: 40%;
-  transition: 150ms;
 }
 .forward {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
   max-width: 80px;
   opacity: 35%;
-  transition: 150ms;
 }
+/* name of the type of button */
 .position {
   color: rgba(63, 81, 181);
   font-size: 19px;
@@ -106,6 +117,7 @@ export default {
   opacity: 50%;
   text-transform: capitalize;
 }
+/* bottom border for setup transition */
 .position:after {
   display: block;
   content: '';
@@ -114,16 +126,18 @@ export default {
   transition: transform 200ms ease-in-out;
   opacity: 100%;
 }
+/* bottom border start transition on selection */
+.selection .position:after {
+  transform: scaleX(1);
+}
+/* zoom transform  */
 .zoom {
   transform: scale(1.1);
 }
-.zoom img {
+.zoom .playerImg {
   opacity: 100%;
 }
 .zoom .position {
   opacity: 100%;
-}
-.selection .position:after {
-  transform: scaleX(1);
 }
 </style>
