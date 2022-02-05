@@ -15,10 +15,10 @@
 
             <v-text-field color="indigo" label="Username"
             clearable prepend-icon="mdi-account"
-            :rules="[rules.required, rules.noSpaces]">
+            :rules="[]">
             </v-text-field>
 
-           <v-text-field :rules="[rules.required, rules.noSpaces]"
+           <v-text-field :rules="[]"
             :append-icon="showPsw ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPsw ? 'text' : 'password'"
             color="indigo" label="Password" @click:append="showPsw = !showPsw"
@@ -55,16 +55,16 @@
 
             <v-text-field color="indigo" label="Username"
             clearable prepend-icon="mdi-account" :counter="10"
-            :rules="[rules.required, rules.userMax, rules.noSpaces]">
+            :rules="[]">
             </v-text-field>
 
             <v-text-field color="indigo" label="Email"
             clearable prepend-icon="mdi-email"
-            :rules="[rules.required, rules.emailFormat, rules.noSpaces]"
+            :rules="[]"
             hint="your-email-name@example.com">
             </v-text-field>
 
-            <v-text-field :rules="[rules.required, rules.pswMin, rules.noSpaces]"
+            <v-text-field :rules="[]"
             :append-icon="showPsw ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPsw ? 'text' : 'password'"
             color="indigo" label="Password" @click:append="showPsw = !showPsw"
@@ -75,7 +75,7 @@
         </v-card-text>
 
         <v-card-actions class="pt-4">
-          <v-btn @click="submitReg" x-large dark color="indigo" rounded block elevation="2">
+          <v-btn @click="submitFirstReg" x-large dark color="indigo" rounded block elevation="2">
             Sign up
           </v-btn>
         </v-card-actions>
@@ -97,7 +97,7 @@
         </v-card-title>
 
         <v-card-text class="pb-0 pt-4">
-          <v-form>
+          <v-form ref="fullReg">
 
             <v-menu ref="menu" v-model="menu" :close-on-content-click="false"
             transition="scale-transition" offset-y min-width="auto">
@@ -119,19 +119,12 @@
 
             </v-menu>
 
-            <v-row class="pt-4 pb-5">
-            <v-icon class="pl-3">mdi-account</v-icon>
-            <h3 class="pt-1 pl-3 font-weight-regular
-            grey--text text--darken-1" style="transform: scale(1.1);">Position</h3>
-            </v-row>
-
-            <position-field/>
-
+            <position-field ref="pos"></position-field>
           </v-form>
         </v-card-text>
 
         <v-card-actions class="pb-4 pt-5">
-          <v-btn x-large dark color="indigo" rounded block elevation="2">
+          <v-btn @click="submitFullReg" x-large dark color="indigo" rounded block elevation="2">
             Let's start!
           </v-btn>
         </v-card-actions>
@@ -160,23 +153,34 @@ export default {
       showPsw: false,
       rules: {
         required: (v) => !!v || 'Required',
-        userMax: (v) => v?.length <= 10 || 'Username must be less than 10 characters',
+        /* userMax: (v) => v?.length <= 10 || 'Username must be less than 10 characters',
         pswMin: (v) => v?.length >= 8 || 'Password must be at least 8 characters',
         emailFormat: (v) => /.+@.+\...+/.test(v) || 'Email must be valid',
-        noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
+        noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed', */
       },
     };
   },
+
   watch: {
     menu(val) {
       return val && setTimeout(() => { this.activePicker = 'YEAR'; });
     },
+
+    '$store.state.registrationPositionSelection': {
+      deep: true,
+      handler(value) {
+        if (value !== '') {
+          this.posEmpty = false; /* !!!!!!!!!!!! */
+        }
+      },
+    },
   },
+
   methods: {
     save(date) {
       this.$refs.menu.save(date);
     },
-    submitReg() {
+    submitFirstReg() {
       if (this.$refs.firstStepReg.validate()) {
         this.step += 1;
       }
@@ -185,6 +189,17 @@ export default {
       if (this.$refs.login.validate()) {
         console.log('ciao');
       }
+    },
+    submitFullReg() {
+      if (this.$refs.fullReg.validate()) {
+        console.log('bubu');
+      }
+      console.log('press');
+      this.$refs.pos.validate();
+
+      /* if (this.$store.getters.getRgtPosSelection === '') {
+         !!!!!!!!!!!!!!!!
+      } */
     },
   },
 };

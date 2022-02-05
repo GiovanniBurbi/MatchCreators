@@ -55,6 +55,7 @@ export default {
         this.click = true;
         this.classes.push('selection');
         this.setRgtPosSelection(this.fieldPos);
+        this.$emit('clicked');
       }
     },
   },
