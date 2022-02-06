@@ -28,11 +28,9 @@ export default {
 
     async signup({ commit }, userData) {
       /* const result = await userService.register(userData); */
-      const result = true;
-      if (result) {
-        commit('setUser', userData);
-        return true;
-      } return false;
+
+      /* write in json the new user */
+      commit('setUser', userData);
     },
   },
 
