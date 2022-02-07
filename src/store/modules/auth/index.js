@@ -1,3 +1,5 @@
+import UserService from '@/services/UserService';
+
 export default {
   namespaced: true,
 
@@ -13,23 +15,19 @@ export default {
 
   actions: {
     async login({ commit }, credentials) {
-      /* const user = await userService.attempt(credentials); */
-      const res = await fetch('backend.json');
-      const data = await res.json();
-      console.log(data);
-      /* const user = data.(search for user using credentials),
-      if user null fail, else success and commit */
-      const result = credentials.username !== '' && credentials.psw !== '';
-      if (result) {
-        commit('setUser', 'user');
+      /* get user using credentials, if not null return true, else false */
+      const res = await UserService.getUser(credentials);
+      const userData = res.data[0];
+      if (userData) {
+        commit('setUser', userData);
         return true;
       } return false;
     },
 
     async signup({ commit }, userData) {
-      /* const result = await userService.register(userData); */
-
-      /* write in json the new user */
+      /* register user in db */
+      await UserService.registerUser(JSON.stringify(userData));
+      /* set the user in the vuex auth/state */
       commit('setUser', userData);
     },
   },

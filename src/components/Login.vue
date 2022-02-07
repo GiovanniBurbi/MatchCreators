@@ -287,7 +287,7 @@ export default {
     submitLogin() {
       if (this.$refs.login.validate()) {
         this.loginAttempt(
-          { username: this.username, psw: this.password },
+          { name: this.username, psw: this.password },
         ).then((val) => {
           if (val) {
             this.$router.push({ name: 'Home' });
@@ -320,8 +320,7 @@ export default {
             date: this.date,
             position: this.getPos,
           },
-        );
-        this.$router.push({ name: 'Home' });
+        ).then(() => { this.$router.push({ name: 'Home' }); });
       }
     },
   },
