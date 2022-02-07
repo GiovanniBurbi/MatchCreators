@@ -1,6 +1,14 @@
 <template>
-  <div :class="classes" @mouseover="hoverOver" @mouseout="hoverOut" @click="clicked">
-    <img :class="[fieldPos, 'playerImg']" :src="require(`@/assets/${fieldPos}.png`)">
+  <div
+    :class="classes"
+    @mouseover="hoverOver"
+    @mouseout="hoverOut"
+    @click="clicked"
+  >
+    <img
+      :class="[fieldPos, 'playerImg']"
+      :src="require(`@/assets/${fieldPos}.png`)"
+    />
     <h1 class="position">{{ fieldPos }}</h1>
   </div>
 </template>
@@ -89,7 +97,7 @@ export default {
   transform: scale(1);
   transition: transform 150ms ease-in-out;
 }
-.playerImg{
+.playerImg {
   /* centering img and default opacity*/
   display: block;
   margin-left: auto;
@@ -120,7 +128,7 @@ export default {
 /* bottom border for setup transition */
 .position:after {
   display: block;
-  content: '';
+  content: "";
   border-bottom: solid 1px rgba(63, 81, 181);
   transform: scaleX(0);
   transition: transform 200ms ease-in-out;

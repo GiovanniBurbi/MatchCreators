@@ -1,39 +1,56 @@
 <template>
   <div class="container">
-
     <!-- input field name -->
     <v-row justify="start">
       <!-- change color based on error value -->
-      <v-icon :class="[error ? 'icon iconError' : 'icon']">$position-icon</v-icon>
+      <v-icon :class="[error ? 'icon iconError' : 'icon']">
+        $position-icon
+      </v-icon>
       <!-- change color and shake based on error value -->
-      <h3 :class="['pt-2 pl-2 font-weight-regular',
-      error ? 'red--text text--accent-2 shake' : 'text--secondary']">Position</h3>
+      <h3
+        :class="[
+          'pt-2 pl-2 font-weight-regular',
+          error ? 'red--text text--accent-2 shake' : 'text--secondary',
+        ]"
+      >
+        Position
+      </h3>
     </v-row>
 
-    <v-row :class="['pl-6 pb-3', {'shake': error}]">
-
+    <v-row :class="['pl-6 pb-3', { shake: error }]">
       <v-col cols="4">
         <!-- listen for events of type clicked of this component -->
-        <position-button v-on:clicked="buttonClick" field-pos="goalkeeper"></position-button>
+        <position-button
+          v-on:clicked="buttonClick"
+          field-pos="goalkeeper">
+        </position-button>
       </v-col>
 
       <v-col cols="4">
-        <position-button v-on:clicked="buttonClick" field-pos="defender"></position-button>
+        <position-button
+          v-on:clicked="buttonClick"
+          field-pos="defender"
+        ></position-button>
       </v-col>
 
       <v-col cols="4">
-        <position-button v-on:clicked="buttonClick" field-pos="forward"></position-button>
+        <position-button
+          v-on:clicked="buttonClick"
+          field-pos="forward"
+        ></position-button>
       </v-col>
-
     </v-row>
 
     <div :class="[error ? 'divider error' : 'divider']"></div>
 
-  <div :class="['reduce font-weight-regular red--text text-accent-2 pl-5',
-  error ? 'expand' : 'shrink']">
-  Required
-  </div>
-
+    <div
+      :class="[
+        'reduce font-weight-regular red--text text-accent-2 pl-5',
+        error ? 'expand' : 'shrink',
+      ]"
+    >
+      Required
+    </div>
   </div>
 </template>
 <script>
@@ -65,8 +82,7 @@ export default {
         /* change error value */
         this.error = true;
         return false;
-      }
-      return true;
+      } return true;
     },
     buttonClick() {
       /* reset error on position form selection if error had happened */
@@ -92,35 +108,36 @@ export default {
   border-color: black;
 }
 .error {
-  border-bottom: 0.1px solid #FF5252;
+  border-bottom: 0.1px solid #ff5252;
 }
-.reduce{
+.reduce {
   font-size: 0.75rem;
 }
 /* sets svg icon color */
 .icon {
   /* gray darken-1 */
-  filter: invert(50%) sepia(0%) saturate(7%) hue-rotate(138deg) brightness(90%) contrast(92%);
+  filter: invert(50%) sepia(0%) saturate(7%) hue-rotate(138deg) brightness(90%)
+    contrast(92%);
 }
 .iconError {
   /* red accent-2 */
-  filter: invert(46%) sepia(71%) saturate(3070%)
-  hue-rotate(330deg) brightness(106%) contrast(109%);
+  filter: invert(46%) sepia(71%) saturate(3070%) hue-rotate(330deg)
+    brightness(106%) contrast(109%);
 }
 /* error message transition */
-.expand{
+.expand {
   max-height: 50px;
-  transition: max-height .3s ease-in;
+  transition: max-height 0.3s ease-in;
   overflow: hidden;
 }
-.shrink{
+.shrink {
   max-height: 0;
-  transition: max-height .25s ease-out;
+  transition: max-height 0.25s ease-out;
   overflow: hidden;
 }
 /* shake on error animation */
 .shake {
-  animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
   animation-delay: 350ms;
 }
