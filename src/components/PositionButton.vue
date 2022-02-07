@@ -9,7 +9,11 @@
       :class="[fieldPos, 'playerImg']"
       :src="require(`@/assets/${fieldPos}.png`)"
     />
-    <h1 class="position">{{ fieldPos }}</h1>
+    <h1 :class="['position indigo--text pt-2 text-center',
+    'font-weight-light', { 'small' : xsOnly },
+    { 'medium' : smOnly }, { 'big' : mdAndUp }]">
+    {{ fieldPos }}
+    </h1>
   </div>
 </template>
 
@@ -40,6 +44,16 @@ export default {
     /* declare currentSelection as a method to get vuex state of
     registrationPositionSelection */
     ...mapGetters({ currentSelection: 'posInputField/getRgtPosSelection' }),
+
+    smOnly() {
+      return this.$vuetify.breakpoint.smOnly;
+    },
+    xsOnly() {
+      return this.$vuetify.breakpoint.xsOnly;
+    },
+    mdAndUp() {
+      return this.$vuetify.breakpoint.mdAndUp;
+    },
   },
 
   watch: {
@@ -86,11 +100,17 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  max-width: 450px;
+.big {
+  font-size: 1.25rem
+}
+.medium{
+  font-size: 1.10rem
+}
+.small{
+  font-size: .88rem;
 }
 .button {
-  min-height: 80px;
+  height: 100px;
   max-width: 100px;
   cursor: pointer;
   /* transition for hoverOut */
@@ -118,10 +138,6 @@ export default {
 }
 /* name of the type of button */
 .position {
-  color: rgba(63, 81, 181);
-  font-size: 19px;
-  font-weight: 400;
-  text-align: center;
   opacity: 50%;
   text-transform: capitalize;
 }

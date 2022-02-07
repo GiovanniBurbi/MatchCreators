@@ -17,7 +17,7 @@
       </h3>
     </v-row>
 
-    <v-row :class="['pl-6 pb-3', { shake: error }]">
+    <v-row :class="['pl-md-6 pl-2 pb-4', { shake: error }]">
       <v-col cols="4">
         <!-- listen for events of type clicked of this component -->
         <position-button
@@ -41,7 +41,7 @@
       </v-col>
     </v-row>
 
-    <div :class="[error ? 'divider error' : 'divider']"></div>
+    <div :class="[error ? 'error' : null, 'divider']"></div>
 
     <div
       :class="[
@@ -96,7 +96,7 @@ export default {
 <style scoped>
 .container {
   max-width: 450px;
-  max-height: 150px;
+  max-height: 170px;
 }
 .divider {
   height: 0.1px;
@@ -106,9 +106,6 @@ export default {
 }
 .container:hover .divider {
   border-color: black;
-}
-.error {
-  border-bottom: 0.1px solid #ff5252;
 }
 .reduce {
   font-size: 0.75rem;
