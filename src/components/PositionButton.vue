@@ -45,6 +45,7 @@ export default {
     registrationPositionSelection */
     ...mapGetters({ currentSelection: 'posInputField/getRgtPosSelection' }),
 
+    /* Vuetify conditionals for responsive */
     smOnly() {
       return this.$vuetify.breakpoint.smOnly;
     },
