@@ -9,9 +9,7 @@
       :class="[fieldPos, 'playerImg']"
       :src="require(`@/assets/${fieldPos}.png`)"
     />
-    <h1 :class="['position indigo--text pt-2 text-center',
-    'font-weight-light', { 'small' : xsOnly },
-    { 'medium' : smOnly }, { 'big' : mdAndUp }]">
+    <h1 class="position indigo--text pt-2 font-weight-light text-size">
     {{ fieldPos }}
     </h1>
   </div>
@@ -19,6 +17,7 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex';
+import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'PositionButton',
@@ -40,21 +39,12 @@ export default {
     };
   },
 
+  mixins: [BreakpointsCond],
+
   computed: {
     /* declare currentSelection as a method to get vuex state of
     registrationPositionSelection */
     ...mapGetters({ currentSelection: 'posInputField/getRgtPosSelection' }),
-
-    /* Vuetify conditionals for responsive */
-    smOnly() {
-      return this.$vuetify.breakpoint.smOnly;
-    },
-    xsOnly() {
-      return this.$vuetify.breakpoint.xsOnly;
-    },
-    mdAndUp() {
-      return this.$vuetify.breakpoint.mdAndUp;
-    },
   },
 
   watch: {
@@ -101,14 +91,8 @@ export default {
 </script>
 
 <style scoped>
-.big {
+.text-size {
   font-size: 1.25rem
-}
-.medium{
-  font-size: 1.10rem
-}
-.small{
-  font-size: .88rem;
 }
 .button {
   height: 100px;
@@ -141,6 +125,8 @@ export default {
 .position {
   opacity: 50%;
   text-transform: capitalize;
+  width: fit-content;
+  margin: auto;
 }
 /* bottom border for setup transition */
 .position:after {

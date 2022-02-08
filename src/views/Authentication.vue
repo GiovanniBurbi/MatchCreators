@@ -1,22 +1,21 @@
 <template>
-  <v-content class="background fill-height">
-    <v-container fluid align="center">
-      <v-row justify="center mt-12">
-        <h1 :class="['text-center white--text font-weight-medium logo',
-        { 'small' : smAndDown }, {'big': mdAndUp}]">
-        MatchCreators
-      </h1>
-      </v-row>
-      <v-row justify="center pt-14">
-        <v-col cols="9" sm="10" md="12">
-          <login />
-        </v-col>
-      </v-row>
-    </v-container>
- </v-content>
+  <v-container class="background" fluid fill-height>
+    <!-- <v-row justify="center">
+      <h1 :class="['text-center white--text font-weight-medium logo',
+      { 'small' : smAndDown }, {'big': mdAndUp}]">
+      MatchCreators
+    </h1>
+    </v-row> -->
+    <v-row>
+      <v-col>
+        <login class="card"></login>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script>
 import Login from '../components/Login.vue';
+import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Authentication',
@@ -25,19 +24,15 @@ export default {
     Login,
   },
 
-  computed: {
-    /* Vuetify conditionals for responsive */
-    smAndDown() {
-      return this.$vuetify.breakpoint.smAndDown;
-    },
-    mdAndUp() {
-      return this.$vuetify.breakpoint.mdAndUp;
-    },
-  },
+  mixins: [BreakpointsCond],
 };
 </script>
 
 <style scoped>
+.card {
+  margin-left: auto;
+  margin-right: auto;
+}
 .background {
   background-image: linear-gradient(to left top, #673ab7, #6b40b9,
   #7045bb, #744bbd, #7850bf, #7c55c1, #805ac3, #845fc5,
