@@ -1,12 +1,12 @@
 <template>
   <v-container class="background" fluid fill-height>
-    <!-- <v-row justify="center">
-      <h1 :class="['text-center white--text font-weight-medium logo',
-      { 'small' : smAndDown }, {'big': mdAndUp}]">
-      MatchCreators
-    </h1>
-    </v-row> -->
     <v-row>
+      <v-col cols="12">
+        <h1 :class="['text-center white--text font-weight-medium logo',
+        {'small' : smAndDown }, {'big': mdAndUp}]">
+        MatchCreators
+        </h1>
+      </v-col>
       <v-col>
         <login class="card"></login>
       </v-col>
@@ -32,6 +32,7 @@ export default {
 .card {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 5%;
 }
 .background {
   background-image: linear-gradient(to left top, #673ab7, #6b40b9,
@@ -40,7 +41,6 @@ export default {
 }
 .logo {
   text-shadow: 1px 1px 20px rgba(50, 50, 50, 0.4);
-  height: 100px;
 }
 .small {
   font-size: 4rem;
