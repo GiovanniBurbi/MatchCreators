@@ -2,8 +2,7 @@
   <v-container class="background" fluid fill-height>
     <v-row>
       <v-col cols="12">
-        <h1 :class="['text-center white--text font-weight-medium logo',
-        {'small' : smAndDown }, {'big': mdAndUp}]">
+        <h1 class="text-center white--text font-weight-medium logo">
         MatchCreators
         </h1>
       </v-col>
@@ -41,11 +40,6 @@ export default {
 }
 .logo {
   text-shadow: 1px 1px 20px rgba(50, 50, 50, 0.4);
-}
-.small {
-  font-size: 4rem;
-}
-.big {
-  font-size: 5rem;
+  font-size: calc(40px + 2vw);
 }
 </style>
