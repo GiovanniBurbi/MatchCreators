@@ -228,6 +228,7 @@ export default {
   components: {
     PositionField,
   },
+
   data() {
     return {
       username: '',
@@ -318,7 +319,9 @@ export default {
             date: this.date,
             position: this.getPos,
           },
-        ).then(() => { this.$router.push({ name: 'Home' }); });
+        ).then(() => {
+          this.$router.push({ name: 'Home' });
+        });
       }
     },
   },

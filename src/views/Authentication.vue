@@ -24,6 +24,7 @@ export default {
   },
 
   mixins: [BreakpointsCond],
+
 };
 </script>
 
