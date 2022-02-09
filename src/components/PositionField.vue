@@ -17,8 +17,8 @@
       </h3>
     </v-row>
 
-    <v-row :class="['pl-md-6 pl-2 pb-4', { shake: error }]">
-      <v-col cols="4">
+    <v-row :class="['pl-md-6 pl-2 pb-4', { shake: error }]" wrap>
+      <v-col xs="12" sm="4">
         <!-- listen for events of type clicked of this component -->
         <position-button
           v-on:clicked="buttonClick"
@@ -26,14 +26,14 @@
         </position-button>
       </v-col>
 
-      <v-col cols="4">
+      <v-col xs="12" sm="4">
         <position-button
           v-on:clicked="buttonClick"
           field-pos="defender"
         ></position-button>
       </v-col>
 
-      <v-col cols="4">
+      <v-col xs="12" sm="4">
         <position-button
           v-on:clicked="buttonClick"
           field-pos="forward"
@@ -96,7 +96,6 @@ export default {
 <style scoped>
 .container {
   max-width: 450px;
-  max-height: 170px;
 }
 .divider {
   height: 0.1px;
