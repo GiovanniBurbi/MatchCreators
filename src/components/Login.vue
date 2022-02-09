@@ -290,6 +290,7 @@ export default {
         ).then((val) => {
           if (val) {
             this.$router.push({ name: 'Home' });
+            this.$emit('loginSuccess');
           } else {
             this.loginError.push('Invalid access');
           }
@@ -321,6 +322,7 @@ export default {
           },
         ).then(() => {
           this.$router.push({ name: 'Home' });
+          this.$emit('loginSuccess');
         });
       }
     },
