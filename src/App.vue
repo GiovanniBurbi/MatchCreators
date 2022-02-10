@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <navbar v-if="isNotAuth"></navbar>
+    <navbar v-if="isNotAuth" :is-dark=darkNav></navbar>
 
     <v-snackbar
      v-model="snackbar"
      top color="green"
-     :timeout="2000"
+     :timeout="4000"
     >
       <v-icon
        class="pb-1"
@@ -19,6 +19,7 @@
     </v-snackbar>
 
     <v-main>
+      <mode-switcher v-if="isNotAuth" @modeSwitch="modeSwitch()" />
       <router-view @loginSuccess="snackbar = true"></router-view>
     </v-main>
   </v-app>
@@ -26,6 +27,7 @@
 
 <script>
 import Navbar from './components/Navbar.vue';
+import ModeSwitcher from './components/ModeSwitcher.vue';
 
 export default {
   name: 'App',
@@ -33,6 +35,7 @@ export default {
   data() {
     return {
       snackbar: false,
+      darkNav: false,
     };
   },
 
@@ -42,7 +45,16 @@ export default {
     },
   },
 
-  components: { Navbar },
+  methods: {
+    modeSwitch() {
+      this.darkNav = !this.darkNav;
+    },
+  },
+
+  components: {
+    Navbar,
+    ModeSwitcher,
+  },
 
 };
 </script>
