@@ -24,14 +24,14 @@
         </v-btn>
       </v-row>
       <v-row>
-        <v-sheet width="100%" rounded="lg" elevation="7">
-          <v-row justify="space-between" class="pa-6">
-            <v-btn dark color="deep-purple">Position</v-btn>
-            <v-btn dark color="deep-purple">Date</v-btn>
-            <v-btn dark color="deep-purple">Location</v-btn>
-            <v-btn dark color="deep-purple">Time</v-btn>
-            <v-btn dark color="deep-purple">Free spots</v-btn>
-          </v-row>
+        <v-sheet width="100%" rounded="lg" elevation="7" height="60">
+          <div class="filtersGroup">
+            <v-btn :small="smOnly" dark color="deep-purple">Position</v-btn>
+            <v-btn :small="smOnly" dark color="deep-purple">Date</v-btn>
+            <v-btn :small="smOnly" dark color="deep-purple">Location</v-btn>
+            <v-btn :small="smOnly" dark color="deep-purple">Time</v-btn>
+            <v-btn :small="smOnly" dark color="deep-purple">Free spots</v-btn>
+          </div>
         </v-sheet>
       </v-row>
     </v-container>
@@ -75,5 +75,13 @@ export default {
 }
 .biggerContent {
   max-width: 90%;
+}
+.filtersGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 </style>
