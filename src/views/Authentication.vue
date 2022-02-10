@@ -14,7 +14,6 @@
 </template>
 <script>
 import Login from '../components/Login.vue';
-import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Authentication',
@@ -22,9 +21,6 @@ export default {
   components: {
     Login,
   },
-
-  mixins: [BreakpointsCond],
-
 };
 </script>
 
