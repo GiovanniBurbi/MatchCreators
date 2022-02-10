@@ -10,11 +10,29 @@
         <h1 :class="['white--text font-weight-bold header']">
           Search a Match
         </h1>
-        <v-btn dark :x-small="xsOnly" :small="smOnly" color="indigo"
-        class="mr-2">
+        <v-btn dark
+        :x-small="xsOnly"
+        :small="smOnly"
+        color="indigo"
+        elevation="3"
+        >
           Filters
-          <v-icon right>fa-solid fa-sliders</v-icon>
+          <v-icon
+          :small="xsOnly"
+          right>fa-solid fa-sliders
+          </v-icon>
         </v-btn>
+      </v-row>
+      <v-row>
+        <v-sheet width="100%" rounded="lg" elevation="7">
+          <v-row justify="space-between" class="pa-6">
+            <v-btn dark color="deep-purple">Position</v-btn>
+            <v-btn dark color="deep-purple">Date</v-btn>
+            <v-btn dark color="deep-purple">Location</v-btn>
+            <v-btn dark color="deep-purple">Time</v-btn>
+            <v-btn dark color="deep-purple">Free spots</v-btn>
+          </v-row>
+        </v-sheet>
       </v-row>
     </v-container>
   </v-container>
