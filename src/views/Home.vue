@@ -1,21 +1,35 @@
 <template>
   <v-container fluid class="background">
-    <v-row>
-      <v-col>
-        <h1 class="text-h3 white--text font-weight-bold header
-        mt-16 pt-3 text-start">Search a Match</h1>
-      </v-col>
-    </v-row>
+
+    <v-container
+    :class="['content',
+    {'fullscreen' : smAndDown},
+    {'biggerContent' : lgOnly || mdOnly}]"
+    >
+      <v-row justify="space-between" align="center">
+        <h1 :class="['white--text font-weight-bold header']">
+          Search a Match
+        </h1>
+        <v-btn dark :x-small="xsOnly" :small="smOnly" color="indigo"
+        class="mr-2">
+          Filters
+          <v-icon right>fa-solid fa-sliders</v-icon>
+        </v-btn>
+      </v-row>
+    </v-container>
   </v-container>
 </template>
 
 <script>
+import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Home',
 
   components: {
   },
+
+  mixins: [BreakpointsCond],
 };
 </script>
 
@@ -30,6 +44,18 @@ export default {
   background-size: cover;
 }
 .header {
-  text-shadow: 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 3px rgba(0, 0, 0, 0.8);
+  font-size: calc(20px + 2vw);
+  white-space: nowrap;
+}
+.content {
+  margin-top: 60px;
+  max-width: 80%
+}
+.fullscreen {
+  max-width: 100%;
+}
+.biggerContent {
+  max-width: 90%;
 }
 </style>
