@@ -38,7 +38,7 @@ export default {
 </script>
 <style scoped>
 .container {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   width: 100%;
