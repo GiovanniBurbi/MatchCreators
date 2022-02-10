@@ -15,54 +15,45 @@
         color="indigo"
         elevation="3"
         >
-          Filters
+          <span class="hidden-xs-only">Filters</span>
           <v-icon
           :small="smAndDown"
-          right>fa-solid fa-sliders
+          :right="smAndUp">fa-solid fa-sliders
           </v-icon>
         </v-btn>
       </v-row>
       <v-row>
         <v-container fluid class="filtersGroup">
           <v-row justify="center">
-            <v-col cols="12" sm="4">
+            <v-col cols="3">
               <v-sheet color="transparent" class="d-flex justify-center">
                 <v-btn dark color="deep-purple">
-                  <v-icon size="22" left>mdi-clock-outline</v-icon>
-                  Time
+                  <v-icon :left="smAndUp" size="22">mdi-map-marker-outline</v-icon>
+                  <span class="hidden-xs-only">Location</span>
                 </v-btn>
               </v-sheet>
             </v-col>
-            <v-col cols="12" sm="4">
+            <v-col cols="3">
               <v-sheet color="transparent" class="d-flex justify-center">
                 <v-btn dark color="deep-purple">
-                  <v-icon size="22" left>mdi-map-marker-outline</v-icon>
-                  Location
+                  <v-icon size="22" :left="smAndUp">mdi-calendar</v-icon>
+                  <span class="hidden-xs-only">Date</span>
                 </v-btn>
               </v-sheet>
             </v-col>
-            <v-col cols="12" sm="4">
+            <v-col cols="3">
               <v-sheet color="transparent" class="d-flex justify-center">
                 <v-btn dark color="deep-purple">
-                  <v-icon size="22" left>mdi-calendar</v-icon>
-                  Date
+                  <v-icon size="22" :left="smAndUp">mdi-clock-outline</v-icon>
+                  <span class="hidden-xs-only">Time</span>
                 </v-btn>
               </v-sheet>
             </v-col>
-          </v-row>
-          <v-row justify="center">
-            <v-col cols="12" sm="5">
+            <v-col cols="3">
               <v-sheet color="transparent" class="d-flex justify-center">
                 <v-btn dark color="deep-purple">
-                  Free spots
-                </v-btn>
-              </v-sheet>
-            </v-col>
-            <v-col cols="12" sm="5">
-              <v-sheet color="transparent" class="d-flex justify-center">
-                <v-btn dark color="deep-purple">
-                  <v-icon left size=24 class="icon-white">$position-icon</v-icon>
-                  Field position
+                  <v-icon size=24 class="icon-white" :left="smAndUp">$position-icon</v-icon>
+                  <span class="hidden-xs-only">position</span>
                 </v-btn>
               </v-sheet>
             </v-col>
@@ -112,7 +103,7 @@ export default {
   max-width: 90%;
 }
 .filtersGroup {
-  /* width:50%;  */
+  max-width: 1200px;
 }
 .icon-white {
   /* white */
