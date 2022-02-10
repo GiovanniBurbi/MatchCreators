@@ -4,16 +4,20 @@
       <h1 :class="['white--text font-weight-bold header']">
         Search a Match
       </h1>
-      <v-btn dark
-      :small="smAndDown"
-      color="indigo"
-      elevation="3"
+      <v-btn
+      :small="xsOnly"
+      :color="showFilters ?  'white' : 'indigo'"
+      rounded
       @click="showFilters = !showFilters"
       >
-        <span class="hidden-xs-only">Filters</span>
+        <span
+        :class="['hidden-xs-only', showFilters ? 'indigo--text' : 'white--text']">Filters</span>
         <v-icon
-        :small="smAndDown"
-        :right="smAndUp">fa-solid fa-sliders
+        :small="xsOnly"
+        :right="smAndUp"
+        :class="showFilters ? 'icon-indigo' : 'icon-white'"
+        >
+          fa-solid fa-sliders
         </v-icon>
       </v-btn>
     </v-row>
@@ -88,5 +92,9 @@ export default {
 .icon-white {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
+}
+.icon-indigo {
+  filter: invert(26%) sepia(55%) saturate(2295%)
+  hue-rotate(217deg) brightness(90%) contrast(83%);
 }
 </style>
