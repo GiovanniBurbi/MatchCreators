@@ -19,6 +19,7 @@
 
     <v-dialog
       v-model="dialog"
+      persistent
       max-width="500"
     >
       <v-card>
@@ -79,7 +80,7 @@
           <v-btn
             color="error"
             text
-            @click="dialog = false"
+            @click="dialog = false, dates = []"
           >
             Cancel
           </v-btn>
@@ -114,14 +115,6 @@ export default {
       dates: [],
       dialog: false,
     };
-  },
-
-  watch: {
-    dialog(value) {
-      if (!value) {
-        this.dates = [];
-      }
-    },
   },
 
   computed: {
