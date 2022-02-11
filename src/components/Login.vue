@@ -149,15 +149,16 @@
 
       <v-window-item :value="3">
 
+<!-- style="font-size: 30px;font-weight: 300; color:
+        #3F51B5;" -->
         <v-card-title
-        class="justify-start pr-4 pt-8 pb-4"
-        style="font-size: 30px;font-weight: 300; color:
-        #3F51B5;"
+        class="justify-start pr-4 pt-8"
         >
-          <span>Complete your profile</span>
+          <h1 class="font-weight-light"
+          style="font-size:30px;">Complete your profile</h1>
         </v-card-title>
 
-        <v-card-text class="pb-0 pt-4">
+        <v-card-text class="pb-0">
           <v-form ref="fullReg">
 
             <v-menu
@@ -195,7 +196,7 @@
 
             </v-menu>
 
-            <position-field ref="pos" label="Position"></position-field>
+            <position-field ref="pos" label="Position" registration="true"></position-field>
           </v-form>
         </v-card-text>
 

@@ -38,10 +38,14 @@
 
         <v-card-text class="pt-4 pb-2">
 
-          <position-field
-          label="Filter position"
-          color="icon-indigo"
-          />
+          <v-row class="pl-2">
+
+            <position-field
+            label="Filter position"
+            color="icon-indigo"
+            />
+
+          </v-row>
 
         </v-card-text>
 
