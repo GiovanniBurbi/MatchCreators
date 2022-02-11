@@ -20,6 +20,7 @@
 
     <v-dialog
       v-model="dialog"
+      persistent
       max-width="500"
     >
       <v-card>
@@ -50,7 +51,7 @@
           <v-btn
             color="error"
             text
-            @click="dialog = false"
+            @click="dialog = false, setSelection('')"
           >
             Cancel
           </v-btn>
@@ -60,7 +61,7 @@
           <v-btn
             color="indigo"
             text
-            disabled
+            :disabled="!getPosSelection"
             @click="dialog = false"
           >
             Add Filter
@@ -74,6 +75,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 import PositionField from '../PositionField.vue';
 
@@ -86,8 +88,16 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters({ getPosSelection: 'posInputField/getPosSelection' }),
+  },
+
   components: {
     PositionField,
+  },
+
+  methods: {
+    ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
   },
 
   mixins: [BreakpointsCond],
