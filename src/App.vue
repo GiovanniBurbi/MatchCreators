@@ -5,7 +5,7 @@
     <v-snackbar
      v-model="snackbar"
      top color="green"
-     :timeout="30000"
+     :timeout="4000"
     >
       <v-icon
        class="pb-2"
@@ -46,6 +46,7 @@ export default {
     },
     ...mapGetters({ getUserInfo: 'auth/getUser' }),
     getUsername() {
+      if (!this.getUserInfo) return '';
       return this.getUserInfo.username;
     },
   },
