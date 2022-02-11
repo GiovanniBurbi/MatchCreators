@@ -2,20 +2,20 @@ export default {
   namespaced: true,
 
   state: {
-    registrationPositionSelection: '',
+    positionSelection: '',
   },
 
   mutations: {
-    setRgtPosSelection(state, payload) {
-      state.registrationPositionSelection = payload;
+    setPosSelection(state, payload) {
+      state.positionSelection = payload;
     },
   },
 
   actions: {},
 
   getters: {
-    getRgtPosSelection(state) {
-      return state.registrationPositionSelection;
+    getPosSelection(state) {
+      return state.positionSelection;
     },
   },
 };
