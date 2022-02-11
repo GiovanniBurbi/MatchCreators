@@ -33,19 +33,19 @@
           <v-row justify="center">
 
             <v-col cols="3">
-              <match-filter category="location"/>
+              <location-filter />
             </v-col>
 
             <v-col cols="3">
-              <match-filter category="date"/>
+              <date-filter />
             </v-col>
 
             <v-col cols="3">
-              <match-filter category="time"/>
+              <time-filter />
             </v-col>
 
             <v-col cols="3">
-              <match-filter category="position"/>
+              <position-filter />
             </v-col>
 
           </v-row>
@@ -64,8 +64,11 @@
 
 <script>
 /* import FilterChipsGroup from './FilterChipsGroup.vue'; */
-import MatchFilter from './MatchFilter.vue';
+import DateFilter from './Filters/DateFilter.vue';
+import TimeFilter from './Filters/TimeFilter.vue';
+import LocationFilter from './Filters/LocationFilter.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
+import PositionFilter from './Filters/PositionFilter.vue';
 
 export default {
   name: 'FinderHeader',
@@ -78,7 +81,10 @@ export default {
 
   components: {
     /* FilterChipsGroup, */
-    MatchFilter,
+    DateFilter,
+    TimeFilter,
+    LocationFilter,
+    PositionFilter,
   },
 
   methods: {
