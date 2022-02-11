@@ -39,6 +39,7 @@
 
           <v-row>
             <v-col cols="12" sm="5">
+
               <v-menu
               ref="menu1"
               v-model="menuStart"
@@ -50,6 +51,7 @@
               max-width="290px"
               min-width="290px"
               >
+
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     v-model="start"
@@ -59,22 +61,36 @@
                     v-bind="attrs"
                     v-on="on"
                   >
+
+                    <template v-slot:prepend>
+                      <v-icon
+                      left
+                      color="indigo"
+                      >
+                        mdi-clock-time-four-outline
+                      </v-icon>
+                    </template>
+
                   </v-text-field>
                 </template>
+
                 <v-time-picker
                 v-if="menuStart"
                 v-model="start"
                 format="24hr"
                 full-width
+                color="indigo"
                 :max="end"
                 @click:minute="$refs.menu1.save(start)"
                 ></v-time-picker>
+
               </v-menu>
             </v-col>
 
             <v-spacer></v-spacer>
 
             <v-col cols="12" sm="6">
+
               <v-menu
               ref="menu2"
               v-model="menuEnd"
@@ -86,6 +102,7 @@
               max-width="290px"
               min-width="290px"
               >
+
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     v-model="end"
@@ -95,16 +112,27 @@
                     v-bind="attrs"
                     v-on="on"
                   >
+                    <template v-slot:prepend>
+                      <v-icon
+                      left
+                      color="indigo"
+                      >
+                        mdi-clock-time-eight-outline
+                      </v-icon>
+                    </template>
                   </v-text-field>
                 </template>
+
                 <v-time-picker
                 v-if="menuEnd"
                 v-model="end"
                 format="24hr"
                 full-width
+                color="indigo"
                 :min="start"
                 @click:minute="$refs.menu2.save(end)"
                 ></v-time-picker>
+
               </v-menu>
             </v-col>
           </v-row>
