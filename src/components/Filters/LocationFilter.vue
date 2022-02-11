@@ -19,6 +19,7 @@
 
     <v-dialog
       v-model="dialog"
+      persistent
       max-width="500"
     >
       <v-card>
@@ -37,8 +38,9 @@
         <v-card-text class="pt-4 pb-2">
 
           <v-text-field
+          v-model="location"
           color="indigo"
-          label="'Filter location'"
+          label="Filter location"
           clearable
           >
 
@@ -61,7 +63,7 @@
           <v-btn
             color="error"
             text
-            @click="dialog = false"
+            @click="dialog = false, location = ''"
           >
             Cancel
           </v-btn>
@@ -71,7 +73,7 @@
           <v-btn
             color="indigo"
             text
-            disabled
+            :disabled="!location"
             @click="dialog = false"
           >
             Add Filter
@@ -93,6 +95,7 @@ export default {
   data() {
     return {
       dialog: false,
+      location: '',
     };
   },
 
