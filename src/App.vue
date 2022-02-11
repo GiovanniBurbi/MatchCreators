@@ -5,16 +5,16 @@
     <v-snackbar
      v-model="snackbar"
      top color="green"
-     :timeout="4000"
+     :timeout="30000"
     >
       <v-icon
-       class="pb-1"
-       size=30
+       class="pb-2"
+       size=32
        left
       >mdi-check-circle-outline
       </v-icon>
-      <span class="text-subtitle-1">
-        Hello, {{ this.$store.state.auth.user.username }}!
+      <span class="text-h6">
+        Hello, {{ getUsername }}
       </span>
     </v-snackbar>
 
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Navbar from './components/Navbar.vue';
 import ModeSwitcher from './components/ModeSwitcher.vue';
 
@@ -42,6 +43,10 @@ export default {
   computed: {
     isNotAuth() {
       return this.$route.name !== 'Authentication';
+    },
+    ...mapGetters({ getUserInfo: 'auth/getUser' }),
+    getUsername() {
+      return this.getUserInfo.username;
     },
   },
 
