@@ -218,7 +218,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import PositionField from './PositionField.vue';
 
@@ -258,7 +258,7 @@ export default {
       return this.date ? format(parseISO(this.date), 'do MMMM yyyy') : '';
     },
     /* getter current position selection */
-    ...mapGetters({ getPos: 'posInputField/getRgtPosSelection' }),
+    ...mapGetters({ getPos: 'posInputField/getPosSelection' }),
   },
 
   watch: {
@@ -306,6 +306,7 @@ export default {
     },
 
     ...mapActions({ signup: 'auth/signup' }),
+    ...mapMutations({ resetSelection: 'posInputField/setPosSelection' }),
 
     submitFullReg() {
       const posValid = this.$refs.pos.validate();
@@ -321,6 +322,7 @@ export default {
             position: this.getPos,
           },
         ).then(() => {
+          this.resetSelection('');
           this.$router.push({ name: 'Home' });
           this.$emit('loginSuccess');
         });
