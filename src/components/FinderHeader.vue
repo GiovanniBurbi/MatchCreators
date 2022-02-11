@@ -61,6 +61,53 @@
         </v-container>
       </v-scroll-y-transition>
     </v-row>
+    <v-row justify="center">
+      <v-chip
+        class="ma-2"
+        close
+        color="indigo"
+        text-color="white"
+      >
+        <v-icon left size="22">
+          mdi-clock-outline
+        </v-icon>
+        10:30 - 12:30
+      </v-chip>
+      <v-chip
+        class="ma-2"
+        close
+        color="indigo"
+        text-color="white"
+        @click:close="closeChip"
+      >
+        <v-icon left size="22">
+          mdi-calendar
+        </v-icon>
+        29 Nov - 11 Dec
+      </v-chip>
+      <v-chip
+        class="ma-2"
+        close
+        color="indigo"
+        text-color="white"
+      >
+        <v-icon class="icon-white" left>
+          $position-icon
+        </v-icon>
+        Forward
+      </v-chip>
+      <v-chip
+        class="ma-2"
+        close
+        color="indigo"
+        text-color="white"
+      >
+        <v-icon size="22" left>
+          mdi-map-marker-outline
+        </v-icon>
+        Rose Stadium
+      </v-chip>
+    </v-row>
   </div>
 </template>
 
@@ -74,6 +121,12 @@ export default {
     return {
       showFilters: false,
     };
+  },
+
+  methods: {
+    closeChip() {
+      /* TODO */
+    },
   },
 
   mixins: [BreakpointsCond],
