@@ -127,7 +127,7 @@
           <v-btn
             color="indigo"
             text
-            disabled
+            :disabled="!(start || end)"
             @click="dialog = false"
           >
             Add Filter
