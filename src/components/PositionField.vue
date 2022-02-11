@@ -3,7 +3,8 @@
     <!-- input field name -->
     <v-row justify="start">
       <!-- change color based on error value -->
-      <v-icon :class="[error ? 'icon iconError' : 'icon']">
+      <v-icon
+      :class="[error ? 'icon iconError' : 'icon', color]">
         $position-icon
       </v-icon>
       <!-- change color and shake based on error value -->
@@ -13,7 +14,7 @@
           error ? 'red--text text--accent-2 shake' : 'text--secondary',
         ]"
       >
-        Position
+        <span>{{ label }}</span>
       </h3>
     </v-row>
 
@@ -41,7 +42,8 @@
       </v-col>
     </v-row>
 
-    <div :class="[error ? 'error' : null, 'divider']"></div>
+    <div :class="[error ? 'error' : null, 'divider',
+    {'divider-width' : mdAndUp}]"></div>
 
     <div
       :class="[
@@ -56,9 +58,20 @@
 <script>
 import { mapGetters } from 'vuex';
 import PositionButton from '@/components/PositionButton.vue';
+import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'PositionField',
+
+  props: {
+    label: {
+      type: String,
+      required: true,
+    },
+    color: {
+      type: String,
+    },
+  },
 
   data() {
     return {
@@ -91,6 +104,8 @@ export default {
       }
     },
   },
+
+  mixins: [BreakpointsCond],
 };
 </script>
 <style scoped>
@@ -99,9 +114,11 @@ export default {
 }
 .divider {
   height: 0.1px;
-  width: 385px;
   border-bottom: 0.1px solid gray;
   margin-left: 20px;
+}
+.divider-width {
+  width: 370px;
 }
 .container:hover .divider {
   border-color: black;
@@ -150,5 +167,14 @@ export default {
   40% {
     transform: translate3d(1px, 0, 0);
   }
+}
+.icon-purple {
+  /* deep-purple */
+  filter: invert(25%) sepia(75%) saturate(1998%) hue-rotate(247deg) brightness(82%) contrast(92%);
+}
+.icon-indigo {
+  /* indigo */
+  filter: invert(26%) sepia(55%) saturate(2295%)
+  hue-rotate(217deg) brightness(90%) contrast(83%);
 }
 </style>

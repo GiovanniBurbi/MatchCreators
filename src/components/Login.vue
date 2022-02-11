@@ -195,7 +195,7 @@
 
             </v-menu>
 
-            <position-field ref="pos"></position-field>
+            <position-field ref="pos" label="Position"></position-field>
           </v-form>
         </v-card-text>
 
