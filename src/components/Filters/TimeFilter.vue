@@ -156,7 +156,7 @@
             color="indigo"
             text
             :disabled="!(start || end)"
-            @click="dialog = false"
+            @click="dialog = false, sendFilter()"
           >
             Add Filter
           </v-btn>
@@ -169,6 +169,7 @@
 
 </template>
 <script>
+import { mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -182,6 +183,28 @@ export default {
       start: null,
       end: null,
     };
+  },
+
+  methods: {
+    ...mapMutations({ addFilter: 'filters/addFilter' }),
+
+    sendFilter() {
+      if (!this.start) {
+        this.start = '00:00';
+      }
+      if (!this.end) {
+        this.end = '23:59';
+      }
+      const timeRange = `${this.start}-${this.end}`;
+      const filter = {
+        type: 'Time',
+        icon: 'mdi-clock-outline',
+        msg: timeRange,
+      };
+      this.addFilter(filter);
+      this.start = null;
+      this.end = null;
+    },
   },
 
   mixins: [BreakpointsCond],
