@@ -136,11 +136,10 @@ export default {
     ...mapMutations({ addFilter: 'filters/addFilter' }),
 
     sendFilter() {
-      const dateRange = this.dates.join('~');
       const filter = {
         type: 'Date',
         icon: 'mdi-calendar',
-        msg: dateRange,
+        msg: this.dates,
       };
       this.addFilter(filter);
       this.dates = [];

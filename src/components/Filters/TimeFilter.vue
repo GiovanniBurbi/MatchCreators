@@ -195,11 +195,10 @@ export default {
       if (!this.end) {
         this.end = '23:59';
       }
-      const timeRange = `${this.start}-${this.end}`;
       const filter = {
         type: 'Time',
         icon: 'mdi-clock-outline',
-        msg: timeRange,
+        msg: [this.start, this.end],
       };
       this.addFilter(filter);
       this.start = null;
