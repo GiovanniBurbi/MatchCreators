@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import auth from './modules/auth';
+import auth from './modules/auth/index';
 import positionInputField from './modules/positionInputField/index';
+import filters from './modules/filters/index';
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   modules: {
     posInputField: positionInputField,
     auth,
+    filters,
   },
   getters: {
   },
