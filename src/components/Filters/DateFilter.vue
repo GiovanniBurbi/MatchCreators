@@ -91,7 +91,7 @@
             color="indigo"
             text
             :disabled="!dates.length"
-            @click="dialog = false"
+            @click="dialog = false, sendFilter()"
           >
             Add Filter
           </v-btn>
@@ -105,6 +105,7 @@
 
 <script>
 import { format, parseISO } from 'date-fns';
+import { mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -128,6 +129,21 @@ export default {
         );
       }
       return datesFormatted.join(' ~ ');
+    },
+  },
+
+  methods: {
+    ...mapMutations({ addFilter: 'filters/addFilter' }),
+
+    sendFilter() {
+      const dateRange = this.dates.join('~');
+      const filter = {
+        type: 'Date',
+        icon: 'mdi-calendar',
+        msg: dateRange,
+      };
+      this.addFilter(filter);
+      this.dates = [];
     },
   },
 
