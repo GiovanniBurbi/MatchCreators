@@ -74,7 +74,7 @@
             color="indigo"
             text
             :disabled="!location"
-            @click="dialog = false"
+            @click="dialog = false, sendFilter()"
           >
             Add Filter
           </v-btn>
@@ -87,6 +87,7 @@
 
 </template>
 <script>
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -97,6 +98,24 @@ export default {
       dialog: false,
       location: '',
     };
+  },
+
+  computed: {
+    ...mapGetters({ getFilters: 'filters/getFilters' }),
+  },
+
+  methods: {
+    ...mapMutations({ addFilter: 'filters/addFilter' }),
+
+    sendFilter() {
+      const filter = {
+        type: 'Location',
+        icon: 'mdi-map-marker-outline',
+        msg: this.location,
+      };
+      this.addFilter(filter);
+      this.location = '';
+    },
   },
 
   mixins: [BreakpointsCond],
