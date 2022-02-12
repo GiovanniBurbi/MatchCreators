@@ -66,7 +66,7 @@
             color="indigo"
             text
             :disabled="!getPosSelection"
-            @click="dialog = false"
+            @click="dialog = false, sendFilter()"
           >
             Add Filter
           </v-btn>
@@ -102,6 +102,18 @@ export default {
 
   methods: {
     ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
+
+    ...mapMutations({ addFilter: 'filters/addFilter' }),
+
+    sendFilter() {
+      const filter = {
+        type: 'Position',
+        icon: '$position-icon',
+        msg: this.getPosSelection,
+      };
+      this.addFilter(filter);
+      this.setSelection('');
+    },
   },
 
   mixins: [BreakpointsCond],
