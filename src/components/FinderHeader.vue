@@ -57,13 +57,13 @@
       </v-scroll-y-transition>
     </v-row>
     <v-row justify="center">
-      <!-- <filter-chips-group/> -->
+      <filter-chips-group/>
     </v-row>
   </div>
 </template>
 
 <script>
-/* import FilterChipsGroup from './FilterChipsGroup.vue'; */
+import FilterChipsGroup from './FilterChipsGroup.vue';
 import DateFilter from './Filters/DateFilter.vue';
 import TimeFilter from './Filters/TimeFilter.vue';
 import LocationFilter from './Filters/LocationFilter.vue';
@@ -80,7 +80,7 @@ export default {
   },
 
   components: {
-    /* FilterChipsGroup, */
+    FilterChipsGroup,
     DateFilter,
     TimeFilter,
     LocationFilter,
@@ -88,9 +88,6 @@ export default {
   },
 
   methods: {
-    closeChip() {
-      /* TODO */
-    },
   },
 
   mixins: [BreakpointsCond],
