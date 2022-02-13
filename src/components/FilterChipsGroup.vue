@@ -1,11 +1,8 @@
 <template>
-<!-- TODO column reactive to screen size,
- smAndDown column=false, better use mobile-breakpoint prop -->
   <v-chip-group
   :column="smAndUp"
   show-arrows
   >
-  <!-- maybe bug on key=i -->
     <v-chip
     v-for="(filter, i) in filters"
     :key="i"
@@ -46,11 +43,6 @@ export default {
 
   methods: {
     ...mapMutations({ removeFilter: 'filters/removeFilter' }),
-
-    /* remove(item) {
-      this.chips.splice(this.chips.indexOf(item), 1);
-      this.chips = [...this.chips];
-    }, */
 
     formatMsg(type, msg) {
       if (type === 'Position' || type === 'Location') {
