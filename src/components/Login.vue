@@ -149,8 +149,6 @@
 
       <v-window-item :value="3">
 
-<!-- style="font-size: 30px;font-weight: 300; color:
-        #3F51B5;" -->
         <v-card-title
         class="justify-start pr-4 pt-8"
         >

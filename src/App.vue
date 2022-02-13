@@ -1,6 +1,9 @@
 <template>
   <v-app>
-    <navbar v-if="isNotAuth" :is-dark=darkNav></navbar>
+    <navbar
+    v-if="isNotAuth"
+    :is-dark=darkNav
+    ></navbar>
 
     <v-snackbar
      v-model="snackbar"
@@ -19,7 +22,10 @@
     </v-snackbar>
 
     <v-main>
-      <mode-switcher v-if="isNotAuth" @modeSwitch="modeSwitch()" />
+      <mode-switcher
+      v-if="isNotAuth"
+      @modeSwitch="modeSwitch()"
+      />
       <router-view @loginSuccess="snackbar = true"></router-view>
     </v-main>
   </v-app>
