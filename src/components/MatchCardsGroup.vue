@@ -1,7 +1,6 @@
 <template>
-  <v-container fluid fill-height class="container">
-    <v-row justify="center" align="center" class="centering">
-      <match-card />
+  <v-container fluid fill-height>
+    <v-row justify="center">
       <match-card />
       <match-card />
       <match-card />
@@ -31,11 +30,4 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  height: 585px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  position: relative;
-  right: -17px;
-}
 </style>
