@@ -35,12 +35,15 @@ export default {
 .background {
   height: calc(100vh - 64px);
   background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
-  rgba(0, 0, 0, 0.2)), url('../assets/daylight.jpg') center center fixed;
+  rgba(0, 0, 0, 0.2)), url('../assets/daylight.jpg') no-repeat center center fixed;
+  overflow: hidden;
   background-size: cover;
 }
 .content {
   margin-top: 60px;
-  max-width: 80%
+  max-width: 80%;
+  position: relative;
+  overflow: hidden;
 }
 .fullscreen {
   max-width: 100%;

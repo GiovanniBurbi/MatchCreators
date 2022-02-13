@@ -32,8 +32,10 @@ export default {
 
 <style scoped>
 .container {
-  height: 560px;
+  height: 605px;
   overflow-y: auto;
   scroll-behavior: smooth;
+  position: relative;
+  right: -17px;
 }
 </style>
