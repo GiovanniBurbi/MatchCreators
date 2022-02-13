@@ -1,6 +1,5 @@
 <template>
   <v-chip-group
-  :column="smAndUp"
   show-arrows
   >
     <v-chip
