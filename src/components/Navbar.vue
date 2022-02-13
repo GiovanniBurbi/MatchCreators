@@ -4,7 +4,13 @@
   >
 
     <v-app-bar-nav-icon>
-      <v-icon size=35 class="icon-light"> $ball-icon </v-icon>
+      <v-icon
+      size=35
+      class="icon-light"
+      @click="goHome()"
+      >
+        $ball-icon
+      </v-icon>
     </v-app-bar-nav-icon>
 
     <v-app-bar-title class="text-uppercase hidden-xs-only">
@@ -40,6 +46,16 @@ export default {
   props: {
     isDark: {
       type: Boolean,
+    },
+  },
+
+  methods: {
+    goHome() {
+      if (this.$route.name === 'Home') {
+        this.$router.go();
+      } else {
+        this.$router.push({ name: 'Home' });
+      }
     },
   },
 };

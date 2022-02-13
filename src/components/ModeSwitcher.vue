@@ -21,6 +21,21 @@ export default {
     };
   },
 
+  props: {
+    switch: {
+      type: Boolean,
+    },
+  },
+
+  watch: {
+    switch(newVal) {
+      if (newVal) {
+        this.toggleMode();
+        this.$emit('update:switch', false);
+      }
+    },
+  },
+
   methods: {
     creator() {
       this.$emit('modeSwitch');

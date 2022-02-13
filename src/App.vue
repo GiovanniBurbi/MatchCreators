@@ -24,6 +24,7 @@
     <v-main>
       <mode-switcher
       v-if="isNotAuth"
+      :switch.sync="toggleSwitch"
       @modeSwitch="modeSwitch()"
       />
       <router-view @loginSuccess="snackbar = true"></router-view>
@@ -43,7 +44,25 @@ export default {
     return {
       snackbar: false,
       darkNav: false,
+      toggleSwitch: false,
     };
+  },
+
+  watch: {
+    $route() {
+      if (this.$route.name === 'Home') {
+        if (this.darkNav) {
+          this.darkNav = false;
+          this.toggleSwitch = true;
+        }
+      }
+      if (this.$route.name === 'Creator') {
+        if (!this.darkNav) {
+          this.darkNav = true;
+          this.toggleSwitch = true;
+        }
+      }
+    },
   },
 
   computed: {
