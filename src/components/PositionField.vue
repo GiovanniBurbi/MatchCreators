@@ -1,25 +1,26 @@
 <template>
-  <div class="container">
-    <!-- input field name -->
+
+  <v-container fluid class="container">
     <v-row justify="start">
-      <!-- change color based on error value -->
-      <v-icon :class="[error ? 'icon iconError' : 'icon']">
+
+      <v-icon
+      :class="[error ? 'icon iconError' : 'icon', color]">
         $position-icon
       </v-icon>
-      <!-- change color and shake based on error value -->
+
       <h3
-        :class="[
-          'pt-2 pl-2 font-weight-regular',
-          error ? 'red--text text--accent-2 shake' : 'text--secondary',
-        ]"
+      :class="['pt-2 pl-2 font-weight-regular',
+          error ? 'red--text text--accent-2 shake' : 'text--secondary']"
       >
-        Position
+        <span>{{ label }}</span>
       </h3>
+
     </v-row>
 
-    <v-row :class="['pl-md-6 pl-2 pb-4', { shake: error }]" wrap>
+    <v-row :class="[{'shake' : error},
+    {'pl-6' : registration},'pb-3']">
+
       <v-col xs="12" sm="4">
-        <!-- listen for events of type clicked of this component -->
         <position-button
           v-on:clicked="buttonClick"
           field-pos="goalkeeper">
@@ -39,26 +40,43 @@
           field-pos="forward"
         ></position-button>
       </v-col>
+
     </v-row>
 
-    <div :class="[error ? 'error' : null, 'divider']"></div>
+    <div v-if="registration"
+    :class="[error ? 'error' : null, 'divider',
+    {'divider-width' : smAndUp}]"></div>
 
-    <div
-      :class="[
-        'reduce font-weight-regular red--text text-accent-2 pl-5',
-        error ? 'expand' : 'shrink',
-      ]"
+   <div v-if="registration"
+    :class="['reduce font-weight-regular red--text text-accent-2 pl-5',
+    error ? 'expand' : 'shrink']"
     >
       Required
     </div>
-  </div>
+
+  </v-container>
 </template>
+
 <script>
 import { mapGetters } from 'vuex';
 import PositionButton from '@/components/PositionButton.vue';
+import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'PositionField',
+
+  props: {
+    label: {
+      type: String,
+      required: true,
+    },
+    color: {
+      type: String,
+    },
+    registration: {
+      type: Boolean,
+    },
+  },
 
   data() {
     return {
@@ -72,7 +90,7 @@ export default {
 
   computed: {
     /* define getter of vuex state registrationPositionSelection */
-    ...mapGetters({ currentSelection: 'posInputField/getRgtPosSelection' }),
+    ...mapGetters({ currentSelection: 'posInputField/getPosSelection' }),
   },
 
   methods: {
@@ -91,6 +109,8 @@ export default {
       }
     },
   },
+
+  mixins: [BreakpointsCond],
 };
 </script>
 <style scoped>
@@ -99,9 +119,11 @@ export default {
 }
 .divider {
   height: 0.1px;
-  width: 385px;
   border-bottom: 0.1px solid gray;
   margin-left: 20px;
+}
+.divider-width {
+  width: 370px;
 }
 .container:hover .divider {
   border-color: black;
@@ -150,5 +172,14 @@ export default {
   40% {
     transform: translate3d(1px, 0, 0);
   }
+}
+.icon-purple {
+  /* deep-purple */
+  filter: invert(25%) sepia(75%) saturate(1998%) hue-rotate(247deg) brightness(82%) contrast(92%);
+}
+.icon-indigo {
+  /* indigo */
+  filter: invert(26%) sepia(55%) saturate(2295%)
+  hue-rotate(217deg) brightness(90%) contrast(83%);
 }
 </style>

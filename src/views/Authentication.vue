@@ -7,14 +7,13 @@
         </h1>
       </v-col>
       <v-col>
-        <login class="card"></login>
+        <login class="card" @loginSuccess="$emit('loginSuccess')"></login>
       </v-col>
     </v-row>
   </v-container>
 </template>
 <script>
 import Login from '../components/Login.vue';
-import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Authentication',
@@ -22,8 +21,6 @@ export default {
   components: {
     Login,
   },
-
-  mixins: [BreakpointsCond],
 };
 </script>
 

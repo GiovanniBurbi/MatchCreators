@@ -150,14 +150,13 @@
       <v-window-item :value="3">
 
         <v-card-title
-        class="justify-start pr-4 pt-8 pb-4"
-        style="font-size: 30px;font-weight: 300; color:
-        #3F51B5;"
+        class="justify-start pr-4 pt-8"
         >
-          <span>Complete your profile</span>
+          <h1 class="font-weight-light"
+          style="font-size:30px;">Complete your profile</h1>
         </v-card-title>
 
-        <v-card-text class="pb-0 pt-4">
+        <v-card-text class="pb-0">
           <v-form ref="fullReg">
 
             <v-menu
@@ -195,7 +194,7 @@
 
             </v-menu>
 
-            <position-field ref="pos"></position-field>
+            <position-field ref="pos" label="Position" registration="true"></position-field>
           </v-form>
         </v-card-text>
 
@@ -218,7 +217,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import PositionField from './PositionField.vue';
 
@@ -228,6 +227,7 @@ export default {
   components: {
     PositionField,
   },
+
   data() {
     return {
       username: '',
@@ -257,7 +257,7 @@ export default {
       return this.date ? format(parseISO(this.date), 'do MMMM yyyy') : '';
     },
     /* getter current position selection */
-    ...mapGetters({ getPos: 'posInputField/getRgtPosSelection' }),
+    ...mapGetters({ getPos: 'posInputField/getPosSelection' }),
   },
 
   watch: {
@@ -289,6 +289,7 @@ export default {
         ).then((val) => {
           if (val) {
             this.$router.push({ name: 'Home' });
+            this.$emit('loginSuccess');
           } else {
             this.loginError.push('Invalid access');
           }
@@ -304,6 +305,7 @@ export default {
     },
 
     ...mapActions({ signup: 'auth/signup' }),
+    ...mapMutations({ resetSelection: 'posInputField/setPosSelection' }),
 
     submitFullReg() {
       const posValid = this.$refs.pos.validate();
@@ -318,7 +320,11 @@ export default {
             date: this.date,
             position: this.getPos,
           },
-        ).then(() => { this.$router.push({ name: 'Home' }); });
+        ).then(() => {
+          this.resetSelection('');
+          this.$router.push({ name: 'Home' });
+          this.$emit('loginSuccess');
+        });
       }
     },
   },

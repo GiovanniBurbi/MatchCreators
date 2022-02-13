@@ -89,5 +89,30 @@
       "position": "Forward"
     }
   ],
-  "matches": []
+  "matches": [
+    {
+      "id": 1,
+      "date": "2022-03-01",
+      "startTime": "10:00",
+      "endTime": "12:00",
+      "location": "Albereta",
+      "positions": {
+        "goalkeepers": 2,
+        "defenders": 3,
+        "forwards": 4
+      }
+    },
+    {
+      "id": 2,
+      "date": "2022-03-03",
+      "startTime": "18:00",
+      "endTime": "19:00",
+      "location": "Firenze Sud",
+      "positions": {
+        "goalkeepers": 1,
+        "defenders": 2,
+        "forwards": 2
+      }
+    }
+  ]
 }

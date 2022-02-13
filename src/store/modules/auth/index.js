@@ -10,12 +10,17 @@ export default {
   mutations: {
     setUser(state, userData) {
       state.user = userData;
+      const credentials = { name: userData.username, psw: userData.password };
+      localStorage.setItem('userInfo', JSON.stringify(credentials));
     },
   },
 
   actions: {
     async login({ commit }, credentials) {
       /* get user using credentials, if not null return true, else false */
+      if (!credentials) {
+        return null;
+      }
       const res = await UserService.getUser(credentials);
       const userData = res.data[0];
       if (userData) {
