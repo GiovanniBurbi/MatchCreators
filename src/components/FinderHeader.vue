@@ -10,7 +10,7 @@
       :small="xsOnly"
       :color="showFilters ?  'white' : 'deep-purple'"
       rounded
-      @click="showFilters = !showFilters"
+      @click="showFilters = !showFilters, $emit('filters')"
       >
         <span
         :class="['hidden-xs-only',
@@ -85,9 +85,6 @@ export default {
     TimeFilter,
     LocationFilter,
     PositionFilter,
-  },
-
-  methods: {
   },
 
   mixins: [BreakpointsCond],

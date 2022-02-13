@@ -6,15 +6,14 @@
     {'fullscreen' : smAndDown},
     {'biggerContent' : lgOnly || mdOnly}]"
     >
-      <finder-header />
+      <finder-header @filters="adjust = !adjust"/>
 
       <v-divider class="mt-4" style="border-color: black !important; opacity: 30%;"></v-divider>
 
       <v-row align="center" justify="center" class="mt-1">
 
         <v-container fluid
-        :class="['scrollable full-size', {'full-size': ''},
-        {'medium-size': ''}, {'small-size': ''}]">
+        :class="['scrollable full-size', {'filtersOn': adjust}]">
 
           <match-cards-group />
 
@@ -26,12 +25,32 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import FinderHeader from '@/components/FinderHeader.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import MatchCardsGroup from '../components/MatchCardsGroup.vue';
 
 export default {
   name: 'Home',
+
+  data() {
+    return {
+      adjust: false,
+      chipsOn: false,
+    };
+  },
+
+  computed: {
+    ...mapGetters({ filters: 'filters/getFilters' }),
+  },
+
+  watch: {
+    filters(newVal) {
+      if (newVal.length !== 0) {
+        if (!this.chipsOn) this.chipsOn = true;
+      } else this.chipsOn = false;
+    },
+  },
 
   components: {
     FinderHeader,
@@ -69,5 +88,7 @@ export default {
 .scrollable::-webkit-scrollbar {
   display: none;
 }
-
+.filtersOn {
+  height: calc(670px - 3vw);
+}
 </style>
