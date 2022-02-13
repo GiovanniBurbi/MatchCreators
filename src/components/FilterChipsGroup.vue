@@ -10,6 +10,7 @@
     close
     close-icon="mdi-delete"
     label
+    :ripple="false"
     color="indigo"
     text-color="white"
     @click:close="deleteFilter(i)"
