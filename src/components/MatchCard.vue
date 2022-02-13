@@ -15,10 +15,11 @@
         mdi-calendar
       </v-icon>
       <h1
-      class="text-h6 font-weight-bold indigo--text
-      text--darken-2"
+      :class="['font-weight-bold indigo--text      text--darken-2', {'text-h6': smAndUp},
+      {'text-subtitle-1': xsOnly}]"
       >
-        Saturday, 12 September
+        <!-- Saturday, 12 September -->
+        {{ this.dateFormatted }}
       </h1>
     </v-card-title>
 
@@ -35,7 +36,7 @@
         <h1
         class="text-subtitle-2 font-weight-medium black--text"
         >
-          10:00 - 12:00
+          {{ match.startTime }} - {{ match.endTime }}
         </h1>
       </v-row>
 
@@ -50,7 +51,7 @@
         <h1
         class="text-subtitle-2 font-weight-medium black--text"
         >
-          Albereta
+          {{ match.location }}
         </h1>
       </v-row>
 
@@ -68,32 +69,44 @@
         </h1>
       </v-row>
 
-      <v-row justify="center" class="px-8 pt-2 pb-1">
+      <v-row justify="center" class="px-6 pt-2 pb-1">
 
         <v-col>
           <v-row justify="center">
-            <v-icon size="34">$goalkeeper-icon</v-icon>
+            <v-icon
+            size="34"
+            :class="gkFilled ? 'filled-pos' : null"
+            >
+              $goalkeeper-icon
+            </v-icon>
           </v-row>
 
           <v-row justify="center" class="pt-2">
             <h1
-            class="text-caption font-weight-medium indigo--text text--darken-2"
+            :class="['text-caption font-weight-medium',
+            this.gkFilled ? 'red--text text--darken-2': 'indigo--text text--darken-2']"
             >
-              1 / 2
+              {{ match.positions.goalkeepers }} / 2
             </h1>
           </v-row>
         </v-col>
 
         <v-col>
           <v-row justify="center">
-            <v-icon size="34">$defender-icon</v-icon>
+            <v-icon
+            size="34"
+            :class="defFilled ? 'filled-pos' : null"
+            >
+              $defender-icon
+            </v-icon>
           </v-row>
 
           <v-row justify="center" class="pt-2">
             <h1
-            class="text-caption font-weight-medium indigo--text text--darken-2"
+            :class="['text-caption font-weight-medium',
+            this.defFilled ? 'red--text text--darken-2': 'indigo--text text--darken-2']"
             >
-              3 / 4
+              {{ match.positions.defenders }} / 4
             </h1>
           </v-row>
         </v-col>
@@ -102,7 +115,7 @@
           <v-row justify="center">
             <v-icon
             size="42"
-            class="pb-1 full-pos"
+            :class="['pb-1', fwFilled ? 'filled-pos' : null]"
             >
               $forward-icon
             </v-icon>
@@ -110,9 +123,10 @@
 
           <v-row justify="center">
             <h1
-            class="text-caption font-weight-medium red--text text--darken-2"
+            :class="['text-caption font-weight-medium',
+            this.fwFilled ? 'red--text text--darken-2': 'indigo--text text--darken-2']"
             >
-              4 / 4
+              {{ match.positions.forwards }} / 4
             </h1>
           </v-row>
         </v-col>
@@ -125,9 +139,51 @@
 </template>
 
 <script>
+import { format, parseISO } from 'date-fns';
+import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'MatchCard',
+
+  data() {
+    return {
+      match: {
+        id: 1,
+        date: '2022-09-28',
+        startTime: '10:00',
+        endTime: '12:00',
+        location: 'Albereta',
+        positions: {
+          goalkeepers: 2,
+          defenders: 3,
+          forwards: 4,
+        },
+      },
+      gkFilled: false,
+      defFilled: false,
+      fwFilled: false,
+      dateFormatted: null,
+    };
+  },
+
+  mounted() {
+    if (this.match.positions.goalkeepers === 2) {
+      this.gkFilled = true;
+    }
+    if (this.match.positions.defenders === 4) {
+      this.defFilled = true;
+    }
+    if (this.match.positions.forwards === 4) {
+      this.fwFilled = true;
+    }
+    this.dateFormatted = format(parseISO(this.match.date), 'EEEE, d MMMM');
+  },
+
+  mixins: [BreakpointsCond],
+
+  /* props: {
+    match: {},
+  }, */
 
 };
 </script>
@@ -146,7 +202,7 @@ export default {
   /* indigo darken 2 */
   filter: invert(19%) sepia(50%) saturate(3328%) hue-rotate(224deg) brightness(90%) contrast(89%);
 }
-.full-pos {
+.filled-pos {
   opacity: 50%;
 }
 </style>
