@@ -14,9 +14,9 @@
 
         <v-container fluid
         :class="['scrollable full-size',
-        {'filters-on': filtersOn && !chipsOn},
-        {'filters-chips-on': filtersOn && chipsOn},
-        {'chips-on': chipsOn && !filtersOn}]"
+        {'filters-xor-chips-on': filtersOn && !chipsOn},
+        {'filters-and-chips-on': filtersOn && chipsOn},
+        {'filters-xor-chips-on': chipsOn && !filtersOn}]"
         >
 
           <match-cards-group />
@@ -92,13 +92,10 @@ export default {
 .scrollable::-webkit-scrollbar {
   display: none;
 }
-.filters-on {
+.filters-xor-chips-on {
   height: calc(68vh - 1vw);
 }
-.filters-chips-on {
+.filters-and-chips-on {
   height: calc(62vh - 1vw);
-}
-.chips-on {
-  height: calc(68vh - 1vw);
 }
 </style>

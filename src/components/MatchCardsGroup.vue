@@ -13,6 +13,18 @@
       <match-card />
       <match-card />
       <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
+      <match-card />
     </v-row>
   </v-container>
 </template>
