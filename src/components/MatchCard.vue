@@ -147,18 +147,6 @@ export default {
 
   data() {
     return {
-      match: {
-        id: 1,
-        date: '2022-09-28',
-        startTime: '10:00',
-        endTime: '12:00',
-        location: 'Albereta',
-        positions: {
-          goalkeepers: 2,
-          defenders: 3,
-          forwards: 4,
-        },
-      },
       gkFilled: false,
       defFilled: false,
       fwFilled: false,
@@ -181,9 +169,12 @@ export default {
 
   mixins: [BreakpointsCond],
 
-  /* props: {
-    match: {},
-  }, */
+  props: {
+    match: {
+      type: Object,
+      required: true,
+    },
+  },
 
 };
 </script>
