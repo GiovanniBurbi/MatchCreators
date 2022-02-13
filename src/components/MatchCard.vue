@@ -1,20 +1,21 @@
 <template>
   <v-card
   class="background ma-2"
-  elevation="6"
-  width="380"
+  elevation="8"
+  width="340"
   rounded="lg"
   >
 
     <v-card-title class="px-2">
       <v-icon
       left
+      size="22"
       color="indigo darken-1"
       >
         mdi-calendar
       </v-icon>
       <h1
-      class="text-h5 font-weight-bold indigo--text
+      class="text-h6 font-weight-bold indigo--text
       text--darken-2"
       >
         Saturday, 12 September
@@ -26,12 +27,13 @@
       <v-row class="px-1">
         <v-icon
         left
+        size="22"
         color="indigo darken-2"
         >
           mdi-clock-outline
         </v-icon>
         <h1
-        class="text-subtitle-1 font-weight-medium black--text"
+        class="text-subtitle-2 font-weight-medium black--text"
         >
           10:00 - 12:00
         </h1>
@@ -41,12 +43,12 @@
         <v-icon
         left
         color="indigo darken-2"
-        size="25"
+        size="24"
         >
           mdi-map-marker-outline
         </v-icon>
         <h1
-        class="text-subtitle-1 font-weight-medium black--text"
+        class="text-subtitle-2 font-weight-medium black--text"
         >
           Albereta
         </h1>
@@ -55,11 +57,12 @@
       <v-row class="px-1">
         <v-icon
         class="pl-1 indigo-darken2-icon"
+        size="23"
         >
           $player-icon
         </v-icon>
         <h1
-        class="text-subtitle-1 font-weight-regular pl-1 black--text"
+        class="text-subtitle-2 font-weight-regular pl-2 black--text"
         >
           Participants:
         </h1>
@@ -69,12 +72,12 @@
 
         <v-col>
           <v-row justify="center">
-            <v-icon size="39">$goalkeeper-icon</v-icon>
+            <v-icon size="34">$goalkeeper-icon</v-icon>
           </v-row>
 
           <v-row justify="center" class="pt-2">
             <h1
-            class="text-subtitle-2 indigo--text text--darken-2"
+            class="text-caption font-weight-medium indigo--text text--darken-2"
             >
               1 / 2
             </h1>
@@ -83,12 +86,12 @@
 
         <v-col>
           <v-row justify="center">
-            <v-icon size="40">$defender-icon</v-icon>
+            <v-icon size="34">$defender-icon</v-icon>
           </v-row>
 
           <v-row justify="center" class="pt-2">
             <h1
-            class="text-subtitle-2 indigo--text text--darken-2"
+            class="text-caption font-weight-medium indigo--text text--darken-2"
             >
               3 / 4
             </h1>
@@ -98,7 +101,7 @@
         <v-col>
           <v-row justify="center">
             <v-icon
-            size="48"
+            size="42"
             class="pb-1 full-pos"
             >
               $forward-icon
@@ -107,7 +110,7 @@
 
           <v-row justify="center">
             <h1
-            class="text-subtitle-2 red--text text--darken-2"
+            class="text-caption font-weight-medium red--text text--darken-2"
             >
               4 / 4
             </h1>
