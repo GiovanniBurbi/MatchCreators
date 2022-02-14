@@ -45,7 +45,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ filters: 'filters/getFilters' }),
+    ...mapGetters({ filters: 'matches/getFilters' }),
   },
 
   watch: {

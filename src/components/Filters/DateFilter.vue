@@ -105,7 +105,7 @@
 
 <script>
 import { format, parseISO } from 'date-fns';
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -133,7 +133,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ addFilter: 'filters/addFilter' }),
+    ...mapActions({ addFilter: 'matches/newFilter' }),
 
     sendFilter() {
       const filter = {

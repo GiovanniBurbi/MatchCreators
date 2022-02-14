@@ -87,7 +87,7 @@
 
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -100,12 +100,8 @@ export default {
     };
   },
 
-  computed: {
-    ...mapGetters({ getFilters: 'filters/getFilters' }),
-  },
-
   methods: {
-    ...mapMutations({ addFilter: 'filters/addFilter' }),
+    ...mapActions({ addFilter: 'matches/newFilter' }),
 
     sendFilter() {
       const filter = {

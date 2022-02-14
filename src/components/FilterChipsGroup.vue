@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
@@ -36,13 +36,13 @@ export default {
   computed: {
     filters: {
       get() {
-        return this.$store.state.filters.filters;
+        return this.$store.state.matches.filters;
       },
     },
   },
 
   methods: {
-    ...mapMutations({ removeFilter: 'filters/removeFilter' }),
+    ...mapActions({ removeFilter: 'matches/removeFilter' }),
 
     formatMsg(type, msg) {
       if (type === 'Position' || type === 'Location') {

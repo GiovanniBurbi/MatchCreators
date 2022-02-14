@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import MatchService from '@/services/MatchService';
 
 export default {
@@ -7,6 +8,12 @@ export default {
     matches: [],
     filteredMatches: [],
     loadedMatches: false,
+    filters: [],
+    filter: {
+      type: '',
+      icon: '',
+      msg: null,
+    },
   },
 
   mutations: {
@@ -20,6 +27,22 @@ export default {
 
     setLoaded(state, val) {
       state.loadedMatches = val;
+    },
+
+    addFilter(state, newFilter) {
+      Vue.set(state.filter, 'type', newFilter.type);
+      Vue.set(state.filter, 'icon', newFilter.icon);
+      Vue.set(state.filter, 'msg', newFilter.msg);
+      /* find if there is already a filter like this in filters, if not then push */
+      state.filters.push(state.filter);
+      state.filter = {
+        type: '',
+        icon: '',
+        msg: null,
+      };
+    },
+    deleteFilter(state, indexFilter) {
+      state.filters.splice(indexFilter, 1);
     },
   },
 
@@ -39,6 +62,14 @@ export default {
       }
       commit('setFilteredMatches', matches);
     },
+
+    newFilter({ commit, dispatch }, filter) {
+      commit('addFilter', filter);
+      dispatch('addFilterMatches', filter);
+    },
+    removeFilter({ commit }, indexFilter) {
+      commit('deleteFilter', indexFilter);
+    },
   },
 
   getters: {
@@ -52,6 +83,10 @@ export default {
 
     getStatusMatches(state) {
       return state.loadedMatches;
+    },
+
+    getFilters(state) {
+      return state.filters;
     },
   },
 };

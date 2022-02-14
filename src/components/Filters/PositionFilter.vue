@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 import PositionField from '../PositionField.vue';
 
@@ -103,7 +103,7 @@ export default {
   methods: {
     ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
 
-    ...mapMutations({ addFilter: 'filters/addFilter' }),
+    ...mapActions({ addFilter: 'matches/newFilter' }),
 
     sendFilter() {
       const filter = {

@@ -169,7 +169,7 @@
 
 </template>
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -186,7 +186,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ addFilter: 'filters/addFilter' }),
+    ...mapActions({ addFilter: 'matches/newFilter' }),
 
     sendFilter() {
       if (!this.start) {
