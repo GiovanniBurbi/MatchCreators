@@ -10,7 +10,7 @@ const apiClient = axios.create({
 });
 
 export default {
-  getAllMatches() {
+  fetchMatches() {
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
         resolve(apiClient.get('/matches'));
@@ -18,4 +18,21 @@ export default {
     });
     return promise;
   },
+
+  getAllMatches() {
+    const promise = new Promise((resolve) => {
+      this.fetchMatches().then((resp) => {
+        const matches = resp.data.sort(
+          (a, b) => {
+            if (a.date < b.date) return -1;
+            if (a.date > b.date) return 1;
+            return 0;
+          },
+        );
+        resolve(matches);
+      });
+    });
+    return promise;
+  },
+
 };

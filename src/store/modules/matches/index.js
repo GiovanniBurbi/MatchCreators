@@ -20,12 +20,9 @@ export default {
 
   actions: {
     async allMatches({ commit }) {
-      await MatchService.getAllMatches().then(
-        (response) => {
-          commit('setMatches', response.data);
-          commit('setLoaded', true);
-        },
-      );
+      const matches = await MatchService.getAllMatches();
+      commit('setMatches', matches);
+      commit('setLoaded', true);
     },
   },
 
