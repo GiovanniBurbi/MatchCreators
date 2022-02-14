@@ -12,13 +12,15 @@
       height="200"
       />
     </v-row>
-    <v-row justify="center" v-else>
-      <match-card
-      v-for="match in matches"
-      :key="match.id"
-      :match="match"
-      />
-    </v-row>
+    <v-slide-x-transition>
+      <v-row justify="center" v-if="loaded">
+        <match-card
+        v-for="match in matches"
+        :key="match.id"
+        :match="match"
+        />
+      </v-row>
+    </v-slide-x-transition>
   </v-container>
 </template>
 
