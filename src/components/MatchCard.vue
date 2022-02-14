@@ -18,7 +18,6 @@
       :class="['font-weight-bold indigo--text      text--darken-2', {'text-h6': smAndUp},
       {'text-subtitle-1': xsOnly}]"
       >
-        <!-- Saturday, 12 September -->
         {{ this.dateFormatted }}
       </h1>
     </v-card-title>
@@ -175,7 +174,6 @@ export default {
       required: true,
     },
   },
-
 };
 </script>
 
@@ -194,6 +192,6 @@ export default {
   filter: invert(19%) sepia(50%) saturate(3328%) hue-rotate(224deg) brightness(90%) contrast(89%);
 }
 .filled-pos {
-  opacity: 50%;
+  opacity: 30%;
 }
 </style>
