@@ -10,7 +10,7 @@
       :small="xsOnly"
       :color="showFilters ?  'white' : 'deep-purple'"
       rounded
-      @click="showFilters = !showFilters, $emit('filters'), changeMatches()"
+      @click="showFilters = !showFilters, $emit('filters')"
       >
         <span
         :class="['hidden-xs-only',
@@ -67,7 +67,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
 import FilterChipsGroup from './FilterChipsGroup.vue';
 import DateFilter from './Filters/DateFilter.vue';
 import TimeFilter from './Filters/TimeFilter.vue';
@@ -90,13 +89,6 @@ export default {
     TimeFilter,
     LocationFilter,
     PositionFilter,
-  },
-
-  methods: {
-    ...mapMutations({ resetMatches: 'matches/resetMatches' }),
-    changeMatches() {
-      this.resetMatches();
-    },
   },
 
   mixins: [BreakpointsCond],

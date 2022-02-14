@@ -48,6 +48,7 @@ export default {
 
   computed: {
     ...mapGetters({ getAllMatches: 'matches/getMatches' }),
+    ...mapGetters({ getFilteredMatches: 'matches/getFilteredMatches' }),
     ...mapGetters({ getStatusMatches: 'matches/getStatusMatches' }),
   },
 
@@ -57,6 +58,11 @@ export default {
     },
     getStatusMatches(newVal) {
       this.loaded = newVal;
+    },
+    getFilteredMatches(newVal) {
+      /* TODO, DO IT ONLY IF SOME FILTERS ARE ACTIVE, ELSE I
+      WANT TO SEE ALL MATCHES */
+      this.matches = newVal;
     },
   },
 

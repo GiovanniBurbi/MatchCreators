@@ -5,6 +5,7 @@ export default {
 
   state: {
     matches: [],
+    filteredMatches: [],
     loadedMatches: false,
   },
 
@@ -13,12 +14,12 @@ export default {
       state.matches = allGames;
     },
 
-    setLoaded(state, val) {
-      state.loadedMatches = val;
+    setFilteredMatches(state, games) {
+      state.filteredMatches = games;
     },
 
-    resetMatches(state) {
-      state.matches = [];
+    setLoaded(state, val) {
+      state.loadedMatches = val;
     },
   },
 
@@ -28,12 +29,27 @@ export default {
       commit('setMatches', matches);
       commit('setLoaded', true);
     },
+
+    async addFilterMatches({ state, commit }, newFilter) {
+      let matches = null;
+      if (state.filteredMatches.length === 0) {
+        matches = MatchService.filter(state.matches, newFilter);
+      } else {
+        matches = MatchService.filter(state.filteredMatches, newFilter);
+      }
+      commit('setFilteredMatches', matches);
+    },
   },
 
   getters: {
     getMatches(state) {
       return state.matches;
     },
+
+    getFilteredMatches(state) {
+      return state.filteredMatches;
+    },
+
     getStatusMatches(state) {
       return state.loadedMatches;
     },
