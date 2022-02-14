@@ -53,7 +53,7 @@ export default {
       commit('setLoaded', true);
     },
 
-    async addFilterMatches({ state, commit }, newFilter) {
+    addFilterMatches({ state, commit }, newFilter) {
       let matches = null;
       if (state.filteredMatches.length === 0) {
         matches = MatchService.filter(state.matches, newFilter);
@@ -63,12 +63,18 @@ export default {
       commit('setFilteredMatches', matches);
     },
 
+    multipleFiltersMatch({ state, commit }) {
+      const matches = MatchService.multipleFilters(state.matches, state.filters);
+      commit('setFilteredMatches', matches);
+    },
+
     newFilter({ commit, dispatch }, filter) {
       commit('addFilter', filter);
       dispatch('addFilterMatches', filter);
     },
-    removeFilter({ commit }, indexFilter) {
+    removeFilter({ commit, dispatch }, indexFilter) {
       commit('deleteFilter', indexFilter);
+      dispatch('multipleFiltersMatch');
     },
   },
 
