@@ -16,6 +16,10 @@ export default {
     setLoaded(state, val) {
       state.loadedMatches = val;
     },
+
+    resetMatches(state) {
+      state.matches = [];
+    },
   },
 
   actions: {

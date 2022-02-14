@@ -10,11 +10,14 @@
       :small="xsOnly"
       :color="showFilters ?  'white' : 'deep-purple'"
       rounded
-      @click="showFilters = !showFilters, $emit('filters')"
+      @click="showFilters = !showFilters, $emit('filters'), changeMatches()"
       >
         <span
         :class="['hidden-xs-only',
-        showFilters ? 'deep-purple--text' : 'white--text']">Filters</span>
+        showFilters ? 'deep-purple--text' : 'white--text']">
+          Filters
+        </span>
+
         <v-icon
         :small="xsOnly"
         :right="smAndUp"
@@ -22,6 +25,7 @@
         >
           fa-solid fa-sliders
         </v-icon>
+
       </v-btn>
     </v-row>
 
@@ -63,6 +67,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import FilterChipsGroup from './FilterChipsGroup.vue';
 import DateFilter from './Filters/DateFilter.vue';
 import TimeFilter from './Filters/TimeFilter.vue';
@@ -85,6 +90,13 @@ export default {
     TimeFilter,
     LocationFilter,
     PositionFilter,
+  },
+
+  methods: {
+    ...mapMutations({ resetMatches: 'matches/resetMatches' }),
+    changeMatches() {
+      this.resetMatches();
+    },
   },
 
   mixins: [BreakpointsCond],

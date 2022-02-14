@@ -52,12 +52,8 @@ export default {
   },
 
   watch: {
-    getAllMatches(newVal, oldVal) {
-      if (oldVal.length === 0) {
-        if (newVal.length !== 0) {
-          this.matches = newVal;
-        }
-      }
+    getAllMatches(newVal) {
+      this.matches = newVal;
     },
     getStatusMatches(newVal) {
       this.loaded = newVal;
