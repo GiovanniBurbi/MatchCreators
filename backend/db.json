@@ -134,8 +134,8 @@
       "location": "Albereta",
       "positions": {
         "goalkeepers": 1,
-        "defenders": 2,
-        "forwards": 3
+        "defenders": 0,
+        "forwards": 4
       }
     },
     {
