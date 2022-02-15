@@ -12,8 +12,7 @@
 
       <v-row align="center" justify="center" class="mt-1">
 
-        <v-container fluid
-        :class="[
+        <v-container fluid :class="[
         {'filters-xor-chips-on': filtersOn && !chipsOn},
         {'filters-and-chips-on': filtersOn && chipsOn},
         {'filters-xor-chips-on': chipsOn && !filtersOn},
