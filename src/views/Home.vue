@@ -13,10 +13,11 @@
       <v-row align="center" justify="center" class="mt-1">
 
         <v-container fluid
-        :class="['scrollable full-size',
+        :class="[
         {'filters-xor-chips-on': filtersOn && !chipsOn},
         {'filters-and-chips-on': filtersOn && chipsOn},
-        {'filters-xor-chips-on': chipsOn && !filtersOn}]"
+        {'filters-xor-chips-on': chipsOn && !filtersOn},
+        smAndDown ? 'scrollable-no-bar' : 'scrollable']"
         >
 
           <match-cards-group />
@@ -86,11 +87,30 @@ export default {
 .scrollable {
   overflow-y: auto;
   height: calc(75vh - 1vw);
+  /* -ms-overflow-style: none; */
+  /* scrollbar-width: none; */
+  scrollbar-width: thin;
+  scrollbar-color: #3F51B5;
+}
+.scrollable-no-bar {
+  overflow-y: auto;
+  height: calc(75vh - 1vw);
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.scrollable::-webkit-scrollbar {
+.scrollable-no-bar::-webkit-scrollbar {
   display: none;
+}
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollable::-webkit-scrollbar-track {
+  background: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+}
+.scrollable::-webkit-scrollbar-thumb {
+  background: #3D5AFE;
+  border-radius: 5px;
 }
 .filters-xor-chips-on {
   height: calc(68vh - 1vw);

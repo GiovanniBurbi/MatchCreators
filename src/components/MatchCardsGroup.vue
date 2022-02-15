@@ -53,15 +53,13 @@ export default {
   },
 
   watch: {
-    getAllMatches(newVal) {
-      this.matches = newVal;
+    getAllMatches(newVal, oldVal) {
+      if (oldVal.length === 0) this.matches = newVal;
     },
     getStatusMatches(newVal) {
       this.loaded = newVal;
     },
     getFilteredMatches(newVal) {
-      /* TODO, DO IT ONLY IF SOME FILTERS ARE ACTIVE, ELSE I
-      WANT TO SEE ALL MATCHES */
       this.matches = newVal;
     },
   },
