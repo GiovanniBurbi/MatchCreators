@@ -87,8 +87,6 @@ export default {
 .scrollable {
   overflow-y: auto;
   height: calc(75vh - 1vw);
-  /* -ms-overflow-style: none; */
-  /* scrollbar-width: none; */
   scrollbar-width: thin;
   scrollbar-color: #3F51B5;
 }
@@ -109,8 +107,11 @@ export default {
   border-radius: 5px;
 }
 .scrollable::-webkit-scrollbar-thumb {
-  background: #3D5AFE;
+  background: #5C6BC0;
   border-radius: 5px;
+}
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background: #3F51B5;
 }
 .filters-xor-chips-on {
   height: calc(68vh - 1vw);

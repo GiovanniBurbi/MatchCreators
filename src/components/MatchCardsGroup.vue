@@ -14,11 +14,14 @@
     </v-row>
     <v-slide-x-transition>
       <v-row justify="center" v-if="loaded">
-        <match-card
-        v-for="match in matches"
-        :key="match.id"
-        :match="match"
-        />
+        <template v-for="match in matches">
+          <v-hover v-slot="{ hover }" :key="match.id">
+            <match-card
+            :match="match"
+            :hover="hover"
+            />
+          </v-hover>
+        </template>
       </v-row>
     </v-slide-x-transition>
   </v-container>

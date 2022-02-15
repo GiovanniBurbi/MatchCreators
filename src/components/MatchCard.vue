@@ -134,6 +134,16 @@
 
     </v-card-text>
 
+    <v-fade-transition>
+      <v-overlay
+        v-if="hover"
+        absolute
+        color="indigo lighten-2"
+      >
+        <v-btn rounded color="deep-purple darken-3">Join the Match</v-btn>
+      </v-overlay>
+    </v-fade-transition>
+
   </v-card>
 </template>
 
@@ -172,6 +182,9 @@ export default {
     match: {
       type: Object,
       required: true,
+    },
+    hover: {
+      type: Boolean,
     },
   },
 };
