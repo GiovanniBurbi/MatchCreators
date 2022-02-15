@@ -30,7 +30,7 @@
     </v-row>
 
     <v-row>
-      <v-scroll-y-transition hide-on-leave>
+      <v-slide-y-transition hide-on-leave>
 
         <v-container v-if="showFilters" fluid class="filtersGroup">
 
@@ -58,7 +58,7 @@
           </div>
 
         </v-container>
-      </v-scroll-y-transition>
+      </v-slide-y-transition>
     </v-row>
     <v-row justify="center">
       <filter-chips-group/>

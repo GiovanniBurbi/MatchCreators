@@ -136,7 +136,7 @@
 
     <!-- if mouse hovers on the card then show an overlay with the button
     to join the match, it will redirect to another page passing the id of the match -->
-    <v-fade-transition>
+    <v-slide-x-transition>
       <v-overlay
         v-if="hover"
         absolute
@@ -146,17 +146,20 @@
         <v-btn
         color="deep-purple darken-2"
         class="mb-12"
+        tile
+        :small="xsOnly"
         >
-          Join the match
+          <span v-if="xsOnly">Join match</span>
+          <span v-else>Join the match</span>
           <v-icon
           right
-          size="28"
+          :size="xsOnly ? 24 : 28"
           >
             mdi-chevron-double-right
           </v-icon>
         </v-btn>
       </v-overlay>
-    </v-fade-transition>
+    </v-slide-x-transition>
 
   </v-card>
 </template>

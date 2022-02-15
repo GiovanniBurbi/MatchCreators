@@ -9,8 +9,7 @@
 
       <finder-header @filters="filtersOn = !filtersOn"/>
 
-      <v-divider class="mt-4"
-      style="border-color: black !important; opacity: 30%;">
+      <v-divider class="mt-4">
       </v-divider>
 
       <v-row align="center" justify="center" class="mt-1">
