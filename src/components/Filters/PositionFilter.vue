@@ -100,6 +100,8 @@ export default {
   },
 
   watch: {
+    /* watch for activation filter, only one filter per type allowed.
+    When filter feature will be improved, it will change. */
     currentRemoved(newVal) {
       if (newVal === 'Position') {
         this.filterPresent = false;

@@ -22,6 +22,7 @@
       </v-icon>
       {{ formatMsg(filter.type, filter.msg) }}
     </v-chip>
+
   </v-chip-group>
 </template>
 
@@ -36,6 +37,7 @@ export default {
   computed: {
     filters: {
       get() {
+        /* two-way binding with vuex state */
         return this.$store.state.matches.filters;
       },
     },
@@ -45,6 +47,7 @@ export default {
     ...mapActions({ removeFilter: 'matches/removeFilter' }),
 
     formatMsg(type, msg) {
+      /* format msg for chips based on type */
       if (type === 'Position' || type === 'Location') {
         return msg.charAt(0).toUpperCase() + msg.slice(1);
       }

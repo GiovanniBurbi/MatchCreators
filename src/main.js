@@ -6,6 +6,7 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
+/* re-authenticate user on refresh getting user info from the local storage */
 store.dispatch('auth/login', JSON.parse(localStorage.getItem('userInfo'))).then(() => {
   new Vue({
     router,

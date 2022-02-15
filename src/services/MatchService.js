@@ -10,6 +10,7 @@ const apiClient = axios.create({
 });
 
 export default {
+  /* fetch all matches from fake db, emulated a delay to get data */
   fetchMatches() {
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
@@ -20,6 +21,8 @@ export default {
   },
 
   getAllMatches() {
+    /* call method to get all matches, and then sort by date
+    May change the default order */
     const promise = new Promise((resolve) => {
       this.fetchMatches().then((resp) => {
         const matches = resp.data.sort(
@@ -36,6 +39,7 @@ export default {
   },
 
   filter(matches, newFilter) {
+    /* switch to the right handler based on filter type */
     if (newFilter.type === 'Location') {
       return this.filterLocation(matches, newFilter.msg);
     }
@@ -48,6 +52,7 @@ export default {
     return this.filterTime(matches, newFilter.msg);
   },
 
+  /* Handlers of filters, need to may a better filtering feature in the future */
   filterLocation(matches, msg) {
     return matches.filter(
       (match) => match.location.toLowerCase().includes(msg.toLowerCase()),

@@ -31,10 +31,10 @@ export default {
     },
 
     addFilter(state, newFilter) {
+      /* Needed for reactivity for Vue */
       Vue.set(state.filter, 'type', newFilter.type);
       Vue.set(state.filter, 'icon', newFilter.icon);
       Vue.set(state.filter, 'msg', newFilter.msg);
-      /* find if there is already a filter like this in filters, if not then push */
       state.filters.push(state.filter);
       state.filter = {
         type: '',

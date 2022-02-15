@@ -14,7 +14,8 @@
        class="pb-2"
        size=32
        left
-      >mdi-check-circle-outline
+      >
+        mdi-check-circle-outline
       </v-icon>
       <span class="text-h6">
         Hello, {{ getUsername }}
@@ -49,6 +50,8 @@ export default {
   },
 
   watch: {
+    /* watch route path, change state of persistent
+    app components based on current path */
     $route() {
       if (this.$route.name === 'Home') {
         if (this.darkNav) {
@@ -69,7 +72,9 @@ export default {
     isNotAuth() {
       return this.$route.name !== 'Authentication';
     },
+
     ...mapGetters({ getUserInfo: 'auth/getUser' }),
+
     getUsername() {
       if (!this.getUserInfo) return '';
       return this.getUserInfo.username;

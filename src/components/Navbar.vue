@@ -2,7 +2,7 @@
   <v-app-bar app flat
   :color="isDark ? null : 'white'" :dark="isDark"
   >
-
+    <!-- return home button -->
     <v-app-bar-nav-icon>
       <v-icon
       size=35

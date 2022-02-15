@@ -134,6 +134,8 @@
 
     </v-card-text>
 
+    <!-- if mouse hovers on the card then show an overlay with the button
+    to join the match, it will redirect to another page passing the id of the match -->
     <v-fade-transition>
       <v-overlay
         v-if="hover"
@@ -169,6 +171,8 @@ export default {
   },
 
   mounted() {
+    /* Based on match participant verify if a position is filled.
+    in a match there can be max 2 gk, 4 def, 4 fw */
     if (this.match.positions.goalkeepers === 2) {
       this.gkFilled = true;
     }

@@ -1,11 +1,12 @@
 <template>
   <v-container fluid class="background">
-
+    <!-- change width based on current viewport -->
     <v-container
     :class="['content',
     {'fullscreen' : smAndDown},
     {'biggerContent' : lgOnly || mdOnly}]"
     >
+
       <finder-header @filters="filtersOn = !filtersOn"/>
 
       <v-divider class="mt-4"
@@ -13,7 +14,10 @@
       </v-divider>
 
       <v-row align="center" justify="center" class="mt-1">
-
+        <!-- adjust container height based on rendered components
+        on the page. Without it, cards on last row will not be fully shown
+        when filters are open or when there are some chips.
+        Need to find a better way to handle this problem -->
         <v-container fluid :class="[
         {'filters-xor-chips-on': filtersOn && !chipsOn},
         {'filters-and-chips-on': filtersOn && chipsOn},
@@ -51,6 +55,7 @@ export default {
   },
 
   watch: {
+    /* watch if there are some filters active */
     filters(newVal) {
       if (newVal.length !== 0) {
         if (!this.chipsOn) this.chipsOn = true;
@@ -79,11 +84,11 @@ export default {
   margin-top: 60px;
   max-width: 80%;
 }
-.fullscreen {
-  max-width: 100%;
-}
 .biggerContent {
   max-width: 90%;
+}
+.fullscreen {
+  max-width: 100%;
 }
 .scrollable-no-bar {
   overflow-y: auto;
@@ -97,6 +102,7 @@ export default {
 .scrollable {
   overflow-y: auto;
   height: calc(75vh - 1vw);
+  /* firefox scrollbar */
   scrollbar-width: thin;
   scrollbar-color: #3F51B5;
 }

@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <!-- skeleton cards to be shown while waiting data from the db -->
     <v-row justify="center" v-if="!loaded">
       <v-skeleton-loader
       class="mx-2 my-2"
@@ -12,18 +13,25 @@
       height="200"
       />
     </v-row>
+
+    <!-- list of cards representing available matches -->
     <v-slide-x-transition>
+
       <v-row justify="center" v-if="loaded">
         <template v-for="match in matches">
+          <!-- component over handler with vuetify -->
           <v-hover v-slot="{ hover }" :key="match.id">
             <match-card
             :match="match"
             :hover="hover"
             />
           </v-hover>
+
         </template>
       </v-row>
+
     </v-slide-x-transition>
+
   </v-container>
 </template>
 
@@ -68,6 +76,9 @@ export default {
   },
 
   created() {
+    /* First creation of the component it will start the fetch from db.
+    Get the state of the fetch from db, if they are already loaded then simply
+    get them from vuex store  */
     this.loaded = this.getStatusMatches;
     if (!this.loaded) {
       this.fetchMatches();

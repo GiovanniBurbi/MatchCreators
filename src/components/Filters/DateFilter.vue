@@ -122,6 +122,7 @@ export default {
 
   computed: {
     dateRange() {
+      /* sort date range as ascending */
       const sortedDates = this.dates;
       sortedDates.sort();
       const datesFormatted = [];
