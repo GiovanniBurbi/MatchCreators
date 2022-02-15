@@ -5,6 +5,7 @@
     dark
     rounded
     color="deep-purple"
+    :disabled="filterPresent"
     @click.stop="dialog=true"
     >
       <v-icon
@@ -89,11 +90,21 @@ export default {
   data() {
     return {
       dialog: false,
+      filterPresent: false,
     };
   },
 
   computed: {
     ...mapGetters({ getPosSelection: 'posInputField/getPosSelection' }),
+    ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
+  },
+
+  watch: {
+    currentRemoved(newVal) {
+      if (newVal === 'Position') {
+        this.filterPresent = false;
+      }
+    },
   },
 
   components: {
@@ -113,6 +124,7 @@ export default {
       };
       this.addFilter(filter);
       this.setSelection('');
+      this.filterPresent = true;
     },
   },
 
