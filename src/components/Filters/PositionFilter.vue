@@ -5,12 +5,13 @@
     dark
     rounded
     color="deep-purple"
+    :disabled="filterPresent"
     @click.stop="dialog=true"
     >
       <v-icon
       :left="smAndUp"
       size="22"
-      class="icon-white"
+      :class="['icon-white', filterPresent ? 'icon-disabled' : null]"
       >
         $position-icon
       </v-icon>
@@ -79,7 +80,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 import PositionField from '../PositionField.vue';
 
@@ -89,11 +90,23 @@ export default {
   data() {
     return {
       dialog: false,
+      filterPresent: false,
     };
   },
 
   computed: {
     ...mapGetters({ getPosSelection: 'posInputField/getPosSelection' }),
+    ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
+  },
+
+  watch: {
+    /* watch for activation filter, only one filter per type allowed.
+    When filter feature will be improved, it will change. */
+    currentRemoved(newVal) {
+      if (newVal === 'Position') {
+        this.filterPresent = false;
+      }
+    },
   },
 
   components: {
@@ -103,7 +116,7 @@ export default {
   methods: {
     ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
 
-    ...mapMutations({ addFilter: 'filters/addFilter' }),
+    ...mapActions({ addFilter: 'matches/newFilter' }),
 
     sendFilter() {
       const filter = {
@@ -113,6 +126,7 @@ export default {
       };
       this.addFilter(filter);
       this.setSelection('');
+      this.filterPresent = true;
     },
   },
 
@@ -128,5 +142,8 @@ export default {
 .icon-purple {
   /* deep-purple */
   filter: invert(25%) sepia(75%) saturate(1998%) hue-rotate(247deg) brightness(82%) contrast(92%);
+}
+.icon-disabled {
+  opacity: 30%;
 }
 </style>

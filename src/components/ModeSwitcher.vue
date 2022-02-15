@@ -2,11 +2,15 @@
   <v-container fluid class="container">
 
     <div :class="['switch-bg', isFinder ? null : 'dark-bg']">
+      <!-- div of the switch that highlight the selected mode -->
       <div :class="['selector', isFinder ? null : 'switch-selector']">&nbsp;</div>
+
         <h1 :class="['label pl-4', isFinder ? 'label-select' : 'finder-no-select']"
         @click="toggleMode(), finder()">Finder</h1>
+
         <h1 :class="['label pl-7', isFinder ? 'label-no-select' : 'label-select']"
         @click="toggleMode(), creator()">Creator</h1>
+
     </div>
 
   </v-container>
@@ -52,6 +56,8 @@ export default {
 };
 </script>
 <style scoped>
+/* switch is a fixed component that must be present
+in finder page and creator page */
 .container {
   position: fixed;
   display: flex;
@@ -59,6 +65,7 @@ export default {
   width: 100%;
   z-index: 100;
 }
+/* white background of the switch */
 .switch-bg {
   background-color: white;
   z-index: -10;
@@ -101,6 +108,7 @@ export default {
   color: #3F51B5;
   opacity: 100%;
 }
+/* div styling and animation */
 .selector {
   position: absolute;
   z-index: -1;

@@ -5,6 +5,7 @@
     dark
     rounded
     color="deep-purple"
+    :disabled="filterPresent"
     @click.stop="dialog=true"
     >
       <v-icon
@@ -105,7 +106,7 @@
 
 <script>
 import { format, parseISO } from 'date-fns';
-import { mapMutations } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -115,11 +116,13 @@ export default {
     return {
       dates: [],
       dialog: false,
+      filterPresent: false,
     };
   },
 
   computed: {
     dateRange() {
+      /* sort date range as ascending */
       const sortedDates = this.dates;
       sortedDates.sort();
       const datesFormatted = [];
@@ -130,10 +133,20 @@ export default {
       }
       return datesFormatted.join(' ~ ');
     },
+
+    ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
+  },
+
+  watch: {
+    currentRemoved(newVal) {
+      if (newVal === 'Date') {
+        this.filterPresent = false;
+      }
+    },
   },
 
   methods: {
-    ...mapMutations({ addFilter: 'filters/addFilter' }),
+    ...mapActions({ addFilter: 'matches/newFilter' }),
 
     sendFilter() {
       const filter = {
@@ -143,6 +156,7 @@ export default {
       };
       this.addFilter(filter);
       this.dates = [];
+      this.filterPresent = true;
     },
   },
 

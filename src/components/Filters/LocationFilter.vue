@@ -5,6 +5,7 @@
     dark
     rounded
     color="deep-purple"
+    :disabled="filterPresent"
     @click.stop="dialog=true"
     >
       <v-icon
@@ -87,7 +88,7 @@
 
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -97,15 +98,24 @@ export default {
     return {
       dialog: false,
       location: '',
+      filterPresent: false,
     };
   },
 
   computed: {
-    ...mapGetters({ getFilters: 'filters/getFilters' }),
+    ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
+  },
+
+  watch: {
+    currentRemoved(newVal) {
+      if (newVal === 'Location') {
+        this.filterPresent = false;
+      }
+    },
   },
 
   methods: {
-    ...mapMutations({ addFilter: 'filters/addFilter' }),
+    ...mapActions({ addFilter: 'matches/newFilter' }),
 
     sendFilter() {
       const filter = {
@@ -115,6 +125,7 @@ export default {
       };
       this.addFilter(filter);
       this.location = '';
+      this.filterPresent = true;
     },
   },
 

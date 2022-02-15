@@ -1,11 +1,7 @@
 <template>
-<!-- TODO column reactive to screen size,
- smAndDown column=false, better use mobile-breakpoint prop -->
   <v-chip-group
-  :column="smAndUp"
   show-arrows
   >
-  <!-- maybe bug on key=i -->
     <v-chip
     v-for="(filter, i) in filters"
     :key="i"
@@ -13,6 +9,7 @@
     close
     close-icon="mdi-delete"
     label
+    :ripple="false"
     color="indigo"
     text-color="white"
     @click:close="deleteFilter(i)"
@@ -25,11 +22,12 @@
       </v-icon>
       {{ formatMsg(filter.type, filter.msg) }}
     </v-chip>
+
   </v-chip-group>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
@@ -39,20 +37,17 @@ export default {
   computed: {
     filters: {
       get() {
-        return this.$store.state.filters.filters;
+        /* two-way binding with vuex state */
+        return this.$store.state.matches.filters;
       },
     },
   },
 
   methods: {
-    ...mapMutations({ removeFilter: 'filters/removeFilter' }),
-
-    /* remove(item) {
-      this.chips.splice(this.chips.indexOf(item), 1);
-      this.chips = [...this.chips];
-    }, */
+    ...mapActions({ removeFilter: 'matches/removeFilter' }),
 
     formatMsg(type, msg) {
+      /* format msg for chips based on type */
       if (type === 'Position' || type === 'Location') {
         return msg.charAt(0).toUpperCase() + msg.slice(1);
       }

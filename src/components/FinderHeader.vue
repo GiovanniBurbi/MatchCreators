@@ -10,11 +10,14 @@
       :small="xsOnly"
       :color="showFilters ?  'white' : 'deep-purple'"
       rounded
-      @click="showFilters = !showFilters"
+      @click="showFilters = !showFilters, $emit('filters')"
       >
         <span
         :class="['hidden-xs-only',
-        showFilters ? 'deep-purple--text' : 'white--text']">Filters</span>
+        showFilters ? 'deep-purple--text' : 'white--text']">
+          Filters
+        </span>
+
         <v-icon
         :small="xsOnly"
         :right="smAndUp"
@@ -22,6 +25,7 @@
         >
           fa-solid fa-sliders
         </v-icon>
+
       </v-btn>
     </v-row>
 
@@ -85,9 +89,6 @@ export default {
     TimeFilter,
     LocationFilter,
     PositionFilter,
-  },
-
-  methods: {
   },
 
   mixins: [BreakpointsCond],
