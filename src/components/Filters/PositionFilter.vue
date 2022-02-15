@@ -11,7 +11,7 @@
       <v-icon
       :left="smAndUp"
       size="22"
-      class="icon-white"
+      :class="['icon-white', filterPresent ? 'icon-disabled' : null]"
       >
         $position-icon
       </v-icon>
@@ -140,5 +140,8 @@ export default {
 .icon-purple {
   /* deep-purple */
   filter: invert(25%) sepia(75%) saturate(1998%) hue-rotate(247deg) brightness(82%) contrast(92%);
+}
+.icon-disabled {
+  opacity: 30%;
 }
 </style>
