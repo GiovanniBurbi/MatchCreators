@@ -147,6 +147,7 @@
         color="deep-purple darken-2"
         class="mb-12"
         tile
+        depressed
         :small="xsOnly"
         >
           <span v-if="xsOnly">Join match</span>

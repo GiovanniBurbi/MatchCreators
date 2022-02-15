@@ -109,11 +109,11 @@ export default {
   width: 10px;
 }
 .scrollable::-webkit-scrollbar-track {
-  background: rgba(220, 220, 220, 0.1);
+  background: rgba(220, 220, 220, 0.25);
   border-radius: 5px;
 }
 .scrollable::-webkit-scrollbar-thumb {
-  background: rgba(63, 81, 181, 0.7);
+  background: #5C6BC0;
   border-radius: 5px;
 }
 .scrollable::-webkit-scrollbar-thumb:hover {
