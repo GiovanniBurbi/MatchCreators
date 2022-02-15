@@ -141,12 +141,19 @@
         v-if="hover"
         absolute
         color="indigo lighten-2"
+        class="overlay"
       >
         <v-btn
-        rounded
         color="deep-purple darken-2"
+        class="mb-12"
         >
-          Join the Match
+          Join the match
+          <v-icon
+          right
+          size="28"
+          >
+            mdi-chevron-double-right
+          </v-icon>
         </v-btn>
       </v-overlay>
     </v-fade-transition>
@@ -215,5 +222,9 @@ export default {
 }
 .filled-pos {
   opacity: 30%;
+}
+.overlay {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
