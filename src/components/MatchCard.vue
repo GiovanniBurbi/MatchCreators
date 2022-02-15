@@ -140,7 +140,12 @@
         absolute
         color="indigo lighten-2"
       >
-        <v-btn rounded color="deep-purple darken-3">Join the Match</v-btn>
+        <v-btn
+        rounded
+        color="deep-purple darken-2"
+        >
+          Join the Match
+        </v-btn>
       </v-overlay>
     </v-fade-transition>
 
