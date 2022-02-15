@@ -15,17 +15,12 @@
     <v-slide-x-transition>
       <v-row justify="center" v-if="loaded">
         <template v-for="match in matches">
-          <v-col
-          :key="match.id"
-          cols="12" md="6" lg="4" xl="3"
-          class="d-flex justify-center">
-            <v-hover v-slot="{ hover }">
-              <match-card
-              :match="match"
-              :hover="hover"
-              />
-            </v-hover>
-          </v-col>
+          <v-hover v-slot="{ hover }" :key="match.id">
+            <match-card
+            :match="match"
+            :hover="hover"
+            />
+          </v-hover>
         </template>
       </v-row>
     </v-slide-x-transition>

@@ -83,12 +83,6 @@ export default {
 .biggerContent {
   max-width: 90%;
 }
-.scrollable {
-  overflow-y: auto;
-  height: calc(75vh - 1vw);
-  scrollbar-width: thin;
-  scrollbar-color: #3F51B5;
-}
 .scrollable-no-bar {
   overflow-y: auto;
   height: calc(75vh - 1vw);
@@ -98,15 +92,21 @@ export default {
 .scrollable-no-bar::-webkit-scrollbar {
   display: none;
 }
+.scrollable {
+  overflow-y: auto;
+  height: calc(75vh - 1vw);
+  scrollbar-width: thin;
+  scrollbar-color: #3F51B5;
+}
 .scrollable::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 .scrollable::-webkit-scrollbar-track {
-  background: rgba(220, 220, 220, 0.2);
+  background: rgba(220, 220, 220, 0.1);
   border-radius: 5px;
 }
 .scrollable::-webkit-scrollbar-thumb {
-  background: #5C6BC0;
+  background: rgba(63, 81, 181, 0.7);
   border-radius: 5px;
 }
 .scrollable::-webkit-scrollbar-thumb:hover {
