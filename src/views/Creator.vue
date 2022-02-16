@@ -9,6 +9,8 @@
     {'biggerContent' : lgOnly || mdOnly}]"
     >
 
+    <match-creation-form />
+
       <!-- <v-container fluid fill-height class="pitch">
     </v-container> -->
 
@@ -19,12 +21,14 @@
 <script>
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import Stepper from '../components/Stepper.vue';
+import MatchCreationForm from '../components/MatchCreationForm.vue';
 
 export default {
   name: 'Creator',
 
   components: {
     Stepper,
+    MatchCreationForm,
   },
 
   data() {
