@@ -13,10 +13,6 @@
         </h1>
       </v-row>
 
-      <v-row justify="center">
-        <player-card />
-      </v-row>
-
       <!-- <v-container fluid fill-height class="pitch">
     </v-container> -->
 
@@ -25,14 +21,12 @@
 </template>
 
 <script>
-import PlayerCard from '../components/PlayerCard.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Creator',
 
   components: {
-    PlayerCard,
   },
 
   mixins: [

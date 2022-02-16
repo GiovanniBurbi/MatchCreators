@@ -9,18 +9,18 @@
 
     <div class="overCard">
 
-      <v-container fill-height v-if="player">
+      <!-- <v-container fill-height v-if="player">
 
         <v-avatar rounded size="100" class="pt-5">
           <img src="../assets/Carl.jpg">
-          <!-- <img src="{{player.picture}}"> ??? -->
+          <img src="{{player.picture}}"> ???
         </v-avatar>
 
         <v-row justify="center">
           <h1 :class="['text-center text-h5 font-weight-light',
           white ? 'black--text' : 'white--text']" >Joseph</h1>
-          <!-- <h1 class="white--text text-center text-h5
-          font-weight-light" >{{player.username}}</h1> -->
+          <h1 class="white--text text-center text-h5
+          font-weight-light" >{{player.username}}</h1>
         </v-row>
 
         <v-row justify="center">
@@ -32,9 +32,10 @@
           </v-icon>
         </v-row>
 
-      </v-container>
+      </v-container> -->
 
-      <v-container fill-height v-else>
+      <!-- <v-container fill-height v-else> -->
+      <v-container fill-height>
 
         <v-row justify="center" no-gutters class="mt-6">
           <v-btn fab outlined large :dark="!white">
@@ -63,14 +64,6 @@
 export default {
   name: 'PlayerCard',
 
-  data() {
-    return {
-      white: true,
-      position: 'Forward',
-      player: {},
-    };
-  },
-
   computed: {
     getCard() {
       if (this.white) {
@@ -92,17 +85,17 @@ export default {
     },
   },
 
-  /* props: {
+  props: {
     white: {
-      type: Boolean,
-    },
-    black: {
       type: Boolean,
     },
     position: {
       type: String,
     },
-  }, */
+    /* player: {
+      type: Object,
+    }, */
+  },
 };
 </script>
 
