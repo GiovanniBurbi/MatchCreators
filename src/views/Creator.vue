@@ -7,11 +7,7 @@
     {'biggerContent' : lgOnly || mdOnly}]"
     >
 
-      <v-row justify="space-between" align="center">
-        <h1 :class="['white--text font-weight-bold header']">
-          Create a Match
-        </h1>
-      </v-row>
+      <stepper />
 
       <!-- <v-container fluid fill-height class="pitch">
     </v-container> -->
@@ -22,11 +18,13 @@
 
 <script>
 import BreakpointsCond from '../mixins/BreakpointsCond';
+import Stepper from '../components/Stepper.vue';
 
 export default {
   name: 'Creator',
 
   components: {
+    Stepper,
   },
 
   mixins: [
@@ -37,18 +35,14 @@ export default {
 
 <style scoped>
 .background {
-  height: 100vh;
+  height: 100%;
   background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
   rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/night.jpg') center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-.header {
-  text-shadow: 2px 3px rgba(0, 0, 0, 0.8);
-  font-size: calc(20px + 2vw);
-  white-space: nowrap;
+  overflow: hidden;
 }
 .content {
   margin-top: 60px;
