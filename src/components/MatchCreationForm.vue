@@ -53,7 +53,7 @@ export default {
   width: 100px
 }
 .large {
-  width: 130px;
+  width: 122px;
 }
 .bg-field {
   background-color: white;
@@ -63,7 +63,7 @@ export default {
 }
 .bg-field-large {
   background-color: white;
-  width: 320px;
+  width: 326px;
   height: 49px;
   border-radius: 6px;
 }
