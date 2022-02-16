@@ -1,13 +1,13 @@
 <template>
   <v-container fluid class="background px-0">
-
+    <v-container :class="[smAndDown ? 'dense' : 'normal', 'header']">
+      <stepper :change="detailsOk" />
+    </v-container>
     <v-container
     :class="['content',
     {'fullscreen' : smAndDown},
     {'biggerContent' : lgOnly || mdOnly}]"
     >
-
-      <stepper />
 
       <!-- <v-container fluid fill-height class="pitch">
     </v-container> -->
@@ -25,6 +25,12 @@ export default {
 
   components: {
     Stepper,
+  },
+
+  data() {
+    return {
+      detailsOk: false,
+    };
   },
 
   mixins: [
@@ -45,14 +51,23 @@ export default {
   overflow: hidden;
 }
 .content {
-  margin-top: 60px;
   max-width: 80%
+}
+.biggerContent {
+  max-width: 90%;
 }
 .fullscreen {
   max-width: 100%;
 }
-.biggerContent {
+.header {
+  margin-top: 65px;
+}
+.normal {
   max-width: 90%;
+}
+.dense {
+  margin-top: 70px;
+  max-width: 70%;
 }
 /* .pitch {
   background: url('../assets/pitch.png') center center fixed no-repeat;
