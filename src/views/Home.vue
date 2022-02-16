@@ -75,7 +75,7 @@ export default {
 .background {
   height: calc(100vh - 64px);
   background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
-  rgba(0, 0, 0, 0.2)), url('../assets/daylight.jpg') no-repeat center center fixed;
+  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/daylight.jpg') no-repeat center center fixed;
   background-size: cover;
   overflow: hidden;
 }

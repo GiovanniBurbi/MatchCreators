@@ -1,26 +1,43 @@
 <template>
-  <v-container fluid class="background">
+  <v-container fluid class="background px-0">
+
     <v-container
     :class="['content',
     {'fullscreen' : smAndDown},
     {'biggerContent' : lgOnly || mdOnly}]"
     >
+
       <v-row justify="space-between" align="center">
         <h1 :class="['white--text font-weight-bold header']">
           Create a Match
         </h1>
       </v-row>
+
+      <v-row justify="center">
+        <player-card />
+      </v-row>
+
+      <!-- <v-container fluid fill-height class="pitch">
+    </v-container> -->
+
     </v-container>
   </v-container>
 </template>
 
 <script>
+import PlayerCard from '../components/PlayerCard.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Creator',
 
-  mixins: [BreakpointsCond],
+  components: {
+    PlayerCard,
+  },
+
+  mixins: [
+    BreakpointsCond,
+  ],
 };
 </script>
 
@@ -28,7 +45,7 @@ export default {
 .background {
   height: 100vh;
   background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
-  rgba(0, 0, 0, 0.2)), url('../assets/night.jpg') center center no-repeat fixed;
+  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/night.jpg') center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -49,4 +66,11 @@ export default {
 .biggerContent {
   max-width: 90%;
 }
+/* .pitch {
+  background: url('../assets/pitch.png') center center fixed no-repeat;
+  background-size: cover; Phones
+  background-size: contain; Screen size big
+  height: 700px;
+  padding-top: 50px;
+} */
 </style>
