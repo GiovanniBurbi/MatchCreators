@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="background px-0">
     <v-container :class="[smAndDown ? 'dense' : 'normal', 'header']">
-      <stepper :change="detailsOk" />
+      <stepper :change="step === 2" />
     </v-container>
     <v-container
     :class="['content',

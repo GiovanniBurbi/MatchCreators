@@ -11,7 +11,7 @@
           1
         </h1>
 
-        <v-fab-transition>
+        <v-fab-transition hide-on-leave>
           <v-icon
           v-if="change"
           color="white"
