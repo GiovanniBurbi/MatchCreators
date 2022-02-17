@@ -9,7 +9,17 @@
     {'biggerContent' : lgOnly || mdOnly}]"
     >
 
-    <match-creation-form />
+    <v-window v-model="step">
+      <v-window-item :value="1">
+
+        <match-creation-form @detailsPassed="step++" />
+
+      </v-window-item>
+
+      <v-window-item :value="2">
+
+      </v-window-item>
+    </v-window>
 
       <!-- <v-container fluid fill-height class="pitch">
     </v-container> -->
@@ -33,7 +43,7 @@ export default {
 
   data() {
     return {
-      detailsOk: false,
+      step: 1,
     };
   },
 

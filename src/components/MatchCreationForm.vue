@@ -6,7 +6,10 @@
       <div class="background-label d-inline-flex px-3 justify-center align-center">
         <h1
         v-if="smAndUp"
-        class="text-button white--text label-text pr-1">Date</h1>
+        class="text-button white--text label-text pr-1"
+        >
+          Date
+        </h1>
         <v-icon size="20" dark class="label-text">mdi-calendar</v-icon>
       </div>
 
@@ -51,7 +54,10 @@
       <div class="background-label d-inline-flex px-3 justify-center align-center">
         <h1
         v-if="smAndUp"
-        class="text-button white--text label-text pr-1">Time</h1>
+        class="text-button white--text label-text pr-1"
+        >
+          Time
+        </h1>
         <v-icon size="20" dark class="label-text">mdi-clock-outline</v-icon>
       </div>
 
@@ -101,6 +107,7 @@
                 <v-spacer></v-spacer>
                 <v-btn
                   text
+                  :disabled="start === null"
                   color="indigo accent-2"
                   @click="step++"
                 >
@@ -135,6 +142,7 @@
                 <v-btn
                   text
                   color="green"
+                  :disabled="end === null"
                   @click="$refs.dialog.save(getTime)"
                 >
                   Confirm
@@ -154,7 +162,10 @@
       <div class="background-label d-inline-flex px-3 justify-center align-center">
         <h1
         v-if="smAndUp"
-        class="text-button white--text label-text pr-1">Location</h1>
+        class="text-button white--text label-text pr-1"
+        >
+          Location
+        </h1>
         <v-icon size="20" dark class="label-text">mdi-map-marker-outline</v-icon>
       </div>
 
@@ -163,7 +174,11 @@
       solo clearable color="deep-purple darken-2"
       flat class="d-inline-flex" label="Define the location"></v-text-field>
     </div>
-    <v-btn @click="test()">Ciao</v-btn>
+    <v-btn
+    dark
+    color="deep-purple darken-2"
+    elevation="6"
+    @click="proceed()">Continue</v-btn>
   </v-container>
 </v-form>
 </template>
@@ -204,9 +219,9 @@ export default {
   },
 
   methods: {
-    test() {
+    proceed() {
       if (this.$refs.details.validate()) {
-        console.log('ok');
+        this.$emit('detailsPassed');
       }
     },
   },
