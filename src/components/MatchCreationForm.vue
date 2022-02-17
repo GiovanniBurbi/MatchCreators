@@ -37,6 +37,7 @@
 
           <v-date-picker
           v-model="date"
+          dark
           color="deep-purple darken-2"
           :active-picker.sync="activePicker"
           :min="(new Date(Date.now() - (new Date()).
