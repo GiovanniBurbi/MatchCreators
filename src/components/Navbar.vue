@@ -31,7 +31,7 @@
 
     <v-btn icon>
       <v-avatar size=40>
-        <v-img src="../assets/CR7.jpg" alt="User"></v-img>
+        <v-img src="../assets/users/CR7.jpg" alt="User"></v-img>
       </v-avatar>
     </v-btn>
 

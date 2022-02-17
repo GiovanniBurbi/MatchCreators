@@ -9,8 +9,7 @@
 
       <finder-header @filters="filtersOn = !filtersOn"/>
 
-      <v-divider class="mt-4"
-      style="border-color: black !important; opacity: 30%;">
+      <v-divider class="mt-4">
       </v-divider>
 
       <v-row align="center" justify="center" class="mt-1">
@@ -76,7 +75,7 @@ export default {
 .background {
   height: calc(100vh - 64px);
   background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
-  rgba(0, 0, 0, 0.2)), url('../assets/daylight.jpg') no-repeat center center fixed;
+  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/daylight.jpg') no-repeat center center fixed;
   background-size: cover;
   overflow: hidden;
 }
@@ -110,11 +109,11 @@ export default {
   width: 10px;
 }
 .scrollable::-webkit-scrollbar-track {
-  background: rgba(220, 220, 220, 0.1);
+  background: rgba(220, 220, 220, 0.25);
   border-radius: 5px;
 }
 .scrollable::-webkit-scrollbar-thumb {
-  background: rgba(63, 81, 181, 0.7);
+  background: #5C6BC0;
   border-radius: 5px;
 }
 .scrollable::-webkit-scrollbar-thumb:hover {

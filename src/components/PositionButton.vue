@@ -7,7 +7,7 @@
   >
     <img
       :class="[fieldPos, 'playerImg']"
-      :src="require(`@/assets/${fieldPos}.png`)"
+      :src="require(`@/assets/myButtons/${fieldPos}.png`)"
     />
     <h1 class="position indigo--text pt-2 font-weight-light text-size">
     {{ fieldPos }}
