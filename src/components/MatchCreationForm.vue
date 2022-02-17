@@ -1,6 +1,6 @@
 <template>
+<v-form ref="details">
   <v-container fluid>
-
     <div class="bg-field d-inline-flex mb-12">
 
       <div class="background-label d-inline-flex px-3 justify-center align-center">
@@ -21,6 +21,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
             :value="dateFormatting"
+            :rules="[rules.required]"
             label="Define the date"
             color="deep-purple darken-2"
             solo flat
@@ -63,6 +64,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
+            :rules="[rules.required]"
             v-model="time"
             class="d-inline-flex"
             label="Define the time"
@@ -156,11 +158,14 @@
         <v-icon size="20" dark class="label-text">mdi-map-marker-outline</v-icon>
       </div>
 
-      <v-text-field solo clearable color="deep-purple darken-2"
+      <v-text-field
+      :rules="[rules.required, rules.noSpaces]"
+      solo clearable color="deep-purple darken-2"
       flat class="d-inline-flex" label="Define the location"></v-text-field>
     </div>
-
+    <v-btn @click="test()">Ciao</v-btn>
   </v-container>
+</v-form>
 </template>
 
 <script>
@@ -180,6 +185,10 @@ export default {
       start: null,
       end: null,
       step: 1,
+      rules: {
+        required: (v) => !!v || 'Required',
+        noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
+      },
     };
   },
 
@@ -191,6 +200,14 @@ export default {
 
     getTime() {
       return `${this.start} - ${this.end}`;
+    },
+  },
+
+  methods: {
+    test() {
+      if (this.$refs.details.validate()) {
+        console.log('ok');
+      }
     },
   },
 
