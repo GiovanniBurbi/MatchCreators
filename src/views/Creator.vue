@@ -3,11 +3,7 @@
     <v-container :class="[smAndDown ? 'dense' : 'normal', 'header']">
       <stepper :change="step === 2" />
     </v-container>
-    <v-container
-    :class="['content',
-    {'fullscreen' : smAndDown},
-    {'biggerContent' : lgOnly || mdOnly}]"
-    >
+    <v-container>
 
     <v-window v-model="step">
       <v-window-item :value="1">
@@ -17,7 +13,8 @@
       </v-window-item>
 
       <v-window-item :value="2">
-
+        <details-recap />
+        <team-builder />
       </v-window-item>
     </v-window>
 
@@ -32,6 +29,8 @@
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import Stepper from '../components/Stepper.vue';
 import MatchCreationForm from '../components/MatchCreationForm.vue';
+import TeamBuilder from '../components/TeamBuilder.vue';
+import DetailsRecap from '../components/DetailsRecap.vue';
 
 export default {
   name: 'Creator',
@@ -39,11 +38,13 @@ export default {
   components: {
     Stepper,
     MatchCreationForm,
+    TeamBuilder,
+    DetailsRecap,
   },
 
   data() {
     return {
-      step: 1,
+      step: 2,
     };
   },
 
@@ -63,15 +64,6 @@ export default {
   -o-background-size: cover;
   background-size: cover;
   overflow: hidden;
-}
-.content {
-  max-width: 80%
-}
-.biggerContent {
-  max-width: 90%;
-}
-.fullscreen {
-  max-width: 100%;
 }
 .header {
   margin-top: 65px;
