@@ -3,7 +3,7 @@
     <v-container :class="[smAndDown ? 'dense' : 'normal', 'header']">
       <stepper :change="step === 2" />
     </v-container>
-    <v-container>
+    <v-container fluid>
 
     <v-window v-model="step">
       <v-window-item :value="1">
@@ -13,8 +13,10 @@
       </v-window-item>
 
       <v-window-item :value="2">
-        <details-recap />
-        <team-builder />
+        <v-container fluid>
+          <details-recap />
+          <team-builder />
+        </v-container>
       </v-window-item>
     </v-window>
 
