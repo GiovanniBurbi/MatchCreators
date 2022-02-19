@@ -105,6 +105,7 @@ export default {
     currentRemoved(newVal) {
       if (newVal === 'Position') {
         this.filterPresent = false;
+        this.resetDeleted();
       }
     },
   },
@@ -115,6 +116,7 @@ export default {
 
   methods: {
     ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
+    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
 
     ...mapActions({ addFilter: 'matches/newFilter' }),
 

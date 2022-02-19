@@ -88,7 +88,7 @@
 
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -104,12 +104,14 @@ export default {
 
   computed: {
     ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
+    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
   },
 
   watch: {
     currentRemoved(newVal) {
       if (newVal === 'Location') {
         this.filterPresent = false;
+        this.resetDeleted();
       }
     },
   },

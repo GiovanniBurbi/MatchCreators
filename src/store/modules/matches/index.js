@@ -46,6 +46,9 @@ export default {
       const removed = state.filters.splice(indexFilter, 1);
       state.currentRemoved = removed[0].type;
     },
+    resetCurrentDeleted(state) {
+      state.currentRemoved = null;
+    },
   },
 
   actions: {

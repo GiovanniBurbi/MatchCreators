@@ -170,7 +170,7 @@
 
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -195,12 +195,14 @@ export default {
     currentRemoved(newVal) {
       if (newVal === 'Time') {
         this.filterPresent = false;
+        this.resetDeleted();
       }
     },
   },
 
   methods: {
     ...mapActions({ addFilter: 'matches/newFilter' }),
+    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
 
     sendFilter() {
       if (!this.start) {
