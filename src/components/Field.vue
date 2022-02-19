@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <v-img
-    :class="['pitch', mdAndUp ? 'mr-10' : null, xsOnly ? 'mb-8' : null]"
+    :class="['pitch', lgAndUp ? 'mr-10' : null, xsOnly ? 'mb-8' : null]"
     contain
     src="../assets/teamCreator/pitch.png"
     ></v-img>
