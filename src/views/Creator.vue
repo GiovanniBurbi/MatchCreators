@@ -20,9 +20,6 @@
       </v-window-item>
     </v-window>
 
-      <!-- <v-container fluid fill-height class="pitch">
-    </v-container> -->
-
     </v-container>
   </v-container>
 </template>
@@ -68,13 +65,12 @@ export default {
   overflow: hidden;
 }
 .header {
-  margin-top: 65px;
+  margin-top: 70px;
 }
 .normal {
   max-width: 90%;
 }
 .dense {
-  margin-top: 70px;
   max-width: 70%;
 }
 /* .pitch {
