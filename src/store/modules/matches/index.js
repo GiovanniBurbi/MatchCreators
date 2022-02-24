@@ -49,6 +49,10 @@ export default {
     resetCurrentDeleted(state) {
       state.currentRemoved = null;
     },
+
+    clearFilters(state) {
+      state.filters = [];
+    },
   },
 
   actions: {
