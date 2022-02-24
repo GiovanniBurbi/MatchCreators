@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <v-container fluid>
     <v-row justify="space-between" align="center">
 
-      <h1 :class="['white--text font-weight-bold header']">
+      <h1 :class="['white--text font-weight-bold header',
+      {'big': lgAndUp}, {'small': xsOnly}]">
         Search a Match
       </h1>
 
@@ -63,7 +64,8 @@
     <v-row justify="center">
       <filter-chips-group/>
     </v-row>
-  </div>
+    <v-divider class="mt-2" />
+  </v-container>
 </template>
 
 <script>
@@ -98,8 +100,13 @@ export default {
 <style scoped>
 .header {
   text-shadow: 2px 3px rgba(0, 0, 0, 0.8);
-  font-size: calc(20px + 2vw);
   white-space: nowrap;
+}
+.big{
+  font-size: 3rem;
+}
+.small{
+  font-size: 1.5rem;
 }
 .filtersGroup {
   max-width: 1200px;

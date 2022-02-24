@@ -9,18 +9,22 @@
 
       <finder-header @filters="filtersOn = !filtersOn"/>
 
-      <v-divider class="mt-4">
-      </v-divider>
-
-      <v-row align="center" justify="center" class="mt-1">
+      <v-row align="center" justify="center">
         <!-- adjust container height based on rendered components
         on the page. Without it, cards on last row will not be fully shown
         when filters are open or when there are some chips.
         Need to find a better way to handle this problem -->
         <v-container fluid :class="[
-        {'filters-xor-chips-on': filtersOn && !chipsOn},
-        {'filters-and-chips-on': filtersOn && chipsOn},
-        {'filters-xor-chips-on': chipsOn && !filtersOn},
+        {'big': (lgAndUp) && (!filtersOn && !chipsOn)},
+        {'big-two-down': (lgAndUp) && (filtersOn && chipsOn)},
+        {'big-one-down': (lgAndUp) && ((chipsOn && !filtersOn) || filtersOn && !chipsOn)},
+        {'medium': (smOnly || mdOnly) && (!filtersOn && !chipsOn)},
+        {'medium-two-down': (smOnly || mdOnly) && (filtersOn && chipsOn)},
+        {'medium-one-down': (smOnly || mdOnly) &&
+        ((chipsOn && !filtersOn) || filtersOn && !chipsOn)},
+        {'small': (xsOnly) && (!filtersOn && !chipsOn)},
+        {'small-two-down': (xsOnly) && (filtersOn && chipsOn)},
+        {'small-one-down': (xsOnly) && ((chipsOn && !filtersOn) || filtersOn && !chipsOn)},
         smAndDown ? 'scrollable-no-bar' : 'scrollable']"
         >
 
@@ -91,7 +95,6 @@ export default {
 }
 .scrollable-no-bar {
   overflow-y: auto;
-  height: calc(75vh - 1vw);
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -100,7 +103,6 @@ export default {
 }
 .scrollable {
   overflow-y: auto;
-  height: calc(75vh - 1vw);
   /* firefox scrollbar */
   scrollbar-width: thin;
   scrollbar-color: #3F51B5;
@@ -119,10 +121,36 @@ export default {
 .scrollable::-webkit-scrollbar-thumb:hover {
   background: #3F51B5;
 }
-.filters-xor-chips-on {
-  height: calc(68vh - 1vw);
+.big{
+  height: 74vh;
 }
-.filters-and-chips-on {
-  height: calc(62vh - 1vw);
+.big-one-down {
+  height: 68vh;
+}
+.big-two-down {
+  height: 62vh;
+}
+.medium{
+  height: 76vh;
+}
+.medium-one-down {
+  height: 70vh;
+}
+.medium-two-down {
+  height: 64vh;
+}
+.small{
+  height: 78vh;
+}
+.small-one-down {
+  height: 72vh;
+}
+.small-two-down {
+  height: 66vh;
+}
+@media (max-height: 800px) {
+  .scrollable-no-bar {
+    height: 64vh;
+  }
 }
 </style>
