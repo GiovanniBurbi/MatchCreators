@@ -61,13 +61,13 @@ export default {
   overflow: hidden;
 }
 .soccer-field {
-  position: fixed;
+  transform: scale(1.4);
 }
 .field-normal {
-  max-width: 1400px;
+  max-width: 1000px;
 }
 .field-big {
-  max-width: 1450px;
+  max-width: 1100px;
 }
 /* @media (max-height: 800px) {
   .field-big {

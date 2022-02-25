@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box-card">
     <v-img
     :src="getCard"
     contain
@@ -38,7 +38,7 @@
       <v-container fill-height>
 
         <v-row justify="center" no-gutters
-        :class="xsOnly ? '' : 'mt-6'">
+        :class="xsOnly ? '' : 'mt-1'">
           <v-btn fab outlined :small="xsOnly" :dark="!white">
             <v-icon size="38">
               mdi-plus
@@ -105,7 +105,7 @@ export default {
 </script>
 
 <style scoped>
-.box {
+.box-card {
   display: flex;
   align-items: center;
   justify-content: center;
