@@ -3,11 +3,11 @@
     <v-img
     :src="getCard"
     contain
-    class="card"
+    :class="[xsOnly ? 'card-small' : 'card']"
     >
     </v-img>
 
-    <div class="overCard">
+    <div :class="xsOnly ? 'overCard-small' : 'overCard'">
 
       <!-- <v-container fill-height v-if="player">
 
@@ -37,8 +37,9 @@
       <!-- <v-container fill-height v-else> -->
       <v-container fill-height>
 
-        <v-row justify="center" no-gutters class="mt-6">
-          <v-btn fab outlined :dark="!white">
+        <v-row justify="center" no-gutters
+        :class="xsOnly ? '' : 'mt-6'">
+          <v-btn fab outlined :small="xsOnly" :dark="!white">
             <v-icon size="38">
               mdi-plus
             </v-icon>
@@ -47,7 +48,7 @@
 
         <v-row justify="center">
           <v-icon
-          :class="white ? null : 'white-icon'"
+          :class="[white ? null : 'white-icon', xsOnly ? 'pb-3' : null]"
           :size="position === 'Forward' ? 40 : 36"
           >
             {{ positionIcon }}
@@ -61,6 +62,8 @@
 </template>
 
 <script>
+import BreakpointsCond from '../mixins/BreakpointsCond';
+
 export default {
   name: 'PlayerCard',
 
@@ -96,6 +99,8 @@ export default {
       type: Object,
     }, */
   },
+
+  mixins: [BreakpointsCond],
 };
 </script>
 
@@ -108,10 +113,18 @@ export default {
 .card {
   max-width: 140px;
 }
+.card-small {
+  max-width: 120px;
+}
 .overCard {
   position: absolute;
   width: 100px;
   height: 170px;
+}
+.overCard-small {
+  position: absolute;
+  width: 80px;
+  height: 130px;
 }
 .white-icon {
   /* white */

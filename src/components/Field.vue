@@ -69,7 +69,7 @@ export default {
 .field-big {
   max-width: 1450px;
 }
-@media (max-height: 800px) {
+/* @media (max-height: 800px) {
   .field-big {
     height: 60vh;
     max-width: 1100px;
@@ -77,5 +77,5 @@ export default {
   .box {
     padding-bottom: 60px;
   }
-}
+} */
 </style>
