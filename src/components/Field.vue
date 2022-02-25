@@ -2,7 +2,7 @@
   <v-container fluid :class="['px-0', {'big': smAndUp}, {'small': xsOnly}]"
   style="overflow: hidden;">
 
-    <v-container fluid fill-height class="box">
+    <v-container fluid fill-height class="box-squad">
 
       <v-img
       :class="['soccer-field', {'field-normal': smAndUp}, {'field-big': xsOnly}]"
@@ -54,11 +54,13 @@ export default {
 .small {
   height: 70vh;
 }
-.box {
+.box-squad {
+  padding-top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 .soccer-field {
   transform: scale(1.4);

@@ -1,8 +1,8 @@
 <template>
   <v-container :class="['box', {'resize':xsOnly}]">
     <div class="row-1">
-      <player-card class="mb-8 mx-4" :position="'Forward'"/>
-      <player-card class="mb-8 mx-4" :position="'Forward'"/>
+      <player-card class="mt-10 mx-4" :position="'Forward'"/>
+      <player-card class="mt-10 mx-4" :position="'Forward'"/>
     </div>
     <div class="row-2">
       <player-card class="" :position="'Defender'"/>
@@ -37,7 +37,8 @@ export default {
   height: 70%;
   display: inline-flex;
   flex-wrap: wrap;
-  position: absolute;
+  position: fixed;
+  border: 1px solid red;
 }
 .resize {
   margin-top: 130px;
@@ -66,6 +67,6 @@ export default {
   justify-content: center;
 }
 .gk {
-  margin-bottom: 30px;
+  margin-bottom: 100px;
 }
 </style>
