@@ -48,7 +48,7 @@
         <v-row justify="center">
           <v-icon
           :class="white ? null : 'white-icon'"
-          :size="position === 'Forward' ? 40 : 32"
+          :size="position === 'Forward' ? 40 : 36"
           >
             {{ positionIcon }}
           </v-icon>
@@ -106,13 +106,12 @@ export default {
   justify-content: center;
 }
 .card {
-  max-width: 130px;
+  max-width: 140px;
 }
 .overCard {
   position: absolute;
-  width: 90px;
-  height: 160px;
-  margin-bottom: 8px;
+  width: 100px;
+  height: 170px;
 }
 .white-icon {
   /* white */

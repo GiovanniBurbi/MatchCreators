@@ -1,36 +1,15 @@
 <template>
   <v-container class="box">
-    <!-- <v-row class="px-15 mx-15">
-      <v-col class="pt-0">
-        <player-card class="pt-0" :position="'Forward'"/>
-      </v-col>
-      <v-col class="pt-0">
-        <player-card class="pt-0" :position="'Forward'"/>
-      </v-col>
-    </v-row>
-    <v-row class="mt-0" no-gutters style="background: white">
-      <v-col>
-        <player-card  :position="'Defender'"/>
-      </v-col>
-      <v-col>
-        <player-card  :position="'Defender'"/>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <player-card  :position="'Goalkeeper'"/>
-      </v-col>
-    </v-row> -->
     <div class="row-1">
-      <player-card class="mb-6 mx-10" :position="'Forward'"/>
-      <player-card class="mb-6 mx-10" :position="'Forward'"/>
+      <player-card class="mb-6" :position="'Forward'"/>
+      <player-card class="mb-6" :position="'Forward'"/>
     </div>
     <div class="row-2">
       <player-card class="mb-6" :position="'Defender'"/>
       <player-card class="mb-6" :position="'Defender'"/>
     </div>
     <div class="row-3">
-      <player-card class="mb-6" :position="'Goalkeeper'"/>
+      <player-card class="mb-12" :position="'Goalkeeper'"/>
     </div>
 
   </v-container>
@@ -60,7 +39,8 @@ export default {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  margin: 0 180px 0 180px;
 }
 .row-2 {
   height: 33.4%;
