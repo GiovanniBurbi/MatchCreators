@@ -1,11 +1,18 @@
 <template>
-  <div class="container">
-    <v-img
-    :class="['pitch', lgAndUp ? 'mr-10' : null, xsOnly ? 'mb-8' : null]"
-    contain
-    src="../assets/teamCreator/pitch.png"
-    ></v-img>
-  </div>
+  <v-container fluid :class="['px-0', {'big': smAndUp}, {'small': xsOnly}]"
+  style="overflow: hidden;">
+
+    <v-container fluid fill-height class="box">
+
+      <v-img
+      :class="['soccer-field', {'field-normal': smAndUp}, {'field-big': xsOnly}]"
+      src="../assets/teamCreator/pitch.png"
+      >
+      </v-img>
+
+    </v-container>
+
+  </v-container>
 </template>
 
 <script>
@@ -19,15 +26,34 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  position: fixed;
-  height: 60%;
+.big {
+  height: 62vh;
+}
+.small {
+  height: 70vh;
+}
+.box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.pitch {
+.soccer-field {
   position: fixed;
+}
+.field-normal {
   max-width: 1200px;
+}
+.field-big {
+  max-width: 1450px;
+}
+
+@media (max-height: 800px) {
+  .field-big {
+    height: 60vh;
+    max-width: 1100px;
+  }
+  .box {
+    padding-bottom: 60px;
+  }
 }
 </style>
