@@ -1,36 +1,48 @@
 <template>
   <v-container fluid class="px-0">
-    <v-row justify="center" :class="[ smAndUp ? 'mt-2' : 'mt-0']">
+    <v-row justify="center" :class="[smAndUp ? 'mt-2' : 'mt-0']">
       <div
-      :class="['switcher px-8', black ? 'selected' : 'no-selected']"
-      @click="black = !black"
+        :class="['switcher px-8', black ? 'selected' : 'no-selected']"
+        @click="black = !black"
       >
         <h1
-        v-if="smAndUp"
-        :class="['white--text d-inline-flex font-weight-medium pr-1', {'text-size': mdAndUp}]"
+          v-if="smAndUp"
+          :class="[
+            'white--text d-inline-flex font-weight-medium pr-1',
+            { 'text-size': mdAndUp },
+          ]"
         >
           Team
         </h1>
         <h1
-        :class="['white--text d-inline-flex font-weight-medium pl-1', {'text-size': mdAndUp},
-        {'text-small': xsOnly}]"
+          :class="[
+            'white--text d-inline-flex font-weight-medium pl-1',
+            { 'text-size': mdAndUp },
+            { 'text-small': xsOnly },
+          ]"
         >
           Black
         </h1>
       </div>
       <div
-      :class="['switcher px-8', black ? 'no-selected' : 'selected']"
-      @click="black = !black"
+        :class="['switcher px-8', black ? 'no-selected' : 'selected']"
+        @click="black = !black"
       >
         <h1
-        v-if="smAndUp"
-        :class="['white--text d-inline-flex font-weight-medium pr-1', {'text-size': mdAndUp}]"
+          v-if="smAndUp"
+          :class="[
+            'white--text d-inline-flex font-weight-medium pr-1',
+            { 'text-size': mdAndUp },
+          ]"
         >
           Team
         </h1>
         <h1
-        :class="['white--text d-inline-flex font-weight-medium pl-1', {'text-size': mdAndUp},
-        {'text-small': xsOnly}]"
+          :class="[
+            'white--text d-inline-flex font-weight-medium pl-1',
+            { 'text-size': mdAndUp },
+            { 'text-small': xsOnly },
+          ]"
         >
           White
         </h1>
@@ -38,9 +50,8 @@
     </v-row>
 
     <v-row justify="center">
-      <field />
+      <field/>
     </v-row>
-
   </v-container>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="box">
     <v-img
     :src="getCard"
     contain
@@ -38,8 +38,8 @@
       <v-container fill-height>
 
         <v-row justify="center" no-gutters class="mt-6">
-          <v-btn fab outlined large :dark="!white">
-            <v-icon size="50">
+          <v-btn fab outlined :dark="!white">
+            <v-icon size="38">
               mdi-plus
             </v-icon>
           </v-btn>
@@ -48,7 +48,7 @@
         <v-row justify="center">
           <v-icon
           :class="white ? null : 'white-icon'"
-          :size="position === 'Forward' ? 50 : 45"
+          :size="position === 'Forward' ? 40 : 32"
           >
             {{ positionIcon }}
           </v-icon>
@@ -100,18 +100,18 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .card {
-  max-width: 200px;
+  max-width: 130px;
 }
 .overCard {
   position: absolute;
-  width: 150px;
-  height: 240px;
+  width: 90px;
+  height: 160px;
   margin-bottom: 8px;
 }
 .white-icon {
