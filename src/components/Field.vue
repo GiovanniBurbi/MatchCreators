@@ -8,8 +8,8 @@
       :class="['soccer-field', {'field-normal': smAndUp}, {'field-big': xsOnly}]"
       src="../assets/teamCreator/pitch.png"
       >
+        <players-cards-group class="cards" />
       </v-img>
-      <players-cards-group />
     </v-container>
 
   </v-container>
@@ -64,6 +64,12 @@ export default {
 }
 .soccer-field {
   transform: scale(1.4);
+  position: relative;
+}
+.soccer-field .cards {
+  transform: scale(0.7);
+  margin-top: 50px;
+  margin-left: 50px;
 }
 .field-normal {
   max-width: 1000px;

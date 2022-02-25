@@ -1,12 +1,12 @@
 <template>
   <v-container :class="['box', {'resize':xsOnly}]">
     <div class="row-1">
-      <player-card class="mt-2 mx-4" :position="'Forward'"/>
-      <player-card class="mt-2 mx-4" :position="'Forward'"/>
+      <player-card class="mb-12" :position="'Forward'"/>
+      <player-card class="mb-12" :position="'Forward'"/>
     </div>
     <div class="row-2">
-      <player-card class="mt-8" :position="'Defender'"/>
-      <player-card class="mt-8" :position="'Defender'"/>
+      <player-card class="mt-4" :position="'Defender'"/>
+      <player-card class="mt-4" :position="'Defender'"/>
     </div>
     <div class="row-3">
       <player-card class="gk" :position="'Goalkeeper'"/>
@@ -34,10 +34,10 @@ export default {
 .box {
   margin-top: 20px;
   max-width: 900px;
-  height: 50%;
+  height: 480px;
   display: inline-flex;
   flex-wrap: wrap;
-  position: fixed;
+  position: absolute;
 }
 .resize {
   margin-top: 130px;
@@ -49,7 +49,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 0 180px 0 180px;
+  margin: auto 180px;
 }
 .row-2 {
   height: 33.4%;
@@ -66,6 +66,6 @@ export default {
   justify-content: center;
 }
 .gk {
-  margin-bottom: 0px;
+  margin-bottom: 20px;
 }
 </style>
