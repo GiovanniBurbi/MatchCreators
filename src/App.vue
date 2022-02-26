@@ -2,7 +2,6 @@
   <v-app>
     <navbar
     v-if="isNotAuth"
-    :is-dark=darkNav
     ></navbar>
 
     <v-snackbar
@@ -24,11 +23,6 @@
     </v-snackbar>
 
     <v-main>
-      <!-- <mode-switcher
-      v-if="isNotAuth"
-      :switch.sync="toggleSwitch"
-      @modeSwitch="modeSwitch()"
-      /> -->
       <router-view
       @loginSuccess="snackbar = true"></router-view>
     </v-main>
@@ -38,7 +32,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import Navbar from './components/Navbar.vue';
-/* import ModeSwitcher from './components/ModeSwitcher.vue'; */
 
 export default {
   name: 'App',
@@ -46,28 +39,7 @@ export default {
   data() {
     return {
       snackbar: false,
-      darkNav: false,
-      toggleSwitch: false,
     };
-  },
-
-  watch: {
-    /* watch route path, change state of persistent
-    app components based on current path */
-    $route() {
-      if (this.$route.name === 'Home') {
-        if (this.darkNav) {
-          this.darkNav = false;
-          this.toggleSwitch = true;
-        }
-      }
-      if (this.$route.name === 'Creator') {
-        if (!this.darkNav) {
-          this.darkNav = true;
-          this.toggleSwitch = true;
-        }
-      }
-    },
   },
 
   computed: {
@@ -83,15 +55,8 @@ export default {
     },
   },
 
-  methods: {
-    modeSwitch() {
-      this.darkNav = !this.darkNav;
-    },
-  },
-
   components: {
     Navbar,
-    /* ModeSwitcher, */
   },
 
 };

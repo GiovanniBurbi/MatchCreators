@@ -16,7 +16,7 @@
         v-if="!xsOnly"
         :class="['label pl-4',
         isFinder ? 'label-select' : 'finder-no-select', {'label-small': smOnly}]"
-        @click="toggleMode(), finder()"
+        @click="toggleMode()"
         >
           Finder
         </h1>
@@ -26,7 +26,7 @@
         :class="['label pl-7 pr-2',
         isFinder ? 'label-no-select' : 'label-select',
         {'label-small': smOnly}]"
-        @click="toggleMode(), creator()"
+        @click="toggleMode()"
         >
           Creator
         </h1>
@@ -38,7 +38,7 @@
         :color="isFinder ? 'white' : null"
         :class="['mx-3 icon-switch',
         isFinder ? 'icon-select' : 'icon-no-select']"
-        @click="toggleMode(), finder()"
+        @click="toggleMode()"
         >
           mdi-magnify
         </v-icon>
@@ -47,7 +47,7 @@
         v-if="xsOnly"
         :class="['mx-3 icon-switch',
         isFinder ? 'icon-no-select' : 'icon-select']"
-        @click="toggleMode(), creator()"
+        @click="toggleMode()"
         >
           mdi-pencil-outline
         </v-icon>
@@ -77,23 +77,19 @@ export default {
   watch: {
     switch(newVal) {
       if (newVal) {
-        this.toggleMode();
+        this.isFinder = !this.isFinder;
         this.$emit('update:switch', false);
       }
     },
   },
 
   methods: {
-    creator() {
-      this.$emit('modeSwitch');
-      this.$router.replace('/creator');
-    },
-    finder() {
-      this.$emit('modeSwitch');
-      this.$router.replace('/home');
-    },
     toggleMode() {
       this.isFinder = !this.isFinder;
+      this.$emit('modeSwitch');
+      if (this.isFinder) {
+        this.$router.replace('/home');
+      } else this.$router.replace('/creator');
     },
   },
 

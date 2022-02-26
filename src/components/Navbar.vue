@@ -3,7 +3,7 @@
   app
   hide-on-scroll
   scroll-threshold=70
-  :color="isDark ? null : 'white'" :dark="isDark"
+  :color="darkMode ? null : 'white'" :dark="darkMode"
   style="z-index: 2000;"
   >
     <!-- return home button -->
@@ -23,9 +23,10 @@
     </v-app-bar-title>
 
     <v-spacer v-if="mdAndUp"></v-spacer>
+
     <mode-switcher
     :switch.sync="toggleSwitch"
-    @modeSwitch="modeSwitch()"
+    @modeSwitch="darkMode = !darkMode"
     />
     <v-spacer></v-spacer>
 
@@ -60,13 +61,29 @@ export default {
 
   data() {
     return {
+      darkMode: false,
       toggleSwitch: false,
     };
   },
 
-  props: {
-    isDark: {
-      type: Boolean,
+  watch: {
+    /* watch route path, change state of navbar and
+    switcher based on current path */
+    $route() {
+      /* first if maybe is useless, do the actions in goHome
+      if that's the case */
+      if (this.$route.name === 'Home') {
+        if (this.darkMode) {
+          this.darkMode = false;
+          this.toggleSwitch = true;
+        }
+      }
+      if (this.$route.name === 'Creator') {
+        if (!this.darkMode) {
+          this.darkMode = true;
+          this.toggleSwitch = true;
+        }
+      }
     },
   },
 
