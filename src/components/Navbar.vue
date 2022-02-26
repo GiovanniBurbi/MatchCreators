@@ -3,7 +3,7 @@
   app
   hide-on-scroll
   scroll-threshold=70
-  :color="darkNav ? null : 'white'" :dark="darkNav"
+  :color="isDark ? null : 'white'" :dark="isDark"
   style="z-index: 2000;"
   >
     <!-- return home button -->
@@ -25,6 +25,7 @@
     <v-spacer v-if="mdAndUp"></v-spacer>
     <mode-switcher
     :switch.sync="toggleSwitch"
+    @modeSwitch="modeSwitch()"
     />
     <v-spacer></v-spacer>
 
@@ -59,33 +60,13 @@ export default {
 
   data() {
     return {
-      darkNav: false,
       toggleSwitch: false,
     };
   },
 
-  /* props: {
+  props: {
     isDark: {
       type: Boolean,
-    },
-  }, */
-
-  watch: {
-    /* watch route path, change state of persistent
-    app components based on current path */
-    $route() {
-      if (this.$route.name === 'Home') {
-        if (this.darkNav) {
-          this.darkNav = false;
-          this.toggleSwitch = true;
-        }
-      }
-      if (this.$route.name === 'Creator') {
-        if (!this.darkNav) {
-          this.darkNav = true;
-          this.toggleSwitch = true;
-        }
-      }
     },
   },
 
