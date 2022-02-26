@@ -1,10 +1,16 @@
 <template>
   <v-row justify="space-between" align="center">
 
-    <div class="d-inline-flex align-center" @click = "$emit('back')"
+    <div
+    class="d-inline-flex align-center"
+    @click = "$emit('back')"
     :style="change ? 'cursor: pointer;' : 'cursor: default'">
 
-      <div :class="['icon', {'icon-big': lgAndUp}, {'icon-medium': mdAndDown}]">
+      <div
+      :class="['icon', {'icon-big': lgAndUp},
+      {'icon-medium': mdAndDown},
+      {'icon-back' : change && smAndDown}]"
+      >
         <h1
         v-if="!change"
         :class="['white--text font-weight-bold number',
@@ -29,7 +35,7 @@
         <h1
         v-if="mdAndUp"
         :class="['white--text font-weight-bold header pl-2',
-        {'text-disable': change}, {'text-big': lgAndUp}]"
+        {'text-back': change}, {'text-big': lgAndUp}]"
         >
           Define the Details
         </h1>
@@ -39,7 +45,10 @@
 
     <v-divider class="mx-2 divider"></v-divider>
 
-    <div class="d-inline-flex align-center" style="cursor: default;">
+    <div
+    class="d-inline-flex align-center"
+    style="cursor: default;"
+    >
 
       <div :class="['icon', {'icon-disable': !change},
       {'icon-big': lgAndUp}, {'icon-medium': mdAndDown}]">
@@ -86,7 +95,6 @@ export default {
 <style scoped>
 .header {
   text-shadow: 2px 3px rgba(0, 0, 0, 0.8);
-  /* font-size: calc(15px + 2vw); */
   white-space: nowrap;
 }
 .text-big {
@@ -106,6 +114,13 @@ export default {
   margin-top: 0.3vw;
   cursor: default;
 }
+.icon-back {
+  opacity: 60%;
+  cursor: pointer;
+}
+.icon-back:hover {
+  opacity: 100%;
+}
 .icon-big {
   height: 3.2rem;
   width: 3.2rem;
@@ -119,6 +134,12 @@ export default {
 }
 .text-disable {
   opacity: 30%;
+}
+.text-back {
+  opacity: 30%;
+}
+.text-back:hover {
+  opacity: 100%;
 }
 .divider {
  border-color: #9E9E9E !important;
