@@ -14,9 +14,12 @@
         on the page. Without it, cards on last row will not be fully shown
         when filters are open or when there are some chips.
         Need to find a better way to handle this problem -->
-        <v-container fluid :class="[
+
+        <!-- <v-container fluid :class="[
         smAndDown ? 'scrollable-no-bar' : 'scrollable']"
-        :style="getHeight">
+        :style="getHeight"> -->
+        <v-container fluid :class="[
+        smAndDown ? 'scrollable-no-bar' : 'scrollable']">
 
           <match-cards-group />
 
@@ -145,14 +148,14 @@ export default {
 
 <style scoped>
 .background {
-  height: calc(100vh - 64px);
+  /* height: calc(100vh - 64px); */
   background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
   rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/daylight.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .content {
-  margin-top: 60px;
+  /* margin-top: 60px; */
   max-width: 80%;
 }
 .biggerContent {
@@ -162,7 +165,7 @@ export default {
   max-width: 100%;
 }
 .scrollable-no-bar {
-  overflow-y: auto;
+  /* overflow-y: auto; */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -170,7 +173,7 @@ export default {
   display: none;
 }
 .scrollable {
-  overflow-y: auto;
+  /* overflow-y: auto; */
   /* firefox scrollbar */
   scrollbar-width: thin;
   scrollbar-color: #3F51B5;

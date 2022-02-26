@@ -65,7 +65,7 @@ export default {
   overflow: hidden;
 }
 .header {
-  margin-top: 70px;
+  /* margin-top: 70px; */
 }
 .normal {
   max-width: 90%;

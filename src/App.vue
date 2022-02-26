@@ -6,6 +6,7 @@
     ></navbar>
 
     <v-snackbar
+    v-if="false"
      v-model="snackbar"
      top color="green"
      :timeout="4000"
@@ -23,12 +24,13 @@
     </v-snackbar>
 
     <v-main>
-      <mode-switcher
+      <!-- <mode-switcher
       v-if="isNotAuth"
       :switch.sync="toggleSwitch"
       @modeSwitch="modeSwitch()"
-      />
-      <router-view @loginSuccess="snackbar = true"></router-view>
+      /> -->
+      <router-view
+      @loginSuccess="snackbar = true"></router-view>
     </v-main>
   </v-app>
 </template>
@@ -36,7 +38,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import Navbar from './components/Navbar.vue';
-import ModeSwitcher from './components/ModeSwitcher.vue';
+/* import ModeSwitcher from './components/ModeSwitcher.vue'; */
 
 export default {
   name: 'App',
@@ -89,7 +91,7 @@ export default {
 
   components: {
     Navbar,
-    ModeSwitcher,
+    /* ModeSwitcher, */
   },
 
 };

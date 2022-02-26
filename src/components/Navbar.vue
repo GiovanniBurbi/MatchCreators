@@ -1,6 +1,10 @@
 <template>
-  <v-app-bar app flat
-  :color="isDark ? null : 'white'" :dark="isDark"
+  <v-app-bar
+  app
+  hide-on-scroll
+  scroll-threshold=70
+  :color="darkNav ? null : 'white'" :dark="darkNav"
+  style="z-index: 2000;"
   >
     <!-- return home button -->
     <v-app-bar-nav-icon>
@@ -13,20 +17,24 @@
       </v-icon>
     </v-app-bar-nav-icon>
 
-    <v-app-bar-title class="text-uppercase hidden-xs-only">
+    <v-app-bar-title class="pl-1 text-uppercase hidden-sm-and-down">
       <h1 class="font-weight-bold d-inline-flex title">Match</h1>
       <h1 class="font-weight-light d-inline-flex title">Creators</h1>
     </v-app-bar-title>
 
+    <v-spacer v-if="mdAndUp"></v-spacer>
+    <mode-switcher
+    :switch.sync="toggleSwitch"
+    />
     <v-spacer></v-spacer>
 
     <v-btn
-     class="mr-2"
+     class="mr-1"
      text rounded left
      style="text-shadow: 1px 1px rgba(63, 81, 181, 0.2);"
     >
       <v-icon class="icon-light" size=37> $player-icon </v-icon>
-      <span class="hidden-xs-only">My matches</span>
+      <span class="hidden-sm-and-down">My matches</span>
     </v-btn>
 
     <v-btn icon>
@@ -39,13 +47,45 @@
 </template>
 
 <script>
+import BreakpointsCond from '../mixins/BreakpointsCond';
+import ModeSwitcher from './ModeSwitcher.vue';
 
 export default {
   name: 'Navbar',
 
-  props: {
+  components: {
+    ModeSwitcher,
+  },
+
+  data() {
+    return {
+      darkNav: false,
+      toggleSwitch: false,
+    };
+  },
+
+  /* props: {
     isDark: {
       type: Boolean,
+    },
+  }, */
+
+  watch: {
+    /* watch route path, change state of persistent
+    app components based on current path */
+    $route() {
+      if (this.$route.name === 'Home') {
+        if (this.darkNav) {
+          this.darkNav = false;
+          this.toggleSwitch = true;
+        }
+      }
+      if (this.$route.name === 'Creator') {
+        if (!this.darkNav) {
+          this.darkNav = true;
+          this.toggleSwitch = true;
+        }
+      }
     },
   },
 
@@ -58,6 +98,8 @@ export default {
       }
     },
   },
+
+  mixins: [BreakpointsCond],
 };
 </script>
 

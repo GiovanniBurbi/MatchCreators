@@ -1,21 +1,64 @@
 <template>
   <v-container fluid class="container">
 
-    <div :class="['switch-bg', isFinder ? null : 'dark-bg']">
+    <div :class="['switch-bg', isFinder ? null : 'dark-bg', smAndDown ? 'switch-small' : null]">
+
       <!-- div of the switch that highlight the selected mode -->
-      <div :class="['selector', isFinder ? null : 'switch-selector']">&nbsp;</div>
+      <div :class="['selector',
+      isFinder ? null : 'switch-selector',
+      {'selector-small': smOnly && !isFinder},
+      {'selector-xsmall' : xsOnly && !isFinder}]"
+      >
+        &nbsp;
+      </div>
 
-        <h1 :class="['label pl-4', isFinder ? 'label-select' : 'finder-no-select']"
-        @click="toggleMode(), finder()">Finder</h1>
+        <h1
+        v-if="!xsOnly"
+        :class="['label pl-4',
+        isFinder ? 'label-select' : 'finder-no-select', {'label-small': smOnly}]"
+        @click="toggleMode(), finder()"
+        >
+          Finder
+        </h1>
 
-        <h1 :class="['label pl-7', isFinder ? 'label-no-select' : 'label-select']"
-        @click="toggleMode(), creator()">Creator</h1>
+        <h1
+        v-if="!xsOnly"
+        :class="['label pl-7 pr-2',
+        isFinder ? 'label-no-select' : 'label-select',
+        {'label-small': smOnly}]"
+        @click="toggleMode(), creator()"
+        >
+          Creator
+        </h1>
 
+        <!-- Use icons instead of text when window width is
+        small -->
+        <v-icon
+        v-if="xsOnly"
+        :color="isFinder ? 'white' : null"
+        :class="['mx-3 icon-switch',
+        isFinder ? 'icon-select' : 'icon-no-select']"
+        @click="toggleMode(), finder()"
+        >
+          mdi-magnify
+        </v-icon>
+
+        <v-icon
+        v-if="xsOnly"
+        :class="['mx-3 icon-switch',
+        isFinder ? 'icon-no-select' : 'icon-select']"
+        @click="toggleMode(), creator()"
+        >
+          mdi-pencil-outline
+        </v-icon>
     </div>
 
   </v-container>
 </template>
+
 <script>
+import BreakpointsCond from '../mixins/BreakpointsCond';
+
 export default {
   name: 'ModeSwitcher',
 
@@ -53,28 +96,35 @@ export default {
       this.isFinder = !this.isFinder;
     },
   },
+
+  mixins: [BreakpointsCond],
 };
 </script>
+
 <style scoped>
 /* switch is a fixed component that must be present
 in finder page and creator page */
 .container {
-  position: fixed;
   display: flex;
   justify-content: center;
-  width: 100%;
   z-index: 100;
+  width: fit-content;
 }
 /* white background of the switch */
 .switch-bg {
   background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   z-index: -10;
   position: relative;
+  display: flex;
+  align-items: center;
   height: 50px;
-  width: 250px;
   border-radius: 8px;
-  box-shadow: 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 3px rgba(0, 0, 0, 0.4);
   transition: background-color 0.4s ease;
+}
+.switch-small {
+  height: 36px;
 }
 .dark-bg {
   background-color: #212121;
@@ -83,6 +133,28 @@ in finder page and creator page */
 .label {
   display: inline;
   cursor: pointer;
+}
+.icon-switch {
+  cursor: pointer;
+}
+.icon-select {
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+  background-clip: text;
+  cursor: default;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+.icon-no-select {
+  opacity: 40%;
+  transition: 0.2s ease;
+}
+.icon-no-select:hover {
+  color: #3F51B5;
+  opacity: 100%;
+}
+
+.label-small {
+  font-size: 1.25rem;
 }
 .label-select {
   color: white;
@@ -101,8 +173,7 @@ in finder page and creator page */
   opacity: 100%;
 }
 .finder-no-select {
-  color: #515151;
-  transition: color 0.2s ease;
+  opacity: 30%;
 }
 .finder-no-select:hover {
   color: #3F51B5;
@@ -113,7 +184,7 @@ in finder page and creator page */
   position: absolute;
   z-index: -1;
   width: 50%;
-  height: 100%;
+  height: 105%;
   background-color: #3F51B5;
   border-radius: 8px;
   box-shadow: 0px 3px rgba(0, 0, 0, 0.5);
@@ -122,8 +193,15 @@ in finder page and creator page */
 }
 
 .switch-selector {
-  transform: translateX(125px);
+  transform: translateX(126px);
   transition: 0.3s ease;
 }
 
+.selector-small {
+  transform: translateX(89px);
+}
+
+.selector-xsmall {
+  transform: translateX(48px);
+}
 </style>
