@@ -28,6 +28,7 @@
     :switch.sync="toggleSwitch"
     @modeSwitch="darkMode = !darkMode"
     />
+
     <v-spacer></v-spacer>
 
     <v-btn
