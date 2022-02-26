@@ -73,11 +73,4 @@ export default {
 .dense {
   max-width: 70%;
 }
-/* .pitch {
-  background: url('../assets/pitch.png') center center fixed no-repeat;
-  background-size: cover; Phones
-  background-size: contain; Screen size big
-  height: 700px;
-  padding-top: 50px;
-} */
 </style>
