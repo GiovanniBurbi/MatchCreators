@@ -4,7 +4,7 @@
     <v-row justify="center" v-if="!loaded">
       <v-skeleton-loader
       class="mx-2 my-2"
-      v-for="index in 12"
+      v-for="index in 16"
       :key="index"
       elevation="8"
       tile
