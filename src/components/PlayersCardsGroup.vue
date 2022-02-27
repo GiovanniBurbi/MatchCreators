@@ -10,7 +10,7 @@
       <player-card :position="'Defender'" />
     </div>
     <div class="row-3">
-      <player-card style="position: absolute;" class="pb-4" :position="'Goalkeeper'" />
+      <player-card :position="'Goalkeeper'" />
     </div>
 
   </v-container>
@@ -43,7 +43,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding-top: 120px;
 }
 .row-2 {
   height: 33.4%;
@@ -52,7 +51,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding-top: 50px;
 }
 .row-3 {
   height: 33.3%;
@@ -61,37 +59,4 @@ export default {
   align-items: center;
   justify-content: center;
 }
-/* .box {
-  display: inline-flex;
-  flex-wrap: wrap;
-} */
-/* .resize {
-  margin-top: 130px;
-  max-width: 600px;
-}
-.row-1 {
-  height: 33.3%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin: auto 180px;
-}
-.row-2 {
-  height: 33.4%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.row-3 {
-  height: 33.3%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.gk {
-  margin-bottom: 20px;
-} */
 </style>
