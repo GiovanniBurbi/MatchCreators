@@ -33,6 +33,7 @@ export default {
 
 <style scoped>
 .formation {
+  margin-top: 10px;
   height: 90%;
   position: relative;
 }
@@ -58,5 +59,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 430px) {
+  .row-2 {
+    max-width: 40%;
+  }
+  .row-1 {
+    max-width: 24%;
+  }
 }
 </style>

@@ -3,11 +3,11 @@
     <v-img
     :src="getCard"
     contain
-    class="card"
+    :class="xsOnly ? 'card-small' : 'card'"
     >
     </v-img>
 
-    <div class="overCard">
+    <div :class="xsOnly ? 'overCard-small' : 'overCard'">
 
       <!-- <v-container fill-height v-if="player">
 
@@ -39,8 +39,8 @@
 
         <v-row justify="center" no-gutters
         :class="xsOnly ? '' : 'mt-1'">
-          <v-btn fab outlined :small="xsOnly" :dark="!white">
-            <v-icon size="38">
+          <v-btn fab outlined :x-small="xsOnly" :dark="!white">
+            <v-icon :size="xsOnly ? 26 : 38">
               mdi-plus
             </v-icon>
           </v-btn>
@@ -48,8 +48,8 @@
 
         <v-row justify="center">
           <v-icon
-          :class="[white ? null : 'white-icon', xsOnly ? 'pb-3' : null]"
-          :size="position === 'Forward' ? 40 : 36"
+          :class="white ? null : 'white-icon'"
+          :size="iconSize"
           >
             {{ positionIcon }}
           </v-icon>
@@ -86,6 +86,15 @@ export default {
           return '$forward-icon';
       }
     },
+
+    iconSize() {
+      if (this.position === 'Forward') {
+        if (this.$vuetify.breakpoint.xsOnly) return 26;
+        return 40;
+      }
+      if (this.$vuetify.breakpoint.xsOnly) return 24;
+      return 36;
+    },
   },
 
   props: {
@@ -114,7 +123,7 @@ export default {
   max-width: 140px;
 }
 .card-small {
-  max-width: 120px;
+  max-width: 100px;
 }
 .overCard {
   position: absolute;
@@ -123,8 +132,8 @@ export default {
 }
 .overCard-small {
   position: absolute;
-  width: 80px;
-  height: 130px;
+  width: 70px;
+  height: 110px;
 }
 .white-icon {
   /* white */
