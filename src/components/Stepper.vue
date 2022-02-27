@@ -98,7 +98,7 @@ export default {
   white-space: nowrap;
 }
 .text-big {
-  font-size: 2.4rem;
+  font-size: 2rem;
 }
 .number {
   text-shadow: 1px 2px rgba(0, 0, 0, 0.4);
