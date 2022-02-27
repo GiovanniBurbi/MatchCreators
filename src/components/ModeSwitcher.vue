@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="container">
+  <v-container fluid class="switch-container">
 
     <div :class="['switch-bg', isFinder ? null : 'dark-bg', smAndDown ? 'switch-small' : null]">
 
@@ -100,7 +100,7 @@ export default {
 <style scoped>
 /* switch is a fixed component that must be present
 in finder page and creator page */
-.container {
+.switch-container {
   display: flex;
   justify-content: center;
   z-index: 100;

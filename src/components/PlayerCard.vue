@@ -3,11 +3,11 @@
     <v-img
     :src="getCard"
     contain
-    :class="[xsOnly ? 'card-small' : 'card']"
+    class="card"
     >
     </v-img>
 
-    <div :class="xsOnly ? 'overCard-small' : 'overCard'">
+    <div class="overCard">
 
       <!-- <v-container fill-height v-if="player">
 

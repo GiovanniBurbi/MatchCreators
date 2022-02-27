@@ -48,8 +48,8 @@ export default {
 
 <style scoped>
 .field {
-  max-width: 1300px;
-  max-height: 490px;
+  max-width: 1500px;
+  max-height: 690px;
 }
 .field-small {
   max-width: 1100px;
