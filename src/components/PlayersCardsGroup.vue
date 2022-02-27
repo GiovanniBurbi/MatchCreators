@@ -35,7 +35,6 @@ export default {
 .formation {
   margin-top: 10px;
   height: 90%;
-  position: relative;
 }
 .row-1 {
   height: 33.3%;

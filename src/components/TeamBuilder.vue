@@ -1,15 +1,16 @@
 <template>
   <v-container fluid class="px-0">
-    <v-row v-if="false" justify="center" :class="[smAndUp ? 'mt-2' : 'mt-0']">
+    <v-row justify="center" :class="[smAndUp ? 'mt-2' : 'mt-0']">
       <div
-        :class="['switcher px-8', black ? 'selected' : 'no-selected']"
+        :class="['switcher px-6', black ? 'selected' : 'no-selected']"
         @click="black = !black"
       >
         <h1
-          v-if="smAndUp"
+        v-if="windowWidth >= 370"
           :class="[
             'white--text d-inline-flex font-weight-medium pr-1',
             { 'text-size': mdAndUp },
+            { 'text-small': xsOnly },
           ]"
         >
           Team
@@ -25,14 +26,15 @@
         </h1>
       </div>
       <div
-        :class="['switcher px-8', black ? 'no-selected' : 'selected']"
+        :class="['switcher px-6', black ? 'no-selected' : 'selected']"
         @click="black = !black"
       >
         <h1
-          v-if="smAndUp"
+          v-if="windowWidth >= 370"
           :class="[
             'white--text d-inline-flex font-weight-medium pr-1',
             { 'text-size': mdAndUp },
+            { 'text-small': xsOnly },
           ]"
         >
           Team
@@ -65,11 +67,34 @@ export default {
   data() {
     return {
       black: true,
+      windowWidth: window.innerWidth,
     };
+  },
+
+  watch: {
+    windowWidth(newVal) {
+      this.windowWidth = newVal;
+    },
   },
 
   components: {
     Field,
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
+  },
+
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
   },
 
   mixins: [BreakpointsCond],

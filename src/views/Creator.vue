@@ -6,7 +6,7 @@
     {'header-md' : lgOnly || mdOnly}]"
     >
       <h1
-      :class="['white--text font-weight-bold',
+      :class="['white--text text-size font-weight-bold',
       {'big': lgAndUp}, {'small': xsOnly}]"
       >
         Create a Match
@@ -17,7 +17,7 @@
       ></v-divider>
 
       <stepper
-      :class="['stepper-margin-lg',
+      :class="['stepper-margin-lg mb-0',
       {'stepper-margin-md' : mdOnly},
       {'stepper-margin-sm' : smAndDown}]"
       :change="step === 2"
@@ -38,12 +38,12 @@
       <v-window-item :value="2">
         <v-container fluid class="px-0">
           <details-recap
+          v-if="!xsOnly"
           :class="['header px-16 pt-0',
           {'header-sm' : smAndDown},
           {'header-md' : lgOnly || mdOnly}]"
-          v-if="!xsOnly"
           />
-          <v-row justify="center" class="pt-14 pb-6">
+          <v-row justify="center" :class="xsOnly ? 'pt-4 pb-6' : 'pt-10 pb-4'">
             <v-btn
             color="green darken-4"
             dark
@@ -51,7 +51,7 @@
               Create the match
             </v-btn>
           </v-row>
-          <team-builder />
+          <team-builder class="pb-0"/>
         </v-container>
       </v-window-item>
     </v-window>
@@ -103,13 +103,16 @@ export default {
   max-width: 90%;
 }
 .header-sm {
-  max-width: 100%;
+  max-width: 97%;
+}
+.text-size {
+  font-size: 2.2rem;
 }
 .big{
   font-size: 3rem;
 }
 .small{
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 .stepper-margin-lg {
   margin: 16px 8vw;
@@ -118,6 +121,6 @@ export default {
   margin: 16px 4vw;
 }
 .stepper-margin-sm {
-  margin: 16px 12vw;
+  margin: 16px 6vw;
 }
 </style>

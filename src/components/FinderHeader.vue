@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row justify="space-between" align="center">
 
-      <h1 :class="['white--text font-weight-bold header',
+      <h1 :class="['white--text text-size font-weight-bold header',
       {'big': lgAndUp}, {'small': xsOnly}]">
         Search a Match
       </h1>
@@ -102,11 +102,14 @@ export default {
   text-shadow: 2px 3px rgba(0, 0, 0, 0.8);
   white-space: nowrap;
 }
+.text-size {
+  font-size: 2.2rem;
+}
 .big{
   font-size: 3rem;
 }
 .small{
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 .filtersGroup {
   max-width: 1200px;
