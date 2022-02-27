@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="px-0">
-    <v-row justify="center" :class="[smAndUp ? 'mt-2' : 'mt-0']">
+    <v-row v-if="false" justify="center" :class="[smAndUp ? 'mt-2' : 'mt-0']">
       <div
         :class="['switcher px-8', black ? 'selected' : 'no-selected']"
         @click="black = !black"

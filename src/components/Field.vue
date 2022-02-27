@@ -1,16 +1,15 @@
 <template>
-  <v-container fluid :class="['px-0', {'big': smAndUp}, {'small': xsOnly}]"
-  style="overflow: hidden;">
+  <v-container fluid class="px-0"
+>
 
-    <v-container fluid fill-height class="box-squad">
-
-      <v-img
-      :class="['soccer-field', {'field-normal': smAndUp}, {'field-big': xsOnly}]"
-      src="../assets/teamCreator/pitch.png"
-      >
-        <players-cards-group class="cards" />
-      </v-img>
-    </v-container>
+  <v-row justify="center">
+    <v-img
+    :class="xsOnly ? 'field-small' :'field'"
+    src="../assets/teamCreator/pitch.png"
+    >
+      <players-cards-group />
+    </v-img>
+  </v-row>
 
   </v-container>
 </template>
@@ -48,42 +47,12 @@ export default {
 </script>
 
 <style scoped>
-.big {
-  height: 62vh;
+.field {
+  max-width: 1300px;
+  max-height: 490px;
 }
-.small {
-  height: 70vh;
-}
-.box-squad {
-  padding-top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
-.soccer-field {
-  transform: scale(1.4);
-  position: relative;
-}
-.soccer-field .cards {
-  transform: scale(0.7);
-  margin-top: 50px;
-  margin-left: 50px;
-}
-.field-normal {
-  max-width: 1000px;
-}
-.field-big {
+.field-small {
   max-width: 1100px;
+  max-height: 490px;
 }
-/* @media (max-height: 800px) {
-  .field-big {
-    height: 60vh;
-    max-width: 1100px;
-  }
-  .box {
-    padding-bottom: 60px;
-  }
-} */
 </style>

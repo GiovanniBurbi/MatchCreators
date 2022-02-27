@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row justify="space-around">
 
-      <div class="reminder py-2">
+      <div class="reminder py-1">
         <div class="background-label d-inline-flex px-3">
           <v-icon size="20" dark class="label-text py-2">mdi-calendar</v-icon>
         </div>
