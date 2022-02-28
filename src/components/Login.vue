@@ -92,7 +92,7 @@
             color="indigo"
             label="Username"
             clearable prepend-icon="mdi-account"
-            :counter="10"
+            :counter="8"
             :rules="[rules.required, rules.noSpaces, rules.userMax]">
             </v-text-field>
 
@@ -153,7 +153,7 @@
         class="justify-start pr-4 pt-8"
         >
           <h1 class="font-weight-light"
-          style="font-size:30px;">Complete your profile</h1>
+          :style="xsOnly ? 'font-size:26px' : 'font-size:30px;'">Complete your profile</h1>
         </v-card-title>
 
         <v-card-text class="pb-0">
@@ -194,7 +194,7 @@
 
             </v-menu>
 
-            <position-field ref="pos" label="Position" registration="true"></position-field>
+            <position-field ref="pos" label="Position" registration></position-field>
           </v-form>
         </v-card-text>
 
@@ -220,6 +220,7 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import PositionField from './PositionField.vue';
+import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Login',
@@ -242,7 +243,7 @@ export default {
       /* rules for validate input in text-fields */
       rules: {
         required: (v) => !!v || 'Required',
-        userMax: (v) => v?.length <= 10 || 'Username must be less than 10 characters',
+        userMax: (v) => v?.length <= 8 || 'Username must be less than 10 characters',
         pswMin: (v) => v?.length >= 8 || 'Password must be at least 8 characters',
         emailFormat: (v) => /.+@.+\...+/.test(v) || 'Email must be valid',
         noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
@@ -266,6 +267,8 @@ export default {
       return val && setTimeout(() => { this.activePicker = 'YEAR'; });
     },
   },
+
+  mixins: [BreakpointsCond],
 
   methods: {
     /* save date on text field */

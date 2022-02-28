@@ -92,12 +92,12 @@
     },
     {
       "id": 11,
-      "username": "match",
+      "username": "Admin",
       "password": "match291",
       "email": "MatchCreators@gmail.com",
       "birthday": "2021-01-29",
       "position": "Forward",
-      "picture": "assets/users/CR7.jpg"
+      "picture": "assets/users/match.jpg"
     }
   ],
   "matches": [
@@ -111,7 +111,63 @@
         "goalkeepers": 2,
         "defenders": 3,
         "forwards": 4
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 2,
@@ -123,7 +179,63 @@
         "goalkeepers": 1,
         "defenders": 2,
         "forwards": 2
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 3,
@@ -135,7 +247,63 @@
         "goalkeepers": 1,
         "defenders": 2,
         "forwards": 4
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 4,
@@ -147,7 +315,63 @@
         "goalkeepers": 1,
         "defenders": 0,
         "forwards": 4
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 5,
@@ -159,7 +383,63 @@
         "goalkeepers": 2,
         "defenders": 4,
         "forwards": 3
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 6,
@@ -171,7 +451,63 @@
         "goalkeepers": 2,
         "defenders": 2,
         "forwards": 3
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 7,
@@ -183,7 +519,63 @@
         "goalkeepers": 1,
         "defenders": 2,
         "forwards": 4
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 8,
@@ -195,7 +587,63 @@
         "goalkeepers": 1,
         "defenders": 4,
         "forwards": 3
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 9,
@@ -207,7 +655,63 @@
         "goalkeepers": 2,
         "defenders": 2,
         "forwards": 4
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 10,
@@ -219,7 +723,63 @@
         "goalkeepers": 1,
         "defenders": 4,
         "forwards": 3
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 11,
@@ -231,7 +791,63 @@
         "goalkeepers": 0,
         "defenders": 4,
         "forwards": 4
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 12,
@@ -243,7 +859,63 @@
         "goalkeepers": 1,
         "defenders": 0,
         "forwards": 4
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 13,
@@ -255,7 +927,63 @@
         "goalkeepers": 2,
         "defenders": 4,
         "forwards": 3
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 14,
@@ -267,7 +995,63 @@
         "goalkeepers": 0,
         "defenders": 3,
         "forwards": 4
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     },
     {
       "id": 15,
@@ -279,7 +1063,63 @@
         "goalkeepers": 1,
         "defenders": 2,
         "forwards": 3
-      }
+      },
+      "blackTeam": [
+        { "team": "Black" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ],
+      "whiteTeam": [
+        { "team": "White" },
+        {
+          "id": 1,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 2,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 3,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 4,
+          "picture": "",
+          "username": ""
+        },
+        {
+          "id": 5,
+          "picture": "",
+          "username": ""
+        }
+      ]
     }
   ]
 }

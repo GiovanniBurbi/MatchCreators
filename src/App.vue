@@ -5,10 +5,10 @@
     ></navbar>
 
     <v-snackbar
-    v-if="false"
      v-model="snackbar"
      top color="green"
      :timeout="4000"
+     style="z-index: 9000"
     >
       <v-icon
        class="pb-2"
