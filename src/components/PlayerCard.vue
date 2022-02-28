@@ -11,11 +11,24 @@
 
       <v-container fill-height v-if="player.username !== ''">
 
-        <v-row justify="center">
+        <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
+          <v-btn
+          style="z-index: 1000;"
+          x-small
+          :width="xsOnly ? 20 : null"
+          :height="xsOnly ? 20 : null"
+          fab color="red darken-4" dark
+          @click="deletePlayer()"
+          >
+            <v-icon :x-small="xsOnly">mdi-close</v-icon>
+          </v-btn>
+        </div>
+
+        <v-row justify="center" class="">
           <v-avatar
           :width="xsOnly ? 60 : 80"
           rounded="sm"
-          :size="xsOnly ? 50 : 70"
+          :height="xsOnly ? 51 : 71"
           :class="xsOnly ? 'mt-1' : 'mt-4'"
           >
             <img :src="getPicture" >
@@ -32,6 +45,14 @@
           </h1>
         </v-row>
 
+        <v-row>
+          <v-divider
+          :class="['divide', white ? 'divide-opacity' : '',
+          xsOnly ? 'divide-spacing' : '']"
+          style="border-color: grey !important"
+          ></v-divider>
+        </v-row>
+
         <v-row justify="center">
           <v-icon
           :class="[white ? null : 'white-icon',
@@ -46,12 +67,22 @@
 
       <v-container fill-height v-else>
 
-        <v-row justify="center" no-gutters
-        :class="xsOnly ? '' : 'mt-1'">
-          <v-btn fab outlined :x-small="xsOnly" :dark="!white">
+        <v-row
+        justify="center"
+        no-gutters
+        :class="xsOnly ? '' : 'mt-1'"
+        >
+          <v-btn
+          fab
+          outlined
+          :x-small="xsOnly"
+          :dark="!white"
+          >
+
             <v-icon :size="xsOnly ? 26 : 38">
               mdi-plus
             </v-icon>
+
           </v-btn>
         </v-row>
 
@@ -72,6 +103,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 /* eslint-disable global-require */
@@ -123,6 +155,17 @@ export default {
     },
   },
 
+  methods: {
+    ...mapMutations({ removePlayer: 'matches/removePlayer' }),
+
+    deletePlayer() {
+      this.removePlayer({
+        isWhite: this.white,
+        spot: this.player.id,
+      });
+    },
+  },
+
   mixins: [BreakpointsCond],
 };
 </script>
@@ -152,5 +195,31 @@ export default {
 .white-icon {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
+}
+.close-button {
+  position: absolute;
+  left: 76%;
+}
+.upper {
+  bottom: 84%;
+  left: 74%;
+}
+.normal {
+  top: 0%;
+}
+.divide {
+  position: absolute;
+  top: 68%;
+  left: 10%;
+  width: 80%;
+  opacity: 20%;
+}
+.divide-opacity {
+  opacity: 40%;
+}
+.divide-spacing {
+  top: 70%;
+  width: 70%;
+  left: 15%;
 }
 </style>

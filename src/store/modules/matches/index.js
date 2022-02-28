@@ -19,22 +19,27 @@ export default {
     teamBlack: [
       { team: 'Black' },
       {
+        id: 1,
         username: '',
         picture: '',
       },
       {
+        id: 2,
         username: '',
         picture: '',
       },
       {
+        id: 3,
         username: '',
         picture: '',
       },
       {
+        id: 4,
         username: '',
         picture: '',
       },
       {
+        id: 5,
         username: '',
         picture: '',
       },
@@ -42,22 +47,27 @@ export default {
     teamWhite: [
       { team: 'White' },
       {
+        id: 1,
         username: '',
         picture: '',
       },
       {
+        id: 2,
         username: '',
         picture: '',
       },
       {
+        id: 3,
         username: '',
         picture: '',
       },
       {
+        id: 4,
         username: '',
         picture: '',
       },
       {
+        id: 5,
         username: '',
         picture: '',
       },
@@ -114,6 +124,16 @@ export default {
       } else {
         state.teamBlack[payload.spot].username = payload.info.username;
         state.teamBlack[payload.spot].picture = payload.info.picture;
+      }
+    },
+
+    removePlayer(state, payload) {
+      if (payload.isWhite) {
+        state.teamWhite[payload.spot].username = '';
+        state.teamWhite[payload.spot].picture = '';
+      } else {
+        state.teamBlack[payload.spot].username = '';
+        state.teamBlack[payload.spot].picture = '';
       }
     },
   },
