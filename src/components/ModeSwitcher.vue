@@ -35,21 +35,25 @@
         small -->
         <v-icon
         v-if="xsOnly"
+        size="28"
         :color="isFinder ? 'white' : null"
-        :class="['mx-3 icon-switch',
+        :class="['mx-3 icon-switch white-icon',
         isFinder ? 'icon-select' : 'icon-no-select']"
         @click="toggleMode()"
         >
-          mdi-magnify
+          <!-- mdi-magnify -->
+          $finder-icon
         </v-icon>
 
         <v-icon
         v-if="xsOnly"
+        size="28"
         :class="['mx-3 icon-switch',
-        isFinder ? 'icon-no-select' : 'icon-select']"
+        isFinder ? 'icon-no-select' : 'icon-select white-icon']"
         @click="toggleMode()"
         >
-          mdi-pencil-outline
+          <!-- mdi-pencil-outline -->
+          $creator-icon
         </v-icon>
     </div>
 
@@ -198,6 +202,11 @@ in finder page and creator page */
 }
 
 .selector-xsmall {
-  transform: translateX(48px);
+  transform: translateX(52px);
+}
+.white-icon {
+  /* white */
+  filter: invert(99%) sepia(3%) saturate(1032%)
+  hue-rotate(291deg) brightness(122%) contrast(100%) drop-shadow( 2px 2px 1px rgba(0, 0, 0));
 }
 </style>

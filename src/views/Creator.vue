@@ -10,6 +10,13 @@
       {'big': lgAndUp}, {'small': xsOnly}]"
       >
         Create a Match
+        <v-icon
+        :class="['white-icon ml-1',
+        xsOnly ? 'pb-2' : 'pb-1']"
+        :size="lgAndUp ? 50 : 40"
+        >
+          $creator-icon
+        </v-icon>
       </h1>
 
       <v-divider
@@ -122,5 +129,12 @@ export default {
 }
 .stepper-margin-sm {
   margin: 16px 6vw;
+}
+.white-icon {
+  /* white */
+  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
+  brightness(122%) contrast(100%)
+  drop-shadow( 2px 2px 1px rgba(0, 0, 0))
+  drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7));
 }
 </style>

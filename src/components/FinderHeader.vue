@@ -5,6 +5,12 @@
       <h1 :class="['white--text text-size font-weight-bold header',
       {'big': lgAndUp}, {'small': xsOnly}]">
         Search a Match
+        <v-icon
+        :size="lgAndUp ? 50 : 34"
+        class="white-icon pb-3"
+        >
+          $finder-icon
+        </v-icon>
       </h1>
 
       <v-btn
@@ -113,5 +119,10 @@ export default {
 }
 .filtersGroup {
   max-width: 1200px;
+}
+.white-icon {
+  /* white */
+  filter: invert(99%) sepia(3%) saturate(1032%)
+  hue-rotate(291deg) brightness(122%) contrast(100%) drop-shadow( 2px 2px 1px rgba(0, 0, 0));
 }
 </style>
