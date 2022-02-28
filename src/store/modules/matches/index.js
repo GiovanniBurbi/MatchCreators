@@ -15,6 +15,7 @@ export default {
       msg: null,
     },
     currentRemoved: null,
+    details: [],
   },
 
   mutations: {
@@ -42,16 +43,22 @@ export default {
         msg: null,
       };
     },
+
     deleteFilter(state, indexFilter) {
       const removed = state.filters.splice(indexFilter, 1);
       state.currentRemoved = removed[0].type;
     },
+
     resetCurrentDeleted(state) {
       state.currentRemoved = null;
     },
 
     clearFilters(state) {
       state.filters = [];
+    },
+
+    setDetails(state, details) {
+      state.details = details.slice();
     },
   },
 
@@ -106,6 +113,10 @@ export default {
 
     getCurrentRemoved(state) {
       return state.currentRemoved;
+    },
+
+    getDetails(state) {
+      return state.details;
     },
   },
 };

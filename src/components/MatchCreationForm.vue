@@ -171,6 +171,7 @@
       </div>
 
       <v-text-field
+      v-model="location"
       :rules="[rules.required, rules.noSpaces]"
       solo clearable color="deep-purple darken-2"
       flat class="d-inline-flex" label="Define the location"></v-text-field>
@@ -185,6 +186,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import { parseISO, format } from 'date-fns';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
@@ -200,6 +202,7 @@ export default {
       modal: false,
       start: null,
       end: null,
+      location: null,
       step: 1,
       rules: {
         required: (v) => !!v || 'Required',
@@ -220,8 +223,16 @@ export default {
   },
 
   methods: {
+    ...mapMutations({ sendDetails: 'matches/setDetails' }),
+
     proceed() {
       if (this.$refs.details.validate()) {
+        const details = [
+          this.date,
+          this.getTime,
+          this.location,
+        ];
+        this.sendDetails(details);
         this.$emit('detailsPassed');
       }
     },
