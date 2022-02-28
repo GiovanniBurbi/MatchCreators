@@ -13,18 +13,18 @@
 
         <v-row justify="center">
           <v-avatar
-          rounded
+          :width="xsOnly ? 71 : 100"
+          rounded="sm"
           :size="xsOnly ? 50 : 70"
-          :class="xsOnly ? 'mt-1' : 'mt-3'"
+          :class="xsOnly ? 'mt-2' : 'mt-5'"
           >
             <img :src="getPicture" >
-            <!-- <img :src="require(`@/assets/users/${player}.jpg`)" > -->
           </v-avatar>
         </v-row>
 
         <v-row justify="center">
           <h1
-          :class="['text-center font-weight-regular',
+          :class="['text-center font-weight-light',
           xsOnly ? 'text-caption' : 'text-h6 pb-2',
           white ? '' : 'white--text']"
           >
@@ -73,6 +73,7 @@
 
 <script>
 import BreakpointsCond from '../mixins/BreakpointsCond';
+
 /* eslint-disable global-require */
 export default {
   name: 'PlayerCard',

@@ -7,8 +7,12 @@
     :class="xsOnly ? 'field-small' :'field'"
     src="../assets/teamCreator/pitch.png"
     >
-      <players-cards-group v-show="teamWhite" :team="match.whiteTeam"/>
-      <players-cards-group v-show="!teamWhite" :team="match.blackTeam"/>
+      <v-scale-transition hide-on-leave>
+        <players-cards-group v-show="!teamWhite" :team="match.blackTeam"/>
+      </v-scale-transition>
+      <v-scale-transition hide-on-leave>
+        <players-cards-group v-show="teamWhite" :team="match.whiteTeam"/>
+      </v-scale-transition>
     </v-img>
   </v-row>
 
@@ -16,6 +20,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import PlayersCardsGroup from './PlayersCardsGroup.vue';
 
@@ -54,8 +59,8 @@ export default {
           },
           {
             id: 4,
-            picture: 'assets/users/Stephan.jpg',
-            username: 'Stephan',
+            picture: '',
+            username: '',
           },
           {
             id: 5,
@@ -67,8 +72,8 @@ export default {
           { team: 'White' },
           {
             id: 1,
-            picture: 'assets/users/Vince.jpg',
-            username: 'Vince',
+            picture: '',
+            username: '',
           },
           {
             id: 2,
@@ -102,8 +107,24 @@ export default {
     },
   },
 
+  computed: {
+    ...mapGetters({ getUser: 'auth/getUser' }),
+  },
+
   components: {
     PlayersCardsGroup,
+  },
+
+  mounted() {
+    const user = this.getUser;
+    let pos = null;
+    if (user.position === 'Goalkeeper') {
+      pos = 1;
+    } else if (user.position === 'Defender') {
+      pos = 2;
+    } else pos = 4;
+    this.match.blackTeam[pos].username = user.username;
+    this.match.blackTeam[pos].picture = user.picture;
   },
 
   mixins: [BreakpointsCond],
