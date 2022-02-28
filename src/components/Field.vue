@@ -8,10 +8,10 @@
     src="../assets/teamCreator/pitch.png"
     >
       <v-scale-transition hide-on-leave>
-        <players-cards-group v-show="!teamWhite" :team="match.blackTeam"/>
+        <players-cards-group v-show="!isWhite" :team="teamBlack"/>
       </v-scale-transition>
       <v-scale-transition hide-on-leave>
-        <players-cards-group v-show="teamWhite" :team="match.whiteTeam"/>
+        <players-cards-group v-show="isWhite" :team="teamWhite"/>
       </v-scale-transition>
     </v-img>
   </v-row>
@@ -20,88 +20,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import PlayersCardsGroup from './PlayersCardsGroup.vue';
 
 export default {
   name: 'Field',
 
-  data() {
-    return {
-      match: {
-        id: 1,
-        date: '2022-03-01',
-        startTime: '10:00',
-        endTime: '12:00',
-        location: 'Albereta',
-        positions: {
-          goalkeepers: 2,
-          defenders: 3,
-          forwards: 4,
-        },
-        blackTeam: [
-          { team: 'Black' },
-          {
-            id: 1,
-            picture: '',
-            username: '',
-          },
-          {
-            id: 2,
-            picture: '',
-            username: '',
-          },
-          {
-            id: 3,
-            picture: '',
-            username: '',
-          },
-          {
-            id: 4,
-            picture: '',
-            username: '',
-          },
-          {
-            id: 5,
-            picture: '',
-            username: '',
-          },
-        ],
-        whiteTeam: [
-          { team: 'White' },
-          {
-            id: 1,
-            picture: '',
-            username: '',
-          },
-          {
-            id: 2,
-            picture: '',
-            username: '',
-          },
-          {
-            id: 3,
-            picture: '',
-            username: '',
-          },
-          {
-            id: 4,
-            picture: '',
-            username: '',
-          },
-          {
-            id: 5,
-            picture: '',
-            username: '',
-          },
-        ],
-      },
-    };
-  },
-
   props: {
-    teamWhite: {
+    isWhite: {
       type: Boolean,
       required: true,
     },
@@ -109,6 +36,20 @@ export default {
 
   computed: {
     ...mapGetters({ getUser: 'auth/getUser' }),
+    teamWhite: {
+      get() {
+        return this.$store.state.matches.teamWhite;
+      },
+    },
+    teamBlack: {
+      get() {
+        return this.$store.state.matches.teamBlack;
+      },
+    },
+  },
+
+  methods: {
+    ...mapMutations({ addPlayer: 'matches/addPlayer' }),
   },
 
   components: {
@@ -123,8 +64,15 @@ export default {
     } else if (user.position === 'Defender') {
       pos = 2;
     } else pos = 4;
-    this.match.blackTeam[pos].username = user.username;
-    this.match.blackTeam[pos].picture = user.picture;
+    const payload = {
+      spot: pos,
+      isWhite: this.isWhite,
+      info: {
+        username: user.username,
+        picture: user.picture,
+      },
+    };
+    this.addPlayer(payload);
   },
 
   mixins: [BreakpointsCond],

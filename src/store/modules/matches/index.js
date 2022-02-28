@@ -16,6 +16,52 @@ export default {
     },
     currentRemoved: null,
     details: ['2001-01-01', 'test', 'test'],
+    teamBlack: [
+      { team: 'Black' },
+      {
+        username: '',
+        picture: '',
+      },
+      {
+        username: '',
+        picture: '',
+      },
+      {
+        username: '',
+        picture: '',
+      },
+      {
+        username: '',
+        picture: '',
+      },
+      {
+        username: '',
+        picture: '',
+      },
+    ],
+    teamWhite: [
+      { team: 'White' },
+      {
+        username: '',
+        picture: '',
+      },
+      {
+        username: '',
+        picture: '',
+      },
+      {
+        username: '',
+        picture: '',
+      },
+      {
+        username: '',
+        picture: '',
+      },
+      {
+        username: '',
+        picture: '',
+      },
+    ],
   },
 
   mutations: {
@@ -59,6 +105,16 @@ export default {
 
     setDetails(state, details) {
       state.details = details.slice();
+    },
+
+    addPlayer(state, payload) {
+      if (payload.isWhite) {
+        state.teamWhite[payload.spot].username = payload.info.username;
+        state.teamWhite[payload.spot].picture = payload.info.picture;
+      } else {
+        state.teamBlack[payload.spot].username = payload.info.username;
+        state.teamBlack[payload.spot].picture = payload.info.picture;
+      }
     },
   },
 

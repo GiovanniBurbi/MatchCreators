@@ -13,10 +13,10 @@
 
         <v-row justify="center">
           <v-avatar
-          :width="xsOnly ? 71 : 100"
+          :width="xsOnly ? 60 : 80"
           rounded="sm"
-          :size="xsOnly ? 48 : 68"
-          :class="xsOnly ? 'mt-2' : 'mt-5'"
+          :size="xsOnly ? 50 : 70"
+          :class="xsOnly ? 'mt-1' : 'mt-4'"
           >
             <img :src="getPicture" >
           </v-avatar>

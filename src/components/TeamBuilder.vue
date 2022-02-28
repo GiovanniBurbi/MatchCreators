@@ -52,7 +52,7 @@
     </v-row>
 
     <v-row justify="center">
-      <field :teamWhite="!black"/>
+      <field :isWhite="!black"/>
     </v-row>
   </v-container>
 </template>
