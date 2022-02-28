@@ -7,7 +7,7 @@
           <v-icon size="20" dark class="label-text py-2">mdi-calendar</v-icon>
         </div>
         <div class="bg-field d-inline-flex">
-          <h1 class="text-subtitle-1 pl-1 py-1">
+          <h1 class="text-subtitle-1 font-weight-medium pl-1 py-1">
             {{ dateFormatted }}
           </h1>
         </div>
@@ -18,7 +18,7 @@
           <v-icon size="20" dark class="label-text py-2">mdi-clock-outline</v-icon>
         </div>
         <div class="bg-field d-inline-flex">
-          <h1 class="text-subtitle-1 pl-1 py-1">
+          <h1 class="text-subtitle-1 font-weight-medium pl-1 py-1">
             {{ details[1] }}
           </h1>
         </div>
@@ -29,7 +29,7 @@
           <v-icon size="20" dark class="label-text py-2">mdi-map-marker-outline</v-icon>
         </div>
         <div class="bg-field d-inline-flex">
-          <h1 class="text-subtitle-1 pl-1 py-1">
+          <h1 class="text-subtitle-1 font-weight-medium pl-1 py-1">
             {{ details[2] }}
           </h1>
         </div>
