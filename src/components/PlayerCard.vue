@@ -15,7 +15,7 @@
           <v-avatar
           :width="xsOnly ? 71 : 100"
           rounded="sm"
-          :size="xsOnly ? 50 : 70"
+          :size="xsOnly ? 48 : 68"
           :class="xsOnly ? 'mt-2' : 'mt-5'"
           >
             <img :src="getPicture" >
@@ -25,7 +25,7 @@
         <v-row justify="center">
           <h1
           :class="['text-center font-weight-light',
-          xsOnly ? 'text-caption' : 'text-h6 pb-2',
+          xsOnly ? 'text-caption' : 'text-h6 pb-4',
           white ? '' : 'white--text']"
           >
             {{ player.username }}
@@ -104,10 +104,10 @@ export default {
     iconSize() {
       if (this.position === 'Forward') {
         if (this.$vuetify.breakpoint.xsOnly) return 24;
-        return 40;
+        return 34;
       }
       if (this.$vuetify.breakpoint.xsOnly) return 22;
-      return 36;
+      return 30;
     },
   },
 
