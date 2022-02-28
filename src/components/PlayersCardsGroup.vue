@@ -2,15 +2,32 @@
   <v-container fluid class="formation">
 
     <div class="row-1">
-      <player-card :player="user" :white="teamWhite" :position="'Forward'" />
-      <player-card :white="teamWhite" :position="'Forward'" />
+      <player-card
+      :player="team[5]"
+      :white="isTeamWhite"
+      :position="'Forward'" />
+      <player-card
+      :player="team[4]"
+      :white="isTeamWhite"
+      :position="'Forward'" />
     </div>
+
     <div class="row-2">
-      <player-card :white="teamWhite" :position="'Defender'" />
-      <player-card :white="teamWhite" :position="'Defender'" />
+      <player-card
+      :player="team[3]"
+      :white="isTeamWhite"
+      :position="'Defender'" />
+      <player-card
+      :player="team[2]"
+      :white="isTeamWhite"
+      :position="'Defender'" />
     </div>
+
     <div class="row-3">
-      <player-card :white="teamWhite" :position="'Goalkeeper'" />
+      <player-card
+      :player="team[1]"
+      :white="isTeamWhite"
+      :position="'Goalkeeper'" />
     </div>
 
   </v-container>
@@ -23,20 +40,22 @@ import PlayerCard from './PlayerCard.vue';
 export default {
   name: 'PlayersCardsGroup',
 
-  data() {
-    return {
-      user: 'Carl',
-    };
-  },
-
   components: {
     PlayerCard,
   },
 
   props: {
-    teamWhite: {
-      type: Boolean,
+    team: {
+      type: Array,
       required: true,
+    },
+  },
+
+  computed: {
+    isTeamWhite() {
+      const type = this.team[0].team;
+      if (type === 'Black') return false;
+      return true;
     },
   },
 

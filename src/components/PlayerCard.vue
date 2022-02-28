@@ -9,7 +9,7 @@
 
     <div :class="xsOnly ? 'overCard-small' : 'overCard'">
 
-      <v-container fill-height v-if="player">
+      <v-container fill-height v-if="player.username !== ''">
 
         <v-row justify="center">
           <v-avatar
@@ -17,7 +17,8 @@
           :size="xsOnly ? 50 : 70"
           :class="xsOnly ? 'mt-1' : 'mt-3'"
           >
-            <img :src="require(`@/assets/users/${player}.jpg`)" >
+            <img :src="getPicture" >
+            <!-- <img :src="require(`@/assets/users/${player}.jpg`)" > -->
           </v-avatar>
         </v-row>
 
@@ -27,7 +28,7 @@
           xsOnly ? 'text-caption' : 'text-h6 pb-2',
           white ? '' : 'white--text']"
           >
-            {{ player }}
+            {{ player.username }}
           </h1>
         </v-row>
 
@@ -72,17 +73,20 @@
 
 <script>
 import BreakpointsCond from '../mixins/BreakpointsCond';
-
+/* eslint-disable global-require */
 export default {
   name: 'PlayerCard',
 
   computed: {
     getCard() {
       if (this.white) {
-        // eslint-disable-next-line global-require
         return require('../assets/teamCreator/white-card.png');
-      // eslint-disable-next-line global-require
       } return require('../assets/teamCreator/black-card.png');
+    },
+
+    getPicture() {
+      // eslint-disable-next-line import/no-dynamic-require
+      return require(`../${this.player.picture}`);
     },
 
     positionIcon() {
@@ -114,7 +118,7 @@ export default {
       type: String,
     },
     player: {
-      type: String,
+      type: Object,
     },
   },
 

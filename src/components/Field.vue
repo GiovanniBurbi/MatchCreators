@@ -7,7 +7,8 @@
     :class="xsOnly ? 'field-small' :'field'"
     src="../assets/teamCreator/pitch.png"
     >
-      <players-cards-group :teamWhite="teamWhite"/>
+      <players-cards-group v-show="teamWhite" :team="match.whiteTeam"/>
+      <players-cards-group v-show="!teamWhite" :team="match.blackTeam"/>
     </v-img>
   </v-row>
 
@@ -35,6 +36,7 @@ export default {
           forwards: 4,
         },
         blackTeam: [
+          { team: 'Black' },
           {
             id: 1,
             picture: '',
@@ -52,8 +54,8 @@ export default {
           },
           {
             id: 4,
-            picture: '',
-            username: '',
+            picture: 'assets/users/Stephan.jpg',
+            username: 'Stephan',
           },
           {
             id: 5,
@@ -62,10 +64,11 @@ export default {
           },
         ],
         whiteTeam: [
+          { team: 'White' },
           {
             id: 1,
-            picture: '',
-            username: '',
+            picture: 'assets/users/Vince.jpg',
+            username: 'Vince',
           },
           {
             id: 2,
