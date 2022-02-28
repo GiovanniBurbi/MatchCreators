@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import PlayersCardsGroup from './PlayersCardsGroup.vue';
 
@@ -32,47 +31,18 @@ export default {
       type: Boolean,
       required: true,
     },
-  },
-
-  computed: {
-    ...mapGetters({ getUser: 'auth/getUser' }),
     teamWhite: {
-      get() {
-        return this.$store.state.matches.teamWhite;
-      },
+      type: Array,
+      required: true,
     },
     teamBlack: {
-      get() {
-        return this.$store.state.matches.teamBlack;
-      },
+      type: Array,
+      required: true,
     },
-  },
-
-  methods: {
-    ...mapMutations({ addPlayer: 'matches/addPlayer' }),
   },
 
   components: {
     PlayersCardsGroup,
-  },
-
-  mounted() {
-    const user = this.getUser;
-    let pos = null;
-    if (user.position === 'Goalkeeper') {
-      pos = 1;
-    } else if (user.position === 'Defender') {
-      pos = 2;
-    } else pos = 4;
-    const payload = {
-      spot: pos,
-      isWhite: this.isWhite,
-      info: {
-        username: user.username,
-        picture: user.picture,
-      },
-    };
-    this.addPlayer(payload);
   },
 
   mixins: [BreakpointsCond],

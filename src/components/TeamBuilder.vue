@@ -52,12 +52,13 @@
     </v-row>
 
     <v-row justify="center">
-      <field :isWhite="!black"/>
+      <field :isWhite="!black" :teamBlack="teamBlack" :teamWhite="teamWhite"/>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import Field from './Field.vue';
 
@@ -71,6 +72,20 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters({ getUser: 'auth/getUser' }),
+    teamWhite: {
+      get() {
+        return this.$store.state.matches.teamWhite;
+      },
+    },
+    teamBlack: {
+      get() {
+        return this.$store.state.matches.teamBlack;
+      },
+    },
+  },
+
   watch: {
     windowWidth(newVal) {
       this.windowWidth = newVal;
@@ -82,6 +97,23 @@ export default {
   },
 
   mounted() {
+    const user = this.getUser;
+    let pos = null;
+    if (user.position === 'Goalkeeper') {
+      pos = 1;
+    } else if (user.position === 'Defender') {
+      pos = 2;
+    } else pos = 4;
+    const payload = {
+      spot: pos,
+      isWhite: this.isWhite,
+      info: {
+        username: user.username,
+        picture: user.picture,
+      },
+    };
+    this.addPlayer(payload);
+
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize);
     });
@@ -95,6 +127,7 @@ export default {
     onResize() {
       this.windowWidth = window.innerWidth;
     },
+    ...mapMutations({ addPlayer: 'matches/addPlayer' }),
   },
 
   mixins: [BreakpointsCond],
