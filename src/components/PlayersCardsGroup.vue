@@ -2,15 +2,15 @@
   <v-container fluid class="formation">
 
     <div class="row-1">
-      <player-card :position="'Forward'" />
-      <player-card :position="'Forward'" />
+      <player-card :player="user" :white="teamWhite" :position="'Forward'" />
+      <player-card :white="teamWhite" :position="'Forward'" />
     </div>
     <div class="row-2">
-      <player-card :position="'Defender'" />
-      <player-card :position="'Defender'" />
+      <player-card :white="teamWhite" :position="'Defender'" />
+      <player-card :white="teamWhite" :position="'Defender'" />
     </div>
     <div class="row-3">
-      <player-card :position="'Goalkeeper'" />
+      <player-card :white="teamWhite" :position="'Goalkeeper'" />
     </div>
 
   </v-container>
@@ -23,8 +23,21 @@ import PlayerCard from './PlayerCard.vue';
 export default {
   name: 'PlayersCardsGroup',
 
+  data() {
+    return {
+      user: 'Carl',
+    };
+  },
+
   components: {
     PlayerCard,
+  },
+
+  props: {
+    teamWhite: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   mixins: [BreakpointsCond],

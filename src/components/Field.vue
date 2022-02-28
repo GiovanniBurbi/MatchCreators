@@ -7,7 +7,7 @@
     :class="xsOnly ? 'field-small' :'field'"
     src="../assets/teamCreator/pitch.png"
     >
-      <players-cards-group />
+      <players-cards-group :teamWhite="teamWhite"/>
     </v-img>
   </v-row>
 
@@ -34,8 +34,69 @@ export default {
           defenders: 3,
           forwards: 4,
         },
+        blackTeam: [
+          {
+            id: 1,
+            picture: '',
+            username: '',
+          },
+          {
+            id: 2,
+            picture: '',
+            username: '',
+          },
+          {
+            id: 3,
+            picture: '',
+            username: '',
+          },
+          {
+            id: 4,
+            picture: '',
+            username: '',
+          },
+          {
+            id: 5,
+            picture: '',
+            username: '',
+          },
+        ],
+        whiteTeam: [
+          {
+            id: 1,
+            picture: '',
+            username: '',
+          },
+          {
+            id: 2,
+            picture: '',
+            username: '',
+          },
+          {
+            id: 3,
+            picture: '',
+            username: '',
+          },
+          {
+            id: 4,
+            picture: '',
+            username: '',
+          },
+          {
+            id: 5,
+            picture: '',
+            username: '',
+          },
+        ],
       },
     };
+  },
+
+  props: {
+    teamWhite: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   components: {

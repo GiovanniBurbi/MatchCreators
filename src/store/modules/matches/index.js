@@ -15,7 +15,7 @@ export default {
       msg: null,
     },
     currentRemoved: null,
-    details: [],
+    details: ['2001-01-01', 'test', 'test'],
   },
 
   mutations: {

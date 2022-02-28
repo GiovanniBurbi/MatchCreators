@@ -9,33 +9,41 @@
 
     <div :class="xsOnly ? 'overCard-small' : 'overCard'">
 
-      <!-- <v-container fill-height v-if="player">
-
-        <v-avatar rounded size="100" class="pt-5">
-          <img src="../assets/Carl.jpg">
-          <img src="{{player.picture}}"> ???
-        </v-avatar>
+      <v-container fill-height v-if="player">
 
         <v-row justify="center">
-          <h1 :class="['text-center text-h5 font-weight-light',
-          white ? 'black--text' : 'white--text']" >Joseph</h1>
-          <h1 class="white--text text-center text-h5
-          font-weight-light" >{{player.username}}</h1>
+          <v-avatar
+          rounded
+          :size="xsOnly ? 50 : 70"
+          :class="xsOnly ? 'mt-1' : 'mt-3'"
+          >
+            <img :src="require(`@/assets/users/${player}.jpg`)" >
+          </v-avatar>
+        </v-row>
+
+        <v-row justify="center">
+          <h1
+          :class="['text-center font-weight-regular',
+          xsOnly ? 'text-caption' : 'text-h6 pb-2',
+          white ? '' : 'white--text']"
+          >
+            {{ player }}
+          </h1>
         </v-row>
 
         <v-row justify="center">
           <v-icon
-          :class="[white ? null : 'white-icon', 'pb-2']"
-          :size="position === 'Forward' ? 50 : 45"
+          :class="[white ? null : 'white-icon',
+          xsOnly ? 'pb-1' : 'pb-4']"
+          :size="iconSize"
           >
-            $forward-icon
+            {{ positionIcon }}
           </v-icon>
         </v-row>
 
-      </v-container> -->
+      </v-container>
 
-      <!-- <v-container fill-height v-else> -->
-      <v-container fill-height>
+      <v-container fill-height v-else>
 
         <v-row justify="center" no-gutters
         :class="xsOnly ? '' : 'mt-1'">
@@ -48,7 +56,8 @@
 
         <v-row justify="center">
           <v-icon
-          :class="white ? null : 'white-icon'"
+          :class="[white ? null : 'white-icon',
+          xsOnly ? 'pt-1' : '']"
           :size="iconSize"
           >
             {{ positionIcon }}
@@ -89,10 +98,10 @@ export default {
 
     iconSize() {
       if (this.position === 'Forward') {
-        if (this.$vuetify.breakpoint.xsOnly) return 26;
+        if (this.$vuetify.breakpoint.xsOnly) return 24;
         return 40;
       }
-      if (this.$vuetify.breakpoint.xsOnly) return 24;
+      if (this.$vuetify.breakpoint.xsOnly) return 22;
       return 36;
     },
   },
@@ -104,9 +113,9 @@ export default {
     position: {
       type: String,
     },
-    /* player: {
-      type: Object,
-    }, */
+    player: {
+      type: String,
+    },
   },
 
   mixins: [BreakpointsCond],
@@ -132,7 +141,7 @@ export default {
 }
 .overCard-small {
   position: absolute;
-  width: 70px;
+  width: 80px;
   height: 110px;
 }
 .white-icon {
