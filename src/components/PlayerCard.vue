@@ -35,7 +35,7 @@
         <v-row justify="center">
           <v-icon
           :class="[white ? null : 'white-icon',
-          xsOnly ? 'pb-1' : 'pb-4']"
+          xsOnly ? 'pb-1' : 'pb-6']"
           :size="iconSize"
           >
             {{ positionIcon }}

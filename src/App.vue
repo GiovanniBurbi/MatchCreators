@@ -7,7 +7,7 @@
     <v-snackbar
      v-model="snackbar"
      top color="green"
-     :timeout="4000"
+     :timeout="2000"
      style="z-index: 9000"
     >
       <v-icon
