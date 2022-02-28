@@ -7,6 +7,8 @@ import PlayerIcon from '../icons/PlayerIcon.vue';
 import GoalkeeperIcon from '../icons/GoalkeeperIcon.vue';
 import DefenderIcon from '../icons/DefenderIcon.vue';
 import ForwardIcon from '../icons/ForwardIcon.vue';
+import FinderIcon from '../icons/FinderIcon.vue';
+import CreatorIcon from '../icons/CreatorIcon.vue';
 
 Vue.use(Vuetify);
 
@@ -30,6 +32,12 @@ export default new Vuetify({
       },
       'forward-icon': {
         component: ForwardIcon,
+      },
+      'finder-icon': {
+        component: FinderIcon,
+      },
+      'creator-icon': {
+        component: CreatorIcon,
       },
     },
     iconfont: 'mdi' || 'fa',
