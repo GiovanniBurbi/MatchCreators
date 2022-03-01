@@ -53,6 +53,7 @@
             <v-btn
             color="green darken-4"
             dark
+            :disabled="nPlayers === 0"
             >
               Create the match
             </v-btn>
@@ -67,6 +68,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import Stepper from '../components/Stepper.vue';
 import MatchCreationForm from '../components/MatchCreationForm.vue';
@@ -87,6 +89,10 @@ export default {
     return {
       step: 2,
     };
+  },
+
+  computed: {
+    ...mapGetters({ nPlayers: 'matches/getNumPlayers' }),
   },
 
   mixins: [

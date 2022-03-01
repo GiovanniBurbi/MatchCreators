@@ -184,5 +184,21 @@ export default {
     getDetails(state) {
       return state.details;
     },
+
+    getNumPlayers(state) {
+      let count = 0;
+      const teamSize = 5;
+      for (let i = 1; i < teamSize; i += 1) {
+        if (!(state.teamBlack[i].user && Object.keys(state.teamBlack[i].user).length === 0
+        && state.teamBlack[i].user.constructor === Object)) {
+          count += 1;
+        }
+        if (!(state.teamWhite[i].user && Object.keys(state.teamWhite[i].user).length === 0
+        && state.teamWhite[i].user.constructor === Object)) {
+          count += 1;
+        }
+      }
+      return count;
+    },
   },
 };
