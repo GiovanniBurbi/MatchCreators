@@ -54,7 +54,7 @@
             color="green darken-4"
             dark
             :disabled="nPlayers === 0 || loading"
-            @click="createMatch(), loader = 'loading'"
+            @click="createMatch()"
             :loading="loading"
             >
               Create the match
@@ -90,13 +90,12 @@ export default {
   data() {
     return {
       step: 2,
-      loader: null,
-      loading: false,
     };
   },
 
   computed: {
     ...mapGetters({ nPlayers: 'matches/getNumPlayers' }),
+    ...mapGetters({ loading: 'matches/getLoading' }),
   },
 
   methods: {
@@ -104,18 +103,6 @@ export default {
 
     createMatch() {
       this.newMatch();
-    },
-  },
-
-  watch: {
-    loader() {
-      const l = this.loader;
-      this[l] = !this[l];
-
-      // eslint-disable-next-line no-return-assign
-      setTimeout(() => (this[l] = false), 1000);
-
-      this.loader = null;
     },
   },
 

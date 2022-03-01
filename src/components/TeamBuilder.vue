@@ -74,16 +74,8 @@ export default {
 
   computed: {
     ...mapGetters({ getUser: 'auth/getUser' }),
-    teamWhite: {
-      get() {
-        return this.$store.state.matches.teamWhite;
-      },
-    },
-    teamBlack: {
-      get() {
-        return this.$store.state.matches.teamBlack;
-      },
-    },
+    ...mapGetters({ teamBlack: 'matches/getTeamBlack' }),
+    ...mapGetters({ teamWhite: 'matches/getTeamWhite' }),
   },
 
   watch: {

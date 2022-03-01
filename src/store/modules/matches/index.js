@@ -213,5 +213,17 @@ export default {
     getNumPlayers(state) {
       return MatchService.countParticipants(state.teamBlack, state.teamWhite);
     },
+
+    getTeamBlack(state) {
+      return state.teamBlack;
+    },
+
+    getTeamWhite(state) {
+      return state.teamWhite;
+    },
+
+    getLoading(state) {
+      return state.loading;
+    },
   },
 };
