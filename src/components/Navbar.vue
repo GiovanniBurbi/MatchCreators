@@ -17,10 +17,12 @@
       </v-icon>
     </v-app-bar-nav-icon>
 
-    <v-app-bar-title class="pl-1 text-uppercase hidden-sm-and-down">
-      <h1 class="font-weight-bold d-inline-flex title">Match</h1>
-      <h1 class="font-weight-light d-inline-flex title">Creators</h1>
-    </v-app-bar-title>
+    <v-slide-x-transition hide-on-leave>
+      <v-app-bar-title v-if="mdAndUp" class="pl-1 text-uppercase">
+        <h1 class="font-weight-bold d-inline-flex title">Match</h1>
+        <h1 class="font-weight-light d-inline-flex title">Creators</h1>
+      </v-app-bar-title>
+    </v-slide-x-transition>
 
     <v-spacer v-if="mdAndUp"></v-spacer>
 
@@ -36,8 +38,15 @@
      text rounded left
      style="text-shadow: 1px 1px rgba(63, 81, 181, 0.2);"
     >
-      <v-icon class="icon-light" size=30> $player-icon </v-icon>
-      <span class="hidden-sm-and-down">My matches</span>
+      <v-icon
+      class="icon-light"
+      :size="xsOnly ? 32 : 30"
+      >
+        $player-icon
+      </v-icon>
+      <v-slide-x-reverse-transition>
+        <span v-if="mdAndUp">My matches</span>
+      </v-slide-x-reverse-transition>
     </v-btn>
 
     <v-btn icon>
@@ -51,10 +60,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-/* eslint-disable global-require */
-
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import ModeSwitcher from './ModeSwitcher.vue';
+/* eslint-disable global-require */
 
 export default {
   name: 'Navbar',
