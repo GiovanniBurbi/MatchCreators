@@ -47,7 +47,7 @@
 
         <v-icon
         v-if="xsOnly"
-        size="28"
+        size="30"
         :class="['mx-3 icon-switch',
         isFinder ? 'icon-no-select' : 'icon-select white-icon']"
         @click="toggleMode()"

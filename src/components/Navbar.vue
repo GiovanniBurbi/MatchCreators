@@ -36,13 +36,13 @@
      text rounded left
      style="text-shadow: 1px 1px rgba(63, 81, 181, 0.2);"
     >
-      <v-icon class="icon-light" size=37> $player-icon </v-icon>
+      <v-icon class="icon-light" size=30> $player-icon </v-icon>
       <span class="hidden-sm-and-down">My matches</span>
     </v-btn>
 
     <v-btn icon>
       <v-avatar size=40>
-        <v-img src="../assets/users/match.jpg" alt="User"></v-img>
+        <v-img :src="getAvatarPicture" alt="User"></v-img>
       </v-avatar>
     </v-btn>
 
@@ -50,6 +50,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+/* eslint-disable global-require */
+
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import ModeSwitcher from './ModeSwitcher.vue';
 
@@ -65,6 +68,14 @@ export default {
       darkMode: false,
       toggleSwitch: false,
     };
+  },
+
+  computed: {
+    ...mapGetters({ user: 'auth/getUser' }),
+    getAvatarPicture() {
+      // eslint-disable-next-line import/no-dynamic-require
+      return require(`../${this.user.picture}`);
+    },
   },
 
   watch: {

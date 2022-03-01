@@ -39,7 +39,7 @@
         <v-row justify="center">
           <h1
           :class="['text-center font-weight-light',
-          xsOnly ? 'text-caption' : 'text-h6 pb-4',
+          xsOnly ? 'text-caption' : 'text-subtitle-1 pb-4',
           white ? '' : 'white--text']"
           >
             {{ player.user.username }}
@@ -107,7 +107,7 @@
 
         <v-row justify="center">
           <v-icon
-          :class="['pt-1', white ? null : 'white-icon']"
+          :class="['pt-0', white ? null : 'white-icon']"
           :size="iconSize"
           >
             {{ positionIcon }}

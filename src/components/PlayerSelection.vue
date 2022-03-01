@@ -101,7 +101,7 @@
         </span>
         <v-icon
         :size="xsOnly ? 24 : 20"
-        right
+        :right="!xsOnly"
         :color="selection ? 'white' : ''"
         >
           mdi-email-outline
