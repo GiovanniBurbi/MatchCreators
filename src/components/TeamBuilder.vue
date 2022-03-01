@@ -107,10 +107,7 @@ export default {
     const payload = {
       spot: pos,
       isWhite: this.isWhite,
-      info: {
-        username: user.username,
-        picture: user.picture,
-      },
+      user,
     };
     this.addPlayer(payload);
 

@@ -28,7 +28,7 @@
           :class="['selector', selection === user.id ? 'selected' : '']">
 
             <v-col class="d-flex justify-center">
-              <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize">
+              <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize" class="avatar-contrast">
                 <img :src="getPicture(user.picture)">
               </v-avatar>
             </v-col>
@@ -143,6 +143,7 @@ export default {
 
   computed: {
     ...mapGetters({ getUsers: 'users/getUsers' }),
+    ...mapGetters({ validateAddition: 'matches/getAddValidation' }),
 
     posIconSize() {
       if (this.$vuetify.breakpoint.name === 'xs') {
@@ -192,15 +193,17 @@ export default {
 
     sendInvite() {
       const userSelected = this.users[this.selection - 1];
-      const payload = {
-        spot: this.cardId,
-        isWhite: this.white,
-        info: {
-          username: userSelected.username,
-          picture: userSelected.picture,
-        },
-      };
-      this.invitePlayer(payload);
+      if (this.validateAddition(userSelected)) {
+        const payload = {
+          spot: this.cardId,
+          isWhite: this.white,
+          info: {
+            username: userSelected.username,
+            picture: userSelected.picture,
+          },
+        };
+        this.invitePlayer(payload);
+      }
     },
   },
 
@@ -271,6 +274,9 @@ export default {
 }
 .selected .white-icon {
   opacity: 100%;
+}
+.avatar-contrast {
+  filter: contrast(130%) brightness(70%) saturate(90%);
 }
 
 @media screen and (max-width: 336px) {

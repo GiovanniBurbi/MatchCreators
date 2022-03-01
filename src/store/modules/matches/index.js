@@ -20,56 +20,46 @@ export default {
       { team: 'Black' },
       {
         id: 1,
-        username: '',
-        picture: '',
+        user: {},
       },
       {
         id: 2,
-        username: '',
-        picture: '',
+        user: {},
       },
       {
         id: 3,
-        username: '',
-        picture: '',
+        user: {},
       },
       {
         id: 4,
-        username: '',
-        picture: '',
+        user: {},
       },
       {
         id: 5,
-        username: '',
-        picture: '',
+        user: {},
       },
     ],
     teamWhite: [
       { team: 'White' },
       {
         id: 1,
-        username: '',
-        picture: '',
+        user: {},
       },
       {
         id: 2,
-        username: '',
-        picture: '',
+        user: {},
       },
       {
         id: 3,
-        username: '',
-        picture: '',
+        user: {},
       },
       {
         id: 4,
-        username: '',
-        picture: '',
+        user: {},
       },
       {
         id: 5,
-        username: '',
-        picture: '',
+        user: {},
       },
     ],
   },
@@ -119,21 +109,17 @@ export default {
 
     addPlayer(state, payload) {
       if (payload.isWhite) {
-        state.teamWhite[payload.spot].username = payload.info.username;
-        state.teamWhite[payload.spot].picture = payload.info.picture;
+        state.teamWhite[payload.spot].user = payload.user;
       } else {
-        state.teamBlack[payload.spot].username = payload.info.username;
-        state.teamBlack[payload.spot].picture = payload.info.picture;
+        state.teamBlack[payload.spot].user = payload.user;
       }
     },
 
     removePlayer(state, payload) {
       if (payload.isWhite) {
-        state.teamWhite[payload.spot].username = '';
-        state.teamWhite[payload.spot].picture = '';
+        state.teamWhite[payload.spot].user = {};
       } else {
-        state.teamBlack[payload.spot].username = '';
-        state.teamBlack[payload.spot].picture = '';
+        state.teamBlack[payload.spot].user = {};
       }
     },
   },
@@ -193,6 +179,11 @@ export default {
 
     getDetails(state) {
       return state.details;
+    },
+
+    getInviteValidation(state) {
+      console.log(state);
+      return false;
     },
   },
 };

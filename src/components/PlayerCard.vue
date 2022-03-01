@@ -9,7 +9,7 @@
 
     <div :class="xsOnly ? 'overCard-small' : 'overCard'">
 
-      <v-container fill-height v-if="player.username !== ''">
+      <v-container fill-height v-if="spotTaken">
 
         <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
           <v-btn
@@ -24,12 +24,12 @@
           </v-btn>
         </div>
 
-        <v-row justify="center" class="">
+        <v-row justify="center">
           <v-avatar
           :width="xsOnly ? 60 : 80"
           rounded="sm"
           :height="xsOnly ? 51 : 71"
-          :class="xsOnly ? 'mt-1' : 'mt-4'"
+          :class="[xsOnly ? 'mt-1' : 'mt-4', 'avatar-contrast']"
           >
             <img :src="getPicture" >
           </v-avatar>
@@ -41,7 +41,7 @@
           xsOnly ? 'text-caption' : 'text-h6 pb-4',
           white ? '' : 'white--text']"
           >
-            {{ player.username }}
+            {{ player.user.username }}
           </h1>
         </v-row>
 
@@ -146,7 +146,7 @@ export default {
 
     getPicture() {
       // eslint-disable-next-line import/no-dynamic-require
-      return require(`../${this.player.picture}`);
+      return require(`../${this.player.user.picture}`);
     },
 
     positionIcon() {
@@ -167,6 +167,12 @@ export default {
       }
       if (this.$vuetify.breakpoint.xsOnly) return 22;
       return 30;
+    },
+
+    spotTaken() {
+      if (Object.keys(this.player.user).length === 0) {
+        return false;
+      } return true;
     },
   },
 
@@ -248,5 +254,8 @@ export default {
   top: 70%;
   width: 70%;
   left: 15%;
+}
+.avatar-contrast {
+  filter: contrast(130%) brightness(70%) saturate(90%);
 }
 </style>
