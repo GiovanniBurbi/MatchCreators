@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import auth from './modules/auth/index';
 import positionInputField from './modules/positionInputField/index';
 import matches from './modules/matches/index';
+import users from './modules/users/index';
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     posInputField: positionInputField,
     auth,
     matches,
+    users,
   },
   getters: {
   },

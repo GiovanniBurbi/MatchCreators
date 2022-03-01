@@ -32,4 +32,13 @@ export default {
     });
     return promise;
   },
+
+  getUsers() {
+    const promise = new Promise((resolve) => {
+      window.setTimeout(() => {
+        resolve(apiClient.get('/users'));
+      }, 500);
+    });
+    return promise;
+  },
 };

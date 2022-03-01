@@ -77,13 +77,23 @@
           outlined
           :x-small="xsOnly"
           :dark="!white"
+          @click.stop="dialog = true"
           >
 
-            <v-icon :size="xsOnly ? 26 : 38">
+            <v-icon
+            :size="xsOnly ? 26 : 38"
+            >
               mdi-plus
             </v-icon>
 
           </v-btn>
+          <v-dialog
+          v-model="dialog"
+          max-width="400"
+          scrollable
+          >
+            <player-selection />
+          </v-dialog>
         </v-row>
 
         <v-row justify="center">
@@ -105,10 +115,21 @@
 <script>
 import { mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
+import PlayerSelection from './PlayerSelection.vue';
 
 /* eslint-disable global-require */
 export default {
   name: 'PlayerCard',
+
+  data() {
+    return {
+      dialog: false,
+    };
+  },
+
+  components: {
+    PlayerSelection,
+  },
 
   computed: {
     getCard() {

@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import Field from './Field.vue';
 
@@ -123,11 +123,16 @@ export default {
     window.removeEventListener('resize', this.onResize);
   },
 
+  created() {
+    this.getAllUsers();
+  },
+
   methods: {
     onResize() {
       this.windowWidth = window.innerWidth;
     },
     ...mapMutations({ addPlayer: 'matches/addPlayer' }),
+    ...mapActions({ getAllUsers: 'users/getAllUsers' }),
   },
 
   mixins: [BreakpointsCond],
