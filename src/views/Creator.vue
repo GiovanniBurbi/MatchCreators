@@ -53,7 +53,9 @@
             <v-btn
             color="green darken-4"
             dark
-            :disabled="nPlayers === 0"
+            :disabled="nPlayers === 0 || loading"
+            @click="createMatch(), loader = 'loading'"
+            :loading="loading"
             >
               Create the match
             </v-btn>
@@ -68,7 +70,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import Stepper from '../components/Stepper.vue';
 import MatchCreationForm from '../components/MatchCreationForm.vue';
@@ -88,11 +90,33 @@ export default {
   data() {
     return {
       step: 2,
+      loader: null,
+      loading: false,
     };
   },
 
   computed: {
     ...mapGetters({ nPlayers: 'matches/getNumPlayers' }),
+  },
+
+  methods: {
+    ...mapActions({ newMatch: 'matches/createMatch' }),
+
+    createMatch() {
+      this.newMatch();
+    },
+  },
+
+  watch: {
+    loader() {
+      const l = this.loader;
+      this[l] = !this[l];
+
+      // eslint-disable-next-line no-return-assign
+      setTimeout(() => (this[l] = false), 1000);
+
+      this.loader = null;
+    },
   },
 
   mixins: [

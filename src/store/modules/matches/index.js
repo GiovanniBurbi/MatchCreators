@@ -15,7 +15,8 @@ export default {
       msg: null,
     },
     currentRemoved: null,
-    details: ['2001-01-01', 'test', 'test'],
+    loading: false,
+    details: ['2001-01-01', '10:00 - 11:00', 'Albereta'],
     teamBlack: [
       { team: 'Black' },
       {
@@ -122,6 +123,19 @@ export default {
         state.teamBlack[payload.spot].user = {};
       }
     },
+
+    clearMatchTmp(state) {
+      state.details = [];
+      const { teamSize } = MatchService;
+      for (let i = 1; i <= teamSize; i += 1) {
+        state.teamBlack[i].user = {};
+        state.teamWhite[i].user = {};
+      }
+    },
+
+    setLoading(state, isLoading) {
+      state.loading = isLoading;
+    },
   },
 
   actions: {
@@ -150,13 +164,24 @@ export default {
       commit('addFilter', filter);
       dispatch('addFilterMatches', filter);
     },
+
     removeFilter({ commit, dispatch }, indexFilter) {
       commit('deleteFilter', indexFilter);
       dispatch('multipleFiltersMatch');
     },
+
     async inviteValidation({ state }, playerId) {
       const res = await MatchService.validateNewPlayer(playerId, state.teamWhite, state.teamBlack);
       return res;
+    },
+
+    async createMatch({ state, commit }) {
+      commit('setLoading', true);
+      await MatchService.createMatch(state.details, state.teamBlack, state.teamWhite)
+        .then(() => {
+          commit('clearMatchTmp');
+          commit('setLoading', false);
+        });
     },
   },
 
@@ -186,19 +211,7 @@ export default {
     },
 
     getNumPlayers(state) {
-      let count = 0;
-      const teamSize = 5;
-      for (let i = 1; i <= teamSize; i += 1) {
-        if (!(state.teamBlack[i].user && Object.keys(state.teamBlack[i].user).length === 0
-        && state.teamBlack[i].user.constructor === Object)) {
-          count += 1;
-        }
-        if (!(state.teamWhite[i].user && Object.keys(state.teamWhite[i].user).length === 0
-        && state.teamWhite[i].user.constructor === Object)) {
-          count += 1;
-        }
-      }
-      return count;
+      return MatchService.countParticipants(state.teamBlack, state.teamWhite);
     },
   },
 };

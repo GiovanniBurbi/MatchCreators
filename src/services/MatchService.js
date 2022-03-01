@@ -10,6 +10,8 @@ const apiClient = axios.create({
 });
 
 export default {
+  teamSize: 5,
+
   /* fetch all matches from fake db, emulated a delay to get data */
   fetchMatches() {
     const promise = new Promise((resolve) => {
@@ -94,13 +96,75 @@ export default {
 
   validateNewPlayer(playerId, teamWhite, teamBlack) {
     let duplicate = false;
-    const teamSize = 5;
-    for (let i = 1; i <= teamSize; i += 1) {
+    for (let i = 1; i <= this.teamSize; i += 1) {
       if (teamBlack[i].user.id === playerId || teamWhite[i].user.id === playerId) {
         duplicate = true;
         break;
       }
     }
     return !duplicate;
+  },
+
+  countParticipants(teamBlack, teamWhite) {
+    let count = 0;
+    for (let i = 1; i <= this.teamSize; i += 1) {
+      if (!(teamBlack[i].user && Object.keys(teamBlack[i].user).length === 0
+      && teamBlack[i].user.constructor === Object)) {
+        count += 1;
+      }
+      if (!(teamWhite[i].user && Object.keys(teamWhite[i].user).length === 0
+      && teamWhite[i].user.constructor === Object)) {
+        count += 1;
+      }
+    }
+    return count;
+  },
+
+  createMatch(details, teamBlack, teamWhite) {
+    const promise = new Promise((resolve) => {
+      window.setTimeout(() => {
+        const date = details[0];
+        const location = details[2];
+        const times = details[1].split(' - ');
+        console.log(date, location, times, teamBlack, teamWhite);
+        const positions = {
+          goalkeepers: 0,
+          defenders: 0,
+          forwards: 0,
+        };
+        for (let i = 1; i <= this.teamSize; i += 1) {
+          if (!(teamBlack[i].user && Object.keys(teamBlack[i].user).length === 0
+          && teamBlack[i].user.constructor === Object)) {
+            positions[this.extractPositions(i)] += 1;
+          }
+          if (!(teamWhite[i].user && Object.keys(teamWhite[i].user).length === 0
+          && teamWhite[i].user.constructor === Object)) {
+            positions[this.extractPositions(i)] += 1;
+          }
+        }
+
+        const match = {
+          date,
+          startTime: times[0],
+          endTime: times[1],
+          location,
+          positions,
+          blackTeam: teamBlack,
+          whiteTeam: teamWhite,
+        };
+
+        const matchData = JSON.stringify(match);
+        console.log(matchData);
+        resolve('ciao');
+        /* resolve(apiClient.post('/matches', matchData)); */
+      }, 500);
+    });
+    return promise;
+  },
+
+  extractPositions(index) {
+    if (index === 1) return 'goalkeepers';
+    if (index === 2 || index === 3) return 'defenders';
+    return 'forwards';
   },
 };

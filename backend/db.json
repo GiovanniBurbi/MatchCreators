@@ -113,59 +113,53 @@
         "forwards": 4
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -181,59 +175,53 @@
         "forwards": 2
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -249,59 +237,53 @@
         "forwards": 4
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -317,59 +299,53 @@
         "forwards": 4
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -385,59 +361,53 @@
         "forwards": 3
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -453,59 +423,53 @@
         "forwards": 3
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -521,59 +485,53 @@
         "forwards": 4
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -589,59 +547,53 @@
         "forwards": 3
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -657,59 +609,53 @@
         "forwards": 4
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -725,59 +671,53 @@
         "forwards": 3
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -793,59 +733,53 @@
         "forwards": 4
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -861,59 +795,53 @@
         "forwards": 4
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -929,59 +857,53 @@
         "forwards": 3
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -997,59 +919,53 @@
         "forwards": 4
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     },
@@ -1065,59 +981,53 @@
         "forwards": 3
       },
       "blackTeam": [
-        { "team": "Black" },
+        {
+          "team": "Black"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ],
       "whiteTeam": [
-        { "team": "White" },
+        {
+          "team": "White"
+        },
         {
           "id": 1,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 2,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 3,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 4,
-          "picture": "",
-          "username": ""
+          "user": {}
         },
         {
           "id": 5,
-          "picture": "",
-          "username": ""
+          "user": {}
         }
       ]
     }
