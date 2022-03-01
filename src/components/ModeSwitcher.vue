@@ -207,6 +207,6 @@ in finder page and creator page */
 .white-icon {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%)
-  hue-rotate(291deg) brightness(122%) contrast(100%) drop-shadow( 2px 2px 1px rgba(0, 0, 0));
+  hue-rotate(291deg) brightness(122%) contrast(100%) drop-shadow( 1px 2px rgba(0, 0, 0));
 }
 </style>
