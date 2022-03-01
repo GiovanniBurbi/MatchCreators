@@ -20,40 +20,47 @@
         justify="center"
         align="center"
         v-for="user in users" :key="user.id"
-        class="selector px-0"
+        class="px-0"
+        @click="select(user.id)"
         >
 
-          <v-col class="d-flex justify-center">
-            <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize">
-              <img :src="getPicture(user.picture)">
-            </v-avatar>
-          </v-col>
+          <div
+          :class="['selector', selection === user.id ? 'selected' : '']">
 
-          <v-col class="d-flex justify-center">
-            <h1
-            :class="['font-weight-medium', xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1']"
-            >
-              {{user.username}}
-            </h1>
-          </v-col>
+            <v-col class="d-flex justify-center">
+              <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize">
+                <img :src="getPicture(user.picture)">
+              </v-avatar>
+            </v-col>
 
-          <v-col class="d-flex justify-center">
-            <h1
-            :class="['font-weight-medium', xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1']"
-            >
-              {{getAge(user.birthday)}}y/o
-            </h1>
-          </v-col>
+            <v-col class="d-flex justify-center">
+              <h1
+              :class="['font-weight-medium',
+              xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1']"
+              >
+                {{user.username}}
+              </h1>
+            </v-col>
 
-          <v-col class="d-flex justify-center">
-            <v-icon
-            :size="windowWidth <= 336 ? '20' : posIconSize"
-            class="white-icon"
-            >
-              {{positionIcon(user.position)}}
-            </v-icon>
-          </v-col>
+            <v-col class="d-flex justify-center">
+              <h1
+              :class="['font-weight-medium',
+              xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1']"
+              >
+                {{getAge(user.birthday)}}y/o
+              </h1>
+            </v-col>
 
+            <v-col class="d-flex justify-center">
+              <v-icon
+              :size="windowWidth <= 336 ? '20' : posIconSize"
+              class="white-icon"
+              >
+                {{positionIcon(user.position)}}
+              </v-icon>
+            </v-col>
+
+          </div>
         </v-row>
 
       </v-container>
@@ -63,9 +70,17 @@
 
     <v-card-actions>
 
+      <v-btn
+      plain
+      @click="back()"
+      >back</v-btn>
+
       <v-spacer />
 
-      <v-btn color="deep-purple darken-2">
+      <v-btn
+      color="deep-purple darken-2"
+      :disabled="!selection"
+      >
         <span class="pl-1">Invite</span>
         <v-icon
         size="20"
@@ -92,6 +107,8 @@ export default {
     return {
       users: [],
       windowWidth: window.innerWidth,
+      classes: [],
+      selection: null,
     };
   },
 
@@ -142,6 +159,16 @@ export default {
     onResize() {
       this.windowWidth = window.innerWidth;
     },
+
+    select(index) {
+      this.selection = index;
+      this.classes.push('selected');
+    },
+
+    back() {
+      this.selection = '';
+      this.$emit('close');
+    },
   },
 
   mounted() {
@@ -168,10 +195,21 @@ export default {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
 }
+.selector {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 16px;
+}
+
 .selector:hover {
   background: #3F51B5;
   cursor: pointer;
-  border-radius: 16px;
+}
+.selected {
+  background: #3F51B5;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 336px) {
