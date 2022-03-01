@@ -92,7 +92,13 @@
           :max-width="xsOnly ? 320 : 400"
           scrollable
           >
-            <player-selection :white="white" :reset="!dialog" />
+
+            <player-selection
+            :white="white"
+            :reset="!dialog"
+            :cardId="player.id"
+            @closeDialog="dialog = false" />
+
           </v-dialog>
         </v-row>
 

@@ -76,6 +76,7 @@
       <v-btn
       color="deep-purple darken-2"
       :disabled="!selection"
+      @click="sendInvite(), $emit('closeDialog')"
       >
         <span
         :class="['pl-1',
@@ -99,7 +100,7 @@
 
 <script>
 /* eslint-disable global-require */
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
@@ -121,6 +122,10 @@ export default {
     },
     white: {
       type: Boolean,
+    },
+    cardId: {
+      type: Number,
+      required: true,
     },
   },
 
@@ -153,6 +158,8 @@ export default {
   },
 
   methods: {
+    ...mapMutations({ invitePlayer: 'matches/addPlayer' }),
+
     getPicture(path) {
       // eslint-disable-next-line import/no-dynamic-require
       return require(`../${path}`);
@@ -181,6 +188,19 @@ export default {
     select(index) {
       this.selection = index;
       this.classes.push('selected');
+    },
+
+    sendInvite() {
+      const userSelected = this.users[this.selection - 1];
+      const payload = {
+        spot: this.cardId,
+        isWhite: this.white,
+        info: {
+          username: userSelected.username,
+          picture: userSelected.picture,
+        },
+      };
+      this.invitePlayer(payload);
     },
   },
 
