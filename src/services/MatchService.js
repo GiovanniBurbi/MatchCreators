@@ -91,4 +91,16 @@ export default {
     });
     return filteredMatches;
   },
+
+  validateNewPlayer(playerId, teamWhite, teamBlack) {
+    let duplicate = false;
+    const teamSize = 5;
+    for (let i = 1; i <= teamSize; i += 1) {
+      if (teamBlack[i].user.id === playerId || teamWhite[i].user.id === playerId) {
+        duplicate = true;
+        break;
+      }
+    }
+    return !duplicate;
+  },
 };

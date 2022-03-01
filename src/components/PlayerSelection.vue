@@ -73,10 +73,22 @@
 
       <v-spacer />
 
+      <v-slide-x-reverse-transition>
+
+        <h1
+        v-if="error"
+        class="text-subtitle-2 red--text pr-2"
+        >
+          Player already present!
+        </h1>
+
+      </v-slide-x-reverse-transition>
+
       <v-btn
       color="deep-purple darken-2"
+      :class="error ? 'shake' : ''"
       :disabled="!selection"
-      @click="sendInvite(), $emit('closeDialog')"
+      @click="sendInvite()"
       >
         <span
         :class="['pl-1',
@@ -100,7 +112,7 @@
 
 <script>
 /* eslint-disable global-require */
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
@@ -112,6 +124,7 @@ export default {
       windowWidth: window.innerWidth,
       classes: [],
       selection: null,
+      error: false,
     };
   },
 
@@ -137,13 +150,13 @@ export default {
     reset(newVal) {
       if (newVal) {
         this.selection = '';
+        this.error = false;
       }
     },
   },
 
   computed: {
     ...mapGetters({ getUsers: 'users/getUsers' }),
-    ...mapGetters({ validateAddition: 'matches/getAddValidation' }),
 
     posIconSize() {
       if (this.$vuetify.breakpoint.name === 'xs') {
@@ -160,6 +173,7 @@ export default {
 
   methods: {
     ...mapMutations({ invitePlayer: 'matches/addPlayer' }),
+    ...mapActions({ validateAddition: 'matches/inviteValidation' }),
 
     getPicture(path) {
       // eslint-disable-next-line import/no-dynamic-require
@@ -189,21 +203,22 @@ export default {
     select(index) {
       this.selection = index;
       this.classes.push('selected');
+      if (this.error) this.error = false;
     },
 
     sendInvite() {
       const userSelected = this.users[this.selection - 1];
-      if (this.validateAddition(userSelected)) {
-        const payload = {
-          spot: this.cardId,
-          isWhite: this.white,
-          info: {
-            username: userSelected.username,
-            picture: userSelected.picture,
-          },
-        };
-        this.invitePlayer(payload);
-      }
+      this.validateAddition(userSelected.id).then((val) => {
+        if (val) {
+          const payload = {
+            spot: this.cardId,
+            isWhite: this.white,
+            user: userSelected,
+          };
+          this.invitePlayer(payload);
+          this.$emit('closeDialog');
+        } else this.error = true;
+      });
     },
   },
 
@@ -278,7 +293,32 @@ export default {
 .avatar-contrast {
   filter: contrast(130%) brightness(70%) saturate(90%);
 }
-
+/* shake on error animation */
+.shake {
+  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  animation-delay: 350ms;
+}
+@keyframes shake {
+  10% {
+    transform: translate3d(-2px, 0, 0);
+  }
+  20% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  40% {
+    transform: translate3d(1px, 0, 0);
+  }
+  50% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  60% {
+    transform: translate3d(1px, 0, 0);
+  }
+}
 @media screen and (max-width: 336px) {
   .x-small {
     font-size: 0.8rem !important;

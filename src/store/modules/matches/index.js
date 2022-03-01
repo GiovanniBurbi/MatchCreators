@@ -154,6 +154,10 @@ export default {
       commit('deleteFilter', indexFilter);
       dispatch('multipleFiltersMatch');
     },
+    async inviteValidation({ state }, playerId) {
+      const res = await MatchService.validateNewPlayer(playerId, state.teamWhite, state.teamBlack);
+      return res;
+    },
   },
 
   getters: {
@@ -179,11 +183,6 @@ export default {
 
     getDetails(state) {
       return state.details;
-    },
-
-    getInviteValidation(state) {
-      console.log(state);
-      return false;
     },
   },
 };
