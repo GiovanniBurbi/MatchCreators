@@ -72,7 +72,7 @@
         no-gutters
         :class="xsOnly ? '' : 'mt-1'"
         >
-          <v-btn
+          <!-- <v-btn
           fab
           outlined
           :x-small="xsOnly"
@@ -86,21 +86,24 @@
               mdi-plus
             </v-icon>
 
-          </v-btn>
-          <v-dialog
+          </v-btn> -->
+          <!-- <v-dialog
           v-model="dialog"
           :max-width="xsOnly ? 320 : 400"
           scrollable
           transition="scale-transition"
-          >
+          > -->
 
-            <player-selection
+            <!-- <player-selection
             :white="white"
             :reset="!dialog"
             :cardId="player.id"
-            @closeDialog="dialog = false" />
+            @closeDialog="dialog = false" /> -->
+            <player-selection
+            :white="white"
+            :cardId="player.id" />
 
-          </v-dialog>
+          <!-- </v-dialog> -->
         </v-row>
 
         <v-row justify="center">
@@ -129,7 +132,7 @@ export default {
 
   data() {
     return {
-      dialog: false,
+      /* dialog: false, */
     };
   },
 
