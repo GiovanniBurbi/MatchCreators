@@ -56,7 +56,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     v-model="start"
-                    label="From"
+                    label="Filter from"
                     prepend-icon="mdi-clock-time-four-outline"
                     readonly
                     v-bind="attrs"

@@ -10,7 +10,7 @@
     >
       <v-icon
       :left="smAndUp"
-      size="22"
+      size="20"
       :class="['icon-white', filterPresent ? 'icon-disabled' : null]"
       >
         $position-icon
@@ -26,9 +26,9 @@
     >
       <v-card>
 
-        <v-card-title class="text-h5 indigo">
+        <v-card-title class="text-h5 indigo pl-3">
           <v-icon
-          size="28"
+          size="24"
           left
           class="icon-white"
           >

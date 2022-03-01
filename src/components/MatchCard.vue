@@ -59,7 +59,7 @@
         class="pl-1 indigo-darken2-icon"
         size="23"
         >
-          $player-icon
+          $position-icon
         </v-icon>
         <h1
         class="text-subtitle-2 font-weight-regular pl-2 black--text"
