@@ -11,8 +11,7 @@
       >
         Create a Match
         <v-icon
-        :class="['white-icon ml-1',
-        xsOnly ? 'pb-2' : 'pb-1']"
+        class="white-icon pb-2"
         :size="lgAndUp ? 50 : 40"
         >
           $creator-icon

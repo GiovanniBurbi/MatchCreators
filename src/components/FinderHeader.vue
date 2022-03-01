@@ -6,7 +6,7 @@
       {'big': lgAndUp}, {'small': xsOnly}]">
         Search a Match
         <v-icon
-        :size="lgAndUp ? 50 : 34"
+        :size="lgAndUp ? 50 : 36"
         class="white-icon pb-3"
         >
           $finder-icon
