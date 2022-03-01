@@ -89,7 +89,7 @@
           </v-btn>
           <v-dialog
           v-model="dialog"
-          max-width="400"
+          :max-width="xsOnly ? 320 : 400"
           scrollable
           >
             <player-selection />

@@ -10,7 +10,10 @@
 
     <v-divider></v-divider>
 
-    <v-card-text class="px-2" style="height: 400px;">
+    <v-card-text
+    class="px-2"
+    :style="xsOnly ? 'height:320px' : 'height: 400px;'"
+    >
       <v-container fluid class="pt-4 pb-0">
 
         <v-row
@@ -19,20 +22,38 @@
         v-for="user in users" :key="user.id"
         class="selector px-0"
         >
+
           <v-col class="d-flex justify-center">
-            <v-avatar size="40">
+            <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize">
               <img :src="getPicture(user.picture)">
             </v-avatar>
           </v-col>
+
           <v-col class="d-flex justify-center">
-            <h1 class="font-weight-medium text-subtitle-1">{{user.username}}</h1>
+            <h1
+            :class="['font-weight-medium', xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1']"
+            >
+              {{user.username}}
+            </h1>
           </v-col>
+
           <v-col class="d-flex justify-center">
-            <h1 class="font-weight-medium text-subtitle-1">{{ getAge(user.birthday) }} y/o</h1>
+            <h1
+            :class="['font-weight-medium', xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1']"
+            >
+              {{getAge(user.birthday)}}y/o
+            </h1>
           </v-col>
+
           <v-col class="d-flex justify-center">
-            <v-icon size="36" class="white-icon">{{ positionIcon(user.position) }}</v-icon>
+            <v-icon
+            :size="windowWidth <= 336 ? '20' : posIconSize"
+            class="white-icon"
+            >
+              {{positionIcon(user.position)}}
+            </v-icon>
           </v-col>
+
         </v-row>
 
       </v-container>
@@ -62,6 +83,7 @@
 <script>
 /* eslint-disable global-require */
 import { mapGetters } from 'vuex';
+import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'PlayerSelection',
@@ -69,11 +91,30 @@ export default {
   data() {
     return {
       users: [],
+      windowWidth: window.innerWidth,
     };
+  },
+
+  watch: {
+    windowWidth(newVal) {
+      this.windowWidth = newVal;
+    },
   },
 
   computed: {
     ...mapGetters({ getUsers: 'users/getUsers' }),
+
+    posIconSize() {
+      if (this.$vuetify.breakpoint.name === 'xs') {
+        return 30;
+      } return 36;
+    },
+
+    avatarSize() {
+      if (this.$vuetify.breakpoint.name === 'xs') {
+        return 36;
+      } return 40;
+    },
   },
 
   methods: {
@@ -97,11 +138,27 @@ export default {
       const ageDate = new Date(ageDiffMs);
       return Math.abs(ageDate.getUTCFullYear() - 1970);
     },
+
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
   },
 
   created() {
     this.users = this.getUsers;
   },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
+  },
+
+  mixins: [BreakpointsCond],
 };
 
 </script>
@@ -115,5 +172,17 @@ export default {
   background: #3F51B5;
   cursor: pointer;
   border-radius: 16px;
+}
+
+@media screen and (max-width: 336px) {
+  .x-small {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media screen and (max-width: 296px){
+  .x-small {
+    font-size: 0.65rem !important;
+  }
 }
 </style>
