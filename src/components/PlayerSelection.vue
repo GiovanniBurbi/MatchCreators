@@ -1,5 +1,5 @@
 <template>
-  <v-card dark>
+  <v-card :dark="!white">
     <v-card-title class="deep-purple darken-3">
       <h1
       class="text-h5 font-weight-bold white--text"
@@ -35,8 +35,9 @@
 
             <v-col class="d-flex justify-center">
               <h1
-              :class="['font-weight-medium',
-              xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1']"
+              :class="[
+              xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
+              white ? 'black-text font-weight-medium' : 'font-weight-medium']"
               >
                 {{user.username}}
               </h1>
@@ -44,8 +45,9 @@
 
             <v-col class="d-flex justify-center">
               <h1
-              :class="['font-weight-medium',
-              xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1']"
+              :class="[
+              xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
+              white ? 'black-text font-weight-medium' : 'font-weight-medium']"
               >
                 {{getAge(user.birthday)}}y/o
               </h1>
@@ -54,12 +56,11 @@
             <v-col class="d-flex justify-center">
               <v-icon
               :size="windowWidth <= 336 ? '20' : posIconSize"
-              class="white-icon"
+              :class="white ? 'posIcon grey-icon' : 'white-icon'"
               >
                 {{positionIcon(user.position)}}
               </v-icon>
             </v-col>
-
           </div>
         </v-row>
 
@@ -76,10 +77,16 @@
       color="deep-purple darken-2"
       :disabled="!selection"
       >
-        <span class="pl-1">Invite</span>
+        <span
+        :class="['pl-1',
+        selection ? 'white--text' : '']"
+        >
+          Invite
+        </span>
         <v-icon
         size="20"
         right
+        :color="selection ? 'white' : ''"
         >
           mdi-email-outline
         </v-icon>
@@ -111,6 +118,9 @@ export default {
     reset: {
       type: Boolean,
       required: true,
+    },
+    white: {
+      type: Boolean,
     },
   },
 
@@ -197,22 +207,50 @@ export default {
 .white-icon {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
+  opacity: 50%;
+}
+.grey-icon {
+  /* grey darken-1 */
+  filter: invert(49%) sepia(0%) saturate(283%) hue-rotate(143deg) brightness(93%) contrast(92%);
 }
 .selector {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   border-radius: 16px;
 }
-
+.selector::before {
+  content: "";
+  position:absolute;
+  bottom: 0;
+  width: 90%;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
 .selector:hover {
   background: #3F51B5;
   cursor: pointer;
+  color: white !important;
+}
+.selector:hover .posIcon {
+  /* white */
+  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
+}
+.selector:hover .white-icon {
+  opacity: 100%;
 }
 .selected {
   background: #3F51B5;
   pointer-events: none;
+  color: white !important;
+}
+.selected .posIcon {
+  /* white */
+  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
+}
+.selected .white-icon {
+  opacity: 100%;
 }
 
 @media screen and (max-width: 336px) {

@@ -92,7 +92,7 @@
           :max-width="xsOnly ? 320 : 400"
           scrollable
           >
-            <player-selection :reset="!dialog" />
+            <player-selection :white="white" :reset="!dialog" />
           </v-dialog>
         </v-row>
 
