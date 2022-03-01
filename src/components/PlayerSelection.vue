@@ -77,27 +77,30 @@
 
         <h1
         v-if="error"
-        class="text-subtitle-2 red--text pr-2"
+        :class="['red--text pr-2',
+        xsOnly ? 'text-body-2' : 'text-subtitle-2']"
         >
-          Player already present!
+          Player already present
         </h1>
 
       </v-slide-x-reverse-transition>
 
       <v-btn
       color="deep-purple darken-2"
+      :small="xsOnly"
       :class="error ? 'shake' : ''"
       :disabled="!selection"
       @click="sendInvite()"
       >
         <span
+        v-if="!xsOnly"
         :class="['pl-1',
         selection ? 'white--text' : '']"
         >
           Invite
         </span>
         <v-icon
-        size="20"
+        :size="xsOnly ? 24 : 20"
         right
         :color="selection ? 'white' : ''"
         >
@@ -301,10 +304,10 @@ export default {
 }
 @keyframes shake {
   10% {
-    transform: translate3d(-2px, 0, 0);
+    transform: translate3d(-1px, 0, 0);
   }
   20% {
-    transform: translate3d(2px, 0, 0);
+    transform: translate3d(1px, 0, 0);
   }
   30% {
     transform: translate3d(-1px, 0, 0);

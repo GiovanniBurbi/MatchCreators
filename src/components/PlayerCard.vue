@@ -91,6 +91,7 @@
           v-model="dialog"
           :max-width="xsOnly ? 320 : 400"
           scrollable
+          transition="scale-transition"
           >
 
             <player-selection
@@ -104,8 +105,7 @@
 
         <v-row justify="center">
           <v-icon
-          :class="[white ? null : 'white-icon',
-          xsOnly ? 'pt-1' : '']"
+          :class="['pt-1', white ? null : 'white-icon']"
           :size="iconSize"
           >
             {{ positionIcon }}
