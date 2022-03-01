@@ -91,9 +91,8 @@
           v-model="dialog"
           :max-width="xsOnly ? 320 : 400"
           scrollable
-          persistent
           >
-            <player-selection @close="dialog = false" />
+            <player-selection :reset="!dialog" />
           </v-dialog>
         </v-row>
 

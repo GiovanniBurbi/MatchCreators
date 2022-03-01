@@ -70,11 +70,6 @@
 
     <v-card-actions>
 
-      <v-btn
-      plain
-      @click="back()"
-      >back</v-btn>
-
       <v-spacer />
 
       <v-btn
@@ -112,9 +107,22 @@ export default {
     };
   },
 
+  props: {
+    reset: {
+      type: Boolean,
+      required: true,
+    },
+  },
+
   watch: {
     windowWidth(newVal) {
       this.windowWidth = newVal;
+    },
+
+    reset(newVal) {
+      if (newVal) {
+        this.selection = '';
+      }
     },
   },
 
@@ -163,11 +171,6 @@ export default {
     select(index) {
       this.selection = index;
       this.classes.push('selected');
-    },
-
-    back() {
-      this.selection = '';
-      this.$emit('close');
     },
   },
 
