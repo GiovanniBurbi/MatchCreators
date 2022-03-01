@@ -1,142 +1,116 @@
 <template>
-  <v-sheet color="transparent" class="d-flex justify-center">
+  <v-card :dark="!white">
+    <v-card-title class="deep-purple darken-3">
+      <h1
+      class="text-h5 font-weight-bold white--text"
+      >
+        Select a Player
+      </h1>
+    </v-card-title>
 
-    <v-btn
-    fab
-    outlined
-    :x-small="xsOnly"
-    :dark="!white"
-    @click.stop="dialog = true"
+    <v-divider></v-divider>
+
+    <v-card-text
+    class="px-2"
+    :style="xsOnly ? 'height:320px' : 'height: 400px;'"
     >
+      <v-container fluid class="pt-4 pb-0">
 
-      <v-icon
-      :size="xsOnly ? 26 : 38"
-      >
-        mdi-plus
-      </v-icon>
-
-    </v-btn>
-
-    <v-dialog
-      v-model="dialog"
-      :max-width="xsOnly ? 320 : 400"
-      scrollable
-      transition="scale-transition"
-      >
-      <v-card :dark="!white">
-        <v-card-title class="deep-purple darken-3">
-          <h1
-          class="text-h5 font-weight-bold white--text"
-          >
-            Select a Player
-          </h1>
-        </v-card-title>
-
-        <v-divider></v-divider>
-
-        <v-card-text
-        class="px-2"
-        :style="xsOnly ? 'height:320px' : 'height: 400px;'"
+        <v-row
+        justify="center"
+        align="center"
+        v-for="user in users" :key="user.id"
+        class="px-0"
+        @click="select(user.id)"
         >
-          <v-container fluid class="pt-4 pb-0">
 
-            <v-row
-            justify="center"
-            align="center"
-            v-for="user in users" :key="user.id"
-            class="px-0"
-            @click="select(user.id)"
-            >
+          <div
+          :class="['selector', selection === user.id ? 'selected' : '']">
 
-              <div
-              :class="['selector', selection === user.id ? 'selected' : '']">
+            <v-col class="d-flex justify-center">
+              <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize" class="avatar-contrast">
+                <img :src="getPicture(user.picture)">
+              </v-avatar>
+            </v-col>
 
-                <v-col class="d-flex justify-center">
-                  <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize" class="avatar-contrast">
-                    <img :src="getPicture(user.picture)">
-                  </v-avatar>
-                </v-col>
+            <v-col class="d-flex justify-center">
+              <h1
+              :class="[
+              xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
+              white ? 'black-text font-weight-medium' : 'font-weight-medium']"
+              >
+                {{user.username}}
+              </h1>
+            </v-col>
 
-                <v-col class="d-flex justify-center">
-                  <h1
-                  :class="[
-                  xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
-                  white ? 'black-text font-weight-medium' : 'font-weight-medium']"
-                  >
-                    {{user.username}}
-                  </h1>
-                </v-col>
+            <v-col class="d-flex justify-center">
+              <h1
+              :class="[
+              xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
+              white ? 'black-text font-weight-medium' : 'font-weight-medium']"
+              >
+                {{getAge(user.birthday)}}y/o
+              </h1>
+            </v-col>
 
-                <v-col class="d-flex justify-center">
-                  <h1
-                  :class="[
-                  xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
-                  white ? 'black-text font-weight-medium' : 'font-weight-medium']"
-                  >
-                    {{getAge(user.birthday)}}y/o
-                  </h1>
-                </v-col>
+            <v-col class="d-flex justify-center">
+              <v-icon
+              :size="windowWidth <= 336 ? '20' : posIconSize"
+              :class="white ? 'posIcon grey-icon' : 'white-icon'"
+              >
+                {{positionIcon(user.position)}}
+              </v-icon>
+            </v-col>
+          </div>
+        </v-row>
 
-                <v-col class="d-flex justify-center">
-                  <v-icon
-                  :size="windowWidth <= 336 ? '20' : posIconSize"
-                  :class="white ? 'posIcon grey-icon' : 'white-icon'"
-                  >
-                    {{positionIcon(user.position)}}
-                  </v-icon>
-                </v-col>
-              </div>
-            </v-row>
+      </v-container>
+    </v-card-text>
 
-          </v-container>
-        </v-card-text>
+    <v-divider></v-divider>
 
-        <v-divider></v-divider>
+    <v-card-actions>
 
-        <v-card-actions>
+      <v-spacer />
 
-          <v-spacer />
+      <v-slide-x-reverse-transition>
 
-          <v-slide-x-reverse-transition>
+        <h1
+        v-if="error"
+        :class="['red--text pr-2',
+        xsOnly ? 'text-body-2' : 'text-subtitle-2']"
+        >
+          Player already present
+        </h1>
 
-            <h1
-            v-if="error"
-            :class="['red--text pr-2',
-            xsOnly ? 'text-body-2' : 'text-subtitle-2']"
-            >
-              Player already present
-            </h1>
+      </v-slide-x-reverse-transition>
 
-          </v-slide-x-reverse-transition>
+      <v-btn
+      color="deep-purple darken-2"
+      :small="xsOnly"
+      :class="error ? 'shake' : ''"
+      :disabled="!selection"
+      @click="sendInvite()"
+      >
+        <span
+        v-if="!xsOnly"
+        :class="['pl-1',
+        selection ? 'white--text' : '']"
+        >
+          Invite
+        </span>
+        <v-icon
+        :size="xsOnly ? 24 : 20"
+        right
+        :color="selection ? 'white' : ''"
+        >
+          mdi-email-outline
+        </v-icon>
+      </v-btn>
 
-          <v-btn
-          color="deep-purple darken-2"
-          :small="xsOnly"
-          :class="error ? 'shake' : ''"
-          :disabled="!selection"
-          @click="sendInvite()"
-          >
-            <span
-            v-if="!xsOnly"
-            :class="['pl-1',
-            selection ? 'white--text' : '']"
-            >
-              Invite
-            </span>
-            <v-icon
-            :size="xsOnly ? 24 : 20"
-            right
-            :color="selection ? 'white' : ''"
-            >
-              mdi-email-outline
-            </v-icon>
-          </v-btn>
+    </v-card-actions>
 
-        </v-card-actions>
-
-      </v-card>
-    </v-dialog>
-  </v-sheet>
+  </v-card>
 </template>
 
 <script>
@@ -154,15 +128,14 @@ export default {
       classes: [],
       selection: null,
       error: false,
-      dialog: false,
     };
   },
 
   props: {
-    /* reset: {
+    reset: {
       type: Boolean,
       required: true,
-    }, */
+    },
     white: {
       type: Boolean,
     },
@@ -177,8 +150,8 @@ export default {
       this.windowWidth = newVal;
     },
 
-    dialog(newVal) {
-      if (!newVal) {
+    reset(newVal) {
+      if (newVal) {
         this.selection = '';
         this.error = false;
       }
@@ -246,8 +219,7 @@ export default {
             user: userSelected,
           };
           this.invitePlayer(payload);
-          /* this.$emit('closeDialog'); */
-          this.dialog = false;
+          this.$emit('closeDialog');
         } else this.error = true;
       });
     },
