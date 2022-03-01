@@ -36,8 +36,6 @@
       </v-btn>
     </v-row>
 
-    <v-divider class="mt-3 mb-3" />
-
     <v-row>
       <v-slide-y-transition hide-on-leave>
 
@@ -60,6 +58,7 @@
             <v-col cols="3">
               <position-filter />
             </v-col>
+
           </v-row>
           <div>
 
@@ -68,11 +67,10 @@
         </v-container>
       </v-slide-y-transition>
     </v-row>
-
     <v-row justify="center">
       <filter-chips-group/>
     </v-row>
-
+    <v-divider class="mt-2" />
   </v-container>
 </template>
 
