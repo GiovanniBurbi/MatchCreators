@@ -204,7 +204,7 @@ export default {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
   brightness(122%) contrast(100%)
-  drop-shadow( 1px 2px rgba(150, 150, 150, 0.3))
+  drop-shadow( 2px 2px rgba(100, 100, 100, 0.4))
 }
 .stick {
   z-index: 9000;
@@ -214,6 +214,6 @@ export default {
   transform: translateX(-50%);
 }
 .header-shadow {
-  text-shadow: 1px 2px rgba(150, 150, 150, 0.5);
+  text-shadow: 1px 2px rgba(100, 100, 100, 0.8);
 }
 </style>
