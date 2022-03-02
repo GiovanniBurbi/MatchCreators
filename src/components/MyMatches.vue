@@ -1,30 +1,36 @@
 <template>
-  <v-container fluid class="px-0">
+  <v-container fluid class="pt-0">
 
     <v-container
-      :class="['header',
-      {'header-sm' : smAndDown},
-      {'header-md' : lgOnly || mdOnly}]"
+    :class="['header',
+    {'header-sm' : smAndDown},
+    {'header-md' : lgOnly || mdOnly}]"
+    >
+      <h1
+      :class="['white--text text-size font-weight-bold',
+      {'big': lgAndUp}, {'small': xsOnly}]"
       >
-        <h1
-        :class="['white--text text-size font-weight-bold',
-        {'big': lgAndUp}, {'small': xsOnly}]"
+        My Matches
+        <v-icon
+        class="white-icon pb-3"
+        :size="lgAndUp ? 46 : 34"
         >
-          My matches
-          <v-icon
-          class="white-icon pb-3"
-          :size="lgAndUp ? 46 : 34"
-          >
-            $player-icon
-          </v-icon>
-        </h1>
+          $player-icon
+        </v-icon>
+      </h1>
 
-        <v-divider
-        style="border-color: grey !important; opacity: 30%;"
-        ></v-divider>
+      <v-divider
+      style="border-color: grey !important; opacity: 30%;"
+      ></v-divider>
+
+      <match-cards-group
+      :loading="loading"
+      :matches="userMatches"
+      :isFinder=false
+      class="pt-6"/>
+
     </v-container>
 
-      <match-cards-group :loading="loading" :matches="userMatches" :isFinder=false />
   </v-container>
 </template>
 
@@ -59,13 +65,15 @@ export default {
 
 <style scoped>
 .header {
-  max-width: 85%;
+  max-width: 80%;
+  /* margin: 0 auto; */
+  margin: 0 auto;
 }
 .header-md {
   max-width: 90%;
 }
 .header-sm {
-  max-width: 97%;
+  max-width: 100%;
 }
 .text-size {
   font-size: 2.2rem;

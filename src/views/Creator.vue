@@ -1,39 +1,41 @@
 <template>
   <v-container fluid class="background px-0">
-    <v-container
-    v-if="step < 3"
-    :class="['header',
-    {'header-sm' : smAndDown},
-    {'header-md' : lgOnly || mdOnly}]"
-    >
-      <h1
-      :class="['white--text text-size font-weight-bold',
-      {'big': lgAndUp}, {'small': xsOnly}]"
+    <v-fade-transition hide-on-leave>
+      <v-container
+      v-if="step < 3"
+      :class="['header',
+      {'header-sm' : smAndDown},
+      {'header-md' : lgOnly || mdOnly}]"
       >
-        Create a Match
-        <v-icon
-        class="white-icon pb-2 pl-1"
-        :size="lgAndUp ? 54 : 40"
+        <h1
+        :class="['white--text text-size font-weight-bold',
+        {'big': lgAndUp}, {'small': xsOnly}]"
         >
-          $creator-icon
-        </v-icon>
-      </h1>
+          Create a Match
+          <v-icon
+          class="white-icon pb-2 pl-1"
+          :size="lgAndUp ? 54 : 40"
+          >
+            $creator-icon
+          </v-icon>
+        </h1>
 
-      <v-divider
-      style="border-color: grey !important; opacity: 30%;"
-      ></v-divider>
+        <v-divider
+        style="border-color: grey !important; opacity: 30%;"
+        ></v-divider>
 
-      <stepper
-      :class="['stepper-margin-lg mb-0',
-      {'stepper-margin-md' : mdOnly},
-      {'stepper-margin-sm' : smAndDown}]"
-      :change="step === 2"
-      @back="step--"
-      />
+        <stepper
+        :class="['stepper-margin-lg mb-0',
+        {'stepper-margin-md' : mdOnly},
+        {'stepper-margin-sm' : smAndDown}]"
+        :change="step === 2"
+        @back="step--"
+        />
 
-    </v-container>
+      </v-container>
+    </v-fade-transition>
 
-    <v-container fluid class="px-0">
+    <v-container fluid class="px-0 pt-0">
 
     <v-window v-model="step">
       <v-window-item :value="1">
@@ -72,6 +74,22 @@
       </v-window-item>
 
     </v-window>
+
+    <v-btn
+    v-if="!loading && step === 3"
+    class="stick"
+    large
+    fab
+    dark
+    color="deep-purple darken-2"
+    @click="step = 1"
+    >
+
+      <v-icon size="44">
+        mdi-plus
+      </v-icon>
+
+    </v-btn>
 
     </v-container>
   </v-container>
@@ -168,5 +186,12 @@ export default {
   brightness(122%) contrast(100%)
   drop-shadow( 2px 2px 1px rgba(0, 0, 0))
   drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7));
+}
+.stick {
+  z-index: 9000;
+  position: sticky;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
