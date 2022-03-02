@@ -144,6 +144,7 @@
         class="overlay"
       >
         <v-btn
+        v-if="isFinder"
         color="deep-purple darken-2"
         class="mb-12"
         tile
@@ -159,6 +160,25 @@
             mdi-chevron-double-right
           </v-icon>
         </v-btn>
+
+        <v-btn
+        v-else
+        color="deep-purple darken-2"
+        class="mb-12"
+        tile
+        depressed
+        :small="xsOnly"
+        >
+          <span v-if="xsOnly">see details</span>
+          <span v-else>see the details</span>
+          <v-icon
+          right
+          :size="xsOnly ? 24 : 28"
+          >
+            mdi-chevron-double-right
+          </v-icon>
+        </v-btn>
+
       </v-overlay>
     </v-slide-x-transition>
 
@@ -205,6 +225,10 @@ export default {
     },
     hover: {
       type: Boolean,
+    },
+    isFinder: {
+      type: Boolean,
+      required: true,
     },
   },
 };

@@ -1,6 +1,7 @@
 <template>
   <v-container fluid class="background px-0">
     <v-container
+    v-if="step < 3"
     :class="['header',
     {'header-sm' : smAndDown},
     {'header-md' : lgOnly || mdOnly}]"
@@ -63,6 +64,13 @@
           <team-builder class="pb-0"/>
         </v-container>
       </v-window-item>
+
+      <v-window-item :value="3">
+
+        <my-matches />
+
+      </v-window-item>
+
     </v-window>
 
     </v-container>
@@ -76,6 +84,7 @@ import Stepper from '../components/Stepper.vue';
 import MatchCreationForm from '../components/MatchCreationForm.vue';
 import TeamBuilder from '../components/TeamBuilder.vue';
 import DetailsRecap from '../components/DetailsRecap.vue';
+import MyMatches from '../components/myMatches.vue';
 
 export default {
   name: 'Creator',
@@ -85,17 +94,24 @@ export default {
     MatchCreationForm,
     TeamBuilder,
     DetailsRecap,
+    MyMatches,
   },
 
   data() {
     return {
-      step: 2,
+      step: 3,
     };
   },
 
   computed: {
     ...mapGetters({ nPlayers: 'matches/getNumPlayers' }),
     ...mapGetters({ loading: 'matches/getLoading' }),
+  },
+
+  watch: {
+    loading(val) {
+      if (!val) this.step += 1;
+    },
   },
 
   methods: {

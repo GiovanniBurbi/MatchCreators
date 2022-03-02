@@ -24,6 +24,7 @@
             <match-card
             :match="match"
             :hover="hover"
+            :isFinder="isFinder"
             />
           </v-hover>
 
@@ -48,6 +49,10 @@ export default {
     },
     loading: {
       type: Boolean,
+    },
+    isFinder: {
+      type: Boolean,
+      required: true,
     },
   },
 

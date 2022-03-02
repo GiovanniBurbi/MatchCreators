@@ -8,6 +8,8 @@ export default {
     matches: [],
     filteredMatches: [],
     loadedMatches: false,
+    userMatches: [],
+    loadingUserMatches: false,
     filters: [],
     filter: {
       type: '',
@@ -74,7 +76,7 @@ export default {
       state.filteredMatches = games;
     },
 
-    setLoaded(state, val) {
+    setLoadedMatches(state, val) {
       state.loadedMatches = val;
     },
 
@@ -136,6 +138,14 @@ export default {
     setLoading(state, isLoading) {
       state.loading = isLoading;
     },
+
+    setLoadingUserMatches(state, isLoading) {
+      state.loadingUserMatches = isLoading;
+    },
+
+    setUserMatches(state, matches) {
+      state.userMatches = matches;
+    },
   },
 
   actions: {
@@ -143,7 +153,7 @@ export default {
       const matches = await MatchService.getAllMatches();
       commit('setMatches', matches);
       commit('setFilteredMatches', matches);
-      commit('setLoaded', true);
+      commit('setLoadedMatches', true);
     },
 
     addFilterMatches({ state, commit }, newFilter) {
@@ -182,6 +192,21 @@ export default {
         .then(() => {
           commit('clearMatchTmp');
           commit('setLoading', false);
+        });
+    },
+
+    async findUserMatches({
+      state, commit, dispatch, rootGetters,
+    }) {
+      commit('setLoadingUserMatches', true);
+      if (!state.loadedMatches) {
+        await dispatch('allMatches');
+      }
+      await MatchService.findUserMatches(state.matches, rootGetters['auth/getUser'])
+        .then((res) => {
+          console.log(res);
+          commit('setUserMatches', res);
+          commit('setLoadingUserMatches', false);
         });
     },
   },
@@ -225,6 +250,14 @@ export default {
 
     getLoading(state) {
       return state.loading;
+    },
+
+    getLoadingUserMatches(state) {
+      return state.loadingUserMatches;
+    },
+
+    getUserMatches(state) {
+      return state.userMatches;
     },
   },
 };
