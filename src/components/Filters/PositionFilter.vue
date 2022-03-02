@@ -16,7 +16,7 @@
         $position-icon
       </v-icon>
 
-      <span class="hidden-xs-only">Position</span>
+      <span class="hidden-xs-only text-shadow">Position</span>
     </v-btn>
 
     <v-dialog
@@ -139,7 +139,8 @@ export default {
 <style scoped>
 .icon-white {
   /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
+  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%)
+  drop-shadow(1px 1px black);
 }
 .icon-purple {
   /* deep-purple */
@@ -147,5 +148,8 @@ export default {
 }
 .icon-disabled {
   opacity: 30%;
+}
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
 }
 </style>

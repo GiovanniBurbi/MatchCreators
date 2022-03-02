@@ -94,14 +94,14 @@ export default {
 
 <style scoped>
 .header {
-  text-shadow: 2px 3px rgba(0, 0, 0, 0.8);
+  text-shadow: 2px 3px rgba(150, 150, 150, 0.4);
   white-space: nowrap;
 }
 .text-big {
   font-size: 2rem;
 }
 .number {
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 2px rgba(0, 0, 0, 0.6);
 }
 .icon {
   display: flex;

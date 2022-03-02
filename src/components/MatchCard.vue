@@ -86,7 +86,7 @@
 
           <v-row justify="center" class="pt-2">
             <h1
-            :class="['text-caption font-weight-medium',
+            :class="['text-caption num-shadow font-weight-medium',
             this.gkFilled ? 'red--text text--darken-2': 'indigo--text text--darken-2']"
             >
               {{ match.positions.goalkeepers }} / 2
@@ -106,7 +106,7 @@
 
           <v-row justify="center" class="pt-2">
             <h1
-            :class="['text-caption font-weight-medium',
+            :class="['text-caption num-shadow font-weight-medium',
             this.defFilled ? 'red--text text--darken-2': 'indigo--text text--darken-2']"
             >
               {{ match.positions.defenders }} / 4
@@ -126,7 +126,7 @@
 
           <v-row justify="center">
             <h1
-            :class="['text-caption font-weight-medium',
+            :class="['text-caption num-shadow font-weight-medium',
             this.fwFilled ? 'red--text text--darken-2': 'indigo--text text--darken-2']"
             >
               {{ match.positions.forwards }} / 4
@@ -253,7 +253,7 @@ export default {
 .indigo-darken2-icon {
   /* indigo darken 2 */
   filter: invert(19%) sepia(50%) saturate(3328%) hue-rotate(224deg) brightness(90%) contrast(89%)
-  drop-shadow(1px 1px rgba(63, 81, 181, 0.7));
+  drop-shadow(1px 1px rgba(0, 0, 0, 0.7));
 }
 .filled-pos {
   opacity: 30%;
@@ -263,9 +263,12 @@ export default {
   justify-content: flex-end;
 }
 .icon-shadow {
-  text-shadow: 1px 1px rgba(63, 81, 181, 1);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
 }
 .posIcon-shadow {
-  filter: drop-shadow(1px 1px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.3));
+}
+.num-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
 }
 </style>

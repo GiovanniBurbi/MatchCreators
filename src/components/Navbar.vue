@@ -46,7 +46,7 @@
         $player-icon
       </v-icon>
       <v-slide-x-reverse-transition>
-        <span v-if="mdAndUp">My matches</span>
+        <span v-if="mdAndUp" class="text-shadow">My matches</span>
       </v-slide-x-reverse-transition>
     </v-btn>
 
@@ -126,10 +126,14 @@ export default {
 .icon-light{
   /* indigo */
   filter: invert(26%) sepia(55%) saturate(2295%)
-  hue-rotate(217deg) brightness(90%) contrast(83%);
+  hue-rotate(217deg) brightness(90%) contrast(83%)
+  drop-shadow(1px 1px rgba(0, 0, 0, 0.8));
 }
 .title {
-  text-shadow: 1px 1px rgba(128, 128, 128, 0.40);
+  text-shadow: 1px 1px rgb(0, 0, 0, 0.6);
   cursor: default;
+}
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
 }
 </style>

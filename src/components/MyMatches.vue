@@ -8,8 +8,8 @@
     >
       <v-row justify="space-between" align="center">
         <h1
-        :class="['white--text text-size font-weight-bold shadow',
-        {'big': lgAndUp}, {'small': xsOnly}]"
+        :class="['white--text text-size font-weight-bold',
+        {'big': lgAndUp}, {'small': xsOnly}, isFinder ? 'shadow' : 'white-shadow']"
         >
           My Matches
           <v-icon
@@ -106,7 +106,7 @@ export default {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
   brightness(122%) contrast(100%)
-  drop-shadow( 2px 2px 1px rgba(0, 0, 0));
+  drop-shadow( 1px 2px rgb(200, 200, 200, 0.5));
 }
 .divider-light {
   border-color: black !important;
@@ -115,5 +115,8 @@ export default {
 .divider-dark {
   border-color: grey !important;
   opacity: 30%;
+}
+.white-shadow {
+  text-shadow: 1px 2px rgba(200, 200, 200, 0.4);
 }
 </style>

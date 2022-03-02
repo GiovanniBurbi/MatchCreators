@@ -20,13 +20,13 @@
       @click="showFilters = !showFilters, $emit('filters')"
       >
         <span
-        :class="['hidden-xs-only shadow',
-        showFilters ? 'deep-purple--text' : 'white--text']">
+        :class="['hidden-xs-only',
+        showFilters ? 'deep-purple--text text-shadow-soft' : 'white--text text-shadow']">
           Filters
         </span>
 
         <v-icon
-        class="shadow"
+        :class="showFilters ? 'icon-shadow-soft' : 'icon-shadow'"
         :small="xsOnly"
         :right="smAndUp"
         :color="showFilters ? 'deep-purple' : 'white'"
@@ -125,5 +125,17 @@ export default {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%)
   hue-rotate(291deg) brightness(122%) contrast(100%) drop-shadow( 1px 2px rgba(0, 0, 0, 0.7));
+}
+.text-shadow {
+  text-shadow: 1px 2px rgba(0, 0, 0, 1);
+}
+.text-shadow-soft{
+  text-shadow: 1px 1px rgb(97, 97, 97);
+}
+.icon-shadow {
+  filter: drop-shadow(2px 2px black);
+}
+.icon-shadow-soft {
+  filter: drop-shadow(1px 1px rgb(95, 95, 95));
 }
 </style>

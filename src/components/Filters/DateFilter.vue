@@ -11,11 +11,12 @@
       <v-icon
       :left="smAndUp"
       size="22"
+      class="text-shadow"
       >
         mdi-calendar
       </v-icon>
 
-      <span class="hidden-xs-only">Date</span>
+      <span class="hidden-xs-only text-shadow">Date</span>
     </v-btn>
 
     <v-dialog
@@ -170,5 +171,8 @@ export default {
 <style scoped>
 .centered-input >>> input {
   text-align: center;
+}
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
 }
 </style>

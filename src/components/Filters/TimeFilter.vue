@@ -11,11 +11,12 @@
       <v-icon
       :left="smAndUp"
       size="22"
+      class="text-shadow"
       >
         mdi-clock-outline
       </v-icon>
 
-      <span class="hidden-xs-only">Time</span>
+      <span class="hidden-xs-only text-shadow">Time</span>
     </v-btn>
 
     <v-dialog
@@ -227,5 +228,7 @@ export default {
 };
 </script>
 <style scoped>
-
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+}
 </style>

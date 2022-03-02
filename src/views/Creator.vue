@@ -10,7 +10,7 @@
         {'header-md' : lgOnly || mdOnly}]"
         >
           <h1
-          :class="['white--text text-size font-weight-bold',
+          :class="['white--text header-shadow text-size font-weight-bold',
           {'big': lgAndUp}, {'small': xsOnly}]"
           >
             Create a Match
@@ -204,8 +204,7 @@ export default {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
   brightness(122%) contrast(100%)
-  drop-shadow( 2px 2px 1px rgba(0, 0, 0))
-  drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7));
+  drop-shadow( 1px 2px rgba(150, 150, 150, 0.3))
 }
 .stick {
   z-index: 9000;
@@ -213,5 +212,8 @@ export default {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+}
+.header-shadow {
+  text-shadow: 1px 2px rgba(150, 150, 150, 0.5);
 }
 </style>

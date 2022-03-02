@@ -11,11 +11,12 @@
       <v-icon
       :left="smAndUp"
       size="22"
+      class="text-shadow"
       >
         mdi-map-marker-outline
       </v-icon>
 
-      <span class="hidden-xs-only">Location</span>
+      <span class="hidden-xs-only text-shadow">Location</span>
     </v-btn>
 
     <v-dialog
@@ -134,3 +135,9 @@ export default {
   mixins: [BreakpointsCond],
 };
 </script>
+
+<style scoped>
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+}
+</style>
