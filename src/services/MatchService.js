@@ -137,10 +137,6 @@ export default {
           forwards: 0,
         };
         for (let i = 1; i <= this.teamSize; i += 1) {
-          /* if (!(teamBlack[i].user && Object.keys(teamBlack[i].user).length === 0
-          && teamBlack[i].user.constructor === Object)) {
-            positions[this.extractPositions(i)] += 1;
-          } */
           if (!this.isEmpty(teamBlack[i].user)) {
             positions[this.extractPositions(i)] += 1;
           }
@@ -160,9 +156,7 @@ export default {
         };
 
         const matchData = JSON.stringify(match);
-        console.log(matchData);
-        resolve('ciao');
-        /* resolve(apiClient.post('/matches', matchData)); */
+        resolve(apiClient.post('/matches', matchData));
       }, 500);
     });
     return promise;

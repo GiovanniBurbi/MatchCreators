@@ -134,6 +134,7 @@ export default {
 
   methods: {
     ...mapActions({ newMatch: 'matches/createMatch' }),
+    ...mapActions({ fetchUserMatches: 'matches/findUserMatches' }),
 
     createMatch() {
       this.newMatch();

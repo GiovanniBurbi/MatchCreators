@@ -186,12 +186,14 @@ export default {
       return res;
     },
 
-    async createMatch({ state, commit }) {
+    async createMatch({ state, commit, dispatch }) {
       commit('setLoading', true);
       await MatchService.createMatch(state.details, state.teamBlack, state.teamWhite)
-        .then(() => {
+        .then(async () => {
+          await dispatch('allMatches');
           commit('clearMatchTmp');
           commit('setLoading', false);
+          await dispatch('findUserMatches');
         });
     },
 

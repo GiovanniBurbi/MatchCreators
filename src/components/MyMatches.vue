@@ -54,7 +54,7 @@ export default {
     ...mapActions({ fetchUserMatches: 'matches/findUserMatches' }),
   },
 
-  created() {
+  mounted() {
     this.fetchUserMatches();
   },
 
@@ -66,8 +66,6 @@ export default {
 <style scoped>
 .header {
   max-width: 80%;
-  /* margin: 0 auto; */
-  margin: 0 auto;
 }
 .header-md {
   max-width: 90%;

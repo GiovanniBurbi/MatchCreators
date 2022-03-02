@@ -172,7 +172,7 @@
 
       <v-text-field
       v-model="location"
-      :rules="[rules.required, rules.noSpaces]"
+      :rules="[rules.required]"
       solo clearable color="deep-purple darken-2"
       flat class="d-inline-flex" label="Define the location"></v-text-field>
     </div>
@@ -206,7 +206,6 @@ export default {
       step: 1,
       rules: {
         required: (v) => !!v || 'Required',
-        noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
       },
     };
   },
