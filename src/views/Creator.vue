@@ -75,21 +75,23 @@
 
     </v-window>
 
-    <v-btn
-    v-if="!loading && step === 3"
-    class="stick"
-    large
-    fab
-    dark
-    color="deep-purple darken-2"
-    @click="step = 1"
-    >
+    <v-fade-transition hide-on-leave>
+      <v-btn
+      v-if="!loadingUserMatches && step === 3"
+      class="stick"
+      large
+      fab
+      dark
+      color="deep-purple darken-2"
+      @click="step = 1"
+      >
 
-      <v-icon size="44">
-        mdi-plus
-      </v-icon>
+        <v-icon size="44">
+          mdi-plus
+        </v-icon>
 
-    </v-btn>
+      </v-btn>
+    </v-fade-transition>
 
     </v-container>
   </v-container>
@@ -130,6 +132,7 @@ export default {
   computed: {
     ...mapGetters({ nPlayers: 'matches/getNumPlayers' }),
     ...mapGetters({ loading: 'matches/getLoading' }),
+    ...mapGetters({ loadingUserMatches: 'matches/getLoadingUserMatches' }),
   },
 
   watch: {

@@ -24,7 +24,6 @@
     </v-snackbar>
 
     <v-main>
-      <h1 class="red--text">{{msg}}</h1>
       <router-view
       @loginSuccess="snackbar = true"
       :goToMyMatches.sync="userMatches"></router-view>
