@@ -201,9 +201,7 @@ export default {
       state, commit, dispatch, rootGetters,
     }) {
       commit('setLoadingUserMatches', true);
-      if (!state.loadedMatches) {
-        await dispatch('allMatches');
-      }
+      await dispatch('allMatches');
       await MatchService.findUserMatches(state.matches, rootGetters['auth/getUser'])
         .then((res) => {
           commit('setUserMatches', res);
