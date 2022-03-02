@@ -14,7 +14,6 @@
       </h1>
 
       <v-btn
-      :small="xsOnly"
       :color="showFilters ?  'white' : 'deep-purple'"
       rounded
       @click="showFilters = !showFilters, $emit('filters')"
@@ -27,7 +26,7 @@
 
         <v-icon
         :class="showFilters ? 'icon-shadow-soft' : 'icon-shadow'"
-        :small="xsOnly"
+        :size="xsOnly ? 18 : null"
         :right="smAndUp"
         :color="showFilters ? 'deep-purple' : 'white'"
         >

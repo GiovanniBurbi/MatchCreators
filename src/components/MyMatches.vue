@@ -13,7 +13,7 @@
         >
           My Matches
           <v-icon
-          class="white-icon pb-3"
+          :class="[isFinder ? 'white-icon-black-shadow' : 'white-icon-light-shadow', 'pb-3']"
           :size="lgAndUp ? 46 : 34"
           >
             $player-icon
@@ -24,10 +24,16 @@
         v-if="isFinder"
         color="deep-purple"
         dark
+        rounded
         @click="$emit('goBackToFinder')"
         >
-          <span class="shadow">find new match</span>
-          <v-icon right class="white-icon">$finder-icon</v-icon>
+          <span class="text-shadow" v-if="!xsOnly">find new match</span>
+          <v-icon
+          :right="!xsOnly"
+          class="white-icon-black-shadow"
+          >
+            $finder-icon
+          </v-icon>
         </v-btn>
       </v-row>
 
@@ -102,11 +108,17 @@ export default {
 .small{
   font-size: 1.75rem;
 }
-.white-icon {
+.white-icon-light-shadow {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
   brightness(122%) contrast(100%)
-  drop-shadow( 1px 2px rgb(200, 200, 200, 0.5));
+  drop-shadow( 1px 2px rgb(200, 200, 200, 0.2));
+}
+.white-icon-black-shadow {
+  /* white */
+  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
+  brightness(122%) contrast(100%)
+  drop-shadow( 1px 2px rgba(0, 0, 0, 1));
 }
 .divider-light {
   border-color: black !important;
@@ -118,5 +130,8 @@ export default {
 }
 .white-shadow {
   text-shadow: 1px 2px rgba(200, 200, 200, 0.4);
+}
+.text-shadow {
+  text-shadow: 1px 2px black;
 }
 </style>

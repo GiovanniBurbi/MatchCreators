@@ -59,7 +59,7 @@
                 @click="createMatch()"
                 :loading="loading"
                 >
-                  <span class="shadow">create the match</span>
+                  <span class="text-shadow">create the match</span>
                 </v-btn>
               </v-row>
               <team-builder class="pb-0"/>
@@ -215,5 +215,8 @@ export default {
 }
 .header-shadow {
   text-shadow: 1px 2px rgba(100, 100, 100, 0.8);
+}
+.text-shadow {
+   text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
 }
 </style>

@@ -76,7 +76,7 @@
           <v-btn
           fab
           outlined
-          elevation="5"
+          elevation="3"
           :class="white ? '' : 'btn-shadow'"
           :x-small="xsOnly"
           :dark="!white"
