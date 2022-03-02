@@ -9,13 +9,13 @@
 
       <finder-header @filters="filtersOn = !filtersOn"/>
 
-      <match-cards-group class="py-2" />
+      <match-cards-group :matches="filteredMatches" class="py-2" />
     </v-container>
   </v-container>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 import FinderHeader from '@/components/FinderHeader.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import MatchCardsGroup from '../components/MatchCardsGroup.vue';
@@ -32,6 +32,13 @@ export default {
 
   computed: {
     ...mapGetters({ filters: 'matches/getFilters' }),
+    ...mapGetters({ statusMatches: 'matches/getStatusMatches' }),
+    ...mapGetters({ filteredMatches: 'matches/getFilteredMatches' }),
+  },
+
+  methods: {
+    ...mapMutations({ clearChips: 'matches/clearFilters' }),
+    ...mapActions({ fetchMatches: 'matches/allMatches' }),
   },
 
   watch: {
@@ -43,13 +50,17 @@ export default {
     },
   },
 
+  created() {
+    /* At the creation of this component start the fetch
+    from db of all matches if they are not already loaded */
+    if (!this.statusMatches) {
+      this.fetchMatches();
+    }
+  },
+
   destroyed() {
     /* when component is destroyed clear the filters */
     if (this.chipsOn) this.clearChips();
-  },
-
-  methods: {
-    ...mapMutations({ clearChips: 'matches/clearFilters' }),
   },
 
   components: {

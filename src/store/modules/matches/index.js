@@ -142,6 +142,7 @@ export default {
     async allMatches({ commit }) {
       const matches = await MatchService.getAllMatches();
       commit('setMatches', matches);
+      commit('setFilteredMatches', matches);
       commit('setLoaded', true);
     },
 
