@@ -24,11 +24,11 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
             :value="dateFormatting"
-            :rules="[rules.required]"
             label="Define the date"
             color="deep-purple darken-2"
             solo flat
             readonly clearable
+            :rules="rulesVector"
             v-bind="attrs"
             v-on="on"
             @click:clear="date=null">
@@ -71,7 +71,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
-            :rules="[rules.required]"
+            :rules="rulesVector"
             v-model="time"
             class="d-inline-flex"
             label="Define the time"
@@ -172,7 +172,7 @@
 
       <v-text-field
       v-model="location"
-      :rules="[rules.required]"
+      :rules="rulesVector"
       solo clearable color="deep-purple darken-2"
       flat class="d-inline-flex" label="Define the location"></v-text-field>
     </div>
@@ -186,7 +186,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 import { parseISO, format } from 'date-fns';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
@@ -207,6 +207,7 @@ export default {
       rules: {
         required: (v) => !!v || 'Required',
       },
+      rulesVector: [],
     };
   },
 
@@ -219,12 +220,27 @@ export default {
     getTime() {
       return `${this.start} - ${this.end}`;
     },
+
+    ...mapGetters({ getDetails: 'matches/getDetails' }),
+  },
+
+  watch: {
+    getDetails(newVal) {
+      if (newVal.length === 0) {
+        this.date = null;
+        this.time = null;
+        this.start = null;
+        this.end = null;
+        this.location = null;
+      }
+    },
   },
 
   methods: {
     ...mapMutations({ sendDetails: 'matches/setDetails' }),
 
     proceed() {
+      this.rulesVector.push(this.rules.required);
       if (this.$refs.details.validate()) {
         const details = [
           this.date,
@@ -233,6 +249,7 @@ export default {
         ];
         this.sendDetails(details);
         this.$emit('detailsPassed');
+        this.rulesVector.pop();
       }
     },
   },
