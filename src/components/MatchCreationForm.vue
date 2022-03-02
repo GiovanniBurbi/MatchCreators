@@ -249,8 +249,8 @@ export default {
         ];
         this.sendDetails(details);
         this.$emit('detailsPassed');
-        this.rulesVector.pop();
       }
+      this.rulesVector.pop();
     },
   },
 
