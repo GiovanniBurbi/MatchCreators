@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <!-- skeleton cards to be shown while waiting data from the db -->
-    <v-row justify="center" v-if="!getStatusMatches">
+    <v-row justify="center" v-if="loading">
       <v-skeleton-loader
       class="mx-2 my-2"
       v-for="index in 16"
@@ -17,7 +17,7 @@
     <!-- list of cards representing available matches -->
     <v-slide-x-transition>
 
-      <v-row justify="center" v-if="getStatusMatches">
+      <v-row justify="center" v-if="!loading">
         <template v-for="match in matches">
           <!-- component over handler with vuetify -->
           <v-hover v-slot="{ hover }" :key="match.id">
@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import MatchCard from './MatchCard.vue';
 
 export default {
@@ -47,14 +46,13 @@ export default {
       type: Array,
       required: true,
     },
+    loading: {
+      type: Boolean,
+    },
   },
 
   components: {
     MatchCard,
-  },
-
-  computed: {
-    ...mapGetters({ getStatusMatches: 'matches/getStatusMatches' }),
   },
 
 };

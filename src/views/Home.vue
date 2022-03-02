@@ -9,7 +9,7 @@
 
       <finder-header @filters="filtersOn = !filtersOn"/>
 
-      <match-cards-group :matches="filteredMatches" class="py-2" />
+      <match-cards-group :loading="!statusMatches" :matches="filteredMatches" class="py-2" />
     </v-container>
   </v-container>
 </template>

@@ -100,8 +100,6 @@ export default {
 </script>
 
 <style scoped>
-/* switch is a fixed component that must be present
-in finder page and creator page */
 .switch-container {
   display: flex;
   justify-content: center;
