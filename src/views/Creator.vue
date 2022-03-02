@@ -84,7 +84,7 @@ import Stepper from '../components/Stepper.vue';
 import MatchCreationForm from '../components/MatchCreationForm.vue';
 import TeamBuilder from '../components/TeamBuilder.vue';
 import DetailsRecap from '../components/DetailsRecap.vue';
-import MyMatches from '../components/myMatches.vue';
+import MyMatches from '../components/MyMatches.vue';
 
 export default {
   name: 'Creator',
