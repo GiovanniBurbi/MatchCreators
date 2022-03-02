@@ -104,7 +104,6 @@ export default {
 
   computed: {
     ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
-    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
   },
 
   watch: {
@@ -118,6 +117,7 @@ export default {
 
   methods: {
     ...mapActions({ addFilter: 'matches/newFilter' }),
+    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
 
     sendFilter() {
       const filter = {
