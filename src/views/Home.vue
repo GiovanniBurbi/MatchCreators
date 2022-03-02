@@ -35,6 +35,12 @@ export default {
     };
   },
 
+  props: {
+    goToMyMatches: {
+      type: Boolean,
+    },
+  },
+
   computed: {
     ...mapGetters({ filters: 'matches/getFilters' }),
     ...mapGetters({ statusMatches: 'matches/getStatusMatches' }),
@@ -52,6 +58,13 @@ export default {
       if (newVal.length !== 0) {
         if (!this.chipsOn) this.chipsOn = true;
       } else this.chipsOn = false;
+    },
+
+    goToMyMatches(newVal) {
+      if (newVal) {
+        console.log('finder');
+        this.$emit('update:goToMyMatches', false);
+      }
     },
   },
 

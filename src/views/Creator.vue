@@ -141,6 +141,7 @@ export default {
     },
     goToMyMatches(newVal) {
       if (newVal) {
+        console.log('creator');
         this.step = 3;
         this.$emit('update:goToMyMatches', false);
       }
