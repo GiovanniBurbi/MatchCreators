@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { parseISO, format } from 'date-fns';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
@@ -48,11 +49,7 @@ export default {
   name: 'DetailsRecap',
 
   computed: {
-    details: {
-      get() {
-        return this.$store.state.matches.details;
-      },
-    },
+    ...mapGetters({ details: 'matches/getDetails' }),
 
     dateFormatted() {
       return this.details[0] ? format(parseISO(this.details[0]), 'do MMM yyyy') : '';
