@@ -18,7 +18,7 @@
 
     </v-container>
 
-    <my-matches v-else />
+    <my-matches v-else :isFinder="true"/>
   </v-container>
 </template>
 

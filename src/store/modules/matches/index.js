@@ -118,6 +118,16 @@ export default {
       }
     },
 
+    addUser(state, user) {
+      let pos = null;
+      if (user.position === 'Goalkeeper') {
+        pos = 1;
+      } else if (user.position === 'Defender') {
+        pos = 2;
+      } else pos = 4;
+      state.teamBlack[pos].user = user;
+    },
+
     removePlayer(state, payload) {
       if (payload.isWhite) {
         state.teamWhite[payload.spot].user = {};
@@ -186,12 +196,15 @@ export default {
       return res;
     },
 
-    async createMatch({ state, commit, dispatch }) {
+    async createMatch({
+      state, commit, dispatch, rootGetters,
+    }) {
       commit('setLoading', true);
       await MatchService.createMatch(state.details, state.teamBlack, state.teamWhite)
         .then(async () => {
           await dispatch('allMatches');
           commit('clearMatchTmp');
+          commit('addUser', rootGetters['auth/getUser']);
           commit('setLoading', false);
           await dispatch('findUserMatches');
         });

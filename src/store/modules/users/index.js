@@ -14,7 +14,7 @@ export default {
   },
 
   actions: {
-    async getAllUsers({ commit }) {
+    async fetchAllUsers({ commit }) {
       const res = await UserService.getUsers();
       const usersData = res.data;
       commit('setUsers', usersData);

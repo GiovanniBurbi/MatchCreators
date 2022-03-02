@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import Field from './Field.vue';
 
@@ -90,18 +90,8 @@ export default {
 
   mounted() {
     const user = this.getUser;
-    let pos = null;
-    if (user.position === 'Goalkeeper') {
-      pos = 1;
-    } else if (user.position === 'Defender') {
-      pos = 2;
-    } else pos = 4;
-    const payload = {
-      spot: pos,
-      isWhite: this.isWhite,
-      user,
-    };
-    this.addPlayer(payload);
+
+    this.addUser(user);
 
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize);
@@ -113,15 +103,15 @@ export default {
   },
 
   created() {
-    this.getAllUsers();
+    this.fetchAllUsers();
   },
 
   methods: {
     onResize() {
       this.windowWidth = window.innerWidth;
     },
-    ...mapMutations({ addPlayer: 'matches/addPlayer' }),
-    ...mapActions({ getAllUsers: 'users/getAllUsers' }),
+    ...mapActions({ fetchAllUsers: 'users/fetchAllUsers' }),
+    ...mapMutations({ addUser: 'matches/addUser' }),
   },
 
   mixins: [BreakpointsCond],

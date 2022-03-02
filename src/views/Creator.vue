@@ -73,7 +73,7 @@
     <v-slide-y-transition hide-on-leave>
       <div v-if="showMyMatches">
 
-        <my-matches />
+        <my-matches :isFinder="false" />
 
         <v-fade-transition hide-on-leave>
           <v-btn
@@ -83,7 +83,7 @@
           fab
           dark
           color="deep-purple darken-2"
-          @click="showMyMatches = false"
+          @click="showMyMatches = false, step = 1"
           >
 
             <v-icon size="44">
@@ -140,7 +140,7 @@ export default {
 
   watch: {
     loading(val) {
-      if (!val) this.step += 1;
+      if (!val) this.showMyMatches = true;
     },
     goToMyMatches(newVal) {
       if (newVal) {

@@ -1,26 +1,36 @@
 <template>
-  <v-container fluid class="pt-0">
+  <v-container fluid>
 
-    <v-container
+    <v-container fluid
     :class="['header',
     {'header-sm' : smAndDown},
     {'header-md' : lgOnly || mdOnly}]"
     >
-      <h1
-      :class="['white--text text-size font-weight-bold shadow',
-      {'big': lgAndUp}, {'small': xsOnly}]"
-      >
-        My Matches
-        <v-icon
-        class="white-icon pb-3"
-        :size="lgAndUp ? 46 : 34"
+      <v-row justify="space-between" align="center">
+        <h1
+        :class="['white--text text-size font-weight-bold shadow',
+        {'big': lgAndUp}, {'small': xsOnly}]"
         >
-          $player-icon
-        </v-icon>
-      </h1>
+          My Matches
+          <v-icon
+          class="white-icon pb-3"
+          :size="lgAndUp ? 46 : 34"
+          >
+            $player-icon
+          </v-icon>
+        </h1>
+
+        <v-btn
+        v-if="isFinder"
+        color="deep-purple"
+        dark
+        >
+          look for a match
+        </v-btn>
+      </v-row>
 
       <v-divider
-      style="border-color: grey !important; opacity: 30%;"
+      :class="['mt-4', isFinder ? 'divider-light' : 'divider-dark']"
       ></v-divider>
 
       <match-cards-group
@@ -40,8 +50,16 @@ import BreakpointsCond from '../mixins/BreakpointsCond';
 import MatchCardsGroup from './MatchCardsGroup.vue';
 
 export default {
-  components: { MatchCardsGroup },
   name: 'myMatches',
+
+  components: { MatchCardsGroup },
+
+  props: {
+    isFinder: {
+      type: Boolean,
+      required: true,
+    },
+  },
 
   computed: {
     ...mapGetters({
@@ -91,5 +109,13 @@ export default {
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
   brightness(122%) contrast(100%)
   drop-shadow( 2px 2px 1px rgba(0, 0, 0));
+}
+.divider-light {
+  border-color: black !important;
+  opacity: 15%;
+}
+.divider-dark {
+  border-color: grey !important;
+  opacity: 30%;
 }
 </style>
