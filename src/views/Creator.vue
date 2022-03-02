@@ -75,7 +75,7 @@
 
     </v-window>
 
-    <v-fade-transition hide-on-leave>
+    <v-scroll-y-transition hide-on-leave>
       <v-btn
       v-if="!loadingUserMatches && step === 3"
       class="stick"
@@ -91,7 +91,7 @@
         </v-icon>
 
       </v-btn>
-    </v-fade-transition>
+    </v-scroll-y-transition>
 
     </v-container>
   </v-container>
