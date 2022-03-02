@@ -2,6 +2,7 @@
   <v-app>
     <navbar
     v-if="isNotAuth"
+    @myMatches="userMatches = true"
     ></navbar>
 
     <v-snackbar
@@ -23,8 +24,10 @@
     </v-snackbar>
 
     <v-main>
+      <h1 class="red--text">{{msg}}</h1>
       <router-view
-      @loginSuccess="snackbar = true"></router-view>
+      @loginSuccess="snackbar = true"
+      :goToMyMatches.sync="userMatches"></router-view>
     </v-main>
   </v-app>
 </template>
@@ -39,6 +42,7 @@ export default {
   data() {
     return {
       snackbar: false,
+      userMatches: false,
     };
   },
 

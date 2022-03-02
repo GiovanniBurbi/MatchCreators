@@ -37,6 +37,7 @@
      class="mr-1"
      text rounded left
      style="text-shadow: 1px 1px rgba(63, 81, 181, 0.2);"
+     @click="$emit('myMatches')"
     >
       <v-icon
       class="icon-light"

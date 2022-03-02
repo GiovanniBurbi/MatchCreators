@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="background px-0">
-    <v-fade-transition hide-on-leave>
+    <v-scale-transition hide-on-leave>
       <v-container
       v-if="step < 3"
       :class="['header',
@@ -33,7 +33,7 @@
         />
 
       </v-container>
-    </v-fade-transition>
+    </v-scale-transition>
 
     <v-container fluid class="px-0 pt-0">
 
@@ -117,8 +117,14 @@ export default {
 
   data() {
     return {
-      step: 3,
+      step: 1,
     };
+  },
+
+  props: {
+    goToMyMatches: {
+      type: Boolean,
+    },
   },
 
   computed: {
@@ -129,6 +135,12 @@ export default {
   watch: {
     loading(val) {
       if (!val) this.step += 1;
+    },
+    goToMyMatches(newVal) {
+      if (newVal) {
+        this.step = 3;
+        this.$emit('update:goToMyMatches', false);
+      }
     },
   },
 
