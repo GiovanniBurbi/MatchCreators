@@ -41,18 +41,16 @@
         isFinder ? 'icon-select' : 'icon-no-select']"
         @click="toggleMode()"
         >
-          <!-- mdi-magnify -->
           $finder-icon
         </v-icon>
 
         <v-icon
         v-if="xsOnly"
         size="30"
-        :class="['mx-3 icon-switch',
+        :class="['ml-3 mr-2 icon-switch',
         isFinder ? 'icon-no-select' : 'icon-select white-icon']"
         @click="toggleMode()"
         >
-          <!-- mdi-pencil-outline -->
           $creator-icon
         </v-icon>
     </div>
@@ -127,7 +125,8 @@ in finder page and creator page */
   height: 36px;
 }
 .dark-bg {
-  background-color: #212121;
+  background-color: white;
+  /* background-color: #212121; */
   transition: background-color 0.4s ease;
 }
 .label {
@@ -202,7 +201,7 @@ in finder page and creator page */
 }
 
 .selector-xsmall {
-  transform: translateX(52px);
+  transform: translateX(53px);
 }
 .white-icon {
   /* white */
