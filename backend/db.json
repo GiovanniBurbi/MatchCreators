@@ -701,7 +701,9 @@
         },
         {
           "id": 1,
-          "user": { "id": 1 }
+          "user": {
+            "id": 1
+          }
         },
         {
           "id": 2,
@@ -891,7 +893,9 @@
         },
         {
           "id": 2,
-          "user": { "id": 1 }
+          "user": {
+            "id": 1
+          }
         },
         {
           "id": 3,
@@ -1032,6 +1036,108 @@
           "user": {}
         }
       ]
+    },
+    {
+      "date": "2022-09-28",
+      "startTime": "12:00",
+      "endTime": "13:00",
+      "location": "Albereta",
+      "positions": {
+        "goalkeepers": 2,
+        "defenders": 1,
+        "forwards": 2
+      },
+      "blackTeam": [
+        {
+          "team": "Black"
+        },
+        {
+          "id": 1,
+          "user": {
+            "id": 9,
+            "username": "Paul",
+            "password": "match123",
+            "email": "Paul1@gmail.com",
+            "birthday": "2003-10-09",
+            "position": "Goalkeeper",
+            "picture": "assets/users/Paul.jpg"
+          }
+        },
+        {
+          "id": 2,
+          "user": {
+            "id": 1,
+            "username": "Carl",
+            "password": "match123",
+            "email": "Carl4@gmail.com",
+            "birthday": "1990-07-05",
+            "position": "Defender",
+            "picture": "assets/users/Carl.jpg"
+          }
+        },
+        {
+          "id": 3,
+          "user": {}
+        },
+        {
+          "id": 4,
+          "user": {
+            "id": 7,
+            "username": "Matthew",
+            "password": "match123",
+            "email": "Matthew7@gmail.com",
+            "birthday": "1978-08-31",
+            "position": "Forward",
+            "picture": "assets/users/Matthew.jpg"
+          }
+        },
+        {
+          "id": 5,
+          "user": {}
+        }
+      ],
+      "whiteTeam": [
+        {
+          "team": "White"
+        },
+        {
+          "id": 1,
+          "user": {
+            "id": 10,
+            "username": "Robert",
+            "password": "match123",
+            "email": "Robert12@gmail.com",
+            "birthday": "2003-12-7",
+            "position": "Goalkeeper",
+            "picture": "assets/users/Robert.jpg"
+          }
+        },
+        {
+          "id": 2,
+          "user": {}
+        },
+        {
+          "id": 3,
+          "user": {}
+        },
+        {
+          "id": 4,
+          "user": {}
+        },
+        {
+          "id": 5,
+          "user": {
+            "id": 6,
+            "username": "Stephan",
+            "password": "match123",
+            "email": "Stephan8@gmail.com",
+            "birthday": "1960-11-11",
+            "position": "Forward",
+            "picture": "assets/users/Stephan.jpg"
+          }
+        }
+      ],
+      "id": 16
     }
   ]
 }

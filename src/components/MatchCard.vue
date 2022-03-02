@@ -15,7 +15,7 @@
         mdi-calendar
       </v-icon>
       <h1
-      :class="['font-weight-bold indigo--text      text--darken-2', {'text-h6': smAndUp},
+      :class="['font-weight-bold indigo--text      text--darken-2', {'text-subtitle-1': smAndUp},
       {'text-subtitle-1': xsOnly}]"
       >
         {{ this.dateFormatted }}
@@ -213,7 +213,7 @@ export default {
     if (this.match.positions.forwards === 4) {
       this.fwFilled = true;
     }
-    this.dateFormatted = format(parseISO(this.match.date), 'EEEE, d MMMM');
+    this.dateFormatted = format(parseISO(this.match.date), 'EEEE, d MMMM yyyy');
   },
 
   mixins: [BreakpointsCond],
