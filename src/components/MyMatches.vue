@@ -7,7 +7,7 @@
     {'header-md' : lgOnly || mdOnly}]"
     >
       <h1
-      :class="['white--text text-size font-weight-bold',
+      :class="['white--text text-size font-weight-bold shadow',
       {'big': lgAndUp}, {'small': xsOnly}]"
       >
         My Matches
@@ -73,6 +73,10 @@ export default {
 .header-sm {
   max-width: 100%;
 }
+.shadow {
+  text-shadow: 2px 3px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
 .text-size {
   font-size: 2.2rem;
 }
@@ -86,7 +90,6 @@ export default {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
   brightness(122%) contrast(100%)
-  drop-shadow( 2px 2px 1px rgba(0, 0, 0))
-  drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7));
+  drop-shadow( 2px 2px 1px rgba(0, 0, 0));
 }
 </style>

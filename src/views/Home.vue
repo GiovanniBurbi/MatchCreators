@@ -2,6 +2,7 @@
   <v-container fluid class="background">
     <!-- change width based on current viewport -->
     <v-container
+    v-if="!showMyMatches"
     :class="['content',
     {'fullscreen' : smAndDown},
     {'biggerContent' : lgOnly || mdOnly}]"
@@ -16,6 +17,8 @@
       class="py-2"/>
 
     </v-container>
+
+    <my-matches v-else />
   </v-container>
 </template>
 
@@ -24,6 +27,7 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 import FinderHeader from '@/components/FinderHeader.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import MatchCardsGroup from '../components/MatchCardsGroup.vue';
+import MyMatches from '../components/MyMatches.vue';
 
 export default {
   name: 'Home',
@@ -32,6 +36,7 @@ export default {
     return {
       filtersOn: false,
       chipsOn: false,
+      showMyMatches: false,
     };
   },
 
@@ -62,7 +67,7 @@ export default {
 
     goToMyMatches(newVal) {
       if (newVal) {
-        console.log('finder');
+        this.showMyMatches = true;
         this.$emit('update:goToMyMatches', false);
       }
     },
@@ -84,6 +89,7 @@ export default {
   components: {
     FinderHeader,
     MatchCardsGroup,
+    MyMatches,
   },
 
   mixins: [BreakpointsCond],

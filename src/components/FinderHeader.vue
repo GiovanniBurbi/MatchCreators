@@ -105,7 +105,7 @@ export default {
 
 <style scoped>
 .header {
-  text-shadow: 2px 3px 1px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 3px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
 }
 .text-size {
