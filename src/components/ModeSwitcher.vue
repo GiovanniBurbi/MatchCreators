@@ -125,8 +125,7 @@ in finder page and creator page */
   height: 36px;
 }
 .dark-bg {
-  background-color: white;
-  /* background-color: #212121; */
+  background-color: #212121;
   transition: background-color 0.4s ease;
 }
 .label {
