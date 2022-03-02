@@ -24,8 +24,10 @@
         v-if="isFinder"
         color="deep-purple"
         dark
+        @click="$emit('goBackToFinder')"
         >
-          look for a match
+          <span class="shadow">find new match</span>
+          <v-icon right class="white-icon">$finder-icon</v-icon>
         </v-btn>
       </v-row>
 
@@ -90,10 +92,6 @@ export default {
 }
 .header-sm {
   max-width: 100%;
-}
-.shadow {
-  text-shadow: 2px 3px rgba(0, 0, 0, 0.6);
-  white-space: nowrap;
 }
 .text-size {
   font-size: 2.2rem;

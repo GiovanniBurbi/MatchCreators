@@ -1,24 +1,33 @@
 <template>
   <v-container fluid class="background">
-    <!-- change width based on current viewport -->
-    <v-container
-    v-if="!showMyMatches"
-    :class="['content',
-    {'fullscreen' : smAndDown},
-    {'biggerContent' : lgOnly || mdOnly}]"
-    >
 
-      <finder-header @filters="filtersOn = !filtersOn"/>
+    <v-slide-y-reverse-transition hide-on-leave>
+      <!-- change width based on current viewport -->
+      <v-container
+      v-if="!showMyMatches"
+      :class="['content',
+      {'fullscreen' : smAndDown},
+      {'biggerContent' : lgOnly || mdOnly}]"
+      >
 
-      <match-cards-group
-      :loading="!statusMatches"
-      :matches="filteredMatches"
-      :isFinder=true
-      class="py-2"/>
+        <finder-header @filters="filtersOn = !filtersOn"/>
 
-    </v-container>
+        <match-cards-group
+        :loading="!statusMatches"
+        :matches="filteredMatches"
+        :isFinder=true
+        class="py-2"/>
 
-    <my-matches v-else :isFinder="true"/>
+      </v-container>
+    </v-slide-y-reverse-transition>
+
+    <v-slide-y-transition hide-on-leave>
+      <my-matches
+      v-if="showMyMatches"
+      :isFinder="true"
+      @goBackToFinder="showMyMatches = false" />
+    </v-slide-y-transition>
+
   </v-container>
 </template>
 

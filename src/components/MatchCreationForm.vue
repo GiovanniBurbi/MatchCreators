@@ -177,6 +177,7 @@
       flat class="d-inline-flex" label="Define the location"></v-text-field>
     </div>
     <v-btn
+    class="shadow"
     dark
     color="deep-purple darken-2"
     elevation="6"

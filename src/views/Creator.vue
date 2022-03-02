@@ -59,7 +59,7 @@
                 @click="createMatch()"
                 :loading="loading"
                 >
-                  Create the match
+                  <span class="shadow">create the match</span>
                 </v-btn>
               </v-row>
               <team-builder class="pb-0"/>

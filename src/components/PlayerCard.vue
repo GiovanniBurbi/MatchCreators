@@ -21,7 +21,7 @@
           fab color="red darken-4" dark
           @click="deletePlayer()"
           >
-            <v-icon :x-small="xsOnly">mdi-close</v-icon>
+            <v-icon class="shadow" :x-small="xsOnly">mdi-close</v-icon>
           </v-btn>
         </div>
 
@@ -76,6 +76,7 @@
           <v-btn
           fab
           outlined
+          elevation="2"
           :x-small="xsOnly"
           :dark="!white"
           @click.stop="dialog = true"

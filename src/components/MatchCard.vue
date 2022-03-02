@@ -10,12 +10,14 @@
       <v-icon
       left
       size="22"
+      class="icon-shadow"
       color="indigo darken-1"
       >
         mdi-calendar
       </v-icon>
       <h1
-      :class="['font-weight-bold indigo--text      text--darken-2', {'text-subtitle-1': smAndUp},
+      :class="['font-weight-bold indigo--text      text--darken-2 text-shadow',
+      {'text-subtitle-1': smAndUp},
       {'text-subtitle-1': xsOnly}]"
       >
         {{ this.dateFormatted }}
@@ -29,6 +31,7 @@
         left
         size="22"
         color="indigo darken-2"
+        class="icon-shadow"
         >
           mdi-clock-outline
         </v-icon>
@@ -44,6 +47,7 @@
         left
         color="indigo darken-2"
         size="24"
+        class="icon-shadow"
         >
           mdi-map-marker-outline
         </v-icon>
@@ -74,7 +78,7 @@
           <v-row justify="center">
             <v-icon
             size="34"
-            :class="gkFilled ? 'filled-pos' : null"
+            :class="[gkFilled ? 'filled-pos' : null, 'posIcon-shadow']"
             >
               $goalkeeper-icon
             </v-icon>
@@ -94,7 +98,7 @@
           <v-row justify="center">
             <v-icon
             size="34"
-            :class="defFilled ? 'filled-pos' : null"
+            :class="[defFilled ? 'filled-pos' : null, 'posIcon-shadow']"
             >
               $defender-icon
             </v-icon>
@@ -114,7 +118,7 @@
           <v-row justify="center">
             <v-icon
             size="42"
-            :class="['pb-1', fwFilled ? 'filled-pos' : null]"
+            :class="['pb-1 posIcon-shadow', fwFilled ? 'filled-pos' : null]"
             >
               $forward-icon
             </v-icon>
@@ -151,11 +155,12 @@
         depressed
         :small="xsOnly"
         >
-          <span v-if="xsOnly">Join match</span>
-          <span v-else>Join the match</span>
+          <span v-if="xsOnly" class="shadow">Join match</span>
+          <span class="shadow" v-else>Join the match</span>
           <v-icon
           right
           :size="xsOnly ? 24 : 28"
+          class="shadow"
           >
             mdi-chevron-double-right
           </v-icon>
@@ -169,11 +174,12 @@
         depressed
         :small="xsOnly"
         >
-          <span v-if="xsOnly">see details</span>
-          <span v-else>see the details</span>
+          <span v-if="xsOnly" class="shadow">see details</span>
+          <span v-else class="shadow">see the details</span>
           <v-icon
           right
           :size="xsOnly ? 24 : 28"
+          class="shadow"
           >
             mdi-chevron-double-right
           </v-icon>
@@ -246,7 +252,8 @@ export default {
 }
 .indigo-darken2-icon {
   /* indigo darken 2 */
-  filter: invert(19%) sepia(50%) saturate(3328%) hue-rotate(224deg) brightness(90%) contrast(89%);
+  filter: invert(19%) sepia(50%) saturate(3328%) hue-rotate(224deg) brightness(90%) contrast(89%)
+  drop-shadow(1px 1px rgba(63, 81, 181, 0.7));
 }
 .filled-pos {
   opacity: 30%;
@@ -254,5 +261,11 @@ export default {
 .overlay {
   display: flex;
   justify-content: flex-end;
+}
+.icon-shadow {
+  text-shadow: 1px 1px rgba(63, 81, 181, 1);
+}
+.posIcon-shadow {
+  filter: drop-shadow(1px 1px rgba(0, 0, 0, 0.5));
 }
 </style>

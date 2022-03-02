@@ -20,12 +20,13 @@
       @click="showFilters = !showFilters, $emit('filters')"
       >
         <span
-        :class="['hidden-xs-only',
+        :class="['hidden-xs-only shadow',
         showFilters ? 'deep-purple--text' : 'white--text']">
           Filters
         </span>
 
         <v-icon
+        class="shadow"
         :small="xsOnly"
         :right="smAndUp"
         :color="showFilters ? 'deep-purple' : 'white'"
