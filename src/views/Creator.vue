@@ -1,99 +1,101 @@
 <template>
   <v-container fluid class="background px-0">
-    <v-scale-transition hide-on-leave>
-      <v-container
-      v-if="step < 3"
-      :class="['header',
-      {'header-sm' : smAndDown},
-      {'header-md' : lgOnly || mdOnly}]"
-      >
-        <h1
-        :class="['white--text text-size font-weight-bold',
-        {'big': lgAndUp}, {'small': xsOnly}]"
+
+    <v-slide-y-reverse-transition hide-on-leave>
+      <div v-show="!showMyMatches">
+
+        <v-container
+        :class="['header',
+        {'header-sm' : smAndDown},
+        {'header-md' : lgOnly || mdOnly}]"
         >
-          Create a Match
-          <v-icon
-          class="white-icon pb-2 pl-1"
-          :size="lgAndUp ? 54 : 40"
+          <h1
+          :class="['white--text text-size font-weight-bold',
+          {'big': lgAndUp}, {'small': xsOnly}]"
           >
-            $creator-icon
-          </v-icon>
-        </h1>
-
-        <v-divider
-        style="border-color: grey !important; opacity: 30%;"
-        ></v-divider>
-
-        <stepper
-        :class="['stepper-margin-lg mb-0',
-        {'stepper-margin-md' : mdOnly},
-        {'stepper-margin-sm' : smAndDown}]"
-        :change="step === 2"
-        @back="step--"
-        />
-
-      </v-container>
-    </v-scale-transition>
-
-    <v-container fluid class="px-0 pt-0">
-
-    <v-window v-model="step">
-      <v-window-item :value="1">
-
-        <match-creation-form @detailsPassed="step++" />
-
-      </v-window-item>
-
-      <v-window-item :value="2">
-        <v-container fluid class="px-0">
-          <details-recap
-          v-if="!xsOnly"
-          :class="['header px-16 pt-0',
-          {'header-sm' : smAndDown},
-          {'header-md' : lgOnly || mdOnly}]"
-          />
-          <v-row justify="center" :class="xsOnly ? 'pt-4 pb-6' : 'pt-10 pb-4'">
-            <v-btn
-            color="green darken-4"
-            dark
-            :disabled="nPlayers === 0 || loading"
-            @click="createMatch()"
-            :loading="loading"
+            Create a Match
+            <v-icon
+            class="white-icon pb-2 pl-1"
+            :size="lgAndUp ? 54 : 40"
             >
-              Create the match
-            </v-btn>
-          </v-row>
-          <team-builder class="pb-0"/>
-        </v-container>
-      </v-window-item>
+              $creator-icon
+            </v-icon>
+          </h1>
 
-      <v-window-item :value="3">
+          <v-divider
+          style="border-color: grey !important; opacity: 30%;"
+          ></v-divider>
+
+          <stepper
+          :class="['stepper-margin-lg mb-0',
+          {'stepper-margin-md' : mdOnly},
+          {'stepper-margin-sm' : smAndDown}]"
+          :change="step === 2"
+          @back="step--"
+          />
+
+        </v-container>
+
+        <v-window v-model="step">
+          <v-window-item :value="1">
+
+            <match-creation-form @detailsPassed="step++" />
+
+          </v-window-item>
+
+          <v-window-item :value="2">
+            <v-container fluid class="px-0">
+              <details-recap
+              v-if="!xsOnly"
+              :class="['header px-16 pt-0',
+              {'header-sm' : smAndDown},
+              {'header-md' : lgOnly || mdOnly}]"
+              />
+              <v-row justify="center" :class="xsOnly ? 'pt-4 pb-6' : 'pt-10 pb-4'">
+                <v-btn
+                color="green darken-4"
+                dark
+                :disabled="nPlayers === 0 || loading"
+                @click="createMatch()"
+                :loading="loading"
+                >
+                  Create the match
+                </v-btn>
+              </v-row>
+              <team-builder class="pb-0"/>
+            </v-container>
+          </v-window-item>
+
+        </v-window>
+      </div>
+    </v-slide-y-reverse-transition>
+
+    <v-slide-y-transition hide-on-leave>
+      <div v-if="showMyMatches">
 
         <my-matches />
 
-      </v-window-item>
+        <v-fade-transition hide-on-leave>
+          <v-btn
+          v-if="!loadingUserMatches"
+          class="stick"
+          large
+          fab
+          dark
+          color="deep-purple darken-2"
+          @click="showMyMatches = false"
+          >
 
-    </v-window>
+            <v-icon size="44">
+              mdi-plus
+            </v-icon>
 
-    <v-scroll-y-transition hide-on-leave>
-      <v-btn
-      v-if="!loadingUserMatches && step === 3"
-      class="stick"
-      large
-      fab
-      dark
-      color="deep-purple darken-2"
-      @click="step = 1"
-      >
+          </v-btn>
+        </v-fade-transition>
 
-        <v-icon size="44">
-          mdi-plus
-        </v-icon>
+      </div>
+    </v-slide-y-transition>
 
-      </v-btn>
-    </v-scroll-y-transition>
-
-    </v-container>
   </v-container>
 </template>
 
@@ -120,6 +122,7 @@ export default {
   data() {
     return {
       step: 1,
+      showMyMatches: false,
     };
   },
 
@@ -141,7 +144,8 @@ export default {
     },
     goToMyMatches(newVal) {
       if (newVal) {
-        this.step = 3;
+        this.showMyMatches = true;
+        this.step = 1;
         this.$emit('update:goToMyMatches', false);
       }
     },
