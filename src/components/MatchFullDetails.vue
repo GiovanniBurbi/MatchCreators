@@ -148,8 +148,8 @@
 
         </v-container>
 
-        <field class="pt-16"
-        :isWhite="false" :teamBlack="match.blackTeam" :teamWhite="match.whiteTeam" />
+        <field class="pt-4"
+        :teamBlack="match.blackTeam" :teamWhite="match.whiteTeam" />
 
       </div>
 
@@ -284,7 +284,7 @@ export default {
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 50%;
+  opacity: 40%;
 }
 .content {
   position: relative;

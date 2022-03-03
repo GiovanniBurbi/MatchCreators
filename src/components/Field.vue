@@ -1,20 +1,73 @@
 <template>
-  <v-container fluid class="px-0"
->
+  <v-container style="position:relative;" fluid class="px-0">
 
-  <v-row justify="center">
-    <v-img
-    :class="xsOnly ? 'field-small' :'field'"
-    src="../assets/teamCreator/pitch.png"
-    >
-      <v-scale-transition hide-on-leave>
-        <players-cards-group v-show="!isWhite" :team="teamBlack"/>
-      </v-scale-transition>
-      <v-scale-transition hide-on-leave>
-        <players-cards-group v-show="isWhite" :team="teamWhite"/>
-      </v-scale-transition>
-    </v-img>
-  </v-row>
+    <v-row justify="center" :class="[smAndUp ? 'mt-2' : 'mt-0']">
+      <div class="d-inline-flex justify-center align-center switch-bg">
+        <div
+        :class="['switcher px-6', black ? 'selected' : 'no-selected']"
+        @click="black = !black"
+        >
+          <h1
+          v-if="windowWidth >= 370"
+            :class="[
+              'd-inline-flex font-weight-medium pr-1',
+              { 'text-size': mdAndUp },
+              { 'text-small': xsOnly },
+            ]"
+          >
+            Team
+          </h1>
+          <h1
+            :class="[
+              'd-inline-flex font-weight-medium pl-1',
+              { 'text-size': mdAndUp },
+              { 'text-small': xsOnly },
+            ]"
+          >
+            Black
+          </h1>
+        </div>
+        <div
+          :class="['switcher px-6', black ? 'no-selected' : 'selected']"
+          @click="black = !black"
+        >
+          <h1
+            v-if="windowWidth >= 370"
+            :class="[
+              'd-inline-flex font-weight-medium pr-1',
+              { 'text-size': mdAndUp },
+              { 'text-small': xsOnly },
+            ]"
+          >
+            Team
+          </h1>
+          <h1
+            :class="[
+              'd-inline-flex font-weight-medium pl-1',
+              { 'text-size': mdAndUp },
+              { 'text-small': xsOnly },
+            ]"
+          >
+            White
+          </h1>
+        </div>
+
+      </div>
+    </v-row>
+
+    <v-row justify="center" style="position:relative;" class="field-row">
+      <v-img
+      :class="xsOnly ? 'field-small' :'field'"
+      src="../assets/teamCreator/pitch.png"
+      >
+        <v-scale-transition hide-on-leave>
+          <players-cards-group v-show="black" :team="teamBlack"/>
+        </v-scale-transition>
+        <v-scale-transition hide-on-leave>
+          <players-cards-group v-show="!black" :team="teamWhite"/>
+        </v-scale-transition>
+      </v-img>
+    </v-row>
 
   </v-container>
 </template>
@@ -26,11 +79,14 @@ import PlayersCardsGroup from './PlayersCardsGroup.vue';
 export default {
   name: 'Field',
 
+  data() {
+    return {
+      black: true,
+      windowWidth: window.innerWidth,
+    };
+  },
+
   props: {
-    isWhite: {
-      type: Boolean,
-      required: true,
-    },
     teamWhite: {
       type: Array,
       required: true,
@@ -39,6 +95,37 @@ export default {
       type: Array,
       required: true,
     },
+    reset: {
+      type: Boolean,
+    },
+  },
+
+  watch: {
+    windowWidth(newVal) {
+      this.windowWidth = newVal;
+    },
+    reset(newVal) {
+      if (newVal) {
+        this.black = true;
+        this.$emit('update:reset', false);
+      }
+    },
+  },
+
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
   },
 
   components: {
@@ -57,5 +144,46 @@ export default {
 .field-small {
   max-width: 1100px;
   max-height: 490px;
+}
+.switch-bg {
+  background: #212121;
+  /* background: #3949AB; */
+  border-radius: 20px 20px 5px 5px;
+  padding: 0 80px 120px;
+  position: absolute;
+}
+.switcher {
+  z-index: 100;
+  white-space: nowrap;
+}
+.switcher::after {
+  display: block;
+  margin-left: 2px;
+  content: "";
+  border-bottom: solid 2px rgb(255, 255, 255);
+  transform: scaleX(0);
+}
+.selected {
+  cursor: default;
+  pointer-events: none;
+  color: white;
+}
+.selected:after {
+  transition: 200ms ease-in-out;
+  transform: scaleX(1);
+}
+.no-selected {
+  color: white;
+  opacity: 40%;
+}
+.no-selected:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
+h1 {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+.field-row {
+  margin-top: 60px;
 }
 </style>
