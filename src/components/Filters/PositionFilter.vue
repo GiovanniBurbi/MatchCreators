@@ -16,7 +16,8 @@
         $position-icon
       </v-icon>
 
-      <span class="hidden-xs-only text-shadow">Position</span>
+      <span
+      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']">Position</span>
     </v-btn>
 
     <v-dialog

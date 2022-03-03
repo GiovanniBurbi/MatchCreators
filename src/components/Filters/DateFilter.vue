@@ -11,12 +11,16 @@
       <v-icon
       :left="smAndUp"
       size="22"
-      class="text-shadow"
+      :class="filterPresent ? '' : 'text-shadow'"
       >
         mdi-calendar
       </v-icon>
 
-      <span class="hidden-xs-only text-shadow">Date</span>
+      <span
+      :class="['hidden-xs-only',  filterPresent ? '' : 'text-shadow']"
+      >
+        Date
+      </span>
     </v-btn>
 
     <v-dialog

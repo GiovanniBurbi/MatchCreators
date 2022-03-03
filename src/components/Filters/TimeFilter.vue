@@ -11,12 +11,16 @@
       <v-icon
       :left="smAndUp"
       size="22"
-      class="text-shadow"
+      :class="[filterPresent ? '' : 'text-shadow']"
       >
         mdi-clock-outline
       </v-icon>
 
-      <span class="hidden-xs-only text-shadow">Time</span>
+      <span
+      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']"
+      >
+        Time
+      </span>
     </v-btn>
 
     <v-dialog
