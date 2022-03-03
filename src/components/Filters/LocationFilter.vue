@@ -31,10 +31,11 @@
           size="28"
           left
           color="white"
+          class="text-shadow"
           >
             mdi-map-marker-outline
           </v-icon>
-          <span class="white--text">Location</span>
+          <span class="white--text text-shadow">Location</span>
         </v-card-title>
 
         <v-card-text class="pt-4 pb-2">

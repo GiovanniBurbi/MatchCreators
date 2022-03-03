@@ -31,10 +31,11 @@
           size="28"
           left
           color="white"
+          class="text-shadow"
           >
             mdi-calendar
           </v-icon>
-          <span class="white--text">Date</span>
+          <span class="white--text text-shadow">Date</span>
         </v-card-title>
 
         <v-card-text class="pt-4 pb-2">

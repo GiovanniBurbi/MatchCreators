@@ -66,7 +66,7 @@ export default {
 </script>
 <style>
 .shadow {
-  text-shadow: 2px 3px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.6);
 }
 
 </style>

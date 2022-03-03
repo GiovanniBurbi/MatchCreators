@@ -9,7 +9,7 @@
       <v-row justify="space-between" align="center">
         <h1
         :class="['white--text text-size font-weight-bold',
-        {'big': lgAndUp}, {'small': xsOnly}, isFinder ? 'shadow' : 'white-shadow']"
+        {'big': lgAndUp}, {'small': xsOnly}, isFinder ? 'header-shadow-black' : 'white-shadow']"
         >
           My Matches
           <v-icon
@@ -133,5 +133,8 @@ export default {
 }
 .text-shadow {
   text-shadow: 1px 2px black;
+}
+.header-shadow-black {
+  text-shadow: 2px 3px rgba(0, 0, 0, 0.6);
 }
 </style>
