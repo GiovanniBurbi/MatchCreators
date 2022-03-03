@@ -2,7 +2,12 @@
   <v-container fluid class="px-0">
 
     <v-row justify="center">
-      <field :reset="reset" :teamBlack="teamBlack" :teamWhite="teamWhite"/>
+      <field
+      :reset="reset"
+      :teamBlack="teamBlack"
+      :teamWhite="teamWhite"
+      :builder="true"
+      />
     </v-row>
 
   </v-container>

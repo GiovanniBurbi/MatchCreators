@@ -148,8 +148,11 @@
 
         </v-container>
 
-        <field class="pt-4"
-        :teamBlack="match.blackTeam" :teamWhite="match.whiteTeam" />
+        <field
+        class="pt-4"
+        :teamBlack="match.blackTeam"
+        :teamWhite="match.whiteTeam"
+        :builder="false" />
 
       </div>
 
@@ -158,6 +161,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import Field from './Field.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
@@ -228,7 +232,6 @@ export default {
       let type = '';
       if (this.$vuetify.breakpoint.mdAndUp) type = 'text-h5';
       if (this.$vuetify.breakpoint.smAndDown) type = 'text-subtitle-1 font-weight-medium';
-      /* if (this.$vuetify.breakpoint.xsOnly) type = 'text-h5'; */
       return `white--text ${type}`;
     },
 
@@ -253,6 +256,12 @@ export default {
       const ageDate = new Date(ageDiffMs);
       return Math.abs(ageDate.getUTCFullYear() - 1970);
     },
+
+    ...mapActions({ fetchAllUsers: 'users/fetchAllUsers' }),
+  },
+
+  created() {
+    this.fetchAllUsers();
   },
 
   mixins: [BreakpointsCond],

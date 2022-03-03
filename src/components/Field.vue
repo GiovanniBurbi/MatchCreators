@@ -1,5 +1,5 @@
 <template>
-  <v-container style="position:relative;" fluid class="px-0">
+  <v-container fluid class="px-0">
 
     <v-row justify="center" :class="[smAndUp ? 'mt-2' : 'mt-0']">
       <div class="d-inline-flex justify-center align-center switch-bg">
@@ -55,7 +55,7 @@
       </div>
     </v-row>
 
-    <v-row justify="center" style="position:relative;" class="field-row">
+    <v-row justify="center">
       <v-img
       :class="xsOnly ? 'field-small' :'field'"
       src="../assets/teamCreator/pitch.png"
@@ -97,6 +97,10 @@ export default {
     },
     reset: {
       type: Boolean,
+    },
+    builder: {
+      type: Boolean,
+      required: true,
     },
   },
 
@@ -146,11 +150,18 @@ export default {
   max-height: 490px;
 }
 .switch-bg {
-  background: #212121;
-  /* background: #3949AB; */
-  border-radius: 20px 20px 5px 5px;
-  padding: 0 80px 120px;
+  position: relative;
+}
+.switch-bg::before {
+  content: "";
+  background: #000000;
   position: absolute;
+  /* border-radius: 20px 20px 5px 5px; */
+  top: -24px;
+  right: -80px;
+  bottom: -120px;
+  left: -80px;
+  opacity: 80%;
 }
 .switcher {
   z-index: 100;
@@ -182,8 +193,5 @@ export default {
 }
 h1 {
   text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
-}
-.field-row {
-  margin-top: 60px;
 }
 </style>
