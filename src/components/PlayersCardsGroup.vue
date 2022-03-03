@@ -100,4 +100,12 @@ export default {
     max-width: 24%;
   }
 }
+@media screen and (max-width: 300px) {
+  .row-2 {
+    max-width: 34%;
+  }
+  .row-1 {
+    max-width: 20%;
+  }
+}
 </style>
