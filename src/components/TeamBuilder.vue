@@ -72,6 +72,13 @@ export default {
     };
   },
 
+  props: {
+    reset: {
+      type: Boolean,
+      required: true,
+    },
+  },
+
   computed: {
     ...mapGetters({ getUser: 'auth/getUser' }),
     ...mapGetters({ teamBlack: 'matches/getTeamBlack' }),
@@ -81,6 +88,12 @@ export default {
   watch: {
     windowWidth(newVal) {
       this.windowWidth = newVal;
+    },
+    reset(newVal) {
+      if (newVal) {
+        this.black = true;
+        this.$emit('update:reset', false);
+      }
     },
   },
 

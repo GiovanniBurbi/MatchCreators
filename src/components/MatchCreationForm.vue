@@ -232,6 +232,7 @@ export default {
         this.time = null;
         this.start = null;
         this.end = null;
+        this.step = 1;
         this.location = null;
       }
     },

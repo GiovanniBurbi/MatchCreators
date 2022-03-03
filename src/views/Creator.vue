@@ -62,7 +62,7 @@
                   <span class="text-shadow">create the match</span>
                 </v-btn>
               </v-row>
-              <team-builder class="pb-0"/>
+              <team-builder :reset.sync="reset" class="pb-0"/>
             </v-container>
           </v-window-item>
 
@@ -123,6 +123,7 @@ export default {
     return {
       step: 1,
       showMyMatches: false,
+      reset: false,
     };
   },
 
@@ -140,7 +141,10 @@ export default {
 
   watch: {
     loading(val) {
-      if (!val) this.showMyMatches = true;
+      if (!val) {
+        this.showMyMatches = true;
+        this.reset = true;
+      }
     },
     goToMyMatches(newVal) {
       if (newVal) {
