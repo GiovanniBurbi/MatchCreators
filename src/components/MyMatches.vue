@@ -31,6 +31,7 @@
           <v-icon
           :right="!xsOnly"
           class="white-icon-black-shadow"
+          size="28"
           >
             $finder-icon
           </v-icon>
