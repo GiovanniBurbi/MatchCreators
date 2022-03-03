@@ -1,9 +1,10 @@
 <template>
-  <v-container fluid class="background">
+  <v-container fluid :class="[xsOnly ? 'px-0' : '', 'background']">
 
     <v-slide-y-reverse-transition hide-on-leave>
       <!-- change width based on current viewport -->
       <v-container
+      v-show="false"
       v-if="!showMyMatches"
       :class="['content',
       {'fullscreen' : smAndDown},
@@ -23,10 +24,13 @@
 
     <v-slide-y-transition hide-on-leave>
       <my-matches
+      v-show="false"
       v-if="showMyMatches"
       :isFinder="true"
       @goBackToFinder="showMyMatches = false" />
     </v-slide-y-transition>
+
+    <match-full-details v-if="statusMatches" :match="filteredMatches[5]" />
 
   </v-container>
 </template>
@@ -37,6 +41,7 @@ import FinderHeader from '@/components/FinderHeader.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import MatchCardsGroup from '../components/MatchCardsGroup.vue';
 import MyMatches from '../components/MyMatches.vue';
+import MatchFullDetails from '../components/MatchFullDetails.vue';
 
 export default {
   name: 'Home',
@@ -99,6 +104,7 @@ export default {
     FinderHeader,
     MatchCardsGroup,
     MyMatches,
+    MatchFullDetails,
   },
 
   mixins: [BreakpointsCond],
@@ -107,6 +113,8 @@ export default {
 
 <style scoped>
 .background {
+  display: flex;
+  justify-content: center;
   height: 100%;
   background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
   rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/daylight.jpg') no-repeat center center fixed;

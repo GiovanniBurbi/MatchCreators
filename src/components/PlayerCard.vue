@@ -27,9 +27,8 @@
 
         <v-row justify="center">
           <v-avatar
-          :width="xsOnly ? 60 : 80"
           rounded="sm"
-          :height="xsOnly ? 51 : 71"
+          :size="xsOnly ? 51 : 71"
           :class="[xsOnly ? 'mt-1' : 'mt-4', 'avatar-contrast']"
           >
             <img :src="getPicture" >

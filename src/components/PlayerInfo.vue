@@ -89,7 +89,7 @@ export default {
 
 <style scoped>
 .card-title-shadow {
-  text-shadow: 2px 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
 .playerImg {
   /* centering img and default opacity*/
