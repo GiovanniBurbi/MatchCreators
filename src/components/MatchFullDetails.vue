@@ -1,7 +1,9 @@
 <template>
   <v-card tile color="transparent" style="overflow-x:hidden">
 
-    <v-card-title class="indigo darken-2 px-0 py-0">
+    <v-card-title
+    :class="['px-0 py-0', dark ? 'grey darken-4' : 'white']"
+    >
 
       <v-container fluid>
 
@@ -9,6 +11,7 @@
           <v-btn
           :class="mdAndUp ? 'pl-6' : 'pl-4'"
           plain
+          color="grey darken-3"
           :x-large="mdAndUp"
           :large="smAndDown"
           dark
@@ -20,9 +23,9 @@
 
         </v-row>
 
-        <v-row justify="center" no-gutters>
+        <v-row justify="center" class="pb-2 mt-0">
           <h1
-          :class="['white--text title', titleSize]"
+          :class="['indigo--text title', titleSize]"
           >
             Match Overview
           </h1>
@@ -32,9 +35,9 @@
 
     </v-card-title>
 
-    <v-card-text class="px-0 card-content">
+    <v-card-text :class="['px-0 card-content', dark ? '' : 'light']">
 
-      <div class="indigo pb-1">
+      <div :class="['pb-1', dark ? 'ghosty-black' : 'indigo']">
 
         <v-row justify="center" class="mt-0">
 
@@ -166,7 +169,7 @@
       </div>
 
       <field
-      class="pt-16 mt-6"
+      class="pt-16 mt-8"
       :teamBlack="match.blackTeam"
       :teamWhite="match.whiteTeam"
       :builder="false" />
@@ -193,6 +196,9 @@ export default {
     match: {
       type: Object,
       required: true,
+    },
+    dark: {
+      type: Boolean,
     },
   },
 
@@ -297,10 +303,13 @@ export default {
 .card-content {
   height: 100%;
   overflow-x:hidden;
+}
+.light {
   background: rgba(0, 0, 0, 0.4);
 }
 h1 {
   white-space: nowrap;
+  cursor: default;
 }
 h1, .icon-shadow {
   text-shadow: 1px 1px black;
@@ -312,5 +321,10 @@ h1, .icon-shadow {
 }
 .title {
   border-bottom: 1px solid white;
+  cursor: default;
+}
+.ghosty-black {
+  background: rgb(21, 29, 80);
+  /* background: #9E9E9E; */
 }
 </style>

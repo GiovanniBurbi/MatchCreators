@@ -2,7 +2,7 @@
   <v-container fluid class="background px-0">
 
     <v-slide-y-reverse-transition hide-on-leave>
-      <div v-show="!showMyMatches">
+      <div v-show="!showMyMatches && !isOverview">
 
         <v-container
         :class="['header',
@@ -71,7 +71,7 @@
     </v-slide-y-reverse-transition>
 
     <v-slide-y-transition hide-on-leave>
-      <div v-if="showMyMatches">
+      <div v-if="showMyMatches && !isOverview">
 
         <my-matches :isFinder="false" />
 
@@ -96,6 +96,19 @@
       </div>
     </v-slide-y-transition>
 
+    <v-dialog
+    v-model="isOverview"
+    persistent
+    hide-overlay
+    scrollable
+    fullscreen
+    >
+      <match-full-details
+      v-if="isOverview"
+      :dark="true"
+      :match="matchToOverview" />
+    </v-dialog>
+
   </v-container>
 </template>
 
@@ -107,6 +120,7 @@ import MatchCreationForm from '../components/MatchCreationForm.vue';
 import TeamBuilder from '../components/TeamBuilder.vue';
 import DetailsRecap from '../components/DetailsRecap.vue';
 import MyMatches from '../components/MyMatches.vue';
+import MatchFullDetails from '../components/MatchFullDetails.vue';
 
 export default {
   name: 'Creator',
@@ -117,11 +131,12 @@ export default {
     TeamBuilder,
     DetailsRecap,
     MyMatches,
+    MatchFullDetails,
   },
 
   data() {
     return {
-      step: 2,
+      step: 1,
       showMyMatches: false,
       reset: false,
     };
@@ -137,6 +152,8 @@ export default {
     ...mapGetters({ nPlayers: 'matches/getNumPlayers' }),
     ...mapGetters({ loading: 'matches/getLoading' }),
     ...mapGetters({ loadingUserMatches: 'matches/getLoadingUserMatches' }),
+    ...mapGetters({ matchToOverview: 'matches/getMatchToOverview' }),
+    ...mapGetters({ isOverview: 'matches/getIsOverview' }),
   },
 
   watch: {
