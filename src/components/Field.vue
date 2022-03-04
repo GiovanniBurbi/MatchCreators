@@ -164,13 +164,20 @@ export default {
   content: "";
   background: #000000;
   position: absolute;
-  border-radius: 20px 20px 5px 5px;
+  /* border-radius: 20px 20px 5px 5px;
   top: 0px;
   right: -80px;
   bottom: -120px;
   left: -80px;
   opacity: 65%;
-  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.8);
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.8); */
+  border-radius: 5px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 80%;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
 }
 .switch-bg-smaller {
   position: relative;
@@ -179,12 +186,18 @@ export default {
   content: "";
   background: #000000;
   position: absolute;
-  border-radius: 20px 20px 0px 0px;
+  /* border-radius: 20px 20px 0px 0px;
   top: 0px;
   right: -42px;
   bottom: -82px;
   left: -42px;
-  opacity: 60%;
+  opacity: 60%; */
+  border-radius: 5px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 80%;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 .text-small {

@@ -1,6 +1,7 @@
 <template>
   <div :class="['card', mdAndDown ? 'normal' : 'compress']">
-    <v-container fluid class="background px-0">
+    <!-- <v-container fluid class="background px-0 pb-0"> -->
+    <v-container fluid :class="['background px-0', smAndDown ? 'bg-fullHeight' : '']">
 
       <div class="content">
 
@@ -163,7 +164,7 @@
         </v-container>
 
         <field
-        class="pt-4"
+        :class="smAndDown ? 'field-centering' : 'field-padding'"
         :teamBlack="match.blackTeam"
         :teamWhite="match.whiteTeam"
         :builder="false" />
@@ -292,7 +293,7 @@ export default {
 </script>
 
 <style scoped>
-.card {
+/* .card {
   height: 100%;
 }
 .compress {
@@ -300,10 +301,9 @@ export default {
 }
 .normal {
   width: 100%;
-}
+} */
 .background {
   position: relative;
-  height: 100%;
   overflow-x: hidden;
 }
 .background::before {
@@ -315,7 +315,7 @@ export default {
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 60%;
+  opacity: 30%;
 }
 .content {
   position: relative;
@@ -334,4 +334,11 @@ h1, .icon-shadow {
 /* .title {
   border-bottom: 1px solid white;
 } */
+.field-padding {
+  padding-top: 60px;
+}
+.field-centering {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
 </style>

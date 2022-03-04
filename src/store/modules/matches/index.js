@@ -280,5 +280,11 @@ export default {
     getMatchToOverview(state) {
       return state.matchToOverview;
     },
+
+    getIsOverview(state) {
+      if (Object.keys(state.matchToOverview).length !== 0) {
+        return true;
+      } return false;
+    },
   },
 };

@@ -1,9 +1,11 @@
 <template>
   <v-app>
-    <navbar
-    v-if="isNotAuth"
-    @myMatches="userMatches = true"
-    ></navbar>
+    <v-slide-y-transition>
+      <navbar
+      v-if="isNotAuth && !isOverview"
+      @myMatches="userMatches = true"
+      ></navbar>
+    </v-slide-y-transition>
 
     <v-snackbar
      v-model="snackbar"
@@ -51,6 +53,7 @@ export default {
     },
 
     ...mapGetters({ getUserInfo: 'auth/getUser' }),
+    ...mapGetters({ isOverview: 'matches/getIsOverview' }),
 
     getUsername() {
       if (!this.getUserInfo) return '';

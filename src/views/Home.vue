@@ -4,7 +4,7 @@
     <v-slide-y-reverse-transition hide-on-leave>
       <!-- change width based on current viewport -->
       <v-container
-      v-if="!showMyMatches && !showMatchDetails"
+      v-if="!showMyMatches && !isOverview"
       :class="['content',
       {'fullscreen' : smAndDown},
       {'biggerContent' : lgOnly || mdOnly}]"
@@ -24,15 +24,27 @@
 
     <v-slide-y-transition hide-on-leave>
       <my-matches
-      v-if="showMyMatches && !showMatchDetails"
+      v-if="showMyMatches"
+      v-show="!isOverview"
       :isFinder="true"
       @goBackToFinder="showMyMatches = false" />
     </v-slide-y-transition>
 
-    <!-- <match-full-details v-show="false" v-if="statusMatches" :match="filteredMatches[5]" /> -->
-    <v-scale-transition hide-on-leave>
-      <match-full-details v-if="showMatchDetails" :match="matchToOverview" />
-    </v-scale-transition>
+    <!-- <v-scale-transition origin="center center 0" hide-on-leave>
+      <match-full-details v-if="isOverview" :match="matchToOverview" />
+    </v-scale-transition> -->
+
+    <v-dialog
+    v-model="isOverview"
+    persistent
+    fullscreen
+    hide-overlay
+    style="position:relative;"
+    >
+      <match-full-details
+      v-if="isOverview"
+      :match="matchToOverview" />
+    </v-dialog>
 
   </v-container>
 </template>
@@ -53,7 +65,6 @@ export default {
       filtersOn: false,
       chipsOn: false,
       showMyMatches: false,
-      showMatchDetails: false,
     };
   },
 
@@ -68,6 +79,7 @@ export default {
     ...mapGetters({ statusMatches: 'matches/getStatusMatches' }),
     ...mapGetters({ filteredMatches: 'matches/getFilteredMatches' }),
     ...mapGetters({ matchToOverview: 'matches/getMatchToOverview' }),
+    ...mapGetters({ isOverview: 'matches/getIsOverview' }),
   },
 
   methods: {
@@ -88,12 +100,6 @@ export default {
         this.showMyMatches = true;
         this.$emit('update:goToMyMatches', false);
       }
-    },
-
-    matchToOverview(newVal) {
-      if (Object.keys(newVal).length !== 0) {
-        this.showMatchDetails = true;
-      } else this.showMatchDetails = false;
     },
   },
 
