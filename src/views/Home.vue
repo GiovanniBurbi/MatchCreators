@@ -30,16 +30,12 @@
       @goBackToFinder="showMyMatches = false" />
     </v-slide-y-transition>
 
-    <!-- <v-scale-transition origin="center center 0" hide-on-leave>
-      <match-full-details v-if="isOverview" :match="matchToOverview" />
-    </v-scale-transition> -->
-
     <v-dialog
     v-model="isOverview"
     persistent
-    fullscreen
     hide-overlay
-    style="position:relative;"
+    scrollable
+    fullscreen
     >
       <match-full-details
       v-if="isOverview"

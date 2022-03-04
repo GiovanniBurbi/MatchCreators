@@ -2,7 +2,8 @@
   <v-app>
     <v-slide-y-transition>
       <navbar
-      v-if="isNotAuth && !isOverview"
+      v-if="isNotAuth"
+      v-show="!isOverview"
       @myMatches="userMatches = true"
       ></navbar>
     </v-slide-y-transition>

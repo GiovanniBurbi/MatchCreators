@@ -1,178 +1,179 @@
 <template>
-  <div :class="['card', mdAndDown ? 'normal' : 'compress']">
-    <!-- <v-container fluid class="background px-0 pb-0"> -->
-    <v-container fluid :class="['background px-0', smAndDown ? 'bg-fullHeight' : '']">
+  <v-card tile color="transparent" style="overflow-x:hidden">
 
-      <div class="content">
+    <v-card-title class="indigo darken-2 px-0 py-0">
 
-        <v-container fluid class="indigo darken-2 py-0 px-0">
+      <v-container fluid>
 
-          <v-row>
-            <v-btn
-            :class="mdAndUp ? 'pl-6' : 'pl-4'"
-            plain
-            :x-large="mdAndUp"
-            :large="smAndDown"
-            dark
-            @click="resetMatchOverview({})"
-            >
-              <v-icon>mdi-arrow-left</v-icon>
-              <span>back</span>
-            </v-btn>
+        <v-row>
+          <v-btn
+          :class="mdAndUp ? 'pl-6' : 'pl-4'"
+          plain
+          :x-large="mdAndUp"
+          :large="smAndDown"
+          dark
+          @click="resetMatchOverview({})"
+          >
+            <v-icon>mdi-arrow-left</v-icon>
+            <span>back</span>
+          </v-btn>
 
-          </v-row>
+        </v-row>
 
-          <v-row justify="center" no-gutters>
+        <v-row justify="center" no-gutters>
+          <h1
+          :class="['white--text title', titleSize]"
+          >
+            Match Overview
+          </h1>
+        </v-row>
+
+      </v-container>
+
+    </v-card-title>
+
+    <v-card-text class="px-0 card-content">
+
+      <div class="indigo pb-1">
+
+        <v-row justify="center" class="mt-0">
+
+          <v-col class="d-flex align-center justify-center">
+            <div class="d-inline-flex">
+
+              <v-icon
+              left
+              class="icon-shadow"
+              color="white"
+              :size="iconSize"
+              >
+                mdi-calendar
+              </v-icon>
+
+              <div>
+                <h1
+                :class="textSize"
+                >
+                  {{day}},
+                </h1>
+
+                <h1
+                :class="textSize"
+                >
+                  {{date}}
+                </h1>
+              </div>
+
+            </div>
+          </v-col>
+
+          <v-col class="d-flex align-center justify-center">
+            <v-icon
+              class="icon-shadow pr-1"
+              color="white"
+              :size="iconSize"
+              >
+                mdi-clock-outline
+              </v-icon>
             <h1
-            :class="['white--text title', titleSize]"
+            :class="textSize"
             >
-              Match Overview
+              {{time}}
             </h1>
-          </v-row>
+          </v-col>
 
-          <div class=" mt-1 indigo">
+          <v-col class="d-flex align-center justify-center">
+            <v-icon
+              class="icon-shadow pr-1"
+              color="white"
+              :size="iconSize"
+              >
+                mdi-map-marker-outline
+              </v-icon>
+            <h1
+            :class="textSize"
+            >
+              {{match.location}}
+            </h1>
+          </v-col>
 
-            <v-row justify="center" class="mt-0">
+        </v-row>
 
-              <v-col class="d-flex align-center justify-center">
-                <div class="d-inline-flex">
+        <v-divider class="mt-4 mb-6" style="width: 90%; margin:0 auto;"></v-divider>
 
-                  <v-icon
-                  left
-                  class="icon-shadow"
-                  color="white"
-                  :size="iconSize"
-                  >
-                    mdi-calendar
-                  </v-icon>
+        <v-row justify="space-around" align="center" class="pb-2">
 
-                  <div>
-                    <h1
-                    :class="textSize"
-                    >
-                      {{day}},
-                    </h1>
+          <div>
+            <div class="d-inline-flex">
 
-                    <h1
-                    :class="textSize"
-                    >
-                      {{date}}
-                    </h1>
-                  </div>
+              <v-icon
+              class="icon-shadow pb-1 pr-2"
+              color="white"
+              :size="iconSize - 6"
+              >
+                fas fa-solid fa-cake-candles
+              </v-icon>
 
-                </div>
-              </v-col>
+              <h1
+              :class="textSize"
+              >
+                Average
+              </h1>
 
-              <v-col class="d-flex align-center justify-center">
-                <v-icon
-                  class="icon-shadow pr-1"
-                  color="white"
-                  :size="iconSize"
-                  >
-                    mdi-clock-outline
-                  </v-icon>
-                <h1
-                :class="textSize"
-                >
-                  {{time}}
-                </h1>
-              </v-col>
+            </div>
 
-              <v-col class="d-flex align-center justify-center">
-                <v-icon
-                  class="icon-shadow pr-1"
-                  color="white"
-                  :size="iconSize"
-                  >
-                    mdi-map-marker-outline
-                  </v-icon>
-                <h1
-                :class="textSize"
-                >
-                  {{match.location}}
-                </h1>
-              </v-col>
+            <div class="d-flex justify-center">
 
-            </v-row>
+              <h1
+              :class="secondaryTextSize"
+              >
+                {{meanAge}} yrs old
+              </h1>
 
-            <v-divider class="mt-4 mb-6" style="width: 90%; margin:0 auto;"></v-divider>
-
-            <v-row justify="space-around" align="center" class="pb-2">
-
-              <div>
-                <div class="d-inline-flex">
-
-                  <v-icon
-                  class="icon-shadow pb-1 pr-2"
-                  color="white"
-                  :size="iconSize - 6"
-                  >
-                    fas fa-solid fa-cake-candles
-                  </v-icon>
-
-                  <h1
-                  :class="textSize"
-                  >
-                    Average
-                  </h1>
-
-                </div>
-
-                <div class="d-flex justify-center">
-
-                  <h1
-                  :class="secondaryTextSize"
-                  >
-                    {{meanAge}} yrs old
-                  </h1>
-
-                </div>
-
-              </div>
-
-              <div>
-                <div class="d-inline-flex">
-
-                  <v-icon
-                  class="icon-shadow white-icon pt-1 pr-2"
-                  :size="iconSize - 1"
-                  >
-                    $position-icon
-                  </v-icon>
-                  <h1
-                  :class="textSize"
-                  >
-                    Participants
-                  </h1>
-
-                </div>
-
-                <div class="d-flex justify-center">
-                  <h1
-                  :class="secondaryTextSize"
-                  >
-                    {{nParticipants}} / 10
-                  </h1>
-                </div>
-
-              </div>
-
-            </v-row>
+            </div>
 
           </div>
 
-        </v-container>
+          <div>
+            <div class="d-inline-flex">
 
-        <field
-        :class="smAndDown ? 'field-centering' : 'field-padding'"
-        :teamBlack="match.blackTeam"
-        :teamWhite="match.whiteTeam"
-        :builder="false" />
+              <v-icon
+              class="icon-shadow white-icon pt-1 pr-2"
+              :size="iconSize - 1"
+              >
+                $position-icon
+              </v-icon>
+              <h1
+              :class="textSize"
+              >
+                Participants
+              </h1>
+
+            </div>
+
+            <div class="d-flex justify-center">
+              <h1
+              :class="secondaryTextSize"
+              >
+                {{nParticipants}} / 10
+              </h1>
+            </div>
+
+          </div>
+
+        </v-row>
 
       </div>
 
-    </v-container>
-  </div>
+      <field
+      class="pt-16 mt-6"
+      :teamBlack="match.blackTeam"
+      :teamWhite="match.whiteTeam"
+      :builder="false" />
+
+    </v-card-text>
+
+  </v-card>
 </template>
 
 <script>
@@ -293,32 +294,10 @@ export default {
 </script>
 
 <style scoped>
-/* .card {
+.card-content {
   height: 100%;
-}
-.compress {
-  width: 90%;
-}
-.normal {
-  width: 100%;
-} */
-.background {
-  position: relative;
-  overflow-x: hidden;
-}
-.background::before {
-  content: "";
-  background-image: linear-gradient(to top, #c5cae9, #c5cae9, #c5cae9, #c5cae9, #c5cae9,
-  #c8cdea, #cbcfeb, #ced2ec, #d4d8ef, #dbdef1, #e1e4f4, #e8eaf6);
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  opacity: 30%;
-}
-.content {
-  position: relative;
+  overflow-x:hidden;
+  background: rgba(0, 0, 0, 0.4);
 }
 h1 {
   white-space: nowrap;
@@ -331,14 +310,7 @@ h1, .icon-shadow {
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
   brightness(122%) contrast(100%) drop-shadow(1px 1px black);
 }
-/* .title {
+.title {
   border-bottom: 1px solid white;
-} */
-.field-padding {
-  padding-top: 60px;
-}
-.field-centering {
-  padding-top: 100px;
-  padding-bottom: 100px;
 }
 </style>
