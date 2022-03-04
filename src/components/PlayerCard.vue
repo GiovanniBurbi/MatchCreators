@@ -59,7 +59,7 @@
                 color="green"
                 @click="dialogDelete = false"
                 >
-                  sure
+                  yes
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -118,15 +118,12 @@
           <v-btn
           fab
           outlined
-          elevation="3"
-          :class="white ? '' : 'btn-shadow'"
           :x-small="xsOnly"
           :dark="!white"
           @click.stop="dialog = true"
           >
 
             <v-icon
-            :class="white ? 'icon-shadow' : ''"
             :size="xsOnly ? 26 : 38"
             >
               mdi-plus
@@ -314,11 +311,5 @@ export default {
 }
 .avatar-contrast {
   filter: contrast(130%) brightness(70%) saturate(90%);
-}
-.icon-shadow {
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.5);
-}
-.btn-shadow {
-  filter: drop-shadow(0 0 1px rgba(126, 126, 126, 0.7));
 }
 </style>
