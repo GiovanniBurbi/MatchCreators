@@ -13,6 +13,7 @@
             :x-large="mdAndUp"
             :large="smAndDown"
             dark
+            @click="resetMatchOverview({})"
             >
               <v-icon>mdi-arrow-left</v-icon>
               <span>back</span>
@@ -174,7 +175,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import Field from './Field.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
@@ -278,6 +279,7 @@ export default {
     },
 
     ...mapActions({ fetchAllUsers: 'users/fetchAllUsers' }),
+    ...mapMutations({ resetMatchOverview: 'matches/setMatchToOverview' }),
   },
 
   created() {

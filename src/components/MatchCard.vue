@@ -148,15 +148,17 @@
         class="overlay"
       >
         <v-btn
-        v-if="isFinder"
         color="deep-purple darken-2"
         class="mb-12"
         tile
         depressed
         :small="xsOnly"
+        @click="setOverview(match)"
         >
-          <span v-if="xsOnly" class="shadow">Join match</span>
-          <span class="shadow" v-else>Join the match</span>
+          <span v-if="isFinder && xsOnly" class="shadow">Join match</span>
+          <span v-if="isFinder && !xsOnly" class="shadow">Join the match</span>
+          <span v-if="!isFinder && xsOnly" class="shadow">see details</span>
+          <span v-if="!isFinder && !xsOnly" class="shadow">see the details</span>
           <v-icon
           right
           :size="xsOnly ? 24 : 28"
@@ -166,7 +168,7 @@
           </v-icon>
         </v-btn>
 
-        <v-btn
+        <!-- <v-btn
         v-else
         color="deep-purple darken-2"
         class="mb-12"
@@ -183,7 +185,7 @@
           >
             mdi-chevron-double-right
           </v-icon>
-        </v-btn>
+        </v-btn> -->
 
       </v-overlay>
     </v-slide-x-transition>
@@ -192,6 +194,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
@@ -236,6 +239,10 @@ export default {
       type: Boolean,
       required: true,
     },
+  },
+
+  methods: {
+    ...mapMutations({ setOverview: 'matches/setMatchToOverview' }),
   },
 };
 </script>

@@ -10,6 +10,7 @@ export default {
     loadedMatches: false,
     userMatches: [],
     loadingUserMatches: false,
+    matchToOverview: {},
     filters: [],
     filter: {
       type: '',
@@ -156,6 +157,10 @@ export default {
     setUserMatches(state, matches) {
       state.userMatches = matches;
     },
+
+    setMatchToOverview(state, match) {
+      state.matchToOverview = match;
+    },
   },
 
   actions: {
@@ -270,6 +275,10 @@ export default {
 
     getUserMatches(state) {
       return state.userMatches;
+    },
+
+    getMatchToOverview(state) {
+      return state.matchToOverview;
     },
   },
 };

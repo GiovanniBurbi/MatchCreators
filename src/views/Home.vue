@@ -4,8 +4,7 @@
     <v-slide-y-reverse-transition hide-on-leave>
       <!-- change width based on current viewport -->
       <v-container
-      v-show="false"
-      v-if="!showMyMatches"
+      v-if="!showMyMatches && !showMatchDetails"
       :class="['content',
       {'fullscreen' : smAndDown},
       {'biggerContent' : lgOnly || mdOnly}]"
@@ -17,20 +16,23 @@
         :loading="!statusMatches"
         :matches="filteredMatches"
         :isFinder=true
-        class="py-2"/>
+        class="py-2"
+        />
 
       </v-container>
     </v-slide-y-reverse-transition>
 
     <v-slide-y-transition hide-on-leave>
       <my-matches
-      v-show="false"
-      v-if="showMyMatches"
+      v-if="showMyMatches && !showMatchDetails"
       :isFinder="true"
       @goBackToFinder="showMyMatches = false" />
     </v-slide-y-transition>
 
-    <match-full-details v-if="statusMatches" :match="filteredMatches[5]" />
+    <!-- <match-full-details v-show="false" v-if="statusMatches" :match="filteredMatches[5]" /> -->
+    <v-scale-transition hide-on-leave>
+      <match-full-details v-if="showMatchDetails" :match="matchToOverview" />
+    </v-scale-transition>
 
   </v-container>
 </template>
@@ -51,6 +53,7 @@ export default {
       filtersOn: false,
       chipsOn: false,
       showMyMatches: false,
+      showMatchDetails: false,
     };
   },
 
@@ -64,6 +67,7 @@ export default {
     ...mapGetters({ filters: 'matches/getFilters' }),
     ...mapGetters({ statusMatches: 'matches/getStatusMatches' }),
     ...mapGetters({ filteredMatches: 'matches/getFilteredMatches' }),
+    ...mapGetters({ matchToOverview: 'matches/getMatchToOverview' }),
   },
 
   methods: {
@@ -84,6 +88,12 @@ export default {
         this.showMyMatches = true;
         this.$emit('update:goToMyMatches', false);
       }
+    },
+
+    matchToOverview(newVal) {
+      if (Object.keys(newVal).length !== 0) {
+        this.showMatchDetails = true;
+      } else this.showMatchDetails = false;
     },
   },
 
