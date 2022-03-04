@@ -2,7 +2,7 @@
   <v-card tile color="transparent" style="overflow-x:hidden">
 
     <v-card-title
-    :class="['px-0 py-0', dark ? 'grey darken-4' : 'white']"
+    :class="['px-0 py-0', dark ? 'grey darken-4' : 'indigo']"
     >
 
       <v-container fluid>
@@ -11,7 +11,6 @@
           <v-btn
           :class="mdAndUp ? 'pl-6' : 'pl-4'"
           plain
-          color="grey darken-3"
           :x-large="mdAndUp"
           :large="smAndDown"
           dark
@@ -25,7 +24,7 @@
 
         <v-row justify="center" class="pb-2 mt-0">
           <h1
-          :class="['indigo--text title', titleSize]"
+          :class="['title', titleSize, dark ? 'white--text' : 'white--text']"
           >
             Match Overview
           </h1>
@@ -35,9 +34,9 @@
 
     </v-card-title>
 
-    <v-card-text :class="['px-0 card-content', dark ? '' : 'light']">
+    <v-card-text :class="['px-0 card-content', dark ? 'light' : 'light']">
 
-      <div :class="['pb-1', dark ? 'ghosty-black' : 'indigo']">
+      <div :class="'info-padding'">
 
         <v-row justify="center" class="mt-0">
 
@@ -104,41 +103,46 @@
 
         <v-divider class="mt-4 mb-6" style="width: 90%; margin:0 auto;"></v-divider>
 
-        <v-row justify="space-around" align="center" class="pb-2">
+        <v-row justify="center" class="pb-4">
 
-          <div>
-            <div class="d-inline-flex">
+          <v-col>
+            <v-row justify="center" class="pr-16">
 
-              <v-icon
-              class="icon-shadow pb-1 pr-2"
-              color="white"
-              :size="iconSize - 6"
-              >
-                fas fa-solid fa-cake-candles
-              </v-icon>
+              <div class="d-inline-flex">
 
-              <h1
-              :class="textSize"
-              >
-                Average
-              </h1>
+                <h1
+                :class="textSize"
+                >
+                  Average
+                </h1>
 
-            </div>
+                <v-icon
+                class="icon-shadow pb-1 pl-2"
+                color="white"
+                :size="iconSize - 6"
+                >
+                  fas fa-solid fa-cake-candles
+                </v-icon>
+              </div>
 
-            <div class="d-flex justify-center">
+            </v-row>
 
-              <h1
-              :class="secondaryTextSize"
-              >
-                {{meanAge}} yrs old
-              </h1>
+            <v-row justify="center" class="pr-16 mr-3">
+              <div>
+                <h1
+                :class="secondaryTextSize"
+                >
+                  {{meanAge}} yrs old
+                </h1>
+              </div>
+            </v-row>
 
-            </div>
+          </v-col>
 
-          </div>
+          <v-spacer></v-spacer>
 
-          <div>
-            <div class="d-inline-flex">
+          <v-col>
+            <v-row justify="center" class="pr-4">
 
               <v-icon
               class="icon-shadow white-icon pt-1 pr-2"
@@ -152,17 +156,19 @@
                 Participants
               </h1>
 
-            </div>
+            </v-row>
 
-            <div class="d-flex justify-center">
-              <h1
-              :class="secondaryTextSize"
-              >
-                {{nParticipants}} / 10
-              </h1>
-            </div>
+            <v-row justify="center" class="pl-16 ml-2">
+              <div>
+                <h1
+                :class="secondaryTextSize"
+                >
+                  {{nParticipants}} / 10
+                </h1>
+              </div>
+            </v-row>
 
-          </div>
+          </v-col>
 
         </v-row>
 
@@ -320,11 +326,10 @@ h1, .icon-shadow {
   brightness(122%) contrast(100%) drop-shadow(1px 1px black);
 }
 .title {
-  border-bottom: 1px solid white;
+  /* border-bottom: 1px solid white; */
   cursor: default;
 }
-.ghosty-black {
-  background: rgb(21, 29, 80);
-  /* background: #9E9E9E; */
+.info-padding {
+  padding: 0 200px 0;
 }
 </style>

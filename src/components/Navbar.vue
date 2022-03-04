@@ -3,7 +3,7 @@
   app
   hide-on-scroll
   scroll-threshold=70
-  :color="darkMode ? null : 'white'" :dark="darkMode"
+  :color="darkMode ? null : 'grey lighten-5'" :dark="darkMode"
   style="z-index: 2000;"
   >
     <!-- return home button -->
