@@ -17,9 +17,14 @@
               <v-icon>mdi-arrow-left</v-icon>
               <span>back</span>
             </v-btn>
+
           </v-row>
 
-          <v-row justify="center">
+          <v-row justify="center" no-gutters>
+            <h1 class="white--text text-h4 title">Match Overview</h1>
+          </v-row>
+
+          <v-row justify="center" class="mt-0">
 
             <v-col class="d-flex align-center justify-center">
               <div class="d-inline-flex">
@@ -311,5 +316,8 @@ h1, .icon-shadow {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
   brightness(122%) contrast(100%) drop-shadow(1px 1px black);
+}
+.title {
+  border-bottom: 1px solid white;
 }
 </style>

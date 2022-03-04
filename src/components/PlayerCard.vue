@@ -14,15 +14,58 @@
         <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
 
           <v-btn
+          v-if="builder || user.id === player.user.id"
           style="z-index: 1000;"
           x-small
           :width="xsOnly ? 20 : null"
           :height="xsOnly ? 20 : null"
           fab color="red darken-4" dark
-          @click="deletePlayer()"
+          @click.stop="deletePlayer()"
           >
             <v-icon class="shadow" :x-small="xsOnly">mdi-close</v-icon>
           </v-btn>
+
+          <v-dialog
+          v-model="dialogDelete"
+          max-width="290"
+          persistent
+          >
+            <v-card tile>
+              <v-card-text class="pt-3 pb-2">
+                <h1
+                class="text-subtitle-1 font-weight-regular grey--text text--darken-3"
+                >
+                  Do you want to leave this match?
+                </h1>
+              </v-card-text>
+
+              <v-card-actions>
+
+                <v-spacer></v-spacer>
+
+                <v-btn
+                dark
+                small
+                text
+                color="red"
+                @click="dialogDelete = false"
+                >
+                  back
+                </v-btn>
+
+                <v-btn
+                dark
+                small
+                color="green"
+                @click="dialogDelete = false"
+                >
+                  sure
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+
+          </v-dialog>
+
         </div>
 
         <v-row justify="center">
@@ -123,7 +166,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import PlayerSelection from './PlayerSelection.vue';
 
@@ -134,6 +177,7 @@ export default {
   data() {
     return {
       dialog: false,
+      dialogDelete: false,
     };
   },
 
@@ -142,6 +186,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters({ user: 'auth/getUser' }),
     getCard() {
       if (this.white) {
         return require('../assets/teamCreator/white-card.png');
@@ -190,16 +235,24 @@ export default {
     player: {
       type: Object,
     },
+    builder: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   methods: {
     ...mapMutations({ removePlayer: 'matches/removePlayer' }),
 
     deletePlayer() {
-      this.removePlayer({
-        isWhite: this.white,
-        spot: this.player.id,
-      });
+      if (this.builder) {
+        this.removePlayer({
+          isWhite: this.white,
+          spot: this.player.id,
+        });
+      } else {
+        this.dialogDelete = true;
+      }
     },
   },
 

@@ -61,10 +61,10 @@
       src="../assets/teamCreator/pitch.png"
       >
         <v-scale-transition hide-on-leave>
-          <players-cards-group v-show="black" :team="teamBlack"/>
+          <players-cards-group v-show="black" :team="teamBlack" :builder="builder"/>
         </v-scale-transition>
         <v-scale-transition hide-on-leave>
-          <players-cards-group v-show="!black" :team="teamWhite"/>
+          <players-cards-group v-show="!black" :team="teamWhite" :builder="builder"/>
         </v-scale-transition>
       </v-img>
     </v-row>
@@ -154,14 +154,15 @@ export default {
 }
 .switch-bg::before {
   content: "";
+  /* background: #212121; */
   background: #000000;
   position: absolute;
-  /* border-radius: 20px 20px 5px 5px; */
-  top: -24px;
+  border-radius: 20px 20px 5px 5px;
+  top: 0px;
   right: -80px;
   bottom: -120px;
   left: -80px;
-  opacity: 80%;
+  opacity: 60%;
 }
 .switcher {
   z-index: 100;

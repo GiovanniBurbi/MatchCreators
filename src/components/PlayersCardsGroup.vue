@@ -5,10 +5,12 @@
       <player-card
       :player="team[5]"
       :white="isTeamWhite"
+      :builder="builder"
       :position="'Forward'" />
       <player-card
       :player="team[4]"
       :white="isTeamWhite"
+      :builder="builder"
       :position="'Forward'" />
     </div>
 
@@ -16,10 +18,12 @@
       <player-card
       :player="team[3]"
       :white="isTeamWhite"
+      :builder="builder"
       :position="'Defender'" />
       <player-card
       :player="team[2]"
       :white="isTeamWhite"
+      :builder="builder"
       :position="'Defender'" />
     </div>
 
@@ -27,6 +31,7 @@
       <player-card
       :player="team[1]"
       :white="isTeamWhite"
+      :builder="builder"
       :position="'Goalkeeper'" />
     </div>
 
@@ -47,6 +52,10 @@ export default {
   props: {
     team: {
       type: Array,
+      required: true,
+    },
+    builder: {
+      type: Boolean,
       required: true,
     },
   },

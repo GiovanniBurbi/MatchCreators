@@ -121,7 +121,7 @@ export default {
 
   data() {
     return {
-      step: 1,
+      step: 2,
       showMyMatches: false,
       reset: false,
     };
