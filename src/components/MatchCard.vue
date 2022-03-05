@@ -148,7 +148,7 @@
 
     <!-- if mouse hovers on the card then show an overlay with the button
     to join the match, it will redirect to another page passing the id of the match -->
-    <v-slide-x-transition origin="center center 0">
+    <v-fade-transition origin="center center 0">
       <v-overlay
         v-if="hover"
         absolute
@@ -187,7 +187,7 @@
         </v-btn> -->
 
       </v-overlay>
-    </v-slide-x-transition>
+    </v-fade-transition>
 
   </v-card>
 </template>

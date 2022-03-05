@@ -3,7 +3,8 @@
   app
   hide-on-scroll
   scroll-threshold=70
-  :color="darkMode ? null : 'grey lighten-5'" :dark="darkMode"
+  :color="darkMode ? null : 'grey lighten-5'"
+  :dark="darkMode"
   style="z-index: 2000;"
   >
     <!-- return home button -->
@@ -77,7 +78,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import ModeSwitcher from './ModeSwitcher.vue';
 import PlayerInfo from './PlayerInfo.vue';
@@ -93,13 +94,17 @@ export default {
 
   data() {
     return {
-      darkMode: false,
+      /* darkMode: false, */
       toggleSwitch: false,
     };
   },
 
   computed: {
-    ...mapGetters({ user: 'auth/getUser' }),
+    ...mapGetters({
+      user: 'auth/getUser',
+      darkMode: 'theme/getTheme',
+    }),
+
     getAvatarPicture() {
       // eslint-disable-next-line import/no-dynamic-require
       return require(`../${this.user.picture}`);
@@ -114,13 +119,15 @@ export default {
       if that's the case */
       if (this.$route.name === 'Home') {
         if (this.darkMode) {
-          this.darkMode = false;
+          /* this.darkMode = false; */
+          this.setDarkMode(false);
           this.toggleSwitch = true;
         }
       }
       if (this.$route.name === 'Creator') {
         if (!this.darkMode) {
-          this.darkMode = true;
+          /* this.darkMode = true; */
+          this.setDarkMode(true);
           this.toggleSwitch = true;
         }
       }
@@ -128,6 +135,8 @@ export default {
   },
 
   methods: {
+    ...mapMutations({ setDarkMode: 'theme/setDarkMode' }),
+
     goHome() {
       if (this.$route.name === 'Home') {
         this.$router.go();
