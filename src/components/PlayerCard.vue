@@ -30,10 +30,11 @@
           max-width="290"
           persistent
           >
-            <v-card tile>
+            <v-card :dark="darkMode" tile>
               <v-card-text class="pt-3 pb-2">
                 <h1
-                class="text-subtitle-1 font-weight-regular grey--text text--darken-3"
+                :class="['text-subtitle-1 font-weight-regular',
+                darkMode ? '' : 'grey--text text--darken-3']"
                 >
                   Do you want to leave this match?
                 </h1>
@@ -235,6 +236,9 @@ export default {
     builder: {
       type: Boolean,
       required: true,
+    },
+    darkMode: {
+      type: Boolean,
     },
   },
 

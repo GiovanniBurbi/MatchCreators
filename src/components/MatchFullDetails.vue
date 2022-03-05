@@ -176,6 +176,7 @@
 
       <field
       class="pt-16 mt-8"
+      :darkMode="dark"
       :teamBlack="match.blackTeam"
       :teamWhite="match.whiteTeam"
       :builder="false" />

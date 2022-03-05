@@ -59,10 +59,18 @@
       src="../assets/teamCreator/pitch.png"
       >
         <v-scale-transition hide-on-leave>
-          <players-cards-group v-show="black" :team="teamBlack" :builder="builder"/>
+          <players-cards-group
+          v-show="black"
+          :darkMode="darkMode"
+          :team="teamBlack"
+          :builder="builder"/>
         </v-scale-transition>
         <v-scale-transition hide-on-leave>
-          <players-cards-group v-show="!black" :team="teamWhite" :builder="builder"/>
+          <players-cards-group
+          v-show="!black"
+          :darkMode="darkMode"
+          :team="teamWhite"
+          :builder="builder"/>
         </v-scale-transition>
       </v-img>
     </v-row>
@@ -99,6 +107,9 @@ export default {
     builder: {
       type: Boolean,
       required: true,
+    },
+    darkMode: {
+      type: Boolean,
     },
   },
 

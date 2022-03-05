@@ -6,12 +6,14 @@
       :player="team[5]"
       :white="isTeamWhite"
       :builder="builder"
-      :position="'Forward'" />
+      :position="'Forward'"
+      :darkMode="darkMode" />
       <player-card
       :player="team[4]"
       :white="isTeamWhite"
       :builder="builder"
-      :position="'Forward'" />
+      :position="'Forward'"
+      :darkMode="darkMode" />
     </div>
 
     <div class="row-2">
@@ -24,7 +26,8 @@
       :player="team[2]"
       :white="isTeamWhite"
       :builder="builder"
-      :position="'Defender'" />
+      :position="'Defender'"
+      :darkMode="darkMode" />
     </div>
 
     <div class="row-3">
@@ -32,7 +35,8 @@
       :player="team[1]"
       :white="isTeamWhite"
       :builder="builder"
-      :position="'Goalkeeper'" />
+      :position="'Goalkeeper'"
+      :darkMode="darkMode" />
     </div>
 
   </v-container>
@@ -57,6 +61,9 @@ export default {
     builder: {
       type: Boolean,
       required: true,
+    },
+    darkMode: {
+      type: Boolean,
     },
   },
 
