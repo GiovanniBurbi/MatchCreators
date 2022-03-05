@@ -1,19 +1,28 @@
 <template>
-  <v-container class="background" fluid fill-height>
-    <v-row>
-      <v-col cols="12">
-        <h1 class="text-center white--text font-weight-medium logo">
-        MatchCreators
+  <v-container fluid class="background px-0">
+
+    <v-container fluid>
+      <v-row justify="center" class="pb-12">
+        <h1
+        :class="['font-weight-medium white--text logo',
+        xsOnly ? 'logo-small' : 'logo-big']"
+        >
+          MatchCreators
         </h1>
-      </v-col>
-      <v-col>
-        <login class="card" @loginSuccess="$emit('loginSuccess')"></login>
-      </v-col>
-    </v-row>
+      </v-row>
+
+      <v-row justify="center" class="pb-12">
+        <login />
+      </v-row>
+    </v-container>
+
   </v-container>
 </template>
+
 <script>
+import { mapMutations } from 'vuex';
 import Login from '../components/Login.vue';
+import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Authentication',
@@ -21,22 +30,40 @@ export default {
   components: {
     Login,
   },
+
+  methods: {
+    ...mapMutations({ appMode: 'app/setAppMode' }),
+  },
+
+  created() {
+    this.appMode('authentication');
+  },
+
+  mixins: [BreakpointsCond],
 };
 </script>
 
 <style scoped>
-.card {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 5%;
-}
 .background {
   background-image: linear-gradient(to left top, #673ab7, #6b40b9,
   #7045bb, #744bbd, #7850bf, #7c55c1, #805ac3, #845fc5,
   #8865c7, #8d6ac9, #9170cb, #9575cd);
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 .logo {
-  text-shadow: 1px 1px 20px rgba(50, 50, 50, 0.4);
-  font-size: calc(40px + 2vw);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+.logo-big {
+  font-size: 3.75rem;
+}
+.logo-small {
+  font-size: 3rem;
+}
+@media screen and (max-width: 335px) {
+  .logo-small {
+    font-size: 2.4rem;
+  }
 }
 </style>

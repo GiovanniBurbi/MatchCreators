@@ -2,10 +2,10 @@
   <v-app>
     <v-slide-y-transition>
       <navbar
-      v-if="isNotAuth"
-      v-show="!isOverview"
-      @myMatches="userMatches = true"
+      v-if="appMode.mode !== 'authentication'"
+      v-show="appMode.mode !== 'match-overview'"
       ></navbar>
+      <!-- @myMatches="userMatches = true" -->
     </v-slide-y-transition>
 
     <v-snackbar
@@ -22,14 +22,15 @@
         mdi-check-circle-outline
       </v-icon>
       <span class="text-h6">
-        Hello, {{ getUsername }}
+        Hello, {{ username }}
       </span>
     </v-snackbar>
 
     <v-main>
       <router-view
       @loginSuccess="snackbar = true"
-      :goToMyMatches.sync="userMatches"></router-view>
+      ></router-view>
+      <!-- :goToMyMatches.sync="userMatches" -->
     </v-main>
   </v-app>
 </template>
@@ -49,16 +50,21 @@ export default {
   },
 
   computed: {
-    isNotAuth() {
+    /* isNotAuth() {
       return this.$route.name !== 'Authentication';
-    },
+    }, */
 
-    ...mapGetters({ getUserInfo: 'auth/getUser' }),
-    ...mapGetters({ isOverview: 'matches/getIsOverview' }),
+    /* ...mapGetters({ getUserInfo: 'auth/getUser' }),
+    ...mapGetters({ isOverview: 'matches/getIsOverview' }), */
 
-    getUsername() {
-      if (!this.getUserInfo) return '';
-      return this.getUserInfo.username;
+    ...mapGetters({
+      user: 'auth/getUser',
+      appMode: 'app/getAppMode',
+    }),
+
+    username() {
+      if (!this.user) return '';
+      return this.user.username;
     },
   },
 
@@ -72,5 +78,4 @@ export default {
 .shadow {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.6);
 }
-
 </style>
