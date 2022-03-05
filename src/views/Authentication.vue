@@ -12,7 +12,9 @@
       </v-row>
 
       <v-row justify="center" class="pb-12">
-        <login />
+        <div class="mx-2">
+          <login />
+        </div>
       </v-row>
     </v-container>
 
