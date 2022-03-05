@@ -34,9 +34,9 @@
 
     </v-card-title>
 
-    <v-card-text :class="['px-0 card-content', dark ? 'light' : 'light']">
+    <v-card-text :class="['px-0 card-content', dark ? 'dark' : 'light']">
 
-      <div :class="'info-padding'">
+      <div :class="mdAndDown ? 'padding-info-small' : 'info-padding'">
 
         <v-row justify="center" class="mt-0">
 
@@ -54,13 +54,13 @@
 
               <div>
                 <h1
-                :class="textSize"
+                :class="['text-shadow', textSize]"
                 >
                   {{day}},
                 </h1>
 
                 <h1
-                :class="textSize"
+                :class="['text-shadow', textSize]"
                 >
                   {{date}}
                 </h1>
@@ -78,7 +78,7 @@
                 mdi-clock-outline
               </v-icon>
             <h1
-            :class="textSize"
+            :class="['text-shadow', textSize]"
             >
               {{time}}
             </h1>
@@ -93,7 +93,7 @@
                 mdi-map-marker-outline
               </v-icon>
             <h1
-            :class="textSize"
+            :class="['text-shadow', textSize]"
             >
               {{match.location}}
             </h1>
@@ -101,38 +101,39 @@
 
         </v-row>
 
-        <v-divider class="mt-4 mb-6" style="width: 90%; margin:0 auto;"></v-divider>
+        <v-divider dark class="mt-4 mb-6" style="width: 80%; margin:0 auto;"></v-divider>
 
         <v-row justify="center" class="pb-4">
 
-          <v-col>
-            <v-row justify="center" class="pr-16">
+          <v-col :class="{'ml-1': xsOnly}">
+            <v-row justify="center" :class="xsOnly ? 'pr-9' : 'pr-16'">
 
               <div class="d-inline-flex">
 
-                <h1
-                :class="textSize"
-                >
-                  Average
-                </h1>
-
                 <v-icon
-                class="icon-shadow pb-1 pl-2"
+                class="icon-shadow pb-1 pr-2"
                 color="white"
                 :size="iconSize - 6"
                 >
                   fas fa-solid fa-cake-candles
                 </v-icon>
+
+                <h1
+                :class="['text-shadow', textSize]"
+                >
+                  Average
+                </h1>
+
               </div>
 
             </v-row>
 
-            <v-row justify="center" class="pr-16 mr-3">
+            <v-row justify="center" :class="xsOnly ? '' : 'pr-3'">
               <div>
                 <h1
-                :class="secondaryTextSize"
+                :class="['text-shadow', secondaryTextSize]"
                 >
-                  {{meanAge}} yrs old
+                  {{meanAge}} years old
                 </h1>
               </div>
             </v-row>
@@ -141,27 +142,29 @@
 
           <v-spacer></v-spacer>
 
-          <v-col>
-            <v-row justify="center" class="pr-4">
+          <v-col :class="{'mr-1': xsOnly}">
+            <v-row justify="center" :class="xsOnly ? 'pr-2' : 'pr-6'">
 
-              <v-icon
-              class="icon-shadow white-icon pt-1 pr-2"
-              :size="iconSize - 1"
-              >
-                $position-icon
-              </v-icon>
-              <h1
-              :class="textSize"
-              >
-                Participants
-              </h1>
+              <div style="white-space:nowrap;" class="d-inline-flex">
+                <v-icon
+                class="icon-shadow white-icon pt-1"
+                :size="iconSize - 1"
+                >
+                  $position-icon
+                </v-icon>
+                <h1
+                :class="['pl-1 text-shadow', textSize]"
+                >
+                  Participants
+                </h1>
+              </div>
 
             </v-row>
 
-            <v-row justify="center" class="pl-16 ml-2">
+            <v-row justify="center" :class="xsOnly ? 'pl-16' : 'ml-16'">
               <div>
                 <h1
-                :class="secondaryTextSize"
+                :class="['text-shadow', secondaryTextSize]"
                 >
                   {{nParticipants}} / 10
                 </h1>
@@ -259,27 +262,27 @@ export default {
 
     textSize() {
       let type = '';
-      if (this.$vuetify.breakpoint.mdAndUp) type = 'text-h5';
-      if (this.$vuetify.breakpoint.smAndDown) type = 'text-subtitle-1 font-weight-medium';
+      if (this.$vuetify.breakpoint.smAndUp) type = 'text-h5';
+      if (this.$vuetify.breakpoint.xsOnly) type = 'text-subtitle-1 font-weight-medium';
       return `white--text ${type}`;
     },
 
     secondaryTextSize() {
       let type = '';
-      if (this.$vuetify.breakpoint.mdAndUp) type = 'text-h6 font-weight-regular';
-      if (this.$vuetify.breakpoint.smAndDown) type = 'text-subtitle-2 font-weight-regular';
+      if (this.$vuetify.breakpoint.smAndUp) type = 'text-h6 font-weight-regular';
+      if (this.$vuetify.breakpoint.xsOnly) type = 'text-subtitle-2 font-weight-regular';
       return `white--text ${type}`;
     },
 
     titleSize() {
       let type = '';
-      if (this.$vuetify.breakpoint.mdAndUp) type = 'text-h4';
-      if (this.$vuetify.breakpoint.smAndDown) type = 'text-h5 font-weight-medium';
+      if (this.$vuetify.breakpoint.smAndUp) type = 'text-h4';
+      if (this.$vuetify.breakpoint.xsOnly) type = 'text-h5 font-weight-medium';
       return `white--text ${type}`;
     },
     iconSize() {
-      if (this.$vuetify.breakpoint.mdAndUp) return '28';
-      if (this.$vuetify.breakpoint.smAndDown) return '20';
+      if (this.$vuetify.breakpoint.smAndUp) return '28';
+      if (this.$vuetify.breakpoint.xsOnly) return '20';
       return 24;
     },
 
@@ -314,23 +317,32 @@ export default {
 .light {
   background: rgba(0, 0, 0, 0.4);
 }
+.dark {
+  background: rgba(0, 0, 0, 0.7);
+}
 h1 {
   white-space: nowrap;
   cursor: default;
 }
 h1, .icon-shadow {
-  text-shadow: 1px 1px black;
+  text-shadow: 2px 2px black;
 }
 .white-icon {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
-  brightness(122%) contrast(100%) drop-shadow(1px 1px black);
+  brightness(122%) contrast(100%) drop-shadow(2px 2px black);
 }
 .title {
   /* border-bottom: 1px solid white; */
   cursor: default;
 }
 .info-padding {
-  padding: 0 200px 0;
+  /* padding: 0 8vw 0; */
+}
+.padding-info-small {
+  padding: 0 4vw 0;
+}
+.text-shadow {
+  text-shadow: 1px 1px black;
 }
 </style>

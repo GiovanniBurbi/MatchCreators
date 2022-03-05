@@ -73,7 +73,7 @@
     <v-slide-y-transition hide-on-leave>
       <div v-if="showMyMatches && !isOverview">
 
-        <my-matches :isFinder="false" />
+        <my-matches :isFinder="false" :dark="true" />
 
         <v-fade-transition hide-on-leave>
           <v-btn

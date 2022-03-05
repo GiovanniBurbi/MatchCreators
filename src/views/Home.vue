@@ -16,6 +16,7 @@
         :loading="!statusMatches"
         :matches="filteredMatches"
         :isFinder=true
+        :darkMode=false
         class="py-2"
         />
 
@@ -27,6 +28,7 @@
       v-if="showMyMatches"
       v-show="!isOverview"
       :isFinder="true"
+      :dark="false"
       @goBackToFinder="showMyMatches = false" />
     </v-slide-y-transition>
 

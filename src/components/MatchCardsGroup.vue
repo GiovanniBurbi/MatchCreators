@@ -25,6 +25,7 @@
             :match="match"
             :hover="hover"
             :isFinder="isFinder"
+            :darkMode="darkMode"
             />
           </v-hover>
 
@@ -53,6 +54,9 @@ export default {
     isFinder: {
       type: Boolean,
       required: true,
+    },
+    darkMode: {
+      type: Boolean,
     },
   },
 

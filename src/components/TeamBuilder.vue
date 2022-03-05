@@ -44,6 +44,8 @@ export default {
   },
 
   created() {
+    /* Refactor, it should do it only if it is not already done. only the first time.
+    Another component should do it right before is needed */
     this.fetchAllUsers();
   },
 

@@ -46,6 +46,7 @@
       :loading="loading"
       :matches="userMatches"
       :isFinder=false
+      :darkMode="dark"
       class="pt-6"/>
 
     </v-container>
@@ -67,6 +68,9 @@ export default {
     isFinder: {
       type: Boolean,
       required: true,
+    },
+    dark: {
+      type: Boolean,
     },
   },
 
