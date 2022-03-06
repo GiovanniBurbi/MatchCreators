@@ -5,6 +5,7 @@ export default {
 
   state: {
     user: null,
+    loginStatus: false,
   },
 
   mutations: {
@@ -12,6 +13,10 @@ export default {
       state.user = userData;
       const credentials = { name: userData.username, psw: userData.password };
       localStorage.setItem('userInfo', JSON.stringify(credentials));
+    },
+
+    setLoginStatus(state, logged) {
+      state.loginStatus = logged;
     },
   },
 
@@ -40,6 +45,10 @@ export default {
   getters: {
     getUser(state) {
       return state.user;
+    },
+
+    getLoginStatus(state) {
+      return state.loginStatus;
     },
   },
 };

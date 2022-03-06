@@ -9,6 +9,9 @@ export default {
     setDarkMode(state, isDark) {
       state.darkMode = isDark;
     },
+    toggleDarkMode(state) {
+      state.darkMode = !state.darkMode;
+    },
   },
 
   actions: {},

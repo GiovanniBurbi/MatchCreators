@@ -4,7 +4,6 @@ export default {
   state: {
     mode: '',
     section: '',
-    loginStatus: false,
   },
 
   mutations: {
@@ -13,10 +12,6 @@ export default {
     },
     setAppSection(state, section) {
       state.section = section;
-    },
-
-    setLoginStatus(state, logged) {
-      state.loginStatus = logged;
     },
   },
 
@@ -28,10 +23,6 @@ export default {
         mode: state.mode,
         section: state.section,
       };
-    },
-
-    getLoginStatus(state) {
-      return state.loginStatus;
     },
   },
 };

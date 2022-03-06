@@ -1,6 +1,6 @@
 <template>
   <v-card
-  :width="xsOnly ? null : 390"
+  :width="xsOnly ? '96vw' : 390"
   rounded="xl"
   elevation="10"
   >
@@ -285,6 +285,7 @@ export default {
     ...mapMutations({
       resetSelection: 'posInputField/setPosSelection',
       setAppMode: 'app/setAppMode',
+      logged: 'auth/setLoginStatus',
     }),
 
     /* save date on text field */
@@ -306,6 +307,7 @@ export default {
         ).then((val) => {
           if (val) {
             this.$router.push({ name: 'Finder' });
+            this.logged(true);
             this.setAppMode('finder');
           } else {
             this.loginError.push('Invalid access');
@@ -336,6 +338,7 @@ export default {
         ).then(() => {
           this.resetSelection('');
           this.$router.push({ name: 'Finder' });
+          this.logged(true);
           this.setAppMode('finder');
         });
       }

@@ -10,8 +10,9 @@
 
     <v-snackbar
      v-model="snackbar"
-     top color="green"
-     :timeout="2000"
+     top right
+     color="green"
+     :timeout="3000"
      style="z-index: 9000"
     >
       <v-icon
@@ -27,9 +28,7 @@
     </v-snackbar>
 
     <v-main>
-      <router-view
-      @loginSuccess="snackbar = true"
-      ></router-view>
+      <router-view />
       <!-- :goToMyMatches.sync="userMatches" -->
     </v-main>
   </v-app>
@@ -45,14 +44,23 @@ export default {
   data() {
     return {
       snackbar: false,
-      userMatches: false,
+      /* userMatches: false, */
     };
+  },
+
+  watch: {
+    logged(newVal) {
+      if (newVal) {
+        this.snackbar = true;
+      }
+    },
   },
 
   computed: {
     ...mapGetters({
       user: 'auth/getUser',
       appMode: 'app/getAppMode',
+      logged: 'auth/getLoginStatus',
     }),
 
     username() {
@@ -71,6 +79,14 @@ export default {
 /* .shadow {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.6);
 } */
+
+/* shadows */
+.avatar-shadow {
+  filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.8));
+}
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+}
 
 /* sets svg icon color */
 .icon-grey {
@@ -92,5 +108,16 @@ export default {
   /* indigo */
   filter: invert(26%) sepia(55%) saturate(2295%) hue-rotate(217deg)
   brightness(90%) contrast(83%);
+}
+.icon-white {
+  /* white */
+  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
+  brightness(122%) contrast(100%);
+}
+.icon-indigo-shadow{
+  /* indigo */
+  filter: invert(26%) sepia(55%) saturate(2295%)
+  hue-rotate(217deg) brightness(90%) contrast(83%)
+  drop-shadow(1px 1px rgba(0, 0, 0, 0.8));
 }
 </style>
