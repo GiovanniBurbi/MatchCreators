@@ -34,4 +34,13 @@ export default {
       return datesFormatted.join(' ~ ');
     },
   },
+
+  methods: {
+    getAge(birthday) {
+      const bday = new Date(birthday);
+      const ageDiffMs = Date.now() - bday.getTime();
+      const ageDate = new Date(ageDiffMs);
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
+    },
+  },
 };

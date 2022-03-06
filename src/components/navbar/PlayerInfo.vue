@@ -1,7 +1,7 @@
 <template>
   <v-card :dark="darkMode">
 
-    <v-card-title :class="darkMode ? 'indigo darken-2' : 'indigo'">
+    <v-card-title :class="darkMode ? 'indigo darken-1' : 'indigo'">
       <h1 class="text-h5 white--text card-title-shadow">Player Info</h1>
     </v-card-title>
 
@@ -52,21 +52,18 @@
 <script>
 /* eslint-disable global-require */
 
+import { mapGetters } from 'vuex';
+import DataHelper from '@/mixins/DataHelper';
+
 export default {
   name: 'PlayerInfo',
 
-  props: {
-    darkMode: {
-      type: Boolean,
-    },
-
-    user: {
-      type: Object,
-      required: true,
-    },
-  },
-
   computed: {
+    ...mapGetters({
+      darkMode: 'theme/getDarkMode',
+      user: 'auth/getUser',
+    }),
+
     getAvatarPicture() {
       // eslint-disable-next-line import/no-dynamic-require
       return require(`@/${this.user.picture}`);
@@ -76,15 +73,7 @@ export default {
     },
   },
 
-  methods: {
-    getAge(birthday) {
-      const bday = new Date(birthday);
-      const ageDiffMs = Date.now() - bday.getTime();
-      const ageDate = new Date(ageDiffMs);
-      return Math.abs(ageDate.getUTCFullYear() - 1970);
-    },
-  },
-
+  mixins: [DataHelper],
 };
 </script>
 

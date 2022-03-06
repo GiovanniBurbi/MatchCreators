@@ -85,7 +85,7 @@
         </v-btn>
       </template>
 
-      <player-info :darkMode="darkMode" :user="user" />
+      <player-info  />
 
     </v-menu>
 
