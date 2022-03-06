@@ -1,96 +1,64 @@
 <template>
-  <v-sheet color="transparent" class="d-flex justify-center">
+  <v-card>
 
-    <v-btn
-    dark
-    rounded
-    color="deep-purple"
-    :disabled="filterPresent"
-    @click.stop="dialog=true"
-    >
+    <v-card-title class="text-h5 indigo">
       <v-icon
-      :left="smAndUp"
-      size="22"
-      :class="filterPresent ? '' : 'text-shadow'"
+      size="28"
+      left
+      color="white"
+      class="text-shadow"
       >
         mdi-map-marker-outline
       </v-icon>
+      <span class="white--text text-shadow">Location</span>
+    </v-card-title>
 
-      <span
-      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']"
+    <v-card-text class="pt-4 pb-2">
+
+      <v-text-field
+      v-model="location"
+      color="indigo"
+      label="Filter location"
+      clearable
       >
-        Location
-      </span>
-    </v-btn>
 
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="500"
-    >
-      <v-card>
-
-        <v-card-title class="text-h5 indigo">
+        <template v-slot:prepend>
           <v-icon
-          size="28"
           left
-          color="white"
-          class="text-shadow"
+          color="indigo"
           >
             mdi-map-marker-outline
           </v-icon>
-          <span class="white--text text-shadow">Location</span>
-        </v-card-title>
+        </template>
 
-        <v-card-text class="pt-4 pb-2">
+      </v-text-field>
 
-          <v-text-field
-          v-model="location"
-          color="indigo"
-          label="Filter location"
-          clearable
-          >
+    </v-card-text>
 
-            <template v-slot:prepend>
-              <v-icon
-              left
-              color="indigo"
-              >
-                mdi-map-marker-outline
-              </v-icon>
-            </template>
+    <v-divider></v-divider>
 
-          </v-text-field>
+    <v-card-actions>
+      <v-btn
+        color="error"
+        text
+        @click="$emit('dialogClose'), location = ''"
+      >
+        Cancel
+      </v-btn>
 
-        </v-card-text>
+      <v-spacer></v-spacer>
 
-        <v-divider></v-divider>
+      <v-btn
+        color="indigo"
+        text
+        :disabled="!location"
+        @click="$emit('dialogClose'), sendFilter()"
+      >
+        Add Filter
+      </v-btn>
+    </v-card-actions>
 
-        <v-card-actions>
-          <v-btn
-            color="error"
-            text
-            @click="dialog = false, location = ''"
-          >
-            Cancel
-          </v-btn>
-
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="indigo"
-            text
-            :disabled="!location"
-            @click="dialog = false, sendFilter()"
-          >
-            Add Filter
-          </v-btn>
-        </v-card-actions>
-
-      </v-card>
-    </v-dialog>
-
-  </v-sheet>
+  </v-card>
 
 </template>
 <script>
@@ -133,16 +101,10 @@ export default {
       };
       this.addFilter(filter);
       this.location = '';
-      this.filterPresent = true;
+      this.$emit('filterPresent');
     },
   },
 
   mixins: [BreakpointsCond],
 };
 </script>
-
-<style scoped>
-.text-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
-}
-</style>

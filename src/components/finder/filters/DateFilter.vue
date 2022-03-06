@@ -1,113 +1,81 @@
 <template>
-  <v-sheet color="transparent" class="d-flex justify-center">
+  <v-card>
 
-    <v-btn
-    dark
-    rounded
-    color="deep-purple"
-    :disabled="filterPresent"
-    @click.stop="dialog=true"
-    >
+    <v-card-title class="text-h5 indigo">
       <v-icon
-      :left="smAndUp"
-      size="22"
-      :class="filterPresent ? '' : 'text-shadow'"
+      size="28"
+      left
+      color="white"
+      class="text-shadow"
       >
         mdi-calendar
       </v-icon>
+      <span class="white--text text-shadow">Date</span>
+    </v-card-title>
 
-      <span
-      :class="['hidden-xs-only',  filterPresent ? '' : 'text-shadow']"
-      >
-        Date
-      </span>
-    </v-btn>
+    <v-card-text class="pt-4 pb-2">
 
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="500"
-    >
-      <v-card>
+      <v-row>
+        <v-text-field
+        v-model="dateRange"
+        color="indigo"
+        label="Filter date range"
+        class="centered-input"
+        readonly
+        >
 
-        <v-card-title class="text-h5 indigo">
-          <v-icon
-          size="28"
-          left
-          color="white"
-          class="text-shadow"
-          >
-            mdi-calendar
-          </v-icon>
-          <span class="white--text text-shadow">Date</span>
-        </v-card-title>
-
-        <v-card-text class="pt-4 pb-2">
-
-          <v-row>
-            <v-text-field
-            v-model="dateRange"
+          <template v-slot:append>
+            <v-icon
+            left
             color="indigo"
-            label="Filter date range"
-            class="centered-input"
-            readonly
             >
+              mdi-calendar
+            </v-icon>
+          </template>
 
-              <template v-slot:append>
-                <v-icon
-                left
-                color="indigo"
-                >
-                  mdi-calendar
-                </v-icon>
-              </template>
+        </v-text-field>
+      </v-row>
 
-            </v-text-field>
-          </v-row>
+      <v-row justify="center">
 
-          <v-row justify="center">
+        <v-date-picker
+        full-width
+        v-model="dates"
+        :min="(new Date(Date.now() - (new Date()).
+        getTimezoneOffset() * 60000)).toISOString()
+        .substr(0, 10)"
+        color="indigo"
+        range
+        ></v-date-picker>
 
-            <v-date-picker
-            full-width
-            v-model="dates"
-            :min="(new Date(Date.now() - (new Date()).
-              getTimezoneOffset() * 60000)).toISOString()
-              .substr(0, 10)"
-            color="indigo"
-            range
-            ></v-date-picker>
+      </v-row>
 
-          </v-row>
+    </v-card-text>
 
-        </v-card-text>
+    <v-divider></v-divider>
 
-        <v-divider></v-divider>
+    <v-card-actions>
+      <v-btn
+        color="error"
+        text
+        @click="$emit('dialogClose'), dates = []"
+      >
+        Cancel
+      </v-btn>
 
-        <v-card-actions>
-          <v-btn
-            color="error"
-            text
-            @click="dialog = false, dates = []"
-          >
-            Cancel
-          </v-btn>
+      <v-spacer></v-spacer>
 
-          <v-spacer></v-spacer>
+      <v-btn
+        color="indigo"
+        text
+        :disabled="!dates.length"
+        @click="$emit('dialogClose'), sendFilter()"
+      >
+        Add Filter
+      </v-btn>
+    </v-card-actions>
 
-          <v-btn
-            color="indigo"
-            text
-            :disabled="!dates.length"
-            @click="dialog = false, sendFilter()"
-          >
-            Add Filter
-          </v-btn>
-        </v-card-actions>
-
-      </v-card>
-    </v-dialog>
-
-  </v-sheet>
+  </v-card>
 </template>
 
 <script>
@@ -164,7 +132,7 @@ export default {
       };
       this.addFilter(filter);
       this.dates = [];
-      this.filterPresent = true;
+      this.$emit('filterPresent');
     },
   },
 

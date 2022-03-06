@@ -47,7 +47,15 @@
 
           <v-row justify="center">
 
-            <v-col cols="3">
+            <v-col
+            cols="3"
+            v-for="type in ['location', 'date', 'time', 'position']"
+            :key="type"
+            >
+              <match-filter :type="type" />
+            </v-col>
+
+            <!-- <v-col cols="3">
               <location-filter />
             </v-col>
 
@@ -61,7 +69,7 @@
 
             <v-col cols="3">
               <position-filter />
-            </v-col>
+            </v-col> -->
 
           </v-row>
           <div>
@@ -85,10 +93,7 @@
 <script>
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import FilterChipsGroup from './FilterChipsGroup.vue';
-import DateFilter from './filters/DateFilter.vue';
-import TimeFilter from './filters/TimeFilter.vue';
-import LocationFilter from './filters/LocationFilter.vue';
-import PositionFilter from './filters/PositionFilter.vue';
+import MatchFilter from './MatchFilter.vue';
 
 export default {
   name: 'FinderHeader',
@@ -110,10 +115,7 @@ export default {
 
   components: {
     FilterChipsGroup,
-    DateFilter,
-    TimeFilter,
-    LocationFilter,
-    PositionFilter,
+    MatchFilter,
   },
 
   mixins: [BreakpointsCond],

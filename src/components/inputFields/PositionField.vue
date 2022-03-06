@@ -5,7 +5,8 @@
     <v-row justify="start">
 
       <v-icon
-      :class="[error ? 'icon-red' : 'icon-grey', color]">
+      :class="iconColor"
+      >
         $position-icon
       </v-icon>
 
@@ -77,9 +78,6 @@ export default {
       type: String,
       required: true,
     },
-    color: {
-      type: String,
-    },
   },
 
   data() {
@@ -98,6 +96,12 @@ export default {
       currentSelection: 'posInputField/getPosSelection',
       isAuth: 'app/isAuth',
     }),
+
+    iconColor() {
+      if (this.error) return 'icon-red';
+      if (!this.error && this.isAuth) return 'icon-grey';
+      return 'icon-indigo';
+    },
   },
 
   methods: {
@@ -108,13 +112,6 @@ export default {
         this.error = true;
         return false;
       } return true;
-    },
-
-    buttonClick() {
-      /* reset error on position form selection if error had happened */
-      if (this.error) {
-        this.error = false;
-      }
     },
   },
 

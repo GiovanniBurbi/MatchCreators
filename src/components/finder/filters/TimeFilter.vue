@@ -1,180 +1,149 @@
 <template>
-  <v-sheet color="transparent" class="d-flex justify-center">
+  <v-card>
 
-    <v-btn
-    dark
-    rounded
-    color="deep-purple"
-    :disabled="filterPresent"
-    @click.stop="dialog=true"
-    >
+    <v-card-title class="text-h5 indigo">
       <v-icon
-      :left="smAndUp"
-      size="22"
-      :class="[filterPresent ? '' : 'text-shadow']"
+      size="28"
+      left
+      color="white"
+      class="icon-shadow"
       >
         mdi-clock-outline
       </v-icon>
+      <span class="white--text text-shadow">Time</span>
+    </v-card-title>
 
-      <span
-      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']"
-      >
-        Time
-      </span>
-    </v-btn>
+    <v-card-text class="pt-4 pb-2">
 
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="600"
-    >
-      <v-card>
+      <v-row>
+        <v-col cols="12" sm="5">
 
-        <v-card-title class="text-h5 indigo">
-          <v-icon
-          size="28"
-          left
-          color="white"
-          class="text-shadow"
+          <v-menu
+          ref="menu1"
+          v-model="menuStart"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          :return-value.sync="start"
+          transition="scale-transition"
+          offset-y
+          max-width="290px"
+          min-width="290px"
           >
-            mdi-clock-outline
-          </v-icon>
-          <span class="white--text text-shadow">Time</span>
-        </v-card-title>
 
-        <v-card-text class="pt-4 pb-2">
-
-          <v-row>
-            <v-col cols="12" sm="5">
-
-              <v-menu
-              ref="menu1"
-              v-model="menuStart"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="start"
-              transition="scale-transition"
-              offset-y
-              max-width="290px"
-              min-width="290px"
-              >
-
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="start"
-                    label="Filter from"
-                    prepend-icon="mdi-clock-time-four-outline"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-
-                    <template v-slot:prepend>
-                      <v-icon
-                      left
-                      color="indigo"
-                      >
-                        mdi-clock-time-four-outline
-                      </v-icon>
-                    </template>
-
-                  </v-text-field>
-                </template>
-
-                <v-time-picker
-                v-if="menuStart"
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
                 v-model="start"
-                format="24hr"
-                full-width
-                color="indigo"
-                :max="end"
-                @click:minute="$refs.menu1.save(start)"
-                ></v-time-picker>
-
-              </v-menu>
-            </v-col>
-
-            <v-spacer></v-spacer>
-
-            <v-col cols="12" sm="6">
-
-              <v-menu
-              ref="menu2"
-              v-model="menuEnd"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="end"
-              transition="scale-transition"
-              offset-y
-              max-width="290px"
-              min-width="290px"
+                label="Filter from"
+                prepend-icon="mdi-clock-time-four-outline"
+                readonly
+                v-bind="attrs"
+                v-on="on"
               >
 
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="end"
-                    label="To"
-                    prepend-icon="mdi-clock-time-eight-outline"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
+                <template v-slot:prepend>
+                  <v-icon
+                  left
+                  color="indigo"
                   >
-                    <template v-slot:prepend>
-                      <v-icon
-                      left
-                      color="indigo"
-                      >
-                        mdi-clock-time-eight-outline
-                      </v-icon>
-                    </template>
-                  </v-text-field>
+                    mdi-clock-time-four-outline
+                  </v-icon>
                 </template>
 
-                <v-time-picker
-                v-if="menuEnd"
-                v-model="end"
-                format="24hr"
-                full-width
-                color="indigo"
-                :min="start"
-                @click:minute="$refs.menu2.save(end)"
-                ></v-time-picker>
+              </v-text-field>
+            </template>
 
-              </v-menu>
-            </v-col>
-          </v-row>
-
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-btn
-            color="error"
-            text
-            @click="dialog = false, start = null, end = null"
-          >
-            Cancel
-          </v-btn>
-
-          <v-spacer></v-spacer>
-
-          <v-btn
+            <v-time-picker
+            v-if="menuStart"
+            v-model="start"
+            format="24hr"
+            full-width
             color="indigo"
-            text
-            :disabled="!(start || end)"
-            @click="dialog = false, sendFilter()"
+            :max="end"
+            @click:minute="$refs.menu1.save(start)"
+            ></v-time-picker>
+
+          </v-menu>
+        </v-col>
+
+        <v-spacer></v-spacer>
+
+        <v-col cols="12" sm="6">
+
+          <v-menu
+          ref="menu2"
+          v-model="menuEnd"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          :return-value.sync="end"
+          transition="scale-transition"
+          offset-y
+          max-width="290px"
+          min-width="290px"
           >
-            Add Filter
-          </v-btn>
-        </v-card-actions>
 
-      </v-card>
-    </v-dialog>
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="end"
+                label="To"
+                prepend-icon="mdi-clock-time-eight-outline"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              >
+                <template v-slot:prepend>
+                  <v-icon
+                  left
+                  color="indigo"
+                  >
+                    mdi-clock-time-eight-outline
+                  </v-icon>
+                </template>
+              </v-text-field>
+            </template>
 
-  </v-sheet>
+            <v-time-picker
+            v-if="menuEnd"
+            v-model="end"
+            format="24hr"
+            full-width
+            color="indigo"
+            :min="start"
+            @click:minute="$refs.menu2.save(end)"
+            ></v-time-picker>
+
+          </v-menu>
+        </v-col>
+      </v-row>
+
+    </v-card-text>
+
+    <v-divider></v-divider>
+
+    <v-card-actions>
+      <v-btn
+        color="error"
+        text
+        @click="$emit('dialogClose'), start = null, end = null"
+      >
+        Cancel
+      </v-btn>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        color="indigo"
+        text
+        :disabled="!(start || end)"
+        @click="$emit('dialogClose'), sendFilter()"
+      >
+        Add Filter
+      </v-btn>
+    </v-card-actions>
+
+  </v-card>
 
 </template>
+
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
@@ -189,21 +158,11 @@ export default {
       menuEnd: false,
       start: null,
       end: null,
-      filterPresent: false,
     };
   },
 
   computed: {
     ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
-  },
-
-  watch: {
-    currentRemoved(newVal) {
-      if (newVal === 'Time') {
-        this.filterPresent = false;
-        this.resetDeleted();
-      }
-    },
   },
 
   methods: {
@@ -225,15 +184,10 @@ export default {
       this.addFilter(filter);
       this.start = null;
       this.end = null;
-      this.filterPresent = true;
+      this.$emit('filterPresent');
     },
   },
 
   mixins: [BreakpointsCond],
 };
 </script>
-<style scoped>
-.text-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
-}
-</style>

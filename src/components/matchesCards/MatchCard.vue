@@ -4,7 +4,7 @@
   :elevation="hover ? 12 : 8"
   width="340"
   rounded="lg"
-  @click="setOverview(match)"
+  @click="setOverview(match), setAppSection('match-overview')"
   >
 
     <v-card-title class="px-2">
@@ -244,7 +244,10 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ setOverview: 'matches/setMatchToOverview' }),
+    ...mapMutations({
+      setOverview: 'matches/setMatchToOverview',
+      setAppSection: 'app/setAppSection',
+    }),
   },
 };
 </script>

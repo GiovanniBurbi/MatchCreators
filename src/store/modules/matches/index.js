@@ -17,7 +17,7 @@ export default {
       icon: '',
       msg: null,
     },
-    currentRemoved: null,
+    currentRemoved: '',
     loading: false,
     details: ['2001-01-01', '10:00 - 11:00', 'Albereta'],
     teamBlack: [
@@ -100,7 +100,7 @@ export default {
     },
 
     resetCurrentDeleted(state) {
-      state.currentRemoved = null;
+      state.currentRemoved = '';
     },
 
     clearFilters(state) {
@@ -249,7 +249,7 @@ export default {
     },
 
     getCurrentRemoved(state) {
-      return state.currentRemoved;
+      return state.currentRemoved.toLowerCase();
     },
 
     getDetails(state) {

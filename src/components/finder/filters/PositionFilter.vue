@@ -1,83 +1,51 @@
 <template>
-  <v-sheet color="transparent" class="d-flex justify-center">
+  <v-card>
 
-    <v-btn
-    dark
-    rounded
-    color="deep-purple"
-    :disabled="filterPresent"
-    @click.stop="dialog=true"
-    >
+    <v-card-title class="text-h5 indigo">
       <v-icon
-      :left="smAndUp"
-      size="20"
-      :class="['icon-white', filterPresent ? 'icon-disabled' : null]"
+      size="24"
+      left
+      class="icon-white-shadow"
       >
         $position-icon
       </v-icon>
+      <span class="white--text">Position</span>
+    </v-card-title>
 
-      <span
-      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']">Position</span>
-    </v-btn>
+    <v-card-text class="pt-4 pb-2">
 
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="500"
-    >
-      <v-card>
+      <v-row class="pl-2">
 
-        <v-card-title class="text-h5 indigo pl-3">
-          <v-icon
-          size="24"
-          left
-          class="icon-white"
-          >
-            $position-icon
-          </v-icon>
-          <span class="white--text">Position</span>
-        </v-card-title>
+        <position-field label="Filter position"/>
 
-        <v-card-text class="pt-4 pb-2">
+      </v-row>
 
-          <v-row class="pl-2">
+    </v-card-text>
 
-            <position-field
-            label="Filter position"
-            color="icon-indigo"
-            />
+    <v-divider></v-divider>
 
-          </v-row>
+    <v-card-actions>
+      <v-btn
+        color="error"
+        text
+        @click="$emit('dialogClose'), setSelection('')"
+      >
+        Cancel
+      </v-btn>
 
-        </v-card-text>
+      <v-spacer></v-spacer>
 
-        <v-divider></v-divider>
+      <v-btn
+        color="indigo"
+        text
+        :disabled="!getPosSelection"
+        @click="$emit('dialogClose'), sendFilter()"
+      >
+        Add Filter
+      </v-btn>
+    </v-card-actions>
 
-        <v-card-actions>
-          <v-btn
-            color="error"
-            text
-            @click="dialog = false, setSelection('')"
-          >
-            Cancel
-          </v-btn>
-
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="indigo"
-            text
-            :disabled="!getPosSelection"
-            @click="dialog = false, sendFilter()"
-          >
-            Add Filter
-          </v-btn>
-        </v-card-actions>
-
-      </v-card>
-    </v-dialog>
-
-  </v-sheet>
+  </v-card>
 </template>
 
 <script>
@@ -129,28 +97,10 @@ export default {
       };
       this.addFilter(filter);
       this.setSelection('');
-      this.filterPresent = true;
+      this.$emit('filterPresent');
     },
   },
 
   mixins: [BreakpointsCond],
 };
 </script>
-
-<style scoped>
-.icon-white {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%)
-  drop-shadow(1px 1px black);
-}
-.icon-purple {
-  /* deep-purple */
-  filter: invert(25%) sepia(75%) saturate(1998%) hue-rotate(247deg) brightness(82%) contrast(92%);
-}
-.icon-disabled {
-  opacity: 30%;
-}
-.text-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
-}
-</style>
