@@ -10,7 +10,7 @@
       >
         mdi-clock-outline
       </v-icon>
-      <span class="white--text text-shadow">Time</span>
+      <span class="white--text card-title-shadow">Time</span>
     </v-card-title>
 
     <v-card-text class="pt-4 pb-2">

@@ -98,6 +98,24 @@ export default {
 </script>
 
 <style>
+/* Colored position images */
+.playerImg {
+/* centering img and default opacity*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* custom sizes and opacity based on type of button */
+.goalkeeper {
+  max-width: 58px;
+}
+.defender {
+  max-width: 28px;
+}
+.forward {
+  max-width: 80px;
+}
+
 .header {
   text-shadow: 2px 3px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
@@ -108,7 +126,8 @@ export default {
 
 /* shadows */
 .avatar-shadow {
-  filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.8));
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.8));
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 .text-shadow {
   text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
@@ -122,6 +141,10 @@ export default {
 .btn-icon-shadow {
   filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.7));
 }
+.card-title-shadow {
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.7);
+}
+
 /* svg colors with shadow */
 .icon-white-shadow {
   /* white */

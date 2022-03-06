@@ -9,7 +9,7 @@
       >
         $position-icon
       </v-icon>
-      <span class="white--text">Position</span>
+      <span class="white--text card-title-shadow">Position</span>
     </v-card-title>
 
     <v-card-text class="pt-4 pb-2">

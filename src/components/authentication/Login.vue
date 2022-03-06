@@ -251,7 +251,7 @@ export default {
 
   data() {
     return {
-      step: 1,
+      step: 3,
       username: '',
       password: '',
       email: '',

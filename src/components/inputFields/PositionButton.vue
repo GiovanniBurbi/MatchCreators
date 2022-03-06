@@ -7,7 +7,7 @@
   >
     <v-row justify="center">
       <img
-      :class="[fieldPos, 'playerImg']"
+      :class="[fieldPos, 'playerImg visibility']"
       :src="require(`@/assets/myButtons/${fieldPos}.png`)"
       />
     </v-row>
@@ -110,24 +110,9 @@ export default {
   transform: scale(1);
   transition: transform 150ms ease-in-out;
 }
-.playerImg {
-  /* centering img and default opacity*/
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.visibility {
   opacity: 40%;
   transition: 150ms;
-}
-/* custom sizes and opacity based on type of button */
-.goalkeeper {
-  max-width: 58px;
-}
-.defender {
-  max-width: 28px;
-}
-.forward {
-  max-width: 80px;
-  opacity: 35%;
 }
 /* name of the type of button */
 .position {
@@ -157,7 +142,7 @@ export default {
 .zoom {
   transform: scale(1.1);
 }
-.zoom .playerImg {
+.zoom .visibility {
   opacity: 100%;
   filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.6));
 }
