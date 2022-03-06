@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import DataHelper from '@/mixins/DataHelper';
 
@@ -90,26 +90,11 @@ export default {
     return {
       dates: [],
       dialog: false,
-      filterPresent: false,
     };
   },
 
-  computed: {
-    ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
-  },
-
-  watch: {
-    currentRemoved(newVal) {
-      if (newVal === 'Date') {
-        this.filterPresent = false;
-        this.resetDeleted();
-      }
-    },
-  },
-
   methods: {
-    ...mapActions({ addFilter: 'matches/newFilter' }),
-    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
+    ...mapActions({ addFilter: 'filters/newFilter' }),
 
     sendFilter() {
       const filter = {

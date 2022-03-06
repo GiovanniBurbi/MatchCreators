@@ -59,24 +59,11 @@ export default {
   data() {
     return {
       dialog: false,
-      filterPresent: false,
     };
   },
 
   computed: {
     ...mapGetters({ getPosSelection: 'posInputField/getPosSelection' }),
-    ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
-  },
-
-  watch: {
-    /* watch for activation filter, only one filter per type allowed.
-    When filter feature will be improved, it will change. */
-    currentRemoved(newVal) {
-      if (newVal === 'Position') {
-        this.filterPresent = false;
-        this.resetDeleted();
-      }
-    },
   },
 
   components: {
@@ -85,9 +72,8 @@ export default {
 
   methods: {
     ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
-    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
 
-    ...mapActions({ addFilter: 'matches/newFilter' }),
+    ...mapActions({ addFilter: 'filters/newFilter' }),
 
     sendFilter() {
       const filter = {

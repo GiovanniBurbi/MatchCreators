@@ -42,5 +42,22 @@ export default {
       const ageDate = new Date(ageDiffMs);
       return Math.abs(ageDate.getUTCFullYear() - 1970);
     },
+
+    formatMsg(type, msg) {
+      /* format msg for chips based on type */
+      if (type === 'Position' || type === 'Location') {
+        return msg.charAt(0).toUpperCase() + msg.slice(1);
+      }
+      if (type === 'Date') {
+        const start = format(parseISO(msg[0]), 'do MMM');
+        if (msg.length === 1) {
+          return start;
+        }
+        const end = format(parseISO(msg[1]), 'do MMM');
+        return `${start} - ${end}`;
+      }
+      /* type === 'Time' */
+      return `${msg[0]} - ${msg[1]}`;
+    },
   },
 };

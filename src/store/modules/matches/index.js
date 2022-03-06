@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import MatchService from '@/services/MatchService';
 
 export default {
@@ -11,13 +10,6 @@ export default {
     userMatches: [],
     loadingUserMatches: false,
     matchToOverview: {},
-    filters: [],
-    filter: {
-      type: '',
-      icon: '',
-      msg: null,
-    },
-    currentRemoved: '',
     loading: false,
     details: ['2001-01-01', '10:00 - 11:00', 'Albereta'],
     teamBlack: [
@@ -79,34 +71,6 @@ export default {
 
     setLoadedMatches(state, val) {
       state.loadedMatches = val;
-    },
-
-    addFilter(state, newFilter) {
-      /* Needed for reactivity for Vue */
-      Vue.set(state.filter, 'type', newFilter.type);
-      Vue.set(state.filter, 'icon', newFilter.icon);
-      Vue.set(state.filter, 'msg', newFilter.msg);
-      state.filters.push(state.filter);
-      state.filter = {
-        type: '',
-        icon: '',
-        msg: null,
-      };
-    },
-
-    deleteFilter(state, indexFilter) {
-      const removed = state.filters.splice(indexFilter, 1);
-      state.currentRemoved = removed[0].type;
-    },
-
-    resetCurrentDeleted(state) {
-      state.currentRemoved = '';
-    },
-
-    clearFilters(state) {
-      if (state.filters.length !== 0) {
-        state.filters = [];
-      }
     },
 
     setDetails(state, details) {
@@ -176,27 +140,13 @@ export default {
 
     addFilterMatches({ state, commit }, newFilter) {
       let matches = null;
-      if (state.filteredMatches.length === 0) {
-        matches = MatchService.filter(state.matches, newFilter);
-      } else {
-        matches = MatchService.filter(state.filteredMatches, newFilter);
-      }
+      matches = MatchService.filter(state.filteredMatches, newFilter);
       commit('setFilteredMatches', matches);
     },
 
-    multipleFiltersMatch({ state, commit }) {
-      const matches = MatchService.multipleFilters(state.matches, state.filters);
+    multipleFiltersMatch({ state, commit }, filters) {
+      const matches = MatchService.multipleFilters(state.matches, filters);
       commit('setFilteredMatches', matches);
-    },
-
-    newFilter({ commit, dispatch }, filter) {
-      commit('addFilter', filter);
-      dispatch('addFilterMatches', filter);
-    },
-
-    removeFilter({ commit, dispatch }, indexFilter) {
-      commit('deleteFilter', indexFilter);
-      dispatch('multipleFiltersMatch');
     },
 
     async inviteValidation({ state }, playerId) {
@@ -242,14 +192,6 @@ export default {
 
     getStatusMatches(state) {
       return state.loadedMatches;
-    },
-
-    getFilters(state) {
-      return state.filters;
-    },
-
-    getCurrentRemoved(state) {
-      return state.currentRemoved.toLowerCase();
     },
 
     getDetails(state) {

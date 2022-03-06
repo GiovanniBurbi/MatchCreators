@@ -145,7 +145,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
@@ -161,13 +161,8 @@ export default {
     };
   },
 
-  computed: {
-    ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
-  },
-
   methods: {
-    ...mapActions({ addFilter: 'matches/newFilter' }),
-    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
+    ...mapActions({ addFilter: 'filters/newFilter' }),
 
     sendFilter() {
       if (!this.start) {

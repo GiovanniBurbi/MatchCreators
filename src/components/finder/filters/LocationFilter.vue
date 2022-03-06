@@ -62,7 +62,7 @@
 
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
@@ -72,26 +72,11 @@ export default {
     return {
       dialog: false,
       location: '',
-      filterPresent: false,
     };
   },
 
-  computed: {
-    ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
-  },
-
-  watch: {
-    currentRemoved(newVal) {
-      if (newVal === 'Location') {
-        this.filterPresent = false;
-        this.resetDeleted();
-      }
-    },
-  },
-
   methods: {
-    ...mapActions({ addFilter: 'matches/newFilter' }),
-    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
+    ...mapActions({ addFilter: 'filters/newFilter' }),
 
     sendFilter() {
       const filter = {

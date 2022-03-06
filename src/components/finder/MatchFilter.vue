@@ -62,7 +62,7 @@
 
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import TimeFilter from './filters/TimeFilter.vue';
 import LocationFilter from './filters/LocationFilter.vue';
@@ -95,7 +95,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
+    ...mapGetters({ currentRemoved: 'filters/getCurrentRemoved' }),
 
     icon() {
       if (this.type === 'location') return 'mdi-map-marker-outline';
@@ -115,9 +115,7 @@ export default {
   },
 
   methods: {
-    ...mapActions({ addFilter: 'matches/newFilter' }),
-
-    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
+    ...mapMutations({ resetDeleted: 'filters/resetCurrentDeleted' }),
   },
 
   mixins: [BreakpointsCond],
