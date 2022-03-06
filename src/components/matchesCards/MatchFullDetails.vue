@@ -14,7 +14,7 @@
           :x-large="mdAndUp"
           :large="smAndDown"
           dark
-          @click="resetMatchOverview({})"
+          @click="resetMatchOverview({}), setAppSection('')"
           >
             <v-icon>mdi-arrow-left</v-icon>
             <span>back</span>
@@ -297,7 +297,10 @@ export default {
     },
 
     ...mapActions({ fetchAllUsers: 'users/fetchAllUsers' }),
-    ...mapMutations({ resetMatchOverview: 'matches/setMatchToOverview' }),
+    ...mapMutations({
+      resetMatchOverview: 'matches/setMatchToOverview',
+      setAppSection: 'app/setAppSection',
+    }),
   },
 
   created() {

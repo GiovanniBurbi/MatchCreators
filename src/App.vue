@@ -103,6 +103,7 @@ export default {
   white-space: nowrap;
   font-weight: 700 !important;
   color: white;
+  cursor: default;
 }
 
 /* shadows */
