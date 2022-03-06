@@ -24,27 +24,17 @@
     justify="center"
     >
 
-      <v-col>
+      <v-col
+      v-for="pos in ['goalkeeper', 'defender', 'forward']"
+      :key="pos"
+      >
+
         <position-button
-          @clicked="buttonClick"
-          field-pos="goalkeeper">
+          @clicked="error ? error = false : null"
+          :field-pos="pos">
         </position-button>
-      </v-col>
 
-      <v-col>
-        <position-button
-          @clicked="buttonClick"
-          field-pos="defender"
-        ></position-button>
       </v-col>
-
-      <v-col>
-        <position-button
-          @clicked="buttonClick"
-          field-pos="forward"
-        ></position-button>
-      </v-col>
-
     </v-row>
 
     <v-divider
@@ -119,6 +109,7 @@ export default {
         return false;
       } return true;
     },
+
     buttonClick() {
       /* reset error on position form selection if error had happened */
       if (this.error) {

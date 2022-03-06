@@ -68,20 +68,23 @@ export default {
   },
 
   methods: {
+    /* declare vuex mutation for state registrationPositionSelection */
+    ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
+
     hoverOver() {
       /* if button has not been pressed */
       if (!this.click) {
         this.classes.push('zoom');
       }
     },
+
     hoverOut() {
       /* if button has not been pressed */
       if (!this.click) {
         this.classes.pop();
       }
     },
-    /* declare vuex mutation for state registrationPositionSelection */
-    ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
+
     clicked() {
       /* if button was not pressed, change styling class to be permanent */
       if (!this.click) {
