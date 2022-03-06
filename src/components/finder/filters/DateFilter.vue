@@ -13,13 +13,13 @@
       size="22"
       :class="filterPresent ? '' : 'text-shadow'"
       >
-        mdi-map-marker-outline
+        mdi-calendar
       </v-icon>
 
       <span
-      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']"
+      :class="['hidden-xs-only',  filterPresent ? '' : 'text-shadow']"
       >
-        Location
+        Date
       </span>
     </v-btn>
 
@@ -37,30 +37,47 @@
           color="white"
           class="text-shadow"
           >
-            mdi-map-marker-outline
+            mdi-calendar
           </v-icon>
-          <span class="white--text text-shadow">Location</span>
+          <span class="white--text text-shadow">Date</span>
         </v-card-title>
 
         <v-card-text class="pt-4 pb-2">
 
-          <v-text-field
-          v-model="location"
-          color="indigo"
-          label="Filter location"
-          clearable
-          >
+          <v-row>
+            <v-text-field
+            v-model="dateRange"
+            color="indigo"
+            label="Filter date range"
+            class="centered-input"
+            readonly
+            >
 
-            <template v-slot:prepend>
-              <v-icon
-              left
-              color="indigo"
-              >
-                mdi-map-marker-outline
-              </v-icon>
-            </template>
+              <template v-slot:append>
+                <v-icon
+                left
+                color="indigo"
+                >
+                  mdi-calendar
+                </v-icon>
+              </template>
 
-          </v-text-field>
+            </v-text-field>
+          </v-row>
+
+          <v-row justify="center">
+
+            <v-date-picker
+            full-width
+            v-model="dates"
+            :min="(new Date(Date.now() - (new Date()).
+              getTimezoneOffset() * 60000)).toISOString()
+              .substr(0, 10)"
+            color="indigo"
+            range
+            ></v-date-picker>
+
+          </v-row>
 
         </v-card-text>
 
@@ -70,7 +87,7 @@
           <v-btn
             color="error"
             text
-            @click="dialog = false, location = ''"
+            @click="dialog = false, dates = []"
           >
             Cancel
           </v-btn>
@@ -80,7 +97,7 @@
           <v-btn
             color="indigo"
             text
-            :disabled="!location"
+            :disabled="!dates.length"
             @click="dialog = false, sendFilter()"
           >
             Add Filter
@@ -91,30 +108,44 @@
     </v-dialog>
 
   </v-sheet>
-
 </template>
+
 <script>
+import { format, parseISO } from 'date-fns';
 import { mapActions, mapGetters, mapMutations } from 'vuex';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
+import BreakpointsCond from '../../../mixins/BreakpointsCond';
 
 export default {
-  name: 'LocationFilter',
+  name: 'DateFilter',
 
   data() {
     return {
+      dates: [],
       dialog: false,
-      location: '',
       filterPresent: false,
     };
   },
 
   computed: {
+    dateRange() {
+      /* sort date range as ascending */
+      const sortedDates = this.dates;
+      sortedDates.sort();
+      const datesFormatted = [];
+      for (let i = 0; i < sortedDates.length; i += 1) {
+        datesFormatted.push(
+          format(parseISO(sortedDates[i]), 'do MMM yyyy'),
+        );
+      }
+      return datesFormatted.join(' ~ ');
+    },
+
     ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
   },
 
   watch: {
     currentRemoved(newVal) {
-      if (newVal === 'Location') {
+      if (newVal === 'Date') {
         this.filterPresent = false;
         this.resetDeleted();
       }
@@ -127,21 +158,25 @@ export default {
 
     sendFilter() {
       const filter = {
-        type: 'Location',
-        icon: 'mdi-map-marker-outline',
-        msg: this.location,
+        type: 'Date',
+        icon: 'mdi-calendar',
+        msg: this.dates,
       };
       this.addFilter(filter);
-      this.location = '';
+      this.dates = [];
       this.filterPresent = true;
     },
   },
 
   mixins: [BreakpointsCond],
+
 };
 </script>
 
 <style scoped>
+.centered-input >>> input {
+  text-align: center;
+}
 .text-shadow {
   text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
 }

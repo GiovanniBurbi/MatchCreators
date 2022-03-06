@@ -75,12 +75,12 @@
 </template>
 
 <script>
-import FilterChipsGroup from './FilterChipsGroup.vue';
-import DateFilter from './Filters/DateFilter.vue';
-import TimeFilter from './Filters/TimeFilter.vue';
-import LocationFilter from './Filters/LocationFilter.vue';
-import BreakpointsCond from '../mixins/BreakpointsCond';
-import PositionFilter from './Filters/PositionFilter.vue';
+import FilterChipsGroup from '../FilterChipsGroup.vue';
+import DateFilter from './filters/DateFilter.vue';
+import TimeFilter from './filters/TimeFilter.vue';
+import LocationFilter from './filters/LocationFilter.vue';
+import PositionFilter from './filters/PositionFilter.vue';
+import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
   name: 'FinderHeader',

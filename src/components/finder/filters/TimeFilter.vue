@@ -177,7 +177,7 @@
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
+import BreakpointsCond from '../../../mixins/BreakpointsCond';
 
 export default {
   name: 'TimeFilter',

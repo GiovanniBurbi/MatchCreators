@@ -49,11 +49,11 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
-import FinderHeader from '@/components/FinderHeader.vue';
+import FinderHeader from '@/components/finder/FinderHeader.vue';
+import MatchCardsGroup from '@/components/matchesCards/MatchCardsGroup.vue';
+import MyMatches from '@/components/MyMatches.vue';
+import MatchFullDetails from '@/components/MatchFullDetails.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
-import MatchCardsGroup from '../components/MatchCardsGroup.vue';
-import MyMatches from '../components/MyMatches.vue';
-import MatchFullDetails from '../components/MatchFullDetails.vue';
 
 export default {
   name: 'Finder',

@@ -76,8 +76,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import PositionButton from '@/components/PositionButton.vue';
-import BreakpointsCond from '../mixins/BreakpointsCond';
+import PositionButton from './PositionButton.vue';
+import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
   name: 'PositionField',

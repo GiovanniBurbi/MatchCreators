@@ -10,14 +10,17 @@
     >
       <v-icon
       :left="smAndUp"
-      size="20"
-      :class="['icon-white', filterPresent ? 'icon-disabled' : null]"
+      size="22"
+      :class="filterPresent ? '' : 'text-shadow'"
       >
-        $position-icon
+        mdi-map-marker-outline
       </v-icon>
 
       <span
-      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']">Position</span>
+      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']"
+      >
+        Location
+      </span>
     </v-btn>
 
     <v-dialog
@@ -27,27 +30,37 @@
     >
       <v-card>
 
-        <v-card-title class="text-h5 indigo pl-3">
+        <v-card-title class="text-h5 indigo">
           <v-icon
-          size="24"
+          size="28"
           left
-          class="icon-white"
+          color="white"
+          class="text-shadow"
           >
-            $position-icon
+            mdi-map-marker-outline
           </v-icon>
-          <span class="white--text">Position</span>
+          <span class="white--text text-shadow">Location</span>
         </v-card-title>
 
         <v-card-text class="pt-4 pb-2">
 
-          <v-row class="pl-2">
+          <v-text-field
+          v-model="location"
+          color="indigo"
+          label="Filter location"
+          clearable
+          >
 
-            <position-field
-            label="Filter position"
-            color="icon-indigo"
-            />
+            <template v-slot:prepend>
+              <v-icon
+              left
+              color="indigo"
+              >
+                mdi-map-marker-outline
+              </v-icon>
+            </template>
 
-          </v-row>
+          </v-text-field>
 
         </v-card-text>
 
@@ -57,7 +70,7 @@
           <v-btn
             color="error"
             text
-            @click="dialog = false, setSelection('')"
+            @click="dialog = false, location = ''"
           >
             Cancel
           </v-btn>
@@ -67,7 +80,7 @@
           <v-btn
             color="indigo"
             text
-            :disabled="!getPosSelection"
+            :disabled="!location"
             @click="dialog = false, sendFilter()"
           >
             Add Filter
@@ -78,57 +91,48 @@
     </v-dialog>
 
   </v-sheet>
-</template>
 
+</template>
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
-import PositionField from '../PositionField.vue';
+import BreakpointsCond from '../../../mixins/BreakpointsCond';
 
 export default {
-  name: 'PositionFilter',
+  name: 'LocationFilter',
 
   data() {
     return {
       dialog: false,
+      location: '',
       filterPresent: false,
     };
   },
 
   computed: {
-    ...mapGetters({ getPosSelection: 'posInputField/getPosSelection' }),
     ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
   },
 
   watch: {
-    /* watch for activation filter, only one filter per type allowed.
-    When filter feature will be improved, it will change. */
     currentRemoved(newVal) {
-      if (newVal === 'Position') {
+      if (newVal === 'Location') {
         this.filterPresent = false;
         this.resetDeleted();
       }
     },
   },
 
-  components: {
-    PositionField,
-  },
-
   methods: {
-    ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
-    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
-
     ...mapActions({ addFilter: 'matches/newFilter' }),
+    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
 
     sendFilter() {
       const filter = {
-        type: 'Position',
-        icon: '$position-icon',
-        msg: this.getPosSelection,
+        type: 'Location',
+        icon: 'mdi-map-marker-outline',
+        msg: this.location,
       };
       this.addFilter(filter);
-      this.setSelection('');
+      this.location = '';
       this.filterPresent = true;
     },
   },
@@ -138,18 +142,6 @@ export default {
 </script>
 
 <style scoped>
-.icon-white {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%)
-  drop-shadow(1px 1px black);
-}
-.icon-purple {
-  /* deep-purple */
-  filter: invert(25%) sepia(75%) saturate(1998%) hue-rotate(247deg) brightness(82%) contrast(92%);
-}
-.icon-disabled {
-  opacity: 30%;
-}
 .text-shadow {
   text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
 }

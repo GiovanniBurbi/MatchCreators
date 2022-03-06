@@ -23,7 +23,7 @@
 
 <script>
 import { mapMutations } from 'vuex';
-import Login from '../components/Login.vue';
+import Login from '../components/authentication/Login.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {

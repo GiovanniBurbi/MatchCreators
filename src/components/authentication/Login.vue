@@ -235,8 +235,8 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { format, parseISO } from 'date-fns';
-import PositionField from './PositionField.vue';
-import BreakpointsCond from '../mixins/BreakpointsCond';
+import PositionField from '../inputFields/PositionField.vue';
+import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
   name: 'Login',
