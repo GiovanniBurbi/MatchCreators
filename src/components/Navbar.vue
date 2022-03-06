@@ -1,74 +1,138 @@
 <template>
-  <v-app-bar app flat
-  :color="isDark ? null : 'white'" :dark="isDark"
+  <v-app-bar
+  app
+  hide-on-scroll
+  scroll-threshold=70
+  :color="darkMode ? null : 'grey lighten-5'"
+  :dark="darkMode"
+  style="z-index: 2000;"
   >
     <!-- return home button -->
-    <v-app-bar-nav-icon>
+    <v-btn
+    icon
+    :small="xsOnly"
+    class="pl-3"
+    >
       <v-icon
-      size=35
-      class="icon-light"
+      :size=" xsOnly ? 32 : 36"
+      class="icon-indigo-shadow"
       @click="goHome()"
       >
         $ball-icon
       </v-icon>
-    </v-app-bar-nav-icon>
+    </v-btn>
 
-    <v-app-bar-title class="text-uppercase hidden-xs-only">
-      <h1 class="font-weight-bold d-inline-flex title">Match</h1>
-      <h1 class="font-weight-light d-inline-flex title">Creators</h1>
-    </v-app-bar-title>
+    <v-slide-x-transition hide-on-leave>
+
+      <v-app-bar-title
+      v-if="mdAndUp"
+      class="pl-1"
+      style="cursor: default;"
+      >
+
+        <div class="d-inline-flex text-uppercase">
+          <h1 class="font-weight-bold text-h6">Match</h1>
+          <h1 class="font-weight-light text-h6">Creators</h1>
+        </div>
+
+      </v-app-bar-title>
+
+    </v-slide-x-transition>
+
+    <v-spacer v-if="mdAndUp"></v-spacer>
+
+    <mode-switcher :class="{'pl-6': xsOnly}"/>
 
     <v-spacer></v-spacer>
 
     <v-btn
-     class="mr-2"
-     text rounded left
-     style="text-shadow: 1px 1px rgba(63, 81, 181, 0.2);"
+     class="mr-1"
+     :text="!xsOnly"
+     :icon="xsOnly"
+     rounded
+     left
+     @click="setAppSection('my-matches')"
     >
-      <v-icon class="icon-light" size=37> $player-icon </v-icon>
-      <span class="hidden-xs-only">My matches</span>
+      <v-icon
+      class="icon-indigo-shadow pr-2"
+      :size="xsOnly ? 32 : 30"
+      >
+        $player-2-icon
+      </v-icon>
+      <v-slide-x-reverse-transition>
+
+        <span v-if="!xsOnly">My matches</span>
+
+      </v-slide-x-reverse-transition>
     </v-btn>
 
-    <v-btn icon>
-      <v-avatar size=40>
-        <v-img src="../assets/users/CR7.jpg" alt="User"></v-img>
-      </v-avatar>
-    </v-btn>
+    <v-menu
+    :close-on-content-click="false"
+    :nudge-width="260"
+    offset-y
+    rounded="lg"
+    transition="slide-y-transition"
+    >
+      <template v-slot:activator="{ on, attrs}">
+        <v-btn
+        icon
+        v-bind="attrs"
+        v-on="on"
+        >
+          <v-avatar class="avatar-shadow" :size="xsOnly ? 36 : 40">
+            <v-img :src="getAvatarPicture" alt="User"></v-img>
+          </v-avatar>
+        </v-btn>
+      </template>
+
+      <player-info :darkMode="darkMode" :user="user" />
+
+    </v-menu>
 
   </v-app-bar>
 </template>
 
 <script>
+/* eslint-disable global-require */
+
+import { mapGetters, mapMutations } from 'vuex';
+import BreakpointsCond from '../mixins/BreakpointsCond';
+import ModeSwitcher from './ModeSwitcher.vue';
+import PlayerInfo from './PlayerInfo.vue';
 
 export default {
   name: 'Navbar',
 
-  props: {
-    isDark: {
-      type: Boolean,
+  components: {
+    ModeSwitcher,
+    PlayerInfo,
+  },
+
+  computed: {
+    ...mapGetters({
+      user: 'auth/getUser',
+      logged: 'auth/getLoginStatus',
+      darkMode: 'theme/getDarkMode',
+    }),
+
+    getAvatarPicture() {
+      if (this.logged) {
+        // eslint-disable-next-line import/no-dynamic-require
+        return require(`../${this.user.picture}`);
+      } return require('../assets/users/match.jpg');
     },
   },
 
   methods: {
+    ...mapMutations({ setAppSection: 'app/setAppSection' }),
+
     goHome() {
-      if (this.$route.name === 'Home') {
+      if (this.$route.name === 'Finder') {
         this.$router.go();
-      } else {
-        this.$router.push({ name: 'Home' });
-      }
+      } else this.$router.push({ name: 'Finder' });
     },
   },
+
+  mixins: [BreakpointsCond],
 };
 </script>
-
-<style scoped>
-.icon-light{
-  /* indigo */
-  filter: invert(26%) sepia(55%) saturate(2295%)
-  hue-rotate(217deg) brightness(90%) contrast(83%);
-}
-.title {
-  text-shadow: 1px 1px rgba(128, 128, 128, 0.40);
-  cursor: default;
-}
-</style>

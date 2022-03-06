@@ -10,13 +10,14 @@
     >
       <v-icon
       :left="smAndUp"
-      size="22"
+      size="20"
       :class="['icon-white', filterPresent ? 'icon-disabled' : null]"
       >
         $position-icon
       </v-icon>
 
-      <span class="hidden-xs-only">Position</span>
+      <span
+      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']">Position</span>
     </v-btn>
 
     <v-dialog
@@ -26,9 +27,9 @@
     >
       <v-card>
 
-        <v-card-title class="text-h5 indigo">
+        <v-card-title class="text-h5 indigo pl-3">
           <v-icon
-          size="28"
+          size="24"
           left
           class="icon-white"
           >
@@ -105,6 +106,7 @@ export default {
     currentRemoved(newVal) {
       if (newVal === 'Position') {
         this.filterPresent = false;
+        this.resetDeleted();
       }
     },
   },
@@ -115,6 +117,7 @@ export default {
 
   methods: {
     ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
+    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
 
     ...mapActions({ addFilter: 'matches/newFilter' }),
 
@@ -137,7 +140,8 @@ export default {
 <style scoped>
 .icon-white {
   /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
+  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%)
+  drop-shadow(1px 1px black);
 }
 .icon-purple {
   /* deep-purple */
@@ -145,5 +149,8 @@ export default {
 }
 .icon-disabled {
   opacity: 30%;
+}
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
 }
 </style>

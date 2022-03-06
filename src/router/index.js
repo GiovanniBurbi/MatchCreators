@@ -11,9 +11,9 @@ const routes = [
     component: Authentication,
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
+    path: '/finder',
+    name: 'Finder',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Finder.vue'),
   },
   {
     path: '/creator',

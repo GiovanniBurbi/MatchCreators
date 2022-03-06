@@ -1,54 +1,157 @@
 <template>
-  <div class="container">
+  <div class="box-card">
     <v-img
     :src="getCard"
     contain
-    class="card"
+    :class="xsOnly ? 'card-small' : 'card'"
     >
     </v-img>
 
-    <div class="overCard">
+    <div :class="xsOnly ? 'overCard-small' : 'overCard'">
 
-      <!-- <v-container fill-height v-if="player">
+      <v-container fill-height v-if="spotTaken">
 
-        <v-avatar rounded size="100" class="pt-5">
-          <img src="../assets/Carl.jpg">
-          <img src="{{player.picture}}"> ???
-        </v-avatar>
+        <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
+
+          <v-btn
+          v-if="builder || user.id === player.user.id"
+          style="z-index: 1000;"
+          x-small
+          :width="xsOnly ? 20 : null"
+          :height="xsOnly ? 20 : null"
+          fab color="red darken-4" dark
+          @click.stop="deletePlayer()"
+          >
+            <v-icon class="shadow" :x-small="xsOnly">mdi-close</v-icon>
+          </v-btn>
+
+          <v-dialog
+          v-model="dialogDelete"
+          max-width="290"
+          persistent
+          >
+            <v-card :dark="darkMode" tile>
+              <v-card-text class="pt-3 pb-2">
+                <h1
+                :class="['text-subtitle-1 font-weight-regular',
+                darkMode ? '' : 'grey--text text--darken-3']"
+                >
+                  Do you want to leave this match?
+                </h1>
+              </v-card-text>
+
+              <v-card-actions>
+
+                <v-spacer></v-spacer>
+
+                <v-btn
+                dark
+                small
+                text
+                color="red"
+                @click="dialogDelete = false"
+                >
+                  back
+                </v-btn>
+
+                <v-btn
+                dark
+                small
+                color="green"
+                @click="dialogDelete = false"
+                >
+                  yes
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+
+          </v-dialog>
+
+        </div>
 
         <v-row justify="center">
-          <h1 :class="['text-center text-h5 font-weight-light',
-          white ? 'black--text' : 'white--text']" >Joseph</h1>
-          <h1 class="white--text text-center text-h5
-          font-weight-light" >{{player.username}}</h1>
+          <v-avatar
+          rounded="sm"
+          :size="xsOnly ? 51 : 71"
+          :class="[xsOnly ? 'mt-1' : 'mt-4', 'avatar-contrast']"
+          >
+            <img :src="getPicture" >
+          </v-avatar>
+        </v-row>
+
+        <v-row justify="center">
+          <h1
+          :class="['text-center font-weight-light',
+          xsOnly ? 'text-caption' : 'text-subtitle-1 pb-4',
+          white ? '' : 'white--text']"
+          >
+            {{ player.user.username }}
+          </h1>
+        </v-row>
+
+        <v-row>
+          <v-divider
+          :class="['divide', white ? 'divide-opacity' : '',
+          xsOnly ? 'divide-spacing' : '']"
+          style="border-color: grey !important"
+          ></v-divider>
         </v-row>
 
         <v-row justify="center">
           <v-icon
-          :class="[white ? null : 'white-icon', 'pb-2']"
-          :size="position === 'Forward' ? 50 : 45"
+          :class="[white ? null : 'white-icon',
+          xsOnly ? 'pb-1' : 'pb-6']"
+          :size="iconSize"
           >
-            $forward-icon
+            {{ positionIcon }}
           </v-icon>
         </v-row>
 
-      </v-container> -->
+      </v-container>
 
-      <!-- <v-container fill-height v-else> -->
-      <v-container fill-height>
+      <v-container fill-height v-else>
 
-        <v-row justify="center" no-gutters class="mt-6">
-          <v-btn fab outlined large :dark="!white">
-            <v-icon size="50">
+        <v-row
+        justify="center"
+        no-gutters
+        :class="xsOnly ? '' : 'mt-1'"
+        >
+          <v-btn
+          fab
+          outlined
+          :x-small="xsOnly"
+          :dark="!white"
+          @click.stop="dialog = true"
+          >
+
+            <v-icon
+            :size="xsOnly ? 26 : 38"
+            >
               mdi-plus
             </v-icon>
+
           </v-btn>
+
+          <v-dialog
+          v-model="dialog"
+          :max-width="xsOnly ? 320 : 400"
+          scrollable
+          transition="scale-transition"
+          >
+
+            <player-selection
+            :white="white"
+            :reset="!dialog"
+            :cardId="player.id"
+            @closeDialog="dialog = false" />
+
+          </v-dialog>
         </v-row>
 
         <v-row justify="center">
           <v-icon
-          :class="white ? null : 'white-icon'"
-          :size="position === 'Forward' ? 50 : 45"
+          :class="['pt-0', white ? null : 'white-icon']"
+          :size="iconSize"
           >
             {{ positionIcon }}
           </v-icon>
@@ -61,16 +164,36 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex';
+import BreakpointsCond from '../mixins/BreakpointsCond';
+import PlayerSelection from './PlayerSelection.vue';
+
+/* eslint-disable global-require */
 export default {
   name: 'PlayerCard',
 
+  data() {
+    return {
+      dialog: false,
+      dialogDelete: false,
+    };
+  },
+
+  components: {
+    PlayerSelection,
+  },
+
   computed: {
+    ...mapGetters({ user: 'auth/getUser' }),
     getCard() {
       if (this.white) {
-        // eslint-disable-next-line global-require
         return require('../assets/teamCreator/white-card.png');
-      // eslint-disable-next-line global-require
       } return require('../assets/teamCreator/black-card.png');
+    },
+
+    getPicture() {
+      // eslint-disable-next-line import/no-dynamic-require
+      return require(`../${this.player.user.picture}`);
     },
 
     positionIcon() {
@@ -83,6 +206,21 @@ export default {
           return '$forward-icon';
       }
     },
+
+    iconSize() {
+      if (this.position === 'Forward') {
+        if (this.$vuetify.breakpoint.xsOnly) return 24;
+        return 34;
+      }
+      if (this.$vuetify.breakpoint.xsOnly) return 22;
+      return 30;
+    },
+
+    spotTaken() {
+      if (Object.keys(this.player.user).length === 0) {
+        return false;
+      } return true;
+    },
   },
 
   props: {
@@ -92,30 +230,90 @@ export default {
     position: {
       type: String,
     },
-    /* player: {
+    player: {
       type: Object,
-    }, */
+    },
+    builder: {
+      type: Boolean,
+      required: true,
+    },
+    darkMode: {
+      type: Boolean,
+    },
   },
+
+  methods: {
+    ...mapMutations({ removePlayer: 'matches/removePlayer' }),
+
+    deletePlayer() {
+      if (this.builder) {
+        this.removePlayer({
+          isWhite: this.white,
+          spot: this.player.id,
+        });
+      } else {
+        this.dialogDelete = true;
+      }
+    },
+  },
+
+  mixins: [BreakpointsCond],
 };
 </script>
 
 <style scoped>
-.container {
+.box-card {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .card {
-  max-width: 200px;
+  max-width: 140px;
+}
+.card-small {
+  max-width: 100px;
 }
 .overCard {
   position: absolute;
-  width: 150px;
-  height: 240px;
-  margin-bottom: 8px;
+  width: 100px;
+  height: 170px;
+}
+.overCard-small {
+  position: absolute;
+  width: 80px;
+  height: 110px;
 }
 .white-icon {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
+}
+.close-button {
+  position: absolute;
+  left: 76%;
+}
+.upper {
+  bottom: 84%;
+  left: 74%;
+}
+.normal {
+  top: 0%;
+}
+.divide {
+  position: absolute;
+  top: 68%;
+  left: 10%;
+  width: 80%;
+  opacity: 20%;
+}
+.divide-opacity {
+  opacity: 40%;
+}
+.divide-spacing {
+  top: 70%;
+  width: 70%;
+  left: 15%;
+}
+.avatar-contrast {
+  filter: contrast(130%) brightness(70%) saturate(90%);
 }
 </style>

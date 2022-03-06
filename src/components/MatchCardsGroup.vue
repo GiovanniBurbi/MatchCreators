@@ -1,10 +1,10 @@
 <template>
   <v-container fluid>
     <!-- skeleton cards to be shown while waiting data from the db -->
-    <v-row justify="center" v-if="!loaded">
+    <v-row justify="center" v-if="loading">
       <v-skeleton-loader
       class="mx-2 my-2"
-      v-for="index in 12"
+      v-for="index in 16"
       :key="index"
       elevation="8"
       tile
@@ -17,13 +17,15 @@
     <!-- list of cards representing available matches -->
     <v-slide-x-transition>
 
-      <v-row justify="center" v-if="loaded">
+      <v-row justify="center" v-if="!loading">
         <template v-for="match in matches">
           <!-- component over handler with vuetify -->
           <v-hover v-slot="{ hover }" :key="match.id">
             <match-card
             :match="match"
             :hover="hover"
+            :isFinder="isFinder"
+            :darkMode="darkMode"
             />
           </v-hover>
 
@@ -36,57 +38,31 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
 import MatchCard from './MatchCard.vue';
 
 export default {
   name: 'MatchCardGroup',
 
-  data() {
-    return {
-      matches: [],
-      loaded: null,
-    };
+  props: {
+    matches: {
+      type: Array,
+      required: true,
+    },
+    loading: {
+      type: Boolean,
+    },
+    isFinder: {
+      type: Boolean,
+      required: true,
+    },
+    darkMode: {
+      type: Boolean,
+    },
   },
 
   components: {
     MatchCard,
   },
-
-  methods: {
-    ...mapActions({ fetchMatches: 'matches/allMatches' }),
-  },
-
-  computed: {
-    ...mapGetters({ getAllMatches: 'matches/getMatches' }),
-    ...mapGetters({ getFilteredMatches: 'matches/getFilteredMatches' }),
-    ...mapGetters({ getStatusMatches: 'matches/getStatusMatches' }),
-  },
-
-  watch: {
-    getAllMatches(newVal, oldVal) {
-      if (oldVal.length === 0) this.matches = newVal;
-    },
-    getStatusMatches(newVal) {
-      this.loaded = newVal;
-    },
-    getFilteredMatches(newVal) {
-      this.matches = newVal;
-    },
-  },
-
-  created() {
-    /* First creation of the component it will start the fetch from db.
-    Get the state of the fetch from db, if they are already loaded then simply
-    get them from vuex store  */
-    this.loaded = this.getStatusMatches;
-    if (!this.loaded) {
-      this.fetchMatches();
-    } else {
-      this.matches = this.getAllMatches;
-    }
-  },
-
 };
 </script>
 

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
@@ -35,12 +35,7 @@ export default {
   name: 'FilterChipsGroup',
 
   computed: {
-    filters: {
-      get() {
-        /* two-way binding with vuex state */
-        return this.$store.state.matches.filters;
-      },
-    },
+    ...mapGetters({ filters: 'matches/getFilters' }),
   },
 
   methods: {

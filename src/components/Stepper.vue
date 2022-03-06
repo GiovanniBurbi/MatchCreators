@@ -1,12 +1,20 @@
 <template>
   <v-row justify="space-between" align="center">
 
-    <div class="d-inline-flex">
+    <div
+    class="d-inline-flex align-center"
+    @click = "$emit('back')"
+    :style="change ? 'cursor: pointer;' : 'cursor: default'">
 
-      <div class="icon">
+      <div
+      :class="['icon', {'icon-big': lgAndUp},
+      {'icon-medium': mdAndDown},
+      {'icon-back' : change && smAndDown}]"
+      >
         <h1
         v-if="!change"
-        class="white--text font-weight-bold number"
+        :class="['white--text font-weight-bold number',
+        {'text-big': lgAndUp}]"
         >
           1
         </h1>
@@ -15,7 +23,7 @@
           <v-icon
           v-if="change"
           color="white"
-          :size="mdAndUp ? 38 : 26"
+          :size="lgAndUp ? 40 : 32"
           >
             mdi-check
           </v-icon>
@@ -27,7 +35,7 @@
         <h1
         v-if="mdAndUp"
         :class="['white--text font-weight-bold header pl-2',
-        {'text-disable': change}]"
+        {'text-back': change}, {'text-big': lgAndUp}]"
         >
           Define the Details
         </h1>
@@ -37,12 +45,16 @@
 
     <v-divider class="mx-2 divider"></v-divider>
 
-    <div class="d-inline-flex">
+    <div
+    class="d-inline-flex align-center"
+    style="cursor: default;"
+    >
 
-      <div :class="['icon', {'icon-disable': !change}]">
+      <div :class="['icon', {'icon-disable': !change},
+      {'icon-big': lgAndUp}, {'icon-medium': mdAndDown}]">
         <h1
         :class="['white--text font-weight-bold number',
-        {'text-disable': !change}]"
+        {'text-disable': !change}, {'text-big': lgAndUp}]"
         >
           2
         </h1>
@@ -52,7 +64,7 @@
         <h1
         v-if="mdAndUp"
         :class="['white--text font-weight-bold header pl-2',
-        {'text-disable': !change}]"
+        {'text-disable': !change}, {'text-big': lgAndUp}]"
         >
           Build the Teams
         </h1>
@@ -82,32 +94,52 @@ export default {
 
 <style scoped>
 .header {
-  text-shadow: 2px 3px rgba(0, 0, 0, 0.8);
-  font-size: calc(15px + 2vw);
+  text-shadow: 2px 3px rgba(100, 100, 100, 0.4);
   white-space: nowrap;
 }
+.text-big {
+  font-size: 2rem;
+}
 .number {
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.4);
-  font-size: calc(16px + 1vw);
+  text-shadow: 1px 2px rgba(0, 0, 0, 0.6);
 }
 .icon {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #4527A0;
-  height: calc(24px + 2vw);
-  width: calc(24px + 2vw);
   border-radius: 50%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: 0.3vw;
   cursor: default;
 }
+.icon-back {
+  opacity: 60%;
+  cursor: pointer;
+}
+.icon-back:hover {
+  opacity: 100%;
+}
+.icon-big {
+  height: 3.2rem;
+  width: 3.2rem;
+}
+.icon-medium {
+  height: 3rem;
+  width: 3rem;
+}
 .icon-disable {
   background-color: rgba(158, 158, 158, 0.3);
 }
 .text-disable {
   opacity: 30%;
+}
+.text-back {
+  opacity: 30%;
+}
+.text-back:hover {
+  opacity: 100%;
 }
 .divider {
  border-color: #9E9E9E !important;

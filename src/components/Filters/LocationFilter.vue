@@ -11,11 +11,16 @@
       <v-icon
       :left="smAndUp"
       size="22"
+      :class="filterPresent ? '' : 'text-shadow'"
       >
         mdi-map-marker-outline
       </v-icon>
 
-      <span class="hidden-xs-only">Location</span>
+      <span
+      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']"
+      >
+        Location
+      </span>
     </v-btn>
 
     <v-dialog
@@ -30,10 +35,11 @@
           size="28"
           left
           color="white"
+          class="text-shadow"
           >
             mdi-map-marker-outline
           </v-icon>
-          <span class="white--text">Location</span>
+          <span class="white--text text-shadow">Location</span>
         </v-card-title>
 
         <v-card-text class="pt-4 pb-2">
@@ -88,7 +94,7 @@
 
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -110,12 +116,14 @@ export default {
     currentRemoved(newVal) {
       if (newVal === 'Location') {
         this.filterPresent = false;
+        this.resetDeleted();
       }
     },
   },
 
   methods: {
     ...mapActions({ addFilter: 'matches/newFilter' }),
+    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
 
     sendFilter() {
       const filter = {
@@ -132,3 +140,9 @@ export default {
   mixins: [BreakpointsCond],
 };
 </script>
+
+<style scoped>
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+}
+</style>

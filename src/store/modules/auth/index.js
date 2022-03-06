@@ -5,6 +5,7 @@ export default {
 
   state: {
     user: null,
+    loginStatus: false,
   },
 
   mutations: {
@@ -12,6 +13,10 @@ export default {
       state.user = userData;
       const credentials = { name: userData.username, psw: userData.password };
       localStorage.setItem('userInfo', JSON.stringify(credentials));
+    },
+
+    setLoginStatus(state, logged) {
+      state.loginStatus = logged;
     },
   },
 
@@ -25,6 +30,7 @@ export default {
       const userData = res.data[0];
       if (userData) {
         commit('setUser', userData);
+        commit('setLoginStatus', true);
         return true;
       } return false;
     },
@@ -34,12 +40,17 @@ export default {
       await UserService.registerUser(JSON.stringify(userData));
       /* set the user in the vuex auth/state */
       commit('setUser', userData);
+      commit('setLoginStatus', true);
     },
   },
 
   getters: {
     getUser(state) {
       return state.user;
+    },
+
+    getLoginStatus(state) {
+      return state.loginStatus;
     },
   },
 };

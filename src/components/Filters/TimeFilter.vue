@@ -11,11 +11,16 @@
       <v-icon
       :left="smAndUp"
       size="22"
+      :class="[filterPresent ? '' : 'text-shadow']"
       >
         mdi-clock-outline
       </v-icon>
 
-      <span class="hidden-xs-only">Time</span>
+      <span
+      :class="['hidden-xs-only', filterPresent ? '' : 'text-shadow']"
+      >
+        Time
+      </span>
     </v-btn>
 
     <v-dialog
@@ -30,10 +35,11 @@
           size="28"
           left
           color="white"
+          class="text-shadow"
           >
             mdi-clock-outline
           </v-icon>
-          <span class="white--text">Time</span>
+          <span class="white--text text-shadow">Time</span>
         </v-card-title>
 
         <v-card-text class="pt-4 pb-2">
@@ -56,7 +62,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     v-model="start"
-                    label="From"
+                    label="Filter from"
                     prepend-icon="mdi-clock-time-four-outline"
                     readonly
                     v-bind="attrs"
@@ -170,7 +176,7 @@
 
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -195,12 +201,14 @@ export default {
     currentRemoved(newVal) {
       if (newVal === 'Time') {
         this.filterPresent = false;
+        this.resetDeleted();
       }
     },
   },
 
   methods: {
     ...mapActions({ addFilter: 'matches/newFilter' }),
+    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
 
     sendFilter() {
       if (!this.start) {
@@ -225,5 +233,7 @@ export default {
 };
 </script>
 <style scoped>
-
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+}
 </style>

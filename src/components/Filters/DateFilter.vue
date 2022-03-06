@@ -11,11 +11,16 @@
       <v-icon
       :left="smAndUp"
       size="22"
+      :class="filterPresent ? '' : 'text-shadow'"
       >
         mdi-calendar
       </v-icon>
 
-      <span class="hidden-xs-only">Date</span>
+      <span
+      :class="['hidden-xs-only',  filterPresent ? '' : 'text-shadow']"
+      >
+        Date
+      </span>
     </v-btn>
 
     <v-dialog
@@ -30,10 +35,11 @@
           size="28"
           left
           color="white"
+          class="text-shadow"
           >
             mdi-calendar
           </v-icon>
-          <span class="white--text">Date</span>
+          <span class="white--text text-shadow">Date</span>
         </v-card-title>
 
         <v-card-text class="pt-4 pb-2">
@@ -106,7 +112,7 @@
 
 <script>
 import { format, parseISO } from 'date-fns';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
@@ -141,12 +147,14 @@ export default {
     currentRemoved(newVal) {
       if (newVal === 'Date') {
         this.filterPresent = false;
+        this.resetDeleted();
       }
     },
   },
 
   methods: {
     ...mapActions({ addFilter: 'matches/newFilter' }),
+    ...mapMutations({ resetDeleted: 'matches/resetCurrentDeleted' }),
 
     sendFilter() {
       const filter = {
@@ -168,5 +176,8 @@ export default {
 <style scoped>
 .centered-input >>> input {
   text-align: center;
+}
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
 }
 </style>

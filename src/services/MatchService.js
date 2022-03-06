@@ -10,6 +10,8 @@ const apiClient = axios.create({
 });
 
 export default {
+  teamSize: 5,
+
   /* fetch all matches from fake db, emulated a delay to get data */
   fetchMatches() {
     const promise = new Promise((resolve) => {
@@ -90,5 +92,109 @@ export default {
       filteredMatches = this.filter(filteredMatches, filter);
     });
     return filteredMatches;
+  },
+
+  validateNewPlayer(playerId, teamWhite, teamBlack) {
+    let duplicate = false;
+    for (let i = 1; i <= this.teamSize; i += 1) {
+      if (teamBlack[i].user.id === playerId || teamWhite[i].user.id === playerId) {
+        duplicate = true;
+        break;
+      }
+    }
+    return !duplicate;
+  },
+
+  countParticipants(teamBlack, teamWhite) {
+    let count = 0;
+    for (let i = 1; i <= this.teamSize; i += 1) {
+      if (!(teamBlack[i].user && Object.keys(teamBlack[i].user).length === 0
+      && teamBlack[i].user.constructor === Object)) {
+        count += 1;
+      }
+      if (!(teamWhite[i].user && Object.keys(teamWhite[i].user).length === 0
+      && teamWhite[i].user.constructor === Object)) {
+        count += 1;
+      }
+    }
+    return count;
+  },
+
+  isEmpty(obj) {
+    if (obj && Object.keys(obj).length === 0 && obj.constructor === Object) return true;
+    return false;
+  },
+
+  createMatch(details, teamBlack, teamWhite) {
+    const promise = new Promise((resolve) => {
+      window.setTimeout(() => {
+        const date = details[0];
+        const location = details[2];
+        const times = details[1].split(' - ');
+        const positions = {
+          goalkeepers: 0,
+          defenders: 0,
+          forwards: 0,
+        };
+        for (let i = 1; i <= this.teamSize; i += 1) {
+          if (!this.isEmpty(teamBlack[i].user)) {
+            positions[this.extractPositions(i)] += 1;
+          }
+          if (!this.isEmpty(teamWhite[i].user)) {
+            positions[this.extractPositions(i)] += 1;
+          }
+        }
+
+        const match = {
+          date,
+          startTime: times[0],
+          endTime: times[1],
+          location,
+          positions,
+          blackTeam: teamBlack,
+          whiteTeam: teamWhite,
+        };
+
+        const matchData = JSON.stringify(match);
+        resolve(apiClient.post('/matches', matchData));
+      }, 500);
+    });
+    return promise;
+  },
+
+  extractPositions(index) {
+    if (index === 1) return 'goalkeepers';
+    if (index === 2 || index === 3) return 'defenders';
+    return 'forwards';
+  },
+
+  findUserMatches(matches, user) {
+    const promise = new Promise((resolve) => {
+      window.setTimeout(() => {
+        const userId = user.id;
+        let teamBlack = [];
+        let teamWhite = [];
+        const userMatches = [];
+        for (let i = 0; i < matches.length; i += 1) {
+          teamBlack = matches[i].blackTeam;
+          teamWhite = matches[i].whiteTeam;
+          for (let j = 1; j <= this.teamSize; j += 1) {
+            if (!this.isEmpty(teamBlack[j].user)) {
+              if (teamBlack[j].user.id === userId) {
+                userMatches.push(matches[i]);
+                break;
+              }
+            } else if (!this.isEmpty(teamWhite[j].user)) {
+              if (teamWhite[j].user.id === userId) {
+                userMatches.push(matches[i]);
+                break;
+              }
+            }
+          }
+        }
+        resolve(userMatches);
+      }, 500);
+    });
+    return promise;
   },
 };

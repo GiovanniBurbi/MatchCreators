@@ -24,11 +24,11 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
             :value="dateFormatting"
-            :rules="[rules.required]"
             label="Define the date"
             color="deep-purple darken-2"
             solo flat
             readonly clearable
+            :rules="rulesVector"
             v-bind="attrs"
             v-on="on"
             @click:clear="date=null">
@@ -71,7 +71,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
-            :rules="[rules.required]"
+            :rules="rulesVector"
             v-model="time"
             class="d-inline-flex"
             label="Define the time"
@@ -171,11 +171,13 @@
       </div>
 
       <v-text-field
-      :rules="[rules.required, rules.noSpaces]"
+      v-model="location"
+      :rules="rulesVector"
       solo clearable color="deep-purple darken-2"
       flat class="d-inline-flex" label="Define the location"></v-text-field>
     </div>
     <v-btn
+    class="shadow"
     dark
     color="deep-purple darken-2"
     elevation="6"
@@ -185,6 +187,7 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex';
 import { parseISO, format } from 'date-fns';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
@@ -200,11 +203,12 @@ export default {
       modal: false,
       start: null,
       end: null,
+      location: null,
       step: 1,
       rules: {
         required: (v) => !!v || 'Required',
-        noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
       },
+      rulesVector: [],
     };
   },
 
@@ -217,13 +221,38 @@ export default {
     getTime() {
       return `${this.start} - ${this.end}`;
     },
+
+    ...mapGetters({ getDetails: 'matches/getDetails' }),
+  },
+
+  watch: {
+    getDetails(newVal) {
+      if (newVal.length === 0) {
+        this.date = null;
+        this.time = null;
+        this.start = null;
+        this.end = null;
+        this.step = 1;
+        this.location = null;
+      }
+    },
   },
 
   methods: {
+    ...mapMutations({ sendDetails: 'matches/setDetails' }),
+
     proceed() {
+      this.rulesVector.push(this.rules.required);
       if (this.$refs.details.validate()) {
+        const details = [
+          this.date,
+          this.getTime,
+          this.location,
+        ];
+        this.sendDetails(details);
         this.$emit('detailsPassed');
       }
+      this.rulesVector.pop();
     },
   },
 

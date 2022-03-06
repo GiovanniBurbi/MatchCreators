@@ -1,25 +1,32 @@
 <template>
-  <div>
+  <v-container fluid>
     <v-row justify="space-between" align="center">
 
-      <h1 :class="['white--text font-weight-bold header']">
+      <h1 :class="['white--text text-size font-weight-bold header',
+      {'big': lgAndUp}, {'small': xsOnly}]">
         Search a Match
+        <v-icon
+        :size="lgAndUp ? 50 : 36"
+        class="white-icon pb-3"
+        >
+          $finder-icon
+        </v-icon>
       </h1>
 
       <v-btn
-      :small="xsOnly"
       :color="showFilters ?  'white' : 'deep-purple'"
       rounded
       @click="showFilters = !showFilters, $emit('filters')"
       >
         <span
         :class="['hidden-xs-only',
-        showFilters ? 'deep-purple--text' : 'white--text']">
+        showFilters ? 'deep-purple--text text-shadow-soft' : 'white--text text-shadow']">
           Filters
         </span>
 
         <v-icon
-        :small="xsOnly"
+        :class="showFilters ? 'icon-shadow-soft' : 'icon-shadow'"
+        :size="xsOnly ? 18 : null"
         :right="smAndUp"
         :color="showFilters ? 'deep-purple' : 'white'"
         >
@@ -63,7 +70,8 @@
     <v-row justify="center">
       <filter-chips-group/>
     </v-row>
-  </div>
+    <v-divider class="mt-2" />
+  </v-container>
 </template>
 
 <script>
@@ -97,11 +105,36 @@ export default {
 
 <style scoped>
 .header {
-  text-shadow: 2px 3px rgba(0, 0, 0, 0.8);
-  font-size: calc(20px + 2vw);
+  text-shadow: 2px 3px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
+}
+.text-size {
+  font-size: 2.2rem;
+}
+.big{
+  font-size: 3rem;
+}
+.small{
+  font-size: 1.75rem;
 }
 .filtersGroup {
   max-width: 1200px;
+}
+.white-icon {
+  /* white */
+  filter: invert(99%) sepia(3%) saturate(1032%)
+  hue-rotate(291deg) brightness(122%) contrast(100%) drop-shadow( 1px 2px rgba(0, 0, 0, 0.7));
+}
+.text-shadow {
+  text-shadow: 1px 2px rgba(0, 0, 0, 1);
+}
+.text-shadow-soft{
+  text-shadow: 1px 1px rgb(97, 97, 97);
+}
+.icon-shadow {
+  filter: drop-shadow(2px 2px black);
+}
+.icon-shadow-soft {
+  filter: drop-shadow(1px 1px rgb(95, 95, 95));
 }
 </style>

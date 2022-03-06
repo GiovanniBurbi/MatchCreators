@@ -8,6 +8,9 @@ export default {
     matches: [],
     filteredMatches: [],
     loadedMatches: false,
+    userMatches: [],
+    loadingUserMatches: false,
+    matchToOverview: {},
     filters: [],
     filter: {
       type: '',
@@ -15,6 +18,54 @@ export default {
       msg: null,
     },
     currentRemoved: null,
+    loading: false,
+    details: ['2001-01-01', '10:00 - 11:00', 'Albereta'],
+    teamBlack: [
+      { team: 'Black' },
+      {
+        id: 1,
+        user: {},
+      },
+      {
+        id: 2,
+        user: {},
+      },
+      {
+        id: 3,
+        user: {},
+      },
+      {
+        id: 4,
+        user: {},
+      },
+      {
+        id: 5,
+        user: {},
+      },
+    ],
+    teamWhite: [
+      { team: 'White' },
+      {
+        id: 1,
+        user: {},
+      },
+      {
+        id: 2,
+        user: {},
+      },
+      {
+        id: 3,
+        user: {},
+      },
+      {
+        id: 4,
+        user: {},
+      },
+      {
+        id: 5,
+        user: {},
+      },
+    ],
   },
 
   mutations: {
@@ -26,7 +77,7 @@ export default {
       state.filteredMatches = games;
     },
 
-    setLoaded(state, val) {
+    setLoadedMatches(state, val) {
       state.loadedMatches = val;
     },
 
@@ -42,9 +93,73 @@ export default {
         msg: null,
       };
     },
+
     deleteFilter(state, indexFilter) {
       const removed = state.filters.splice(indexFilter, 1);
       state.currentRemoved = removed[0].type;
+    },
+
+    resetCurrentDeleted(state) {
+      state.currentRemoved = null;
+    },
+
+    clearFilters(state) {
+      state.filters = [];
+    },
+
+    setDetails(state, details) {
+      state.details = details.slice();
+    },
+
+    addPlayer(state, payload) {
+      if (payload.isWhite) {
+        state.teamWhite[payload.spot].user = payload.user;
+      } else {
+        state.teamBlack[payload.spot].user = payload.user;
+      }
+    },
+
+    addUser(state, user) {
+      let pos = null;
+      if (user.position === 'Goalkeeper') {
+        pos = 1;
+      } else if (user.position === 'Defender') {
+        pos = 2;
+      } else pos = 4;
+      state.teamBlack[pos].user = user;
+    },
+
+    removePlayer(state, payload) {
+      if (payload.isWhite) {
+        state.teamWhite[payload.spot].user = {};
+      } else {
+        state.teamBlack[payload.spot].user = {};
+      }
+    },
+
+    clearMatchTmp(state) {
+      state.details = [];
+      const { teamSize } = MatchService;
+      for (let i = 1; i <= teamSize; i += 1) {
+        state.teamBlack[i].user = {};
+        state.teamWhite[i].user = {};
+      }
+    },
+
+    setLoading(state, isLoading) {
+      state.loading = isLoading;
+    },
+
+    setLoadingUserMatches(state, isLoading) {
+      state.loadingUserMatches = isLoading;
+    },
+
+    setUserMatches(state, matches) {
+      state.userMatches = matches;
+    },
+
+    setMatchToOverview(state, match) {
+      state.matchToOverview = match;
     },
   },
 
@@ -52,7 +167,8 @@ export default {
     async allMatches({ commit }) {
       const matches = await MatchService.getAllMatches();
       commit('setMatches', matches);
-      commit('setLoaded', true);
+      commit('setFilteredMatches', matches);
+      commit('setLoadedMatches', true);
     },
 
     addFilterMatches({ state, commit }, newFilter) {
@@ -74,9 +190,41 @@ export default {
       commit('addFilter', filter);
       dispatch('addFilterMatches', filter);
     },
+
     removeFilter({ commit, dispatch }, indexFilter) {
       commit('deleteFilter', indexFilter);
       dispatch('multipleFiltersMatch');
+    },
+
+    async inviteValidation({ state }, playerId) {
+      const res = await MatchService.validateNewPlayer(playerId, state.teamWhite, state.teamBlack);
+      return res;
+    },
+
+    async createMatch({
+      state, commit, dispatch, rootGetters,
+    }) {
+      commit('setLoading', true);
+      await MatchService.createMatch(state.details, state.teamBlack, state.teamWhite)
+        .then(async () => {
+          await dispatch('allMatches');
+          commit('clearMatchTmp');
+          commit('addUser', rootGetters['auth/getUser']);
+          commit('setLoading', false);
+          await dispatch('findUserMatches');
+        });
+    },
+
+    async findUserMatches({
+      state, commit, dispatch, rootGetters,
+    }) {
+      commit('setLoadingUserMatches', true);
+      await dispatch('allMatches');
+      await MatchService.findUserMatches(state.matches, rootGetters['auth/getUser'])
+        .then((res) => {
+          commit('setUserMatches', res);
+          commit('setLoadingUserMatches', false);
+        });
     },
   },
 
@@ -99,6 +247,44 @@ export default {
 
     getCurrentRemoved(state) {
       return state.currentRemoved;
+    },
+
+    getDetails(state) {
+      return state.details;
+    },
+
+    getNumPlayers(state) {
+      return MatchService.countParticipants(state.teamBlack, state.teamWhite);
+    },
+
+    getTeamBlack(state) {
+      return state.teamBlack;
+    },
+
+    getTeamWhite(state) {
+      return state.teamWhite;
+    },
+
+    getLoading(state) {
+      return state.loading;
+    },
+
+    getLoadingUserMatches(state) {
+      return state.loadingUserMatches;
+    },
+
+    getUserMatches(state) {
+      return state.userMatches;
+    },
+
+    getMatchToOverview(state) {
+      return state.matchToOverview;
+    },
+
+    getIsOverview(state) {
+      if (Object.keys(state.matchToOverview).length !== 0) {
+        return true;
+      } return false;
     },
   },
 };
