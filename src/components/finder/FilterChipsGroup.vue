@@ -11,7 +11,7 @@
     :ripple="false"
     color="indigo"
     text-color="white"
-    @click:close="deleteFilter(i)"
+    @click:close="removeFilter(i)"
     >
       <v-icon
       left size="22"
@@ -39,10 +39,6 @@ export default {
 
   methods: {
     ...mapActions({ removeFilter: 'filters/removeFilter' }),
-
-    deleteFilter(index) {
-      this.removeFilter(index);
-    },
   },
 
   mixins: [BreakpointsCond, DataHelper],
