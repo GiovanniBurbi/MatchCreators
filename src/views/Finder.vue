@@ -56,7 +56,7 @@ import MyMatches from '../components/MyMatches.vue';
 import MatchFullDetails from '../components/MatchFullDetails.vue';
 
 export default {
-  name: 'Home',
+  name: 'Finder',
 
   data() {
     return {

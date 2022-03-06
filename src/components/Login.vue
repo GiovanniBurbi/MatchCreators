@@ -1,6 +1,6 @@
 <template>
   <v-card
-  max-width=430
+  :width="xsOnly ? null : 390"
   rounded="xl"
   elevation="10"
   >
@@ -9,13 +9,12 @@
       <v-window-item :value="1">
 
         <v-card-title
-        class="justify-end pr-4 pt-8 pb-4"
-        style="font-size: 30px;font-weight: 300; color: 3F51B5;"
+        class="justify-end font-weight-light text-h5 pr-5"
         >
           <span>Authentication</span>
         </v-card-title>
 
-        <v-card-text class="pb-0 pt-2">
+        <v-card-text class="pb-0">
           <v-form ref="login">
 
             <v-text-field
@@ -52,39 +51,41 @@
           x-large dark
           color="indigo"
           rounded block
-          elevation="2"
           >
             Login
           </v-btn>
         </v-card-actions>
 
-        <v-card-text
-        class="text-center pt-6 pb-8 text-body-2"
+        <v-row
+        justify="center"
+        class="py-8"
         >
-          Not registered yet?
-          <v-btn
-          small dark
-          color="indigo"
-          text
-          class="px-1 py-1"
-          @click="step++"
-          >
-            Sign up
-          </v-btn>
-        </v-card-text>
+          <div class="d-inline-flex align-center">
+            <h1 class="text-body-2">Not registered yet?</h1>
+            <v-btn
+            dark
+            text
+            x-small
+            color="indigo"
+            class="pl-2"
+            @click="step++"
+            >
+              Sign up
+            </v-btn>
+          </div>
+        </v-row>
 
       </v-window-item>
 
       <v-window-item :value="2">
 
         <v-card-title
-        class="justify-start pr-4 pt-8 pb-4"
-        style="font-size: 30px;font-weight: 300; color: 3F51B5;"
+        class="justify-start font-weight-light text-h5 pl-5"
         >
           <span>Registration</span>
         </v-card-title>
 
-        <v-card-text class="pb-0 pt-2">
+        <v-card-text class="pb-0">
           <v-form ref="firstStepReg">
 
             <v-text-field
@@ -131,29 +132,33 @@
           </v-btn>
         </v-card-actions>
 
-        <v-card-text
-        class="text-center pt-6 pb-8 text-body-2"
+        <v-row
+        justify="center"
+        class="py-8"
         >
-          Already have an account?
-          <v-btn
-          small dark color="indigo"
-          text
-          class="px-1 py-1"
-          @click="step--"
-          >
-            login
-          </v-btn>
-        </v-card-text>
+          <div class="d-inline-flex align-center">
+            <h1 class="text-body-2">Already have an account?</h1>
+            <v-btn
+            dark
+            text
+            x-small
+            color="indigo"
+            class="pl-2"
+            @click="step--"
+            >
+              Login
+            </v-btn>
+          </div>
+        </v-row>
 
       </v-window-item>
 
       <v-window-item :value="3">
 
         <v-card-title
-        class="justify-start pr-4 pt-8"
+        class="justify-start text-size font-weight-light"
         >
-          <h1 class="font-weight-light"
-          :style="xsOnly ? 'font-size:26px' : 'font-size:30px;'">Complete your profile</h1>
+          <span>Complete your profile</span>
         </v-card-title>
 
         <v-card-text class="pb-0">
@@ -194,17 +199,18 @@
 
             </v-menu>
 
-            <position-field ref="pos" label="Position" registration></position-field>
+            <position-field ref="pos" label="Position" />
           </v-form>
         </v-card-text>
 
-        <v-card-actions class="pb-4 pt-6">
+        <v-card-actions class="pb-4 pt-0">
           <v-btn
-          @click="submitFullReg"
-          x-large dark
+          x-large
+          dark
           color="indigo"
-          rounded block
-          elevation="2"
+          rounded
+          block
+          @click="submitFullReg"
           >
             Let's start!
           </v-btn>
@@ -231,12 +237,12 @@ export default {
 
   data() {
     return {
+      step: 1,
       username: '',
       password: '',
       email: '',
       date: null,
 
-      step: 1,
       activePicker: null,
       menu: false,
       showPsw: false,
@@ -271,6 +277,16 @@ export default {
   mixins: [BreakpointsCond],
 
   methods: {
+    ...mapActions({
+      loginAttempt: 'auth/login',
+      signup: 'auth/signup',
+    }),
+
+    ...mapMutations({
+      resetSelection: 'posInputField/setPosSelection',
+      setAppMode: 'app/setAppMode',
+    }),
+
     /* save date on text field */
     save(date) {
       this.$refs.menu.save(date);
@@ -282,8 +298,6 @@ export default {
       }
     },
 
-    ...mapActions({ loginAttempt: 'auth/login' }),
-
     /* submit handlers of all windows */
     submitLogin() {
       if (this.$refs.login.validate()) {
@@ -291,8 +305,8 @@ export default {
           { name: this.username, psw: this.password },
         ).then((val) => {
           if (val) {
-            this.$router.push({ name: 'Home' });
-            this.$emit('loginSuccess');
+            this.$router.push({ name: 'Finder' });
+            this.setAppMode('finder');
           } else {
             this.loginError.push('Invalid access');
           }
@@ -307,14 +321,10 @@ export default {
       }
     },
 
-    ...mapActions({ signup: 'auth/signup' }),
-    ...mapMutations({ resetSelection: 'posInputField/setPosSelection' }),
-
     submitFullReg() {
       const posValid = this.$refs.pos.validate();
       const dateValid = this.$refs.fullReg.validate();
       if (posValid && dateValid) {
-        this.position = this.getPos;
         this.signup(
           {
             username: this.username,
@@ -325,11 +335,23 @@ export default {
           },
         ).then(() => {
           this.resetSelection('');
-          this.$router.push({ name: 'Home' });
-          this.$emit('loginSuccess');
+          this.$router.push({ name: 'Finder' });
+          this.setAppMode('finder');
         });
       }
     },
   },
 };
 </script>
+
+<style scoped>
+.text-size {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 295px) {
+  .text-size {
+    font-size: 1.25rem;
+  }
+}
+</style>

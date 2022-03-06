@@ -90,7 +90,7 @@ export default {
       this.isFinder = !this.isFinder;
       this.$emit('modeSwitch');
       if (this.isFinder) {
-        this.$router.replace('/home');
+        this.$router.replace('/finder');
       } else this.$router.replace('/creator');
     },
   },

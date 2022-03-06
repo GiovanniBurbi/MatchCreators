@@ -119,7 +119,7 @@ export default {
     $route() {
       /* first if maybe is useless, do the actions in goHome
       if that's the case */
-      if (this.$route.name === 'Home') {
+      if (this.$route.name === 'Finder') {
         if (this.darkMode) {
           /* this.darkMode = false; */
           this.setDarkMode(false);
@@ -140,10 +140,10 @@ export default {
     ...mapMutations({ setDarkMode: 'theme/setDarkMode' }),
 
     goHome() {
-      if (this.$route.name === 'Home') {
+      if (this.$route.name === 'Finder') {
         this.$router.go();
       } else {
-        this.$router.push({ name: 'Home' });
+        this.$router.push({ name: 'Finder' });
       }
     },
   },
