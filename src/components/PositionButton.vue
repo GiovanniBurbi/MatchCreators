@@ -1,18 +1,27 @@
 <template>
-  <div
-    :class="classes"
+  <v-container fluid
+    :class="[classes, 'py-3']"
     @mouseover="hoverOver"
     @mouseout="hoverOut"
     @click="clicked"
   >
-    <img
+    <v-row justify="center">
+      <img
       :class="[fieldPos, 'playerImg']"
       :src="require(`@/assets/myButtons/${fieldPos}.png`)"
-    />
-    <h1 class="position indigo--text pt-2 font-weight-light text-size">
-    {{ fieldPos }}
-    </h1>
-  </div>
+      />
+    </v-row>
+
+    <v-row justify="center">
+      <h1
+      :class="['position indigo--text pt-2 font-weight-light',
+      xsOnly ? 'text-subtitle-2' : 'text-h6']"
+      >
+        {{ fieldPos }}
+      </h1>
+    </v-row>
+
+  </v-container>
 </template>
 
 <script>
@@ -38,8 +47,6 @@ export default {
       click: false,
     };
   },
-
-  mixins: [BreakpointsCond],
 
   computed: {
     /* declare currentSelection as a method to get vuex state of
@@ -87,16 +94,14 @@ export default {
       }
     },
   },
+
+  mixins: [BreakpointsCond],
+
 };
 </script>
 
 <style scoped>
-.text-size {
-  font-size: 1.25rem
-}
 .button {
-  height: 100px;
-  max-width: 100px;
   cursor: pointer;
   /* transition for hoverOut */
   transform: scale(1);
@@ -127,6 +132,7 @@ export default {
   text-transform: capitalize;
   width: fit-content;
   margin: auto;
+  line-height: 1.3;
 }
 /* bottom border for setup transition */
 .position:after {
@@ -136,6 +142,9 @@ export default {
   transform: scaleX(0);
   transition: transform 200ms ease-in-out;
   opacity: 100%;
+}
+.selection .playerImg {
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.6));
 }
 /* bottom border start transition on selection */
 .selection .position:after {
@@ -147,8 +156,21 @@ export default {
 }
 .zoom .playerImg {
   opacity: 100%;
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.6));
 }
 .zoom .position {
   opacity: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .goalkeeper {
+  max-width: 42px;
+  }
+  .defender {
+    max-width: 20px;
+  }
+  .forward {
+    max-width: 58px;
+  }
 }
 </style>

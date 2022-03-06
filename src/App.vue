@@ -50,13 +50,6 @@ export default {
   },
 
   computed: {
-    /* isNotAuth() {
-      return this.$route.name !== 'Authentication';
-    }, */
-
-    /* ...mapGetters({ getUserInfo: 'auth/getUser' }),
-    ...mapGetters({ isOverview: 'matches/getIsOverview' }), */
-
     ...mapGetters({
       user: 'auth/getUser',
       appMode: 'app/getAppMode',
@@ -75,7 +68,29 @@ export default {
 };
 </script>
 <style>
-.shadow {
+/* .shadow {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.6);
+} */
+
+/* sets svg icon color */
+.icon-grey {
+  /* gray darken-1 */
+  filter: invert(50%) sepia(0%) saturate(7%) hue-rotate(138deg)
+  brightness(90%) contrast(92%);
+}
+.icon-red {
+  /* red accent-2 */
+  filter: invert(46%) sepia(71%) saturate(3070%) hue-rotate(330deg)
+  brightness(106%) contrast(109%);
+}
+.icon-purple {
+  /* deep-purple */
+  filter: invert(25%) sepia(75%) saturate(1998%) hue-rotate(247deg)
+  brightness(82%) contrast(92%);
+}
+.icon-indigo {
+  /* indigo */
+  filter: invert(26%) sepia(55%) saturate(2295%) hue-rotate(217deg)
+  brightness(90%) contrast(83%);
 }
 </style>
