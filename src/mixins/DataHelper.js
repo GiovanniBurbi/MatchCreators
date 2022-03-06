@@ -1,6 +1,7 @@
 import { format, parseISO } from 'date-fns';
 
 export default {
+
   data() {
     return {
       /* rules for validate input in text-fields */
@@ -18,6 +19,19 @@ export default {
     /* format date */
     dateNoDay() {
       return this.date ? format(parseISO(this.date), 'do MMMM yyyy') : '';
+    },
+
+    dateRange() {
+      /* sort date range as ascending */
+      const sortedDates = this.dates;
+      sortedDates.sort();
+      const datesFormatted = [];
+      for (let i = 0; i < sortedDates.length; i += 1) {
+        datesFormatted.push(
+          format(parseISO(sortedDates[i]), 'do MMM yyyy'),
+        );
+      }
+      return datesFormatted.join(' ~ ');
     },
   },
 };

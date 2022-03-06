@@ -79,9 +79,9 @@
 </template>
 
 <script>
-import { format, parseISO } from 'date-fns';
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
+import DataHelper from '@/mixins/DataHelper';
 
 export default {
   name: 'DateFilter',
@@ -95,19 +95,6 @@ export default {
   },
 
   computed: {
-    dateRange() {
-      /* sort date range as ascending */
-      const sortedDates = this.dates;
-      sortedDates.sort();
-      const datesFormatted = [];
-      for (let i = 0; i < sortedDates.length; i += 1) {
-        datesFormatted.push(
-          format(parseISO(sortedDates[i]), 'do MMM yyyy'),
-        );
-      }
-      return datesFormatted.join(' ~ ');
-    },
-
     ...mapGetters({ currentRemoved: 'matches/getCurrentRemoved' }),
   },
 
@@ -136,7 +123,7 @@ export default {
     },
   },
 
-  mixins: [BreakpointsCond],
+  mixins: [BreakpointsCond, DataHelper],
 
 };
 </script>
