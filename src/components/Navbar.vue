@@ -11,7 +11,7 @@
     <v-app-bar-nav-icon>
       <v-icon
       size=35
-      class="icon-indigo"
+      class="icon-indigo-shadow"
       @click="goHome()"
       >
         $ball-icon
@@ -22,11 +22,15 @@
 
       <v-app-bar-title
       v-if="mdAndUp"
-      class="pl-1 text-uppercase"
+      class="pl-1"
       style="cursor: default;"
       >
-        <h1 class="font-weight-bold d-inline-flex title">Match</h1>
-        <h1 class="font-weight-light d-inline-flex title">Creators</h1>
+
+        <div class="d-inline-flex text-uppercase">
+          <h1 class="font-weight-bold text-h6">Match</h1>
+          <h1 class="font-weight-light text-h6">Creators</h1>
+        </div>
+
       </v-app-bar-title>
 
     </v-slide-x-transition>
@@ -46,7 +50,7 @@
      @click="$emit('myMatches')"
     >
       <v-icon
-      class="icon-indigo"
+      class="icon-indigo-shadow"
       :size="xsOnly ? 32 : 30"
       >
         $player-icon
