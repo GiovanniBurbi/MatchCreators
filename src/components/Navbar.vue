@@ -106,8 +106,10 @@ export default {
     }),
 
     getAvatarPicture() {
-      // eslint-disable-next-line import/no-dynamic-require
-      return require(`../${this.user.picture}`);
+      if (this.user) {
+        // eslint-disable-next-line import/no-dynamic-require
+        return require(`../${this.user.picture}`);
+      } return require('../assets/users/match.jpg');
     },
   },
 
