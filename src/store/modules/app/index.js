@@ -8,10 +8,14 @@ export default {
 
   mutations: {
     setAppMode(state, mode) {
-      state.mode = mode;
+      if (state.mode !== mode) {
+        state.mode = mode;
+      }
     },
     setAppSection(state, section) {
-      state.section = section;
+      if (state.section !== section) {
+        state.section = section;
+      }
     },
   },
 

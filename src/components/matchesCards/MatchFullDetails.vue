@@ -316,6 +316,8 @@ export default {
 }
 .light {
   background: rgba(0, 0, 0, 0.4);
+  /* background:linear-gradient(to bottom,rgba(0, 0, 0, 0.7),
+  rgba(0, 0, 0, 0.2)); */
 }
 .dark {
   background: rgba(0, 0, 0, 0.7);

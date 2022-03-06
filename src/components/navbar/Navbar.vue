@@ -11,11 +11,11 @@
     <v-btn
     icon
     :small="xsOnly"
-    class="pl-3"
+    class="pl-2"
     >
       <v-icon
       :size=" xsOnly ? 32 : 36"
-      class="icon-indigo-shadow"
+      class="icon-indigo"
       @click="goHome()"
       >
         $ball-icon
@@ -26,7 +26,7 @@
 
       <v-app-bar-title
       v-if="mdAndUp"
-      class="pl-1"
+      class="pl-3"
       style="cursor: default;"
       >
 
@@ -41,7 +41,7 @@
 
     <v-spacer v-if="mdAndUp"></v-spacer>
 
-    <mode-switcher :class="{'pl-6': xsOnly}"/>
+    <mode-switcher :class="{'pl-4': xsOnly}"/>
 
     <v-spacer></v-spacer>
 
@@ -54,7 +54,7 @@
      @click="setAppSection('my-matches')"
     >
       <v-icon
-      class="icon-indigo-shadow pr-2"
+      class="icon-indigo pr-2"
       :size="xsOnly ? 32 : 30"
       >
         $player-2-icon

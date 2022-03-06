@@ -104,7 +104,9 @@ export default {
     },
 
     clearFilters(state) {
-      state.filters = [];
+      if (state.filters.length !== 0) {
+        state.filters = [];
+      }
     },
 
     setDetails(state, details) {
@@ -165,6 +167,7 @@ export default {
 
   actions: {
     async allMatches({ commit }) {
+      commit('setLoadedMatches', false);
       const matches = await MatchService.getAllMatches();
       commit('setMatches', matches);
       commit('setFilteredMatches', matches);

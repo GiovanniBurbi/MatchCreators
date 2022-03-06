@@ -2,12 +2,15 @@
   <v-container fluid>
     <v-row justify="space-between" align="center">
 
-      <h1 :class="['white--text text-size font-weight-bold header',
-      {'big': lgAndUp}, {'small': xsOnly}]">
+      <h1
+      :class="['text-big header',
+      {'text-h4' : mdAndDown},
+      {'text-h5': xsOnly}]"
+      >
         Search a Match
         <v-icon
-        :size="lgAndUp ? 50 : 36"
-        class="white-icon pb-3"
+        :size="iconSize"
+        class="icon-white-shadow pb-3"
         >
           $finder-icon
         </v-icon>
@@ -16,17 +19,18 @@
       <v-btn
       :color="showFilters ?  'white' : 'deep-purple'"
       rounded
-      @click="showFilters = !showFilters, $emit('filters')"
+      :small="xsOnly"
+      @click="showFilters = !showFilters"
       >
         <span
         :class="['hidden-xs-only',
-        showFilters ? 'deep-purple--text text-shadow-soft' : 'white--text text-shadow']">
+        showFilters ? 'deep-purple--text' : 'white--text btn-shadow']">
           Filters
         </span>
 
         <v-icon
-        :class="showFilters ? 'icon-shadow-soft' : 'icon-shadow'"
-        :size="xsOnly ? 18 : null"
+        :class="{'btn-icon-shadow': !showFilters}"
+        :size="xsOnly ? 16 : null"
         :right="smAndUp"
         :color="showFilters ? 'deep-purple' : 'white'"
         >
@@ -37,8 +41,8 @@
     </v-row>
 
     <v-row>
-      <v-slide-y-transition hide-on-leave>
 
+      <v-slide-y-transition hide-on-leave>
         <v-container v-if="showFilters" fluid class="filtersGroup">
 
           <v-row justify="center">
@@ -66,11 +70,15 @@
 
         </v-container>
       </v-slide-y-transition>
+
     </v-row>
+
     <v-row justify="center">
       <filter-chips-group/>
     </v-row>
+
     <v-divider class="mt-2" />
+
   </v-container>
 </template>
 
@@ -91,6 +99,15 @@ export default {
     };
   },
 
+  computed: {
+    iconSize() {
+      if (this.$vuetify.breakpoint.lgAndUp) return 50;
+      if (this.$vuetify.breakpoint.name === 'md'
+        || this.$vuetify.breakpoint.name === 'sm') return 36;
+      return 28;
+    },
+  },
+
   components: {
     FilterChipsGroup,
     DateFilter,
@@ -104,37 +121,10 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  text-shadow: 2px 3px rgba(0, 0, 0, 0.6);
-  white-space: nowrap;
-}
-.text-size {
-  font-size: 2.2rem;
-}
-.big{
-  font-size: 3rem;
-}
-.small{
-  font-size: 1.75rem;
+.text-big{
+  font-size: 2.6rem;
 }
 .filtersGroup {
   max-width: 1200px;
-}
-.white-icon {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%)
-  hue-rotate(291deg) brightness(122%) contrast(100%) drop-shadow( 1px 2px rgba(0, 0, 0, 0.7));
-}
-.text-shadow {
-  text-shadow: 1px 2px rgba(0, 0, 0, 1);
-}
-.text-shadow-soft{
-  text-shadow: 1px 1px rgb(97, 97, 97);
-}
-.icon-shadow {
-  filter: drop-shadow(2px 2px black);
-}
-.icon-shadow-soft {
-  filter: drop-shadow(1px 1px rgb(95, 95, 95));
 }
 </style>

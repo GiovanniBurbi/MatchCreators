@@ -4,7 +4,7 @@
     <v-row justify="center" v-if="loading">
       <v-skeleton-loader
       class="mx-2 my-2"
-      v-for="index in 16"
+      v-for="index in 25"
       :key="index"
       elevation="8"
       tile
@@ -18,18 +18,18 @@
     <v-slide-x-transition>
 
       <v-row justify="center" v-if="!loading">
-        <template v-for="match in matches">
-          <!-- component over handler with vuetify -->
-          <v-hover v-slot="{ hover }" :key="match.id">
-            <match-card
-            :match="match"
-            :hover="hover"
-            :isFinder="isFinder"
-            :darkMode="darkMode"
-            />
-          </v-hover>
+          <template v-for="match in matches">
+            <!-- component over handler with vuetify -->
+            <v-hover v-slot="{ hover }" :key="match.id">
+              <match-card
+              :match="match"
+              :hover="hover"
+              :isFinder="isFinder"
+              :darkMode="darkMode"
+              />
+            </v-hover>
 
-        </template>
+          </template>
       </v-row>
 
     </v-slide-x-transition>

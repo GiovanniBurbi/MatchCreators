@@ -1,68 +1,71 @@
 <template>
+
   <v-container fluid>
+    <v-row justify="space-between" align="center">
 
-    <v-container fluid
-    :class="['header',
-    {'header-sm' : smAndDown},
-    {'header-md' : lgOnly || mdOnly}]"
-    >
-      <v-row justify="space-between" align="center">
-        <h1
-        :class="['white--text text-size font-weight-bold',
-        {'big': lgAndUp}, {'small': xsOnly}, isFinder ? 'header-shadow-black' : 'white-shadow']"
+      <h1
+      :class="['white--text text-size font-weight-bold',
+      {'big': lgAndUp}, {'small': xsOnly}, isFinder ? 'header-shadow-black' : 'white-shadow']"
+      >
+        My Matches
+        <v-icon
+        :class="[isFinder ? 'white-icon-black-shadow' : 'white-icon-light-shadow', 'pb-3']"
+        :size="lgAndUp ? 46 : 34"
         >
-          My Matches
-          <v-icon
-          :class="[isFinder ? 'white-icon-black-shadow' : 'white-icon-light-shadow', 'pb-3']"
-          :size="lgAndUp ? 46 : 34"
-          >
-            $player-icon
-          </v-icon>
-        </h1>
+          $player-2-icon
+        </v-icon>
+      </h1>
 
-        <v-btn
-        v-if="isFinder"
-        color="deep-purple"
-        dark
-        rounded
-        @click="$emit('goBackToFinder')"
+      <v-btn
+      v-if="isFinder"
+      color="deep-purple"
+      dark
+      rounded
+      @click="setAppSection('')"
+      >
+        <span
+        class="text-shadow"
+        v-if="!xsOnly"
         >
-          <span class="text-shadow" v-if="!xsOnly">find new match</span>
-          <v-icon
-          :right="!xsOnly"
-          class="white-icon-black-shadow"
-          size="28"
-          >
-            $finder-icon
-          </v-icon>
-        </v-btn>
-      </v-row>
+          find new match
+        </span>
 
-      <v-divider
-      :class="['mt-4', isFinder ? 'divider-light' : 'divider-dark']"
-      ></v-divider>
+        <v-icon
+        :right="!xsOnly"
+        class="white-icon-black-shadow"
+        size="28"
+        >
+          $finder-icon
+        </v-icon>
 
-      <match-cards-group
-      :loading="loading"
-      :matches="userMatches"
-      :isFinder=false
-      :darkMode="dark"
-      class="pt-6"/>
+      </v-btn>
+    </v-row>
 
-    </v-container>
+    <v-divider
+    :class="['mt-4', isFinder ? 'divider-light' : 'divider-dark']"
+    ></v-divider>
+
+    <match-cards-group
+    :loading="loading"
+    :matches="userMatches"
+    :isFinder=false
+    :darkMode="dark"
+    class="pt-6"/>
 
   </v-container>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import MatchCardsGroup from '../matchesCards/MatchCardsGroup.vue';
 
 export default {
   name: 'myMatches',
 
-  components: { MatchCardsGroup },
+  components: {
+    MatchCardsGroup,
+  },
 
   props: {
     isFinder: {
@@ -83,6 +86,7 @@ export default {
 
   methods: {
     ...mapActions({ fetchUserMatches: 'matches/findUserMatches' }),
+    ...mapMutations({ setAppSection: 'app/setAppSection' }),
   },
 
   mounted() {
@@ -95,15 +99,6 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  max-width: 80%;
-}
-.header-md {
-  max-width: 90%;
-}
-.header-sm {
-  max-width: 100%;
-}
 .text-size {
   font-size: 2.2rem;
 }

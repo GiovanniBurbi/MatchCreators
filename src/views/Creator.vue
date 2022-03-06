@@ -190,7 +190,7 @@ export default {
 <style scoped>
 .background {
   height: 100%;
-  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.7),
   rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/night.jpg') center center no-repeat fixed;
   background-size: cover;
 }
