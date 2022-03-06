@@ -9,9 +9,9 @@
 
       <!-- div of the switch that highlight the selected mode -->
       <div :class="['selector',
-      {'switch-selector': !isFinder},
-      {'selector-small': smOnly && !isFinder},
       {'icon-selector' : xsOnly},
+      {'selector-normal': !isFinder},
+      {'selector-small': smOnly && !isFinder},
       {'selector-xsmall icon-selector' : xsOnly && !isFinder}]"
       >
         &nbsp;
@@ -20,8 +20,8 @@
         <div v-if="!xsOnly" class="d-inline-flex">
           <div class="pl-2 pr-4">
             <h1
-            :class="['label',
-            isFinder ? 'label-select' : 'finder-no-select',
+            style="cursor:pointer"
+            :class="[isFinder ? 'label-select' : 'finder-no-select',
             {'text-h6': smOnly}]"
             @click="toggleMode()"
             >
@@ -31,9 +31,8 @@
 
           <div class="pr-2">
             <h1
-            v-if="!xsOnly"
-            :class="['label',
-            isFinder ? 'label-no-select' : 'label-select',
+            style="cursor:pointer"
+            :class="[isFinder ? 'creator-no-select' : 'label-select',
             smOnly ? 'text-h6' : '']"
             @click="toggleMode()"
             >
@@ -47,10 +46,9 @@
         small -->
         <div v-if="xsOnly">
           <v-icon
-          v-if="xsOnly"
+          style="cursor:pointer"
           size="28"
-          :color="isFinder ? 'white' : null"
-          :class="['mx-3 icon-switch white-icon',
+          :class="['mx-3 icon-white-shadow',
           isFinder ? 'icon-select' : 'icon-no-select']"
           @click="toggleMode()"
           >
@@ -58,10 +56,10 @@
           </v-icon>
 
           <v-icon
-          v-if="xsOnly"
+          style="cursor:pointer"
           size="30"
-          :class="['mx-3 icon-switch',
-          isFinder ? 'icon-no-select' : 'icon-select white-icon']"
+          :class="['mx-3',
+          isFinder ? 'icon-no-select' : 'icon-select icon-white-shadow']"
           @click="toggleMode()"
           >
             $creator-icon
@@ -124,28 +122,6 @@ export default {
   background-color: #212121;
   transition: background-color 0.4s ease;
 }
-.label {
-  cursor: pointer;
-}
-.icon-switch {
-  cursor: pointer;
-}
-.icon-select {
-  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
-  background-clip: text;
-  cursor: default;
-  pointer-events: none;
-  transition: 0.3s ease;
-}
-.icon-no-select {
-  opacity: 40%;
-  transition: 0.2s ease;
-}
-.icon-no-select:hover {
-  color: #3F51B5;
-  opacity: 100%;
-}
-
 .label-select {
   color: white;
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
@@ -154,11 +130,11 @@ export default {
   pointer-events: none;
   transition: 0.3s ease;
 }
-.label-no-select {
+.creator-no-select {
   opacity: 50%;
   transition: 0.2s ease;
 }
-.label-no-select:hover {
+.creator-no-select:hover {
   color: #3F51B5;
   opacity: 100%;
 }
@@ -169,6 +145,22 @@ export default {
   color: #3F51B5;
   opacity: 100%;
 }
+.icon-select {
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+  background-clip: text;
+  cursor: default;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+.icon-no-select {
+  opacity: 30%;
+  transition: 0.2s ease;
+}
+.icon-no-select:hover {
+  color: #3F51B5;
+  opacity: 100%;
+}
+
 /* div styling and animation */
 .selector {
   position: absolute;
@@ -181,28 +173,19 @@ export default {
   transform: translateX(0);
   transition: transform 0.3s ease;
 }
-
 .icon-selector {
   width: 50%;
 }
-
-.switch-selector {
+.selector-normal {
   transform: translateX(107px);
   width: 53%;
   transition: 0.3s ease;
 }
-
 .selector-small {
   transform: translateX(75px);
   width: 52%;
 }
-
 .selector-xsmall {
   transform: translateX(50px);
-}
-.white-icon {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%)
-  hue-rotate(291deg) brightness(122%) contrast(100%) drop-shadow( 1px 2px rgba(0, 0, 0));
 }
 </style>

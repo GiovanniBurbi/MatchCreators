@@ -105,6 +105,18 @@ export default {
 .text-shadow {
   text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
 }
+/* svg colors with shadow */
+.icon-white-shadow {
+  /* white */
+  filter: invert(99%) sepia(3%) saturate(1032%)
+  hue-rotate(291deg) brightness(122%) contrast(100%) drop-shadow( 1px 2px rgba(0, 0, 0));
+}
+.icon-indigo-shadow{
+  /* indigo */
+  filter: invert(26%) sepia(55%) saturate(2295%)
+  hue-rotate(217deg) brightness(90%) contrast(83%)
+  drop-shadow(1px 1px rgba(0, 0, 0, 0.8));
+}
 
 /* sets svg icon color */
 .icon-grey {
@@ -131,11 +143,5 @@ export default {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
   brightness(122%) contrast(100%);
-}
-.icon-indigo-shadow{
-  /* indigo */
-  filter: invert(26%) sepia(55%) saturate(2295%)
-  hue-rotate(217deg) brightness(90%) contrast(83%)
-  drop-shadow(1px 1px rgba(0, 0, 0, 0.8));
 }
 </style>
