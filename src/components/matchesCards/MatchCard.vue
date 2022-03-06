@@ -67,7 +67,7 @@
         class="pl-1 indigo-icon"
         size="23"
         >
-          $position-icon
+          $player-icon
         </v-icon>
         <h1
         :class="['text-subtitle-2 font-weight-regular pl-2',
