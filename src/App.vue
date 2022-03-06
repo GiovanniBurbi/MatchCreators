@@ -36,7 +36,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import Navbar from './components/Navbar.vue';
+import Navbar from './components/navbar/Navbar.vue';
 import BreakpointsCond from './mixins/BreakpointsCond';
 
 export default {

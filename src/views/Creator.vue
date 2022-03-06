@@ -115,12 +115,12 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
-import Stepper from '../components/Stepper.vue';
-import MatchCreationForm from '../components/MatchCreationForm.vue';
-import TeamBuilder from '../components/TeamBuilder.vue';
-import DetailsRecap from '../components/DetailsRecap.vue';
-import MyMatches from '../components/MyMatches.vue';
-import MatchFullDetails from '../components/MatchFullDetails.vue';
+import Stepper from '../components/creator/Stepper.vue';
+import MatchCreationForm from '../components/creator/MatchCreationForm.vue';
+import TeamBuilder from '../components/creator/TeamBuilder.vue';
+import DetailsRecap from '../components/creator/DetailsRecap.vue';
+import MyMatches from '../components/myMatches/MyMatches.vue';
+import MatchFullDetails from '../components/matchesCards/MatchFullDetails.vue';
 
 export default {
   name: 'Creator',

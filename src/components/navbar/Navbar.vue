@@ -96,7 +96,7 @@
 /* eslint-disable global-require */
 
 import { mapGetters, mapMutations } from 'vuex';
-import BreakpointsCond from '../mixins/BreakpointsCond';
+import BreakpointsCond from '../../mixins/BreakpointsCond';
 import ModeSwitcher from './ModeSwitcher.vue';
 import PlayerInfo from './PlayerInfo.vue';
 
@@ -119,7 +119,7 @@ export default {
       if (this.logged) {
         // eslint-disable-next-line import/no-dynamic-require
         return require(`../${this.user.picture}`);
-      } return require('../assets/users/match.jpg');
+      } return require('@/assets/users/match.jpg');
     },
   },
 

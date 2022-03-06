@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import FilterChipsGroup from '../FilterChipsGroup.vue';
+import FilterChipsGroup from './FilterChipsGroup.vue';
 import DateFilter from './filters/DateFilter.vue';
 import TimeFilter from './filters/TimeFilter.vue';
 import LocationFilter from './filters/LocationFilter.vue';

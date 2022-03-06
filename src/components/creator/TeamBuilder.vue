@@ -15,8 +15,8 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex';
-import BreakpointsCond from '../mixins/BreakpointsCond';
-import Field from './Field.vue';
+import BreakpointsCond from '../../mixins/BreakpointsCond';
+import Field from '../teams/Field.vue';
 
 export default {
   name: 'TeamBuilder',
