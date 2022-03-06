@@ -48,22 +48,22 @@
     </v-row>
 
     <v-divider
-    v-if="appMode.mode === 'authentication'"
+    v-if="isAuth"
     :class="error ? 'red accent-2' : 'grey darken-1'"
     ></v-divider>
 
     <v-slide-y-transition hide-on-leave>
-      <div
-      v-if="appMode.mode === 'authentication' && error"
+      <h1
+      v-if="isAuth && error"
       :class="['text-caption font-weight-regular red--text text-accent-2']"
       >
         Required
-      </div>
+      </h1>
     </v-slide-y-transition>
 
     <v-slide-y-transition hide-on-leave>
       <h1
-      v-if="appMode.mode === 'authentication' && !error"
+      v-if="isAuth && !error"
       class="text-caption"
       style="color:transparent;"
       >
@@ -106,7 +106,7 @@ export default {
     /* define getter of vuex state registrationPositionSelection */
     ...mapGetters({
       currentSelection: 'posInputField/getPosSelection',
-      appMode: 'app/getAppMode',
+      isAuth: 'app/isAuth',
     }),
   },
 

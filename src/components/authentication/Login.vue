@@ -23,8 +23,8 @@
             label="Username"
             clearable prepend-icon="mdi-account"
             :rules="[rules.required, rules.noSpaces]"
-            :error-messages=loginError
-            @click="resetLoginError"
+            :error-messages=loginErrorMsg
+            @click="resetLoginErrorMsg"
             >
             </v-text-field>
 
@@ -34,8 +34,8 @@
             :append-icon="showPsw ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPsw ? 'text' : 'password'"
             @click:append="showPsw = !showPsw"
-            :error-messages=loginError
-            @click="resetLoginError"
+            :error-messages=loginErrorMsg
+            @click="resetLoginErrorMsg"
             color="indigo"
             label="Password"
             clearable prepend-icon="mdi-lock"
@@ -47,10 +47,12 @@
 
         <v-card-actions class="pt-4">
           <v-btn
-          @click="submitLogin"
           x-large dark
           color="indigo"
-          rounded block
+          rounded
+          block
+          @click="submitLogin"
+          :loading="loading"
           >
             Login
           </v-btn>
@@ -128,7 +130,7 @@
 
         <v-card-actions class="pt-4">
           <v-btn
-          @click="submitFirstReg"
+          @click="$refs.firstStepReg.validate() ? step++ : null"
             x-large dark color="indigo"
             rounded block
             elevation="2"
@@ -184,11 +186,12 @@
 
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                :value="dateFormatting"
+                :value="dateNoDay"
                 label="Birth date"
                 prepend-icon="mdi-calendar"
                 color="indigo"
-                readonly clearable
+                readonly
+                clearable
                 v-bind="attrs"
                 v-on="on"
                 :rules="[rules.required]"
@@ -221,6 +224,7 @@
           rounded
           block
           @click="submitFullReg"
+          :loading="loading"
           >
             Let's start!
           </v-btn>
@@ -234,8 +238,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
-import { format, parseISO } from 'date-fns';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
+import DataHelper from '@/mixins/DataHelper';
 import PositionField from '../inputFields/PositionField.vue';
 
 export default {
@@ -252,27 +256,15 @@ export default {
       password: '',
       email: '',
       date: null,
-
       activePicker: null,
       menu: false,
       showPsw: false,
-      /* rules for validate input in text-fields */
-      rules: {
-        required: (v) => !!v || 'Required',
-        userMax: (v) => v?.length <= 8 || 'Username must be less than 10 characters',
-        pswMin: (v) => v?.length >= 8 || 'Password must be at least 8 characters',
-        emailFormat: (v) => /.+@.+\...+/.test(v) || 'Email must be valid',
-        noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
-      },
-      loginError: [],
+      loginErrorMsg: [],
+      loading: false,
     };
   },
 
   computed: {
-    /* format date */
-    dateFormatting() {
-      return this.date ? format(parseISO(this.date), 'do MMMM yyyy') : '';
-    },
     /* getter current position selection */
     ...mapGetters({ getPos: 'posInputField/getPosSelection' }),
   },
@@ -283,8 +275,6 @@ export default {
       return val && setTimeout(() => { this.activePicker = 'YEAR'; });
     },
   },
-
-  mixins: [BreakpointsCond],
 
   methods: {
     ...mapActions({
@@ -297,20 +287,20 @@ export default {
       setLogged: 'auth/setLoginStatus',
     }),
 
-    /* save date on text field */
     save(date) {
       this.$refs.menu.save(date);
     },
 
-    resetLoginError() {
-      if (this.loginError.length !== 0) {
-        this.loginError.pop();
+    resetLoginErrorMsg() {
+      if (this.loginErrorMsg.length !== 0) {
+        this.loginErrorMsg.pop();
       }
     },
 
     /* submit handlers of all windows */
     submitLogin() {
       if (this.$refs.login.validate()) {
+        this.loading = true;
         this.loginAttempt(
           { name: this.username, psw: this.password },
         ).then((val) => {
@@ -318,16 +308,10 @@ export default {
             this.setLogged(true);
             this.$router.push({ name: 'Finder' });
           } else {
-            this.loginError.push('Invalid access');
+            this.loginErrorMsg.push('Invalid access');
           }
+          this.loading = false;
         });
-      }
-    },
-
-    submitFirstReg() {
-      if (this.$refs.firstStepReg.validate()) {
-        /* switch to window 3 (step=3) */
-        this.step += 1;
       }
     },
 
@@ -335,6 +319,7 @@ export default {
       const posValid = this.$refs.pos.validate();
       const dateValid = this.$refs.fullReg.validate();
       if (posValid && dateValid) {
+        this.loading = true;
         this.signup(
           {
             username: this.username,
@@ -345,11 +330,15 @@ export default {
           },
         ).then(() => {
           this.resetSelection('');
+          this.loading = false;
           this.$router.push({ name: 'Finder' });
         });
       }
     },
   },
+
+  mixins: [BreakpointsCond, DataHelper],
+
 };
 </script>
 
