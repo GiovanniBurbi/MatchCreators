@@ -235,8 +235,8 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { format, parseISO } from 'date-fns';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 import PositionField from '../inputFields/PositionField.vue';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
   name: 'Login',
@@ -292,7 +292,10 @@ export default {
       signup: 'auth/signup',
     }),
 
-    ...mapMutations({ resetSelection: 'posInputField/setPosSelection' }),
+    ...mapMutations({
+      resetSelection: 'posInputField/setPosSelection',
+      setLogged: 'auth/setLoginStatus',
+    }),
 
     /* save date on text field */
     save(date) {
@@ -312,6 +315,7 @@ export default {
           { name: this.username, psw: this.password },
         ).then((val) => {
           if (val) {
+            this.setLogged(true);
             this.$router.push({ name: 'Finder' });
           } else {
             this.loginError.push('Invalid access');

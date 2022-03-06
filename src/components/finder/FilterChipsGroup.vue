@@ -29,7 +29,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { format, parseISO } from 'date-fns';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
   name: 'FilterChipsGroup',

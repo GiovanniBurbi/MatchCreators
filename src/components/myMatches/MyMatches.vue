@@ -56,7 +56,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 import MatchCardsGroup from '../matchesCards/MatchCardsGroup.vue';
 
 export default {

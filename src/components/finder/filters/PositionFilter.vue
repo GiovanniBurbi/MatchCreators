@@ -83,7 +83,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import PositionField from '@/components/inputFields/PositionField.vue';
-import BreakpointsCond from '../../../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
   name: 'PositionFilter',

@@ -192,8 +192,8 @@
 <script>
 import { mapActions, mapMutations } from 'vuex';
 import { format, parseISO } from 'date-fns';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 import Field from '../teams/Field.vue';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
   name: 'MatchFullDetails',

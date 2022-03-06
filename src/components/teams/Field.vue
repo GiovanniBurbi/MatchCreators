@@ -56,7 +56,7 @@
     <v-row justify="center">
       <v-img
       :class="xsOnly ? 'field-small' :'field'"
-      src="../assets/teamCreator/pitch.png"
+      src="@/assets/teamCreator/pitch.png"
       >
         <v-scale-transition hide-on-leave>
           <players-cards-group
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import BreakpointsCond from '../../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 import PlayersCardsGroup from './PlayersCardsGroup.vue';
 
 export default {

@@ -26,7 +26,7 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
   name: 'PositionButton',

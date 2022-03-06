@@ -189,7 +189,7 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex';
 import { parseISO, format } from 'date-fns';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
   name: 'MatchCreationForm',

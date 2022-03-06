@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import BreakpointsCond from '../../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 import PlayerCard from './PlayerCard.vue';
 
 export default {

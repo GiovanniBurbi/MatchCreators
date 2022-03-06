@@ -165,7 +165,7 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex';
-import BreakpointsCond from '../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 import PlayerSelection from './PlayerSelection.vue';
 
 /* eslint-disable global-require */
@@ -185,15 +185,16 @@ export default {
 
   computed: {
     ...mapGetters({ user: 'auth/getUser' }),
+
     getCard() {
       if (this.white) {
-        return require('../assets/teamCreator/white-card.png');
-      } return require('../assets/teamCreator/black-card.png');
+        return require('@/assets/teamCreator/white-card.png');
+      } return require('@/assets/teamCreator/black-card.png');
     },
 
     getPicture() {
       // eslint-disable-next-line import/no-dynamic-require
-      return require(`../${this.player.user.picture}`);
+      return require(`@/${this.player.user.picture}`);
     },
 
     positionIcon() {

@@ -15,7 +15,7 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 import Field from '../teams/Field.vue';
 
 export default {

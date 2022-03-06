@@ -1,8 +1,11 @@
 <template>
-  <v-container fluid :class="[xsOnly ? 'px-0' : '', 'background']">
+  <v-container
+  fluid
+  :class="[xsOnly ? 'px-0' : '', 'background']"
+  >
 
     <v-slide-y-reverse-transition hide-on-leave>
-      <!-- change width based on current viewport -->
+
       <v-container
       v-if="!showMyMatches && !isOverview"
       :class="['content',
@@ -49,10 +52,10 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
-import FinderHeader from '@/components/finder/FinderHeader.vue';
-import MatchCardsGroup from '@/components/matchesCards/MatchCardsGroup.vue';
-import MyMatches from '@/components/MyMatches.vue';
-import MatchFullDetails from '@/components/MatchFullDetails.vue';
+import FinderHeader from '../components/finder/FinderHeader.vue';
+import MatchCardsGroup from '../components/matchesCards/MatchCardsGroup.vue';
+import MyMatches from '../components/myMatches/MyMatches.vue';
+import MatchFullDetails from '../components/matchesCards/MatchFullDetails.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
@@ -73,11 +76,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ filters: 'matches/getFilters' }),
-    ...mapGetters({ statusMatches: 'matches/getStatusMatches' }),
-    ...mapGetters({ filteredMatches: 'matches/getFilteredMatches' }),
-    ...mapGetters({ matchToOverview: 'matches/getMatchToOverview' }),
-    ...mapGetters({ isOverview: 'matches/getIsOverview' }),
+    ...mapGetters({
+      filters: 'matches/getFilters',
+      statusMatches: 'matches/getStatusMatches',
+      filteredMatches: 'matches/getFilteredMatches',
+      matchToOverview: 'matches/getMatchToOverview',
+      isOverview: 'matches/getIsOverview',
+    }),
   },
 
   methods: {
@@ -131,7 +136,8 @@ export default {
   justify-content: center;
   height: 100%;
   background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
-  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/daylight.jpg') no-repeat center center fixed;
+  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/daylight.jpg')
+  no-repeat center center fixed;
   background-size: cover;
 }
 .content {

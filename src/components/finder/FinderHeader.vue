@@ -75,12 +75,12 @@
 </template>
 
 <script>
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 import FilterChipsGroup from './FilterChipsGroup.vue';
 import DateFilter from './filters/DateFilter.vue';
 import TimeFilter from './filters/TimeFilter.vue';
 import LocationFilter from './filters/LocationFilter.vue';
 import PositionFilter from './filters/PositionFilter.vue';
-import BreakpointsCond from '../../mixins/BreakpointsCond';
 
 export default {
   name: 'FinderHeader',

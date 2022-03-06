@@ -68,7 +68,7 @@ export default {
   computed: {
     getAvatarPicture() {
       // eslint-disable-next-line import/no-dynamic-require
-      return require(`../${this.user.picture}`);
+      return require(`@/${this.user.picture}`);
     },
     positionImage() {
       return this.user.position.toLowerCase();

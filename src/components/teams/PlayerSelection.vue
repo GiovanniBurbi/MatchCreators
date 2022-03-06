@@ -116,7 +116,7 @@
 <script>
 /* eslint-disable global-require */
 import { mapGetters, mapMutations, mapActions } from 'vuex';
-import BreakpointsCond from '../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
   name: 'PlayerSelection',
@@ -180,7 +180,7 @@ export default {
 
     getPicture(path) {
       // eslint-disable-next-line import/no-dynamic-require
-      return require(`../${path}`);
+      return require(`@/${path}`);
     },
 
     positionIcon(position) {
