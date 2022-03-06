@@ -30,6 +30,7 @@ export default {
       const userData = res.data[0];
       if (userData) {
         commit('setUser', userData);
+        commit('setLoginStatus', true);
         return true;
       } return false;
     },
@@ -39,6 +40,7 @@ export default {
       await UserService.registerUser(JSON.stringify(userData));
       /* set the user in the vuex auth/state */
       commit('setUser', userData);
+      commit('setLoginStatus', true);
     },
   },
 

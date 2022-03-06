@@ -18,11 +18,29 @@ export default {
   actions: {},
 
   getters: {
-    getAppMode(state) {
-      return {
-        mode: state.mode,
-        section: state.section,
-      };
+    isFinder(state) {
+      if (state.mode === 'finder') return true;
+      return false;
+    },
+
+    isCreator(state) {
+      if (state.mode === 'creator') return true;
+      return false;
+    },
+
+    isAuth(state) {
+      if (state.mode === 'authentication') return true;
+      return false;
+    },
+
+    isMyMatches(state) {
+      if (state.section === 'my-matches') return true;
+      return false;
+    },
+
+    isMatchOverview(state) {
+      if (state.section === 'match-overview') return true;
+      return false;
     },
   },
 };

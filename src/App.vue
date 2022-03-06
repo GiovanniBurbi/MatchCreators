@@ -2,18 +2,19 @@
   <v-app>
     <v-slide-y-transition>
       <navbar
-      v-if="appMode.mode !== 'authentication'"
-      v-show="appMode.mode !== 'match-overview'"
+      v-if="!isAuth"
+      v-show="!isMatchOverview"
       ></navbar>
-      <!-- @myMatches="userMatches = true" -->
     </v-slide-y-transition>
 
     <v-snackbar
      v-model="snackbar"
-     top right
      color="green"
-     :timeout="3000"
      style="z-index: 9000"
+     top
+     :right="lgAndUp"
+     :timeout="3000"
+     :min-width="xsOnly ? '80vw' : null"
     >
       <v-icon
        class="pb-2"
@@ -29,14 +30,14 @@
 
     <v-main>
       <router-view />
-      <!-- :goToMyMatches.sync="userMatches" -->
     </v-main>
   </v-app>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import Navbar from './components/Navbar.vue';
+import BreakpointsCond from './mixins/BreakpointsCond';
 
 export default {
   name: 'App',
@@ -44,7 +45,6 @@ export default {
   data() {
     return {
       snackbar: false,
-      /* userMatches: false, */
     };
   },
 
@@ -54,32 +54,50 @@ export default {
         this.snackbar = true;
       }
     },
+
+    $route() {
+      if (this.$route.name === 'Finder') {
+        this.setDarkMode(false);
+        this.setAppMode('finder');
+      }
+      if (this.$route.name === 'Creator') {
+        this.setDarkMode(true);
+        this.setAppMode('creator');
+      }
+    },
   },
 
   computed: {
     ...mapGetters({
       user: 'auth/getUser',
-      appMode: 'app/getAppMode',
       logged: 'auth/getLoginStatus',
+      isAuth: 'app/isAuth',
+      isMatchOverview: 'app/isMatchOverview',
     }),
 
     username() {
-      if (!this.user) return '';
+      if (!this.logged) return 'Error, user not found';
       return this.user.username;
     },
+  },
+
+  methods: {
+    ...mapMutations({
+      setDarkMode: 'theme/setDarkMode',
+      setAppMode: 'app/setAppMode',
+    }),
   },
 
   components: {
     Navbar,
   },
 
+  mixins: [BreakpointsCond],
+
 };
 </script>
-<style>
-/* .shadow {
-  text-shadow: 2px 2px rgba(0, 0, 0, 0.6);
-} */
 
+<style>
 /* shadows */
 .avatar-shadow {
   filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.8));

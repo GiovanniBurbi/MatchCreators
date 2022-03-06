@@ -8,15 +8,19 @@
   style="z-index: 2000;"
   >
     <!-- return home button -->
-    <v-app-bar-nav-icon>
+    <v-btn
+    icon
+    :small="xsOnly"
+    class="pl-3"
+    >
       <v-icon
-      size=35
+      :size=" xsOnly ? 32 : 36"
       class="icon-indigo-shadow"
       @click="goHome()"
       >
         $ball-icon
       </v-icon>
-    </v-app-bar-nav-icon>
+    </v-btn>
 
     <v-slide-x-transition hide-on-leave>
 
@@ -37,26 +41,28 @@
 
     <v-spacer v-if="mdAndUp"></v-spacer>
 
-    <mode-switcher
-    :switch.sync="toggleSwitch"
-    @modeSwitch="toggleDarkMode"
-    />
+    <mode-switcher :class="{'pl-6': xsOnly}"/>
 
     <v-spacer></v-spacer>
 
     <v-btn
      class="mr-1"
-     text rounded left
-     @click="$emit('myMatches')"
+     :text="!xsOnly"
+     :icon="xsOnly"
+     rounded
+     left
+     @click="setAppSection('my-matches')"
     >
       <v-icon
-      class="icon-indigo-shadow"
+      class="icon-indigo-shadow pr-2"
       :size="xsOnly ? 32 : 30"
       >
-        $player-icon
+        $player-2-icon
       </v-icon>
       <v-slide-x-reverse-transition>
-        <span v-if="mdAndUp">My matches</span>
+
+        <span v-if="!xsOnly">My matches</span>
+
       </v-slide-x-reverse-transition>
     </v-btn>
 
@@ -87,11 +93,12 @@
 </template>
 
 <script>
+/* eslint-disable global-require */
+
 import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 import ModeSwitcher from './ModeSwitcher.vue';
 import PlayerInfo from './PlayerInfo.vue';
-/* eslint-disable global-require */
 
 export default {
   name: 'Navbar',
@@ -101,53 +108,28 @@ export default {
     PlayerInfo,
   },
 
-  data() {
-    return {
-      toggleSwitch: false,
-    };
-  },
-
   computed: {
     ...mapGetters({
       user: 'auth/getUser',
-      darkMode: 'theme/getTheme',
+      logged: 'auth/getLoginStatus',
+      darkMode: 'theme/getDarkMode',
     }),
 
     getAvatarPicture() {
-      if (this.user) {
+      if (this.logged) {
         // eslint-disable-next-line import/no-dynamic-require
         return require(`../${this.user.picture}`);
       } return require('../assets/users/match.jpg');
     },
   },
 
-  watch: {
-    /* watch route path, change state of navbar and
-    switcher based on current path */
-    $route() {
-      if (this.$route.name === 'Creator') {
-        if (!this.darkMode) {
-          this.setDarkMode(true);
-          this.toggleSwitch = true;
-        }
-      }
-    },
-  },
-
   methods: {
-    ...mapMutations({
-      setDarkMode: 'theme/setDarkMode',
-      toggleDarkMode: 'theme/toggleDarkMode',
-    }),
+    ...mapMutations({ setAppSection: 'app/setAppSection' }),
 
     goHome() {
       if (this.$route.name === 'Finder') {
         this.$router.go();
-      } else {
-        this.setDarkMode(false);
-        this.toggleSwitch = true;
-        this.$router.push({ name: 'Finder' });
-      }
+      } else this.$router.push({ name: 'Finder' });
     },
   },
 

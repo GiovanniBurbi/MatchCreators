@@ -1,97 +1,95 @@
 <template>
   <v-container fluid class="switch-container">
 
-    <div :class="['switch-bg', isFinder ? null : 'dark-bg', smAndDown ? 'switch-small' : null]">
+    <div
+    :class="['switch-bg',
+    {'dark-bg': darkMode},
+    {'switch-small': smAndDown}]"
+    >
 
       <!-- div of the switch that highlight the selected mode -->
       <div :class="['selector',
-      isFinder ? null : 'switch-selector',
+      {'switch-selector': !isFinder},
       {'selector-small': smOnly && !isFinder},
-      {'selector-xsmall' : xsOnly && !isFinder}]"
+      {'icon-selector' : xsOnly},
+      {'selector-xsmall icon-selector' : xsOnly && !isFinder}]"
       >
         &nbsp;
       </div>
 
-        <h1
-        v-if="!xsOnly"
-        :class="['label pl-4',
-        isFinder ? 'label-select' : 'finder-no-select', {'label-small': smOnly}]"
-        @click="toggleMode()"
-        >
-          Finder
-        </h1>
+        <div v-if="!xsOnly" class="d-inline-flex">
+          <div class="pl-2 pr-4">
+            <h1
+            :class="['label',
+            isFinder ? 'label-select' : 'finder-no-select',
+            {'text-h6': smOnly}]"
+            @click="toggleMode()"
+            >
+              Finder
+            </h1>
+          </div>
 
-        <h1
-        v-if="!xsOnly"
-        :class="['label pl-7 pr-2',
-        isFinder ? 'label-no-select' : 'label-select',
-        {'label-small': smOnly}]"
-        @click="toggleMode()"
-        >
-          Creator
-        </h1>
+          <div class="pr-2">
+            <h1
+            v-if="!xsOnly"
+            :class="['label',
+            isFinder ? 'label-no-select' : 'label-select',
+            smOnly ? 'text-h6' : '']"
+            @click="toggleMode()"
+            >
+              Creator
+            </h1>
+          </div>
+
+        </div>
 
         <!-- Use icons instead of text when window width is
         small -->
-        <v-icon
-        v-if="xsOnly"
-        size="28"
-        :color="isFinder ? 'white' : null"
-        :class="['mx-3 icon-switch white-icon',
-        isFinder ? 'icon-select' : 'icon-no-select']"
-        @click="toggleMode()"
-        >
-          $finder-icon
-        </v-icon>
+        <div v-if="xsOnly">
+          <v-icon
+          v-if="xsOnly"
+          size="28"
+          :color="isFinder ? 'white' : null"
+          :class="['mx-3 icon-switch white-icon',
+          isFinder ? 'icon-select' : 'icon-no-select']"
+          @click="toggleMode()"
+          >
+            $finder-icon
+          </v-icon>
 
-        <v-icon
-        v-if="xsOnly"
-        size="30"
-        :class="['ml-3 mr-2 icon-switch',
-        isFinder ? 'icon-no-select' : 'icon-select white-icon']"
-        @click="toggleMode()"
-        >
-          $creator-icon
-        </v-icon>
+          <v-icon
+          v-if="xsOnly"
+          size="30"
+          :class="['mx-3 icon-switch',
+          isFinder ? 'icon-no-select' : 'icon-select white-icon']"
+          @click="toggleMode()"
+          >
+            $creator-icon
+          </v-icon>
+        </div>
     </div>
 
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'ModeSwitcher',
 
-  data() {
-    return {
-      isFinder: true,
-    };
-  },
-
-  props: {
-    switch: {
-      type: Boolean,
-    },
-  },
-
-  watch: {
-    switch(newVal) {
-      if (newVal) {
-        this.isFinder = !this.isFinder;
-        this.$emit('update:switch', false);
-      }
-    },
+  computed: {
+    ...mapGetters({
+      darkMode: 'theme/getDarkMode',
+      isFinder: 'app/isFinder',
+    }),
   },
 
   methods: {
     toggleMode() {
-      this.isFinder = !this.isFinder;
-      this.$emit('modeSwitch');
-      if (this.isFinder) {
-        this.$router.replace('/finder');
-      } else this.$router.replace('/creator');
+      if (this.isFinder) this.$router.replace('/creator');
+      else this.$router.replace('/finder');
     },
   },
 
@@ -127,7 +125,6 @@ export default {
   transition: background-color 0.4s ease;
 }
 .label {
-  display: inline;
   cursor: pointer;
 }
 .icon-switch {
@@ -149,9 +146,6 @@ export default {
   opacity: 100%;
 }
 
-.label-small {
-  font-size: 1.25rem;
-}
 .label-select {
   color: white;
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
@@ -179,8 +173,8 @@ export default {
 .selector {
   position: absolute;
   z-index: -1;
-  width: 50%;
   height: 105%;
+  width: 48%;
   background-color: #3F51B5;
   border-radius: 8px;
   box-shadow: 0px 3px rgba(0, 0, 0, 0.5);
@@ -188,17 +182,23 @@ export default {
   transition: transform 0.3s ease;
 }
 
+.icon-selector {
+  width: 50%;
+}
+
 .switch-selector {
-  transform: translateX(126px);
+  transform: translateX(107px);
+  width: 53%;
   transition: 0.3s ease;
 }
 
 .selector-small {
-  transform: translateX(89px);
+  transform: translateX(75px);
+  width: 52%;
 }
 
 .selector-xsmall {
-  transform: translateX(53px);
+  transform: translateX(50px);
 }
 .white-icon {
   /* white */

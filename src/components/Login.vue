@@ -70,7 +70,12 @@
             class="pl-2"
             @click="step++"
             >
-              Sign up
+              <span
+              style="padding-top:2px"
+              class="text-decoration-underline"
+              >
+                Sing up
+              </span>
             </v-btn>
           </div>
         </v-row>
@@ -146,7 +151,12 @@
             class="pl-2"
             @click="step--"
             >
-              Login
+              <span
+              class="text-decoration-underline"
+              style="padding-top:2px;"
+              >
+                Login
+              </span>
             </v-btn>
           </div>
         </v-row>
@@ -282,11 +292,7 @@ export default {
       signup: 'auth/signup',
     }),
 
-    ...mapMutations({
-      resetSelection: 'posInputField/setPosSelection',
-      setAppMode: 'app/setAppMode',
-      logged: 'auth/setLoginStatus',
-    }),
+    ...mapMutations({ resetSelection: 'posInputField/setPosSelection' }),
 
     /* save date on text field */
     save(date) {
@@ -307,8 +313,6 @@ export default {
         ).then((val) => {
           if (val) {
             this.$router.push({ name: 'Finder' });
-            this.logged(true);
-            this.setAppMode('finder');
           } else {
             this.loginError.push('Invalid access');
           }
@@ -338,8 +342,6 @@ export default {
         ).then(() => {
           this.resetSelection('');
           this.$router.push({ name: 'Finder' });
-          this.logged(true);
-          this.setAppMode('finder');
         });
       }
     },

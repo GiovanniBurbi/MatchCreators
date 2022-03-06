@@ -7,17 +7,14 @@ export default {
 
   mutations: {
     setDarkMode(state, isDark) {
-      state.darkMode = isDark;
-    },
-    toggleDarkMode(state) {
-      state.darkMode = !state.darkMode;
+      if (isDark !== state.darkMode) state.darkMode = isDark;
     },
   },
 
   actions: {},
 
   getters: {
-    getTheme(state) {
+    getDarkMode(state) {
       return state.darkMode;
     },
   },
