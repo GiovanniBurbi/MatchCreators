@@ -149,12 +149,11 @@ export default {
     },
 
     async createMatch({
-      state, commit, dispatch, rootGetters,
+      state, commit, rootGetters,
     }) {
       commit('setLoading', true);
       await MatchService.createMatch(state.details, state.teamBlack, state.teamWhite)
         .then(async () => {
-          await dispatch('fetchAllMatches');
           commit('setLoading', false);
           commit('clearMatchTmp');
           commit('addUser', rootGetters['auth/getUser']);
