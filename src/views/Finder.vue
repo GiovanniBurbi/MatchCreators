@@ -76,7 +76,6 @@ export default {
   },
 
   destroyed() {
-    console.log('remove filters');
     /* when component is destroyed clear the filters */
     this.clearChips();
   },
@@ -97,8 +96,8 @@ export default {
   display: flex;
   justify-content: center;
   height: 100%;
-  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
-  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/daylight.jpg')
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.4),
+  rgba(0, 0, 0, 0.1)), url('../assets/backgrounds/daylight.jpg')
   no-repeat center center fixed;
   background-size: cover;
 }

@@ -23,9 +23,9 @@
       </h1>
     </v-card-title>
 
-    <v-card-text class="pt-4">
+    <v-card-text class="pt-5 px-5">
 
-      <v-row class="px-1">
+      <v-row>
         <v-icon
         left
         size="22"
@@ -40,7 +40,7 @@
         </h1>
       </v-row>
 
-      <v-row class="px-1 py-1">
+      <v-row class="py-1">
         <v-icon
         left
         color="indigo"
@@ -55,7 +55,7 @@
         </h1>
       </v-row>
 
-      <v-row class="px-1">
+      <v-row>
         <v-icon
         class="pl-1 icon-indigo"
         size="23"
@@ -69,7 +69,7 @@
         </h1>
       </v-row>
 
-      <v-row justify="center" class="px-5 pt-3 pb-1">
+      <v-row justify="center" class="px-3 pt-3 pb-1">
 
         <v-col>
           <v-row justify="center">
