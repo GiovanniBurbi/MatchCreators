@@ -1,7 +1,24 @@
 <template>
-  <div
-  class="background"
-  >
+  <div class="background">
+
+    <v-snackbar
+     v-model="snackbar"
+     color="green darken-2"
+     style="z-index: 9000"
+     top
+     :right="lgAndUp"
+     :min-width="xsOnly ? '80vw' : null"
+    >
+      <v-icon
+       class="pb-2 icon-white-shadow"
+       size=32
+      >
+        $ball-icon
+      </v-icon>
+      <span class="pl-2 text-h6 text-shadow">
+        Match Created!
+      </span>
+    </v-snackbar>
 
     <v-slide-y-reverse-transition hide-on-leave>
       <div v-show="!isMyMatches && !isOverview">
@@ -140,7 +157,7 @@ export default {
 
   data() {
     return {
-      step: 2,
+      step: 1,
       reset: false,
       snackbar: false,
     };
@@ -153,6 +170,7 @@ export default {
       matchToOverview: 'matches/getMatchToOverview',
       loading: 'matches/getLoading',
       nPlayers: 'matches/getNumPlayers',
+      matchCreated: 'matches/getMatchCreated',
     }),
 
     iconSize() {
@@ -169,8 +187,11 @@ export default {
         this.setAppSection('my-matches');
         this.reset = true;
         this.step = 1;
-        this.snackbar = true;
       } else this.reset = false;
+    },
+
+    matchCreated(newVal) {
+      if (newVal) this.snackbar = true;
     },
   },
 

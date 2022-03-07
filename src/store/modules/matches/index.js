@@ -9,6 +9,7 @@ export default {
     userMatches: [],
     matchToOverview: {},
     loading: false,
+    matchCreated: false,
     details: ['2022-03-29', '10:30 - 11:30', 'Albereta'],
     teamBlack: [
       { team: 'Black' },
@@ -117,6 +118,10 @@ export default {
     setMatchToOverview(state, match) {
       state.matchToOverview = match;
     },
+
+    setMatchCreated(state, value) {
+      if (state.matchCreated !== value) state.matchCreated = value;
+    },
   },
 
   actions: {
@@ -152,9 +157,11 @@ export default {
       state, commit, rootGetters,
     }) {
       commit('setLoading', true);
+      commit('setMatchCreated', false);
       await MatchService.createMatch(state.details, state.teamBlack, state.teamWhite)
         .then(async () => {
           commit('setLoading', false);
+          commit('setMatchCreated', true);
           commit('clearMatchTmp');
           commit('addUser', rootGetters['auth/getUser']);
         });
@@ -214,6 +221,10 @@ export default {
       if (Object.keys(state.matchToOverview).length !== 0) {
         return true;
       } return false;
+    },
+
+    getMatchCreated(state) {
+      return state.matchCreated;
     },
   },
 };

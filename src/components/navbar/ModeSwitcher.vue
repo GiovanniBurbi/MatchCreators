@@ -110,7 +110,7 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
-  height: 42px;
+  height: 46px;
   border-radius: 8px;
   box-shadow: 2px 3px rgba(0, 0, 0, 0.4);
   transition: background-color 0.4s ease;
