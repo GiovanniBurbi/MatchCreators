@@ -47,7 +47,6 @@
 
     <match-cards-group
     :matches="userMatches"
-    :loading="loading"
     class="pt-6"/>
 
   </v-container>
@@ -78,7 +77,6 @@ export default {
   computed: {
     ...mapGetters({
       userMatches: 'matches/getUserMatches',
-      loading: 'matches/getMyMatchesLoading',
     }),
   },
 

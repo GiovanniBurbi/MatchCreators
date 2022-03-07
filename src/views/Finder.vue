@@ -15,7 +15,6 @@
 
         <match-cards-group
         :matches="matches"
-        :loading="loading"
         class="py-2"
         />
 
@@ -64,7 +63,6 @@ export default {
       myMatches: 'app/isMyMatches',
       isOverview: 'app/isMatchOverview',
       matches: 'matches/getFilteredMatches',
-      loading: 'matches/getLoading',
     }),
   },
 

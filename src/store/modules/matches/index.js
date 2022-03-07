@@ -9,7 +9,6 @@ export default {
     userMatches: [],
     matchToOverview: {},
     loading: false,
-    myMatchesLoading: false,
     details: [],
     teamBlack: [
       { team: 'Black' },
@@ -111,10 +110,6 @@ export default {
       state.loading = isLoading;
     },
 
-    setMyMatchesLoading(state, loading) {
-      state.myMatchesLoading = loading;
-    },
-
     setUserMatches(state, matches) {
       state.userMatches = matches;
     },
@@ -125,12 +120,16 @@ export default {
   },
 
   actions: {
-    async allMatches({ commit }) {
+    async allMatches({ dispatch, commit }) {
       commit('setLoading', true);
+      await dispatch('fetchAllMatches');
+      commit('setLoading', false);
+    },
+
+    async fetchAllMatches({ commit }) {
       const matches = await MatchService.getAllMatches();
       commit('setMatches', matches);
       commit('setFilteredMatches', matches);
-      commit('setLoading', false);
     },
 
     addFilterMatches({ state, commit }, newFilter) {
@@ -155,7 +154,7 @@ export default {
       commit('setLoading', true);
       await MatchService.createMatch(state.details, state.teamBlack, state.teamWhite)
         .then(async () => {
-          await dispatch('allMatches');
+          await dispatch('fetchAllMatches');
           commit('clearMatchTmp');
           commit('addUser', rootGetters['auth/getUser']);
           commit('setLoading', false);
@@ -166,12 +165,12 @@ export default {
     async findUserMatches({
       state, commit, dispatch, rootGetters,
     }) {
-      commit('setMyMatchesLoading', true);
-      await dispatch('allMatches');
+      commit('setLoading', true);
+      await dispatch('fetchAllMatches');
       await MatchService.findUserMatches(state.matches, rootGetters['auth/getUser'])
         .then((res) => {
           commit('setUserMatches', res);
-          commit('setMyMatchesLoading', false);
+          commit('setLoading', false);
         });
     },
   },
@@ -187,10 +186,6 @@ export default {
 
     getLoading(state) {
       return state.loading;
-    },
-
-    getMyMatchesLoading(state) {
-      return state.myMatchesLoading;
     },
 
     getDetails(state) {
