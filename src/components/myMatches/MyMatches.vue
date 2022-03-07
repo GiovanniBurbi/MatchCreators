@@ -1,15 +1,16 @@
 <template>
 
-  <v-container fluid>
+  <v-container fluid class="pt-6">
     <v-row justify="space-between" align="center">
 
       <h1
-      :class="['white--text text-size font-weight-bold',
-      {'big': lgAndUp}, {'small': xsOnly}, isFinder ? 'header-shadow-black' : 'white-shadow']"
+      :class="['text-big header',
+      {'text-h4' : mdAndDown},
+      {'text-h5': xsOnly}]"
       >
         My Matches
         <v-icon
-        :class="[isFinder ? 'white-icon-black-shadow' : 'white-icon-light-shadow', 'pb-3']"
+        :class="['pb-3 icon-white-shadow']"
         :size="lgAndUp ? 46 : 34"
         >
           $player-2-icon
@@ -20,11 +21,12 @@
       v-if="isFinder"
       color="deep-purple"
       dark
+      :small="xsOnly"
       rounded
       @click="setAppSection('')"
       >
         <span
-        class="text-shadow"
+        class="btn-shadow"
         v-if="!xsOnly"
         >
           find new match
@@ -32,8 +34,8 @@
 
         <v-icon
         :right="!xsOnly"
-        class="white-icon-black-shadow"
-        size="28"
+        class="icon-white-shadow"
+        :size="xsOnly ? 25 : 28"
         >
           $finder-icon
         </v-icon>
@@ -42,7 +44,7 @@
     </v-row>
 
     <v-divider
-    :class="['mt-4', isFinder ? 'divider-light' : 'divider-dark']"
+    :class="['mt-4']"
     ></v-divider>
 
     <match-cards-group
@@ -64,19 +66,11 @@ export default {
     MatchCardsGroup,
   },
 
-  props: {
-    isFinder: {
-      type: Boolean,
-      required: true,
-    },
-    dark: {
-      type: Boolean,
-    },
-  },
-
   computed: {
     ...mapGetters({
       userMatches: 'matches/getUserMatches',
+      isFinder: 'app/isFinder',
+      dark: 'theme/getDarkMode',
     }),
   },
 
@@ -93,44 +87,3 @@ export default {
 
 };
 </script>
-
-<style scoped>
-.text-size {
-  font-size: 2.2rem;
-}
-.big{
-  font-size: 3rem;
-}
-.small{
-  font-size: 1.75rem;
-}
-.white-icon-light-shadow {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
-  brightness(122%) contrast(100%)
-  drop-shadow( 1px 2px rgb(200, 200, 200, 0.2));
-}
-.white-icon-black-shadow {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
-  brightness(122%) contrast(100%)
-  drop-shadow( 1px 2px rgba(0, 0, 0, 1));
-}
-.divider-light {
-  border-color: black !important;
-  opacity: 15%;
-}
-.divider-dark {
-  border-color: grey !important;
-  opacity: 30%;
-}
-.white-shadow {
-  text-shadow: 1px 2px rgba(200, 200, 200, 0.4);
-}
-.text-shadow {
-  text-shadow: 1px 2px black;
-}
-.header-shadow-black {
-  text-shadow: 2px 3px rgba(0, 0, 0, 0.6);
-}
-</style>

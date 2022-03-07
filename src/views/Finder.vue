@@ -8,6 +8,7 @@
 
       <v-container
       fluid
+      class="px-0"
       v-if="!myMatches && !isOverview"
       >
 
@@ -24,12 +25,13 @@
     <v-slide-y-transition hide-on-leave>
       <v-container
       fluid
+      class="px-0"
       v-if="myMatches"
       v-show="!isOverview"
       >
-        <my-matches
-        :isFinder="true"
-        :dark="false"/>
+
+        <my-matches />
+
       </v-container>
     </v-slide-y-transition>
 
@@ -40,8 +42,11 @@
     scrollable
     fullscreen
     >
+
       <match-full-details
-      v-if="isOverview" />
+      v-if="isOverview"
+      />
+
     </v-dialog>
 
   </v-container>

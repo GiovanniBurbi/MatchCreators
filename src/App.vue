@@ -127,6 +127,15 @@ export default {
   color: white;
   cursor: default;
 }
+.text-big{
+  font-size: 2.6rem;
+}
+
+/* divider */
+.divider-dark {
+  border-color: grey !important;
+  opacity: 30%;
+}
 
 /* shadows */
 .avatar-shadow {

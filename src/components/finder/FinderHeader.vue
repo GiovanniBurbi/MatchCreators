@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="pt-6">
     <v-row justify="space-between" align="center">
 
       <h1
@@ -56,9 +56,6 @@
             </v-col>
 
           </v-row>
-          <div>
-
-          </div>
 
         </v-container>
       </v-slide-y-transition>
@@ -66,7 +63,9 @@
     </v-row>
 
     <v-row justify="center">
+
       <filter-chips-group/>
+
     </v-row>
 
     <v-divider class="mt-2" />
@@ -107,9 +106,6 @@ export default {
 </script>
 
 <style scoped>
-.text-big{
-  font-size: 2.6rem;
-}
 .filtersGroup {
   max-width: 1200px;
 }
