@@ -130,17 +130,17 @@ export default {
 
 /* shadows */
 .avatar-shadow {
-  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.8));
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.6));
   border: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 .text-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
-}
-.num-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
 }
 .icon-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+.icon-shadow-soft {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
 }
 .btn-shadow {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.7);
@@ -161,12 +161,15 @@ export default {
 .icon-indigo-shadow {
   /* indigo */
   filter: invert(26%) sepia(55%) saturate(2295%) hue-rotate(217deg)
-  brightness(90%) contrast(83%) drop-shadow( 1px 2px rgba(0, 0, 0, 0.4));
+  brightness(90%) contrast(83%) drop-shadow( 1px 1px rgba(0, 0, 0, 0.3));
 }
 .icon-indigo-darken2-shadow {
   /* indigo darken 2 */
   filter: invert(19%) sepia(50%) saturate(3328%) hue-rotate(224deg) brightness(90%) contrast(92%)
   drop-shadow(1px 1px rgba(0, 0, 0, 0.7));
+}
+.icon-black-shadow {
+  filter: drop-shadow(2px 1px rgba(0, 0, 0, 0.2));
 }
 
 /* sets svg icon color */

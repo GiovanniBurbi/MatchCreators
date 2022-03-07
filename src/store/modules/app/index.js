@@ -10,6 +10,7 @@ export default {
     setAppMode(state, mode) {
       if (state.mode !== mode) {
         state.mode = mode;
+        state.section = '';
       }
     },
     setAppSection(state, section) {

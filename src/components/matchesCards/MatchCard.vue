@@ -1,42 +1,40 @@
 <template>
   <v-card
-  :class="[darkMode ? 'grey darken-4' : 'indigo lighten-5',
-  'ma-2 hover']"
+  :class="['indigo lighten-5 ma-2 hover']"
   :elevation="hover ? 12 : 8"
   width="340"
   rounded="lg"
   @click="setOverview(match), setAppSection('match-overview')"
   >
 
-    <v-card-title class="px-2">
+    <v-card-title class="pl-2 pt-2 pb-1 indigo">
       <v-icon
       left
       size="22"
-      color="indigo lighten-1"
+      color="white"
+      class="icon-shadow"
       >
         mdi-calendar
       </v-icon>
       <h1
-      :class="['font-weight-bold text-subtitle-1',
-      !darkMode ? 'indigo--text' : 'indigo--text text--lighten-2']"
+      :class="['white--text text-shadow font-weight-bold text-subtitle-1']"
       >
         {{ fullDate(this.match.date) }}
       </h1>
     </v-card-title>
 
-    <v-card-text class="px-4">
+    <v-card-text class="pt-4">
 
       <v-row class="px-1">
         <v-icon
         left
         size="22"
-        color="indigo lighten-1"
+        color="indigo"
         >
           mdi-clock-outline
         </v-icon>
         <h1
-        :class="['text-subtitle-2 font-weight-medium',
-        !darkMode ? 'black--text' : 'white--text']"
+        :class="[infoText, 'font-weight-medium']"
         >
           {{ match.startTime }} - {{ match.endTime }}
         </h1>
@@ -45,14 +43,13 @@
       <v-row class="px-1 py-1">
         <v-icon
         left
-        color="indigo lighten-1"
+        color="indigo"
         size="24"
         >
           mdi-map-marker-outline
         </v-icon>
         <h1
-        :class="['text-subtitle-2 font-weight-medium',
-        !darkMode ? 'black--text' : 'white--text']"
+        :class="[infoText, 'font-weight-medium']"
         >
           {{ match.location }}
         </h1>
@@ -60,27 +57,25 @@
 
       <v-row class="px-1">
         <v-icon
-        class="pl-1"
+        class="pl-1 icon-indigo"
         size="23"
         >
           $player-icon
         </v-icon>
         <h1
-        :class="['text-subtitle-2 font-weight-regular pl-2',
-        !darkMode ? 'black--text' : 'white--text']"
+        :class="[infoText, 'font-weight-regular pl-2']"
         >
           Participants:
         </h1>
       </v-row>
 
-      <v-row justify="center" class="px-6 pt-2 pb-1">
+      <v-row justify="center" class="px-5 pt-3 pb-1">
 
         <v-col>
           <v-row justify="center">
             <v-icon
             size="34"
-            :class="[gkFilled ? 'filled-pos' : null,
-            !darkMode ? '' : '']"
+            :class="[gkFilled ? 'filled-pos' : null]"
             >
               $goalkeeper-icon
             </v-icon>
@@ -88,8 +83,8 @@
 
           <v-row justify="center" class="pt-2">
             <h1
-            :class="['text-caption num-shadow font-weight-medium',
-            gkFilled ? 'red--text text--darken-1': 'indigo--text text--lighten-1']"
+            :class="[posInfo,
+            gkFilled ? 'red--text text--darken-1': 'indigo--text']"
             >
               {{ match.positions.goalkeepers }} / 2
             </h1>
@@ -100,8 +95,7 @@
           <v-row justify="center">
             <v-icon
             size="34"
-            :class="[defFilled ? 'filled-pos' : null,
-            !darkMode ? '' : '']"
+            :class="[defFilled ? 'filled-pos' : null]"
             >
               $defender-icon
             </v-icon>
@@ -109,8 +103,8 @@
 
           <v-row justify="center" class="pt-2">
             <h1
-            :class="['text-caption num-shadow font-weight-medium',
-            defFilled ? 'red--text text--darken-1': 'indigo--text text--lighten-1']"
+            :class="[posInfo,
+            defFilled ? 'red--text text--darken-1': 'indigo--text']"
             >
               {{ match.positions.defenders }} / 4
             </h1>
@@ -121,8 +115,7 @@
           <v-row justify="center">
             <v-icon
             size="42"
-            :class="['pb-1', fwFilled ? 'filled-pos' : null,
-            !darkMode ? '' : '']"
+            :class="['pb-1', fwFilled ? 'filled-pos' : null]"
             >
               $forward-icon
             </v-icon>
@@ -130,8 +123,8 @@
 
           <v-row justify="center">
             <h1
-            :class="['text-caption num-shadow font-weight-medium',
-            fwFilled ? 'red--text text--darken-1': 'indigo--text text--lighten-1']"
+            :class="[posInfo,
+            fwFilled ? 'red--text text--darken-1': 'indigo--text']"
             >
               {{ match.positions.forwards }} / 4
             </h1>
@@ -142,45 +135,29 @@
 
     </v-card-text>
 
-    <!-- if mouse hovers on the card then show an overlay with the button
-    to join the match, it will redirect to another page passing the id of the match -->
     <v-fade-transition origin="center center 0">
       <v-overlay
         v-if="hover"
         absolute
-        color="black"
+        color="grey darken-4"
         class="overlay"
-        :opacity="isFinder ? 0.5 : 0.6"
+        :opacity="0.6"
       >
-        <div class="d-inline-flex pr-3">
-          <h1 class="text-body-1 font-weight-medium shadow">SEE THE DETAILS</h1>
+
+        <div class="d-inline-flex pr-2">
+          <h1
+          class="text-body-1 font-weight-bold text-shadow"
+          >
+            <span v-if="isFinder && !isMyMatches">JOIN THE MATCH</span>
+            <span v-if="!isFinder || isMyMatches">SEE THE DETAILS</span>
+          </h1>
           <v-icon
-          :size="xsOnly ? 24 : 24"
-          class="shadow"
+          :size="24"
+          class="icon-shadow"
           >
             mdi-chevron-double-right
           </v-icon>
         </div>
-        <!-- <v-btn
-        color="deep-purple darken-2"
-        class="mb-12"
-        tile
-        depressed
-        :small="xsOnly"
-        @click="setOverview(match)"
-        >
-          <span v-if="isFinder && xsOnly" class="shadow">Join match</span>
-          <span v-if="isFinder && !xsOnly" class="shadow">Join the match</span>
-          <span v-if="!isFinder && xsOnly" class="shadow">see details</span>
-          <span v-if="!isFinder && !xsOnly" class="shadow">see the details</span>
-          <v-icon
-          right
-          :size="xsOnly ? 24 : 28"
-          class="shadow"
-          >
-            mdi-chevron-double-right
-          </v-icon>
-        </v-btn> -->
 
       </v-overlay>
     </v-fade-transition>
@@ -199,18 +176,21 @@ export default {
   data() {
     return {
       dateFormatted: null,
+      infoText: 'grey--text text--darken-4 text-subtitle-2',
+      posInfo: 'text-caption font-weight-medium',
     };
   },
 
   computed: {
     ...mapGetters({
       isFinder: 'app/isFinder',
+      isMyMatches: 'app/isMyMatches',
       darkMode: 'theme/getDarkMode',
     }),
 
     gkFilled() {
       if (this.match.positions.goalkeepers === 2) {
-        return true; /* ritorna direttamente lo styling */
+        return true;
       } return false;
     },
 
@@ -255,7 +235,7 @@ export default {
 .overlay {
   display: flex;
   justify-content: flex-end;
-  padding: 0 0 50px 0px;
+  padding: 0 0 40px 0;
   border-radius: 8px;
 }
 .hover {

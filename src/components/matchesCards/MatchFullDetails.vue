@@ -150,7 +150,7 @@
                 class="icon-shadow white-icon pt-1"
                 :size="iconSize - 1"
                 >
-                  $position-icon
+                  $player-icon
                 </v-icon>
                 <h1
                 :class="['pl-1 text-shadow', textSize]"
