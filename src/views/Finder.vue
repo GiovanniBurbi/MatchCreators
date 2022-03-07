@@ -14,10 +14,6 @@
         <finder-header />
 
         <match-cards-group
-        :loading="!statusMatches"
-        :matches="filteredMatches"
-        :isFinder=true
-        :darkMode=false
         class="py-2"
         />
 
@@ -44,8 +40,7 @@
     fullscreen
     >
       <match-full-details
-      v-if="isOverview"
-      :match="matchToOverview" />
+      v-if="isOverview" />
     </v-dialog>
 
   </v-container>
@@ -62,18 +57,8 @@ import BreakpointsCond from '../mixins/BreakpointsCond';
 export default {
   name: 'Finder',
 
-  props: {
-    goToMyMatches: {
-      type: Boolean,
-    },
-  },
-
   computed: {
     ...mapGetters({
-      filters: 'matches/getFilters',
-      statusMatches: 'matches/getStatusMatches',
-      filteredMatches: 'matches/getFilteredMatches',
-      matchToOverview: 'matches/getMatchToOverview',
       myMatches: 'app/isMyMatches',
       isOverview: 'app/isMatchOverview',
     }),

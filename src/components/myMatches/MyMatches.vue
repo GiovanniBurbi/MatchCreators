@@ -79,7 +79,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      loading: 'matches/getLoadingUserMatches',
+      loading: 'matches/getLoading',
       userMatches: 'matches/getUserMatches',
     }),
   },

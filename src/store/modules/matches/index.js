@@ -6,12 +6,10 @@ export default {
   state: {
     matches: [],
     filteredMatches: [],
-    loadedMatches: false,
     userMatches: [],
-    loadingUserMatches: false,
     matchToOverview: {},
     loading: false,
-    details: ['2001-01-01', '10:00 - 11:00', 'Albereta'],
+    details: [],
     teamBlack: [
       { team: 'Black' },
       {
@@ -69,10 +67,6 @@ export default {
       state.filteredMatches = games;
     },
 
-    setLoadedMatches(state, val) {
-      state.loadedMatches = val;
-    },
-
     setDetails(state, details) {
       state.details = details.slice();
     },
@@ -116,10 +110,6 @@ export default {
       state.loading = isLoading;
     },
 
-    setLoadingUserMatches(state, isLoading) {
-      state.loadingUserMatches = isLoading;
-    },
-
     setUserMatches(state, matches) {
       state.userMatches = matches;
     },
@@ -131,11 +121,11 @@ export default {
 
   actions: {
     async allMatches({ commit }) {
-      commit('setLoadedMatches', false);
+      commit('setLoading', true);
       const matches = await MatchService.getAllMatches();
       commit('setMatches', matches);
       commit('setFilteredMatches', matches);
-      commit('setLoadedMatches', true);
+      commit('setLoading', false);
     },
 
     addFilterMatches({ state, commit }, newFilter) {
@@ -171,12 +161,12 @@ export default {
     async findUserMatches({
       state, commit, dispatch, rootGetters,
     }) {
-      commit('setLoadingUserMatches', true);
+      commit('setLoading', true);
       await dispatch('allMatches');
       await MatchService.findUserMatches(state.matches, rootGetters['auth/getUser'])
         .then((res) => {
           commit('setUserMatches', res);
-          commit('setLoadingUserMatches', false);
+          commit('setLoading', false);
         });
     },
   },
@@ -190,8 +180,8 @@ export default {
       return state.filteredMatches;
     },
 
-    getStatusMatches(state) {
-      return state.loadedMatches;
+    getLoading(state) {
+      return state.loading;
     },
 
     getDetails(state) {
@@ -208,14 +198,6 @@ export default {
 
     getTeamWhite(state) {
       return state.teamWhite;
-    },
-
-    getLoading(state) {
-      return state.loading;
-    },
-
-    getLoadingUserMatches(state) {
-      return state.loadingUserMatches;
     },
 
     getUserMatches(state) {

@@ -190,7 +190,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { format, parseISO } from 'date-fns';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import Field from '../teams/Field.vue';
@@ -202,17 +202,12 @@ export default {
     Field,
   },
 
-  props: {
-    match: {
-      type: Object,
-      required: true,
-    },
-    dark: {
-      type: Boolean,
-    },
-  },
-
   computed: {
+    ...mapGetters({
+      match: 'matches/getMatchToOverview',
+      dark: 'theme/getDarkMode',
+    }),
+
     date() {
       if (this.$vuetify.breakpoint.xsOnly) {
         return format(parseISO(this.match.date), 'd MMM yyyy');

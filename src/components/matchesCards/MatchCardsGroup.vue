@@ -19,13 +19,12 @@
 
       <v-row justify="center" v-if="!loading">
           <template v-for="match in matches">
+
             <!-- component over handler with vuetify -->
             <v-hover v-slot="{ hover }" :key="match.id">
               <match-card
               :match="match"
               :hover="hover"
-              :isFinder="isFinder"
-              :darkMode="darkMode"
               />
             </v-hover>
 
@@ -38,26 +37,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import MatchCard from './MatchCard.vue';
 
 export default {
   name: 'MatchCardGroup',
 
-  props: {
-    matches: {
-      type: Array,
-      required: true,
-    },
-    loading: {
-      type: Boolean,
-    },
-    isFinder: {
-      type: Boolean,
-      required: true,
-    },
-    darkMode: {
-      type: Boolean,
-    },
+  computed: {
+    ...mapGetters({
+      loading: 'matches/getLoading',
+      matches: 'matches/getFilteredMatches',
+    }),
   },
 
   components: {
@@ -65,10 +55,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.background-skeleton {
-  background-image: linear-gradient(to top, #c5cae9, #c5cae9, #c5cae9, #c5cae9, #c5cae9,
-  #c8cdea, #cbcfeb, #ced2ec, #d4d8ef, #dbdef1, #e1e4f4, #e8eaf6);
-}
-</style>

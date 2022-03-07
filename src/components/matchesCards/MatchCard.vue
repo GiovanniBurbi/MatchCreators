@@ -1,6 +1,7 @@
 <template>
   <v-card
-  :class="[darkMode ? 'grey darken-4' : 'indigo lighten-5', 'ma-2 hover']"
+  :class="[darkMode ? 'grey darken-4' : 'indigo lighten-5',
+  'ma-2 hover']"
   :elevation="hover ? 12 : 8"
   width="340"
   rounded="lg"
@@ -11,18 +12,15 @@
       <v-icon
       left
       size="22"
-      class="icon-shadow"
       color="indigo lighten-1"
       >
         mdi-calendar
       </v-icon>
       <h1
-      :class="['font-weight-bold',
-      {'text-subtitle-1': smAndUp},
-      {'text-subtitle-1': xsOnly},
+      :class="['font-weight-bold text-subtitle-1',
       !darkMode ? 'indigo--text' : 'indigo--text text--lighten-2']"
       >
-        {{ this.dateFormatted }}
+        {{ fullDate(this.match.date) }}
       </h1>
     </v-card-title>
 
@@ -33,7 +31,6 @@
         left
         size="22"
         color="indigo lighten-1"
-        class="icon-shadow"
         >
           mdi-clock-outline
         </v-icon>
@@ -50,7 +47,6 @@
         left
         color="indigo lighten-1"
         size="24"
-        class="icon-shadow"
         >
           mdi-map-marker-outline
         </v-icon>
@@ -64,7 +60,7 @@
 
       <v-row class="px-1">
         <v-icon
-        class="pl-1 indigo-icon"
+        class="pl-1"
         size="23"
         >
           $player-icon
@@ -84,7 +80,7 @@
             <v-icon
             size="34"
             :class="[gkFilled ? 'filled-pos' : null,
-            !darkMode ? 'posIcon-shadow' : 'white-icon']"
+            !darkMode ? '' : '']"
             >
               $goalkeeper-icon
             </v-icon>
@@ -93,7 +89,7 @@
           <v-row justify="center" class="pt-2">
             <h1
             :class="['text-caption num-shadow font-weight-medium',
-            this.gkFilled ? 'red--text text--darken-1': 'indigo--text text--lighten-1']"
+            gkFilled ? 'red--text text--darken-1': 'indigo--text text--lighten-1']"
             >
               {{ match.positions.goalkeepers }} / 2
             </h1>
@@ -105,7 +101,7 @@
             <v-icon
             size="34"
             :class="[defFilled ? 'filled-pos' : null,
-            !darkMode ? 'posIcon-shadow' : 'white-icon']"
+            !darkMode ? '' : '']"
             >
               $defender-icon
             </v-icon>
@@ -114,7 +110,7 @@
           <v-row justify="center" class="pt-2">
             <h1
             :class="['text-caption num-shadow font-weight-medium',
-            this.defFilled ? 'red--text text--darken-1': 'indigo--text text--lighten-1']"
+            defFilled ? 'red--text text--darken-1': 'indigo--text text--lighten-1']"
             >
               {{ match.positions.defenders }} / 4
             </h1>
@@ -126,7 +122,7 @@
             <v-icon
             size="42"
             :class="['pb-1', fwFilled ? 'filled-pos' : null,
-            !darkMode ? 'posIcon-shadow' : 'white-icon']"
+            !darkMode ? '' : '']"
             >
               $forward-icon
             </v-icon>
@@ -135,7 +131,7 @@
           <v-row justify="center">
             <h1
             :class="['text-caption num-shadow font-weight-medium',
-            this.fwFilled ? 'red--text text--darken-1': 'indigo--text text--lighten-1']"
+            fwFilled ? 'red--text text--darken-1': 'indigo--text text--lighten-1']"
             >
               {{ match.positions.forwards }} / 4
             </h1>
@@ -193,38 +189,43 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-import { format, parseISO } from 'date-fns';
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
+import DataHelper from '@/mixins/DataHelper';
 
 export default {
   name: 'MatchCard',
 
   data() {
     return {
-      gkFilled: false,
-      defFilled: false,
-      fwFilled: false,
       dateFormatted: null,
     };
   },
 
-  mounted() {
-    /* Based on match participant verify if a position is filled.
-    in a match there can be max 2 gk, 4 def, 4 fw */
-    if (this.match.positions.goalkeepers === 2) {
-      this.gkFilled = true;
-    }
-    if (this.match.positions.defenders === 4) {
-      this.defFilled = true;
-    }
-    if (this.match.positions.forwards === 4) {
-      this.fwFilled = true;
-    }
-    this.dateFormatted = format(parseISO(this.match.date), 'EEEE, d MMMM yyyy');
-  },
+  computed: {
+    ...mapGetters({
+      isFinder: 'app/isFinder',
+      darkMode: 'theme/getDarkMode',
+    }),
 
-  mixins: [BreakpointsCond],
+    gkFilled() {
+      if (this.match.positions.goalkeepers === 2) {
+        return true; /* ritorna direttamente lo styling */
+      } return false;
+    },
+
+    defFilled() {
+      if (this.match.positions.defenders === 4) {
+        return true;
+      } return false;
+    },
+
+    fwFilled() {
+      if (this.match.positions.forwards === 4) {
+        return true;
+      } return false;
+    },
+  },
 
   props: {
     match: {
@@ -232,13 +233,6 @@ export default {
       required: true,
     },
     hover: {
-      type: Boolean,
-    },
-    isFinder: {
-      type: Boolean,
-      required: true,
-    },
-    darkMode: {
       type: Boolean,
     },
   },
@@ -249,51 +243,20 @@ export default {
       setAppSection: 'app/setAppSection',
     }),
   },
+
+  mixins: [BreakpointsCond, DataHelper],
 };
 </script>
 
 <style scoped>
-.background {
-  background-image: linear-gradient(to top, #c5cae9, #c5cae9, #c5cae9, #c5cae9, #c5cae9,
-  #c8cdea, #cbcfeb, #ced2ec, #d4d8ef, #dbdef1, #e1e4f4, #e8eaf6);
-}
-/* .background-dark {
-  background: #9575CD;
-} */
-.indigo-icon{
-  /* indigo */
-  filter: invert(26%) sepia(55%) saturate(2295%)
-  hue-rotate(217deg) brightness(95%) contrast(83%)
-  drop-shadow(1px 1px black);
-}
-.indigo-darken2-icon {
-  /* indigo darken 2 */
-  filter: invert(19%) sepia(50%) saturate(3328%) hue-rotate(224deg) brightness(90%) contrast(92%)
-  drop-shadow(1px 1px rgba(0, 0, 0, 0.7));
-}
-.white-icon {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
-  brightness(122%) contrast(100%) drop-shadow(1px 1px black);
-}
 .filled-pos {
   opacity: 20%;
 }
 .overlay {
   display: flex;
   justify-content: flex-end;
-  /* justify-content: center; */
   padding: 0 0 50px 0px;
   border-radius: 8px;
-}
-.icon-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
-}
-.posIcon-shadow {
-  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.3));
-}
-.num-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
 }
 .hover {
   transition: 0.2s ease-in-out;

@@ -59,5 +59,9 @@ export default {
       /* type === 'Time' */
       return `${msg[0]} - ${msg[1]}`;
     },
+
+    fullDate(date) {
+      return date ? format(parseISO(date), 'EEEE, d MMMM yyyy') : '';
+    },
   },
 };
