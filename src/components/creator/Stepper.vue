@@ -75,7 +75,8 @@
         <h1
         v-if="mdAndUp"
         :class="['header pl-2',
-        {'text-disable': !change}, {'text-h4': lgAndUp}]"
+        {'text-disable': !change},
+        {'text-h4': lgAndUp}]"
         >
           Build the Teams
         </h1>

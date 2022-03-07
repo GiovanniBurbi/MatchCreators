@@ -33,6 +33,10 @@ export default {
       }
       return datesFormatted.join(' ~ ');
     },
+
+    getTime() {
+      return `${this.start} - ${this.end}`;
+    },
   },
 
   methods: {
