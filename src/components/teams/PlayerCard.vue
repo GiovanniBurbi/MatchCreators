@@ -13,8 +13,8 @@
 
         <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
 
+          <!-- v-if="builder || user.id === player.user.id" -->
           <v-btn
-          v-if="builder || user.id === player.user.id"
           style="z-index: 1000;"
           x-small
           :width="xsOnly ? 20 : null"
@@ -184,7 +184,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ user: 'auth/getUser' }),
+    ...mapGetters({
+      user: 'auth/getUser',
+      darkMode: 'theme/getDarkMode',
+    }),
 
     getCard() {
       if (this.white) {
@@ -233,13 +236,6 @@ export default {
     },
     player: {
       type: Object,
-    },
-    builder: {
-      type: Boolean,
-      required: true,
-    },
-    darkMode: {
-      type: Boolean,
     },
   },
 

@@ -5,38 +5,29 @@
       <player-card
       :player="team[5]"
       :white="isTeamWhite"
-      :builder="builder"
-      :position="'Forward'"
-      :darkMode="darkMode" />
+      :position="'Forward'" />
       <player-card
       :player="team[4]"
       :white="isTeamWhite"
-      :builder="builder"
-      :position="'Forward'"
-      :darkMode="darkMode" />
+      :position="'Forward'" />
     </div>
 
     <div class="row-2">
       <player-card
       :player="team[3]"
       :white="isTeamWhite"
-      :builder="builder"
       :position="'Defender'" />
       <player-card
       :player="team[2]"
       :white="isTeamWhite"
-      :builder="builder"
-      :position="'Defender'"
-      :darkMode="darkMode" />
+      :position="'Defender'" />
     </div>
 
     <div class="row-3">
       <player-card
       :player="team[1]"
       :white="isTeamWhite"
-      :builder="builder"
-      :position="'Goalkeeper'"
-      :darkMode="darkMode" />
+      :position="'Goalkeeper'" />
     </div>
 
   </v-container>
@@ -57,13 +48,6 @@ export default {
     team: {
       type: Array,
       required: true,
-    },
-    builder: {
-      type: Boolean,
-      required: true,
-    },
-    darkMode: {
-      type: Boolean,
     },
   },
 

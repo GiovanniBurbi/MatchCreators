@@ -82,7 +82,7 @@
 
               </v-row>
 
-              <team-builder :reset.sync="reset" class="pb-0"/>
+              <team-builder class="pb-0"/>
 
             </v-container>
           </v-window-item>
@@ -157,8 +157,7 @@ export default {
 
   data() {
     return {
-      step: 1,
-      reset: false,
+      step: 2,
       snackbar: false,
     };
   },
@@ -185,9 +184,8 @@ export default {
     loading(val) {
       if (!val) {
         this.setAppSection('my-matches');
-        this.reset = true;
         this.step = 1;
-      } else this.reset = false;
+      }
     },
 
     matchCreated(newVal) {

@@ -10,6 +10,7 @@ export default {
     matchToOverview: {},
     loading: false,
     matchCreated: false,
+    teamSelected: 'black',
     details: ['2022-03-29', '10:30 - 11:30', 'Albereta'],
     teamBlack: [
       { team: 'Black' },
@@ -100,6 +101,7 @@ export default {
 
     clearMatchTmp(state) {
       state.details = [];
+      state.teamSelected = 'black';
       const { teamSize } = MatchService;
       for (let i = 1; i <= teamSize; i += 1) {
         state.teamBlack[i].user = {};
@@ -121,6 +123,10 @@ export default {
 
     setMatchCreated(state, value) {
       if (state.matchCreated !== value) state.matchCreated = value;
+    },
+
+    setTeamSelected(state, team) {
+      if (state.teamSelected !== team) state.teamSelected = team;
     },
   },
 
@@ -225,6 +231,10 @@ export default {
 
     getMatchCreated(state) {
       return state.matchCreated;
+    },
+
+    getTeamSelected(state) {
+      return state.teamSelected;
     },
   },
 };
