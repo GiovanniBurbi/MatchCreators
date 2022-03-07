@@ -2,42 +2,46 @@
   <v-container fluid class="pt-6">
     <v-row justify="space-between" align="center">
 
-      <h1
-      :class="['text-big header',
-      {'text-h4' : mdAndDown},
-      {'text-h5': xsOnly}]"
-      >
-        Search a Match
-        <v-icon
-        :size="iconSize"
-        class="icon-white-shadow pb-3"
+      <v-col :cols="windowWidth < 330 ? 12 : null" :class="{'pb-1': windowWidth < 330}">
+        <h1
+        :class="['text-big header',
+        {'text-h4' : mdAndDown},
+        {'text-h5': xsOnly}]"
         >
-          $finder-icon
-        </v-icon>
-      </h1>
+          Search a Match
+          <v-icon
+          :size="iconSize"
+          class="icon-white-shadow pb-3"
+          >
+            $finder-icon
+          </v-icon>
+        </h1>
+      </v-col>
 
-      <v-btn
-      :color="showFilters ?  'white' : 'deep-purple'"
-      rounded
-      :small="xsOnly"
-      @click="showFilters = !showFilters"
-      >
-        <span
-        :class="['hidden-xs-only',
-        showFilters ? 'deep-purple--text' : 'white--text btn-shadow']">
-          Filters
-        </span>
-
-        <v-icon
-        :class="{'btn-icon-shadow': !showFilters}"
-        :size="xsOnly ? 16 : null"
-        :right="smAndUp"
-        :color="showFilters ? 'deep-purple' : 'white'"
+      <v-col :class="windowWidth < 330 ? 'd-flex justify-start pt-0 pb-1' : 'd-flex justify-end'">
+        <v-btn
+        :color="showFilters ?  'white' : 'deep-purple'"
+        rounded
+        :small="xsOnly"
+        @click="showFilters = !showFilters"
         >
-          fa-solid fa-sliders
-        </v-icon>
+          <span
+          :class="['hidden-xs-only',
+          showFilters ? 'deep-purple--text' : 'white--text btn-shadow']">
+            Filters
+          </span>
 
-      </v-btn>
+          <v-icon
+          :class="{'btn-icon-shadow': !showFilters}"
+          :size="xsOnly ? 16 : null"
+          :right="smAndUp"
+          :color="showFilters ? 'deep-purple' : 'white'"
+          >
+            fa-solid fa-sliders
+          </v-icon>
+
+        </v-btn>
+      </v-col>
     </v-row>
 
     <v-row>
@@ -81,10 +85,22 @@ import MatchFilter from './MatchFilter.vue';
 export default {
   name: 'FinderHeader',
 
+  components: {
+    FilterChipsGroup,
+    MatchFilter,
+  },
+
   data() {
     return {
       showFilters: false,
+      windowWidth: window.innerWidth,
     };
+  },
+
+  watch: {
+    windowWidth(newVal) {
+      this.windowWidth = newVal;
+    },
   },
 
   computed: {
@@ -96,9 +112,20 @@ export default {
     },
   },
 
-  components: {
-    FilterChipsGroup,
-    MatchFilter,
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
   },
 
   mixins: [BreakpointsCond],

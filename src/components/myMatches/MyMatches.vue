@@ -3,49 +3,47 @@
   <v-container fluid class="pt-6">
     <v-row justify="space-between" align="center">
 
-      <h1
-      :class="['text-big header',
-      {'text-h4' : mdAndDown},
-      {'text-h5': xsOnly}]"
-      >
-        My Matches
-        <v-icon
-        :class="['pb-3 icon-white-shadow']"
-        :size="lgAndUp ? 46 : 34"
+      <v-col :cols="windowWidth < 310 ? 12 : null" :class="{'pb-1': windowWidth < 310}">
+        <h1
+        :class="['text-big header',
+        {'text-h4' : mdAndDown},
+        {'text-h5': xsOnly}]"
         >
-          $player-2-icon
-        </v-icon>
-      </h1>
+          My Matches
+          <v-icon
+          :class="['pb-3 icon-white-shadow']"
+          :size="lgAndUp ? 46 : 34"
+          >
+            $player-2-icon
+          </v-icon>
+        </h1>
+      </v-col>
 
-      <v-btn
-      v-if="isFinder"
-      color="deep-purple"
-      dark
-      :small="xsOnly"
-      rounded
-      @click="setAppSection('')"
-      >
-        <span
-        class="btn-shadow"
-        v-if="!xsOnly"
+      <v-col :class="windowWidth < 310 ? 'd-flex justify-start pt-0 pb-1' : 'd-flex justify-end'">
+        <v-btn
+        v-if="isFinder"
+        color="deep-purple"
+        dark
+        :small="xsOnly"
+        rounded
+        @click="setAppSection('')"
         >
-          find new match
-        </span>
+          <span class="btn-shadow hidden-xs-only">
+            find new match
+          </span>
 
-        <v-icon
-        :right="!xsOnly"
-        class="icon-white-shadow"
-        :size="xsOnly ? 25 : 28"
-        >
-          $finder-icon
-        </v-icon>
+          <v-icon
+          class="icon-white-shadow"
+          :size="xsOnly ? 25 : 28"
+          >
+            $finder-icon
+          </v-icon>
 
-      </v-btn>
+        </v-btn>
+      </v-col>
     </v-row>
 
-    <v-divider
-    :class="['mt-4']"
-    ></v-divider>
+    <v-divider :class="['mt-4']" />
 
     <match-cards-group
     :matches="userMatches"
@@ -66,6 +64,12 @@ export default {
     MatchCardsGroup,
   },
 
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    };
+  },
+
   computed: {
     ...mapGetters({
       userMatches: 'matches/getUserMatches',
@@ -74,16 +78,35 @@ export default {
     }),
   },
 
+  watch: {
+    windowWidth(newVal) {
+      this.windowWidth = newVal;
+    },
+  },
+
   methods: {
     ...mapActions({ fetchUserMatches: 'matches/findUserMatches' }),
     ...mapMutations({ setAppSection: 'app/setAppSection' }),
+
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
   },
 
   created() {
     this.fetchUserMatches();
   },
 
-  mixins: [BreakpointsCond],
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  },
 
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
+  },
+
+  mixins: [BreakpointsCond],
 };
 </script>
