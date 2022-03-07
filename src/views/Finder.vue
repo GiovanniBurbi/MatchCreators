@@ -67,7 +67,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ clearChips: 'matches/clearFilters' }),
+    ...mapMutations({ clearChips: 'filters/clearFilters' }),
     ...mapActions({ fetchMatches: 'matches/allMatches' }),
   },
 
@@ -76,6 +76,7 @@ export default {
   },
 
   destroyed() {
+    console.log('remove filters');
     /* when component is destroyed clear the filters */
     this.clearChips();
   },

@@ -120,16 +120,16 @@ export default {
   },
 
   actions: {
-    async allMatches({ dispatch, commit }) {
+    async allMatches({ dispatch, commit, state }) {
       commit('setLoading', true);
       await dispatch('fetchAllMatches');
+      commit('setFilteredMatches', state.matches);
       commit('setLoading', false);
     },
 
     async fetchAllMatches({ commit }) {
       const matches = await MatchService.getAllMatches();
       commit('setMatches', matches);
-      commit('setFilteredMatches', matches);
     },
 
     addFilterMatches({ state, commit }, newFilter) {
