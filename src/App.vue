@@ -146,7 +146,7 @@ export default {
   text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
 }
 .icon-shadow {
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
 }
 .icon-shadow-soft {
   text-shadow: 1px 1px rgba(0, 0, 0, 0.5);

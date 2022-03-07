@@ -1,9 +1,8 @@
 <template>
-
-  <v-container fluid class="pt-6">
+  <v-container fluid class="pt-4">
     <v-row justify="space-between" align="center">
 
-      <v-col :cols="windowWidth < 310 ? 12 : null" :class="{'pb-1': windowWidth < 310}">
+      <v-col :cols="windowWidth < 310 ? 12 : null" :class="[{'pb-1': windowWidth < 310}, 'pb-0']">
         <h1
         :class="['text-big header',
         {'text-h4' : mdAndDown},
@@ -43,7 +42,7 @@
       </v-col>
     </v-row>
 
-    <v-divider :class="['mt-4']" />
+    <v-divider :class="['mt-4', {'divider-dark': dark}]" />
 
     <match-cards-group
     :matches="userMatches"

@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid class="pt-6">
+  <v-container fluid class="pt-4">
     <v-row justify="space-between" align="center">
 
-      <v-col :cols="windowWidth < 330 ? 12 : null" :class="{'pb-1': windowWidth < 330}">
+      <v-col :cols="windowWidth < 330 ? 12 : null" :class="[{'pb-1': windowWidth < 330}, 'pb-1']">
         <h1
         :class="['text-big header',
         {'text-h4' : mdAndDown},
@@ -66,13 +66,13 @@
 
     </v-row>
 
-    <v-row justify="center">
+    <v-row justify="center" class="pb-2">
 
       <filter-chips-group/>
 
     </v-row>
 
-    <v-divider class="mt-2" />
+    <v-divider />
 
   </v-container>
 </template>
