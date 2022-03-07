@@ -55,22 +55,6 @@
               <match-filter :type="type" />
             </v-col>
 
-            <!-- <v-col cols="3">
-              <location-filter />
-            </v-col>
-
-            <v-col cols="3">
-              <date-filter />
-            </v-col>
-
-            <v-col cols="3">
-              <time-filter />
-            </v-col>
-
-            <v-col cols="3">
-              <position-filter />
-            </v-col> -->
-
           </v-row>
           <div>
 

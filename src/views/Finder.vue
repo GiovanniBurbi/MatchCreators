@@ -1,7 +1,7 @@
 <template>
   <v-container
   fluid
-  class="background"
+  :class="['background', {'content-padding': mdAndUp}]"
   >
 
     <v-slide-y-reverse-transition hide-on-leave>

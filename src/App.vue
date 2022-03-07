@@ -98,6 +98,10 @@ export default {
 </script>
 
 <style>
+.content-padding {
+  padding: 0 5vw 0;
+}
+
 /* Colored position images */
 .playerImg {
 /* centering img and default opacity*/
