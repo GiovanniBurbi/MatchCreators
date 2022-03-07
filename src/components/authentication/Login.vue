@@ -4,7 +4,7 @@
   rounded="xl"
   elevation="10"
   >
-    <v-window v-model="step">
+    <v-window v-model="step" touchless>
 
       <v-window-item :value="1">
 

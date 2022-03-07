@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="form-padding">
+  <v-container fluid class="form-padding px-8">
 
     <v-form ref="details">
 
@@ -119,8 +119,8 @@
               @click:clear="start=null, end=null, step=1"
             ></v-text-field>
           </template>
-          <v-card dark>
-            <v-window v-model="step">
+          <v-card dark min-width="280">
+            <v-window v-model="step" touchless>
 
               <v-window-item :value="1">
                 <v-card-text class="pl-6">
@@ -131,6 +131,7 @@
                     :max="end"
                     format="24hr"
                     color="deep-purple darken-2"
+                    full-width
                   >
                   </v-time-picker>
                 </v-card-text>
@@ -165,6 +166,7 @@
                     :min="start"
                     format="24hr"
                     color="deep-purple darken-2"
+                    full-width
                   >
                   </v-time-picker>
                 </v-card-text>
@@ -239,11 +241,12 @@
 
       </v-row>
 
-      <v-row justify="center">
+      <v-row justify="center" class="pt-4">
         <v-btn
-        class="shadow"
+        class="btn-shadow"
         dark
-        color="deep-purple darken-2"
+        :small="xsOnly"
+        color="deep-purple darken-3"
         elevation="6"
         @click="proceed()">
           Continue
@@ -323,6 +326,6 @@ export default {
   width: fit-content;
 }
 .form-padding {
-  padding-top: 120px;
+  padding-top: 7vh;
 }
 </style>

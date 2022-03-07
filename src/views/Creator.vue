@@ -1,41 +1,44 @@
 <template>
   <v-container
   fluid
-  :class="['background', {'content-padding': mdAndUp}]"
+  :class="['background px-0', {'content-padding': mdAndUp}]"
   >
 
     <v-slide-y-reverse-transition hide-on-leave>
       <div v-show="!isMyMatches && !isOverview">
 
-        <v-container fluid class="pt-7">
-
-          <h1
-          :class="['text-big header',
-          {'text-h4' : mdAndDown},
-          {'text-h5': xsOnly}]"
-          >
-            Create a Match
-            <v-icon
-            :class="[lgAndUp ? 'pb-3' : 'pb-2', 'icon-white-shadow']"
-            :size="iconSize"
+        <v-container
+        class="pt-4"
+        >
+          <v-container fluid>
+            <h1
+            :class="['text-big header',
+            {'text-h4' : mdAndDown},
+            {'text-h5': xsOnly}]"
             >
-              $creator-icon
-            </v-icon>
-          </h1>
+              Create a Match
+              <v-icon
+              :class="[lgAndUp ? 'pb-3' : 'pb-2', 'icon-white-shadow']"
+              :size="iconSize"
+              >
+                $creator-icon
+              </v-icon>
+            </h1>
 
-          <v-divider class="divider-dark" />
+            <v-divider class="divider-dark" />
 
-          <stepper
-          :class="['stepper-margin-lg mb-0',
-          {'stepper-margin-md' : mdOnly},
-          {'stepper-margin-sm' : smAndDown}]"
-          :change="step === 2"
-          @back="step--"
-          />
+            <stepper
+            :class="['stepper-margin-lg mb-0',
+            {'stepper-margin-md' : mdOnly},
+            {'stepper-margin-sm' : smAndDown}]"
+            :change="step === 2"
+            @back="step--"
+            />
+          </v-container>
 
         </v-container>
 
-        <v-window v-model="step">
+        <v-window v-model="step" touchless>
           <v-window-item :value="1">
 
             <match-creation-form @detailsPassed="step++" />
@@ -70,27 +73,29 @@
     </v-slide-y-reverse-transition>
 
     <v-slide-y-transition hide-on-leave>
-      <v-container fluid v-if="isMyMatches && !isOverview">
+      <v-container v-if="isMyMatches && !isOverview" class="pt-1">
 
-        <my-matches  />
+        <v-container fluid>
+          <my-matches  />
 
-        <v-fab-transition hide-on-leave>
-          <v-btn
-          v-if="!loading"
-          class="stick"
-          large
-          fab
-          dark
-          color="deep-purple darken-2"
-          @click="setAppSection(''), step = 1"
-          >
+          <v-fab-transition hide-on-leave>
+            <v-btn
+            v-if="!loading"
+            class="stick"
+            large
+            fab
+            dark
+            color="deep-purple darken-2"
+            @click="setAppSection(''), step = 1"
+            >
 
-            <v-icon size="44">
-              mdi-plus
-            </v-icon>
+              <v-icon size="44">
+                mdi-plus
+              </v-icon>
 
-          </v-btn>
-        </v-fab-transition>
+            </v-btn>
+          </v-fab-transition>
+        </v-container>
 
       </v-container>
     </v-slide-y-transition>

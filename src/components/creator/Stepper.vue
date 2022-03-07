@@ -28,6 +28,7 @@
           v-if="change"
           color="white icon-shadow"
           :size="iconSize"
+          style="cursor:pointer;"
           >
             mdi-check
           </v-icon>
