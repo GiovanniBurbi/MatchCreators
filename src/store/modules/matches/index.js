@@ -9,7 +9,7 @@ export default {
     userMatches: [],
     matchToOverview: {},
     loading: false,
-    details: [],
+    details: ['2022-03-29', '10:30 - 11:30', 'Albereta'],
     teamBlack: [
       { team: 'Black' },
       {

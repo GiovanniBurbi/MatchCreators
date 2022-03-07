@@ -1,39 +1,66 @@
 <template>
   <v-container fluid>
-    <v-row justify="space-around">
+    <v-row justify="center">
 
-      <div class="reminder py-1">
-        <div class="background-label d-inline-flex px-3">
-          <v-icon size="20" dark class="label-text py-2">mdi-calendar</v-icon>
+      <v-col
+      class="d-inline-flex justify-center align-center"
+      >
+        <div :class="iconBg">
+           <v-icon
+           size="28"
+           dark
+           class="btn-icon-shadow"
+           >
+            mdi-calendar
+          </v-icon>
         </div>
-        <div class="bg-field d-inline-flex">
-          <h1 class="text-subtitle-1 font-weight-medium pl-1 py-1">
+
+        <div :class="textBg">
+          <h1 :class="textStyle">
             {{ dateFormatted }}
           </h1>
         </div>
-      </div>
+      </v-col>
 
-      <div class="reminder py-2">
-        <div class="background-label d-inline-flex px-3">
-          <v-icon size="20" dark class="label-text py-2">mdi-clock-outline</v-icon>
+      <v-col
+      class="d-inline-flex justify-center align-center"
+      >
+        <div :class="iconBg">
+           <v-icon
+           size="28"
+           dark
+           class="btn-icon-shadow"
+           >
+            mdi-clock-outline
+          </v-icon>
         </div>
-        <div class="bg-field d-inline-flex">
-          <h1 class="text-subtitle-1 font-weight-medium pl-1 py-1">
+
+        <div :class="textBg">
+          <h1 :class="textStyle">
             {{ details[1] }}
           </h1>
         </div>
-      </div>
+      </v-col>
 
-      <div class="reminder py-2">
-        <div class="background-label d-inline-flex px-3">
-          <v-icon size="20" dark class="label-text py-2">mdi-map-marker-outline</v-icon>
+      <v-col
+      class="d-inline-flex justify-center align-center"
+      >
+        <div :class="iconBg">
+           <v-icon
+           size="28"
+           dark
+           class="btn-icon-shadow"
+           >
+            mdi-map-marker-outline
+          </v-icon>
         </div>
-        <div class="bg-field d-inline-flex">
-          <h1 class="text-subtitle-1 font-weight-medium pl-1 py-1">
+
+        <div :class="textBg">
+          <h1 :class="textStyle">
             {{ details[2] }}
           </h1>
         </div>
-      </div>
+      </v-col>
 
     </v-row>
   </v-container>
@@ -47,6 +74,14 @@ import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
   name: 'DetailsRecap',
+
+  data() {
+    return {
+      iconBg: 'background-label deep-purple darken-3 pa-2',
+      textBg: 'bg-field grey darken-4 py-1 pl-2',
+      textStyle: 'text-subtitle-1 white--text text-shadow py-1 font-weight-medium',
+    };
+  },
 
   computed: {
     ...mapGetters({ details: 'matches/getDetails' }),
@@ -62,16 +97,15 @@ export default {
 
 <style scoped>
 .background-label {
-  background-color: #512DA8;
-  border-radius: 4px 0 0 4px;
+  border-radius: 6px 0 0 6px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
   width: fit-content;
 }
 .bg-field {
-  background-color: white;
   width: 140px;
   white-space: nowrap;
   border-radius: 0 6px 6px 0;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
   overflow-x: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -79,12 +113,5 @@ export default {
 }
 .bg-field::-webkit-scrollbar {
   display: none;
-}
-.label-text {
-  text-shadow: 2px 2px 3px black;
-}
-.reminder {
-  display: flex;
-  align-items: center;
 }
 </style>

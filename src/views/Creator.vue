@@ -1,40 +1,39 @@
 <template>
-  <v-container
+  <div
   fluid
-  :class="['background px-0', {'content-padding': mdAndUp}]"
+  :class="['background', {'content-padding': mdAndUp}]"
   >
 
     <v-slide-y-reverse-transition hide-on-leave>
       <div v-show="!isMyMatches && !isOverview">
 
         <v-container
-        class="pt-4"
+        fluid
+        class="pt-8"
         >
-          <v-container fluid>
-            <h1
-            :class="['text-big header',
-            {'text-h4' : mdAndDown},
-            {'text-h5': xsOnly}]"
+          <h1
+          :class="['text-big header',
+          {'text-h4' : mdAndDown},
+          {'text-h5': xsOnly}]"
+          >
+            Create a Match
+            <v-icon
+            :class="[lgAndUp ? 'pb-3' : 'pb-2', 'icon-white-shadow']"
+            :size="iconSize"
             >
-              Create a Match
-              <v-icon
-              :class="[lgAndUp ? 'pb-3' : 'pb-2', 'icon-white-shadow']"
-              :size="iconSize"
-              >
-                $creator-icon
-              </v-icon>
-            </h1>
+              $creator-icon
+            </v-icon>
+          </h1>
 
-            <v-divider class="divider-dark" />
+          <v-divider class="divider-dark" />
 
-            <stepper
-            :class="['stepper-margin-lg mb-0',
-            {'stepper-margin-md' : mdOnly},
-            {'stepper-margin-sm' : smAndDown}]"
-            :change="step === 2"
-            @back="step--"
-            />
-          </v-container>
+          <stepper
+          :class="['stepper-margin-lg mb-0',
+          {'stepper-margin-md' : mdOnly},
+          {'stepper-margin-sm' : smAndDown}]"
+          :change="step === 2"
+          @back="step--"
+          />
 
         </v-container>
 
@@ -47,13 +46,14 @@
 
           <v-window-item :value="2">
             <v-container fluid class="px-0">
+
               <details-recap
               v-if="!xsOnly"
-              :class="['header px-16 pt-0',
-              {'header-sm' : smAndDown},
-              {'header-md' : lgOnly || mdOnly}]"
+              class="infos"
               />
+
               <v-row justify="center" :class="xsOnly ? 'pt-4 pb-6' : 'pt-10 pb-4'">
+
                 <v-btn
                 color="green darken-4"
                 dark
@@ -61,10 +61,13 @@
                 @click="createMatch()"
                 :loading="loading"
                 >
-                  <span class="text-shadow">create the match</span>
+                  <span class="btn-shadow">create the match</span>
                 </v-btn>
+
               </v-row>
+
               <team-builder :reset.sync="reset" class="pb-0"/>
+
             </v-container>
           </v-window-item>
 
@@ -73,9 +76,8 @@
     </v-slide-y-reverse-transition>
 
     <v-slide-y-transition hide-on-leave>
-      <v-container v-if="isMyMatches && !isOverview" class="pt-1">
+      <v-container v-if="isMyMatches && !isOverview" class="pt-4">
 
-        <v-container fluid>
           <my-matches  />
 
           <v-fab-transition hide-on-leave>
@@ -97,7 +99,6 @@
           </v-fab-transition>
         </v-container>
 
-      </v-container>
     </v-slide-y-transition>
 
     <v-dialog
@@ -113,7 +114,7 @@
       :match="matchToOverview" />
     </v-dialog>
 
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -140,7 +141,7 @@ export default {
 
   data() {
     return {
-      step: 1,
+      step: 2,
       reset: false,
     };
   },
@@ -205,5 +206,8 @@ export default {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+}
+.infos {
+  max-width: 1400px;
 }
 </style>
