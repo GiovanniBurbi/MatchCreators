@@ -46,10 +46,8 @@
     ></v-divider>
 
     <match-cards-group
-    :loading="loading"
     :matches="userMatches"
-    :isFinder=false
-    :darkMode="dark"
+    :loading="loading"
     class="pt-6"/>
 
   </v-container>
@@ -79,8 +77,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      loading: 'matches/getLoading',
       userMatches: 'matches/getUserMatches',
+      loading: 'matches/getMyMatchesLoading',
     }),
   },
 
@@ -89,7 +87,7 @@ export default {
     ...mapMutations({ setAppSection: 'app/setAppSection' }),
   },
 
-  mounted() {
+  created() {
     this.fetchUserMatches();
   },
 

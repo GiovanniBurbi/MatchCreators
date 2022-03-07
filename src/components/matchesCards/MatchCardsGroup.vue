@@ -37,17 +37,20 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import MatchCard from './MatchCard.vue';
 
 export default {
   name: 'MatchCardGroup',
 
-  computed: {
-    ...mapGetters({
-      loading: 'matches/getLoading',
-      matches: 'matches/getFilteredMatches',
-    }),
+  props: {
+    matches: {
+      type: Array,
+      required: true,
+    },
+
+    loading: {
+      type: Boolean,
+    },
   },
 
   components: {

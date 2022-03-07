@@ -9,6 +9,7 @@ export default {
     userMatches: [],
     matchToOverview: {},
     loading: false,
+    myMatchesLoading: false,
     details: [],
     teamBlack: [
       { team: 'Black' },
@@ -110,6 +111,10 @@ export default {
       state.loading = isLoading;
     },
 
+    setMyMatchesLoading(state, loading) {
+      state.myMatchesLoading = loading;
+    },
+
     setUserMatches(state, matches) {
       state.userMatches = matches;
     },
@@ -161,12 +166,12 @@ export default {
     async findUserMatches({
       state, commit, dispatch, rootGetters,
     }) {
-      commit('setLoading', true);
+      commit('setMyMatchesLoading', true);
       await dispatch('allMatches');
       await MatchService.findUserMatches(state.matches, rootGetters['auth/getUser'])
         .then((res) => {
           commit('setUserMatches', res);
-          commit('setLoading', false);
+          commit('setMyMatchesLoading', false);
         });
     },
   },
@@ -182,6 +187,10 @@ export default {
 
     getLoading(state) {
       return state.loading;
+    },
+
+    getMyMatchesLoading(state) {
+      return state.myMatchesLoading;
     },
 
     getDetails(state) {

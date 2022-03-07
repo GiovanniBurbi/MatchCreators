@@ -14,6 +14,8 @@
         <finder-header />
 
         <match-cards-group
+        :matches="matches"
+        :loading="loading"
         class="py-2"
         />
 
@@ -61,6 +63,8 @@ export default {
     ...mapGetters({
       myMatches: 'app/isMyMatches',
       isOverview: 'app/isMatchOverview',
+      matches: 'matches/getFilteredMatches',
+      loading: 'matches/getLoading',
     }),
   },
 
