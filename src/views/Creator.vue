@@ -1,7 +1,6 @@
 <template>
   <div
-  fluid
-  :class="['background', {'content-padding': mdAndUp}]"
+  class="background"
   >
 
     <v-slide-y-reverse-transition hide-on-leave>
@@ -9,7 +8,7 @@
 
         <v-container
         fluid
-        class="pt-8"
+        :class="['pt-10', {'content-padding': mdAndUp}, {'px-6': smAndDown}]"
         >
           <h1
           :class="['text-big header',
@@ -52,7 +51,7 @@
               class="infos"
               />
 
-              <v-row justify="center" :class="xsOnly ? 'pt-4 pb-6' : 'pt-10 pb-4'">
+              <v-row justify="center" :class="xsOnly ? 'pt-8 pb-6' : 'pt-12 pb-4'">
 
                 <v-btn
                 color="green darken-4"
@@ -76,7 +75,7 @@
     </v-slide-y-reverse-transition>
 
     <v-slide-y-transition hide-on-leave>
-      <v-container v-if="isMyMatches && !isOverview" class="pt-4">
+      <v-container v-if="isMyMatches && !isOverview" class="pt-8">
 
           <my-matches  />
 
@@ -143,6 +142,7 @@ export default {
     return {
       step: 2,
       reset: false,
+      snackbar: false,
     };
   },
 
@@ -166,12 +166,11 @@ export default {
   watch: {
     loading(val) {
       if (!val) {
+        this.setAppSection('my-matches');
         this.reset = true;
-      }
-    },
-
-    isMyMatches(newVal) {
-      if (!newVal) this.step = 1;
+        this.step = 1;
+        this.snackbar = true;
+      } else this.reset = false;
     },
   },
 
@@ -208,6 +207,6 @@ export default {
   transform: translateX(-50%);
 }
 .infos {
-  max-width: 1400px;
+  max-width: 1000px;
 }
 </style>

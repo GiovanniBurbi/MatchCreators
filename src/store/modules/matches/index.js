@@ -155,10 +155,9 @@ export default {
       await MatchService.createMatch(state.details, state.teamBlack, state.teamWhite)
         .then(async () => {
           await dispatch('fetchAllMatches');
+          commit('setLoading', false);
           commit('clearMatchTmp');
           commit('addUser', rootGetters['auth/getUser']);
-          commit('setLoading', false);
-          await dispatch('findUserMatches');
         });
     },
 
