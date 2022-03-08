@@ -37,6 +37,53 @@ export default {
     getTime() {
       return `${this.start} - ${this.end}`;
     },
+
+    matchDay() {
+      return format(parseISO(this.match.date), 'EEEE');
+    },
+
+    matchDate() {
+      if (this.$vuetify.breakpoint.xsOnly) {
+        return format(parseISO(this.match.date), 'd MMM yyyy');
+      }
+      return format(parseISO(this.match.date), 'd MMMM yyyy');
+    },
+
+    matchTime() {
+      return `${this.match.startTime}-${this.match.endTime}`;
+    },
+
+    teamsAverageAge() {
+      let player = {};
+      let playerAge = null;
+      let sumAge = 0;
+      let numPlayers = 0;
+      for (let i = 1; i <= 5; i += 1) {
+        player = this.match.blackTeam[i].user;
+        if (Object.keys(player).length !== 0) {
+          playerAge = this.getAge(player.birthday);
+          sumAge += playerAge;
+          numPlayers += 1;
+        }
+        player = this.match.whiteTeam[i].user;
+        if (Object.keys(player).length !== 0) {
+          playerAge = this.getAge(player.birthday);
+          sumAge += playerAge;
+          numPlayers += 1;
+        }
+      }
+      if (numPlayers !== 0) {
+        return Math.floor(sumAge / numPlayers);
+      } return 'N/A';
+    },
+
+    nMatchParticipants() {
+      return (
+        this.match.positions.goalkeepers
+        + this.match.positions.defenders
+        + this.match.positions.forwards
+      );
+    },
   },
 
   methods: {

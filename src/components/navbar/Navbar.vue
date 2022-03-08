@@ -54,7 +54,7 @@
      @click="setAppSection('my-matches')"
     >
       <v-icon
-      class="icon-indigo pr-2"
+      :class="['icon-indigo', xsOnly ? '' : 'pr-2']"
       :size="xsOnly ? 32 : 30"
       >
         $player-2-icon

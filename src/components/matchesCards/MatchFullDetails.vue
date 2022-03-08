@@ -57,13 +57,13 @@
                 <h1
                 :class="['text-shadow', textSize]"
                 >
-                  {{day}},
+                  {{matchDay}},
                 </h1>
 
                 <h1
                 :class="['text-shadow', textSize]"
                 >
-                  {{date}}
+                  {{matchDate}}
                 </h1>
               </div>
 
@@ -81,7 +81,7 @@
             <h1
             :class="['text-shadow', textSize]"
             >
-              {{time}}
+              {{matchTime}}
             </h1>
           </v-col>
 
@@ -134,7 +134,7 @@
                 <h1
                 :class="['text-shadow', secondaryTextSize]"
                 >
-                  {{meanAge}} years old
+                  {{teamsAverageAge}} years old
                 </h1>
               </div>
             </v-row>
@@ -167,7 +167,7 @@
                 <h1
                 :class="['text-shadow', secondaryTextSize]"
                 >
-                  {{nParticipants}} / 10
+                  {{nMatchParticipants}} / 10
                 </h1>
               </div>
             </v-row>
@@ -180,10 +180,8 @@
 
       <field
       class="pt-16 mt-8"
-      :darkMode="dark"
       :teamBlack="match.blackTeam"
-      :teamWhite="match.whiteTeam"
-      :builder="false" />
+      :teamWhite="match.whiteTeam" />
 
     </v-card-text>
 
@@ -192,8 +190,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
-import { format, parseISO } from 'date-fns';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
+import DataHelper from '@/mixins/DataHelper';
 import Field from '../teams/Field.vue';
 
 export default {
@@ -208,53 +206,6 @@ export default {
       match: 'matches/getMatchToOverview',
       dark: 'theme/getDarkMode',
     }),
-
-    date() {
-      if (this.$vuetify.breakpoint.xsOnly) {
-        return format(parseISO(this.match.date), 'd MMM yyyy');
-      }
-      return format(parseISO(this.match.date), 'd MMMM yyyy');
-    },
-
-    day() {
-      return format(parseISO(this.match.date), 'EEEE');
-    },
-
-    time() {
-      return `${this.match.startTime}-${this.match.endTime}`;
-    },
-
-    meanAge() {
-      let player = {};
-      let playerAge = null;
-      let sumAge = 0;
-      let numPlayers = 0;
-      for (let i = 1; i <= 5; i += 1) {
-        player = this.match.blackTeam[i].user;
-        if (Object.keys(player).length !== 0) {
-          playerAge = this.getAge(player.birthday);
-          sumAge += playerAge;
-          numPlayers += 1;
-        }
-        player = this.match.whiteTeam[i].user;
-        if (Object.keys(player).length !== 0) {
-          playerAge = this.getAge(player.birthday);
-          sumAge += playerAge;
-          numPlayers += 1;
-        }
-      }
-      if (numPlayers !== 0) {
-        return Math.floor(sumAge / numPlayers);
-      } return 'N/A';
-    },
-
-    nParticipants() {
-      return (
-        this.match.positions.goalkeepers
-        + this.match.positions.defenders
-        + this.match.positions.forwards
-      );
-    },
 
     textSize() {
       let type = '';
@@ -297,7 +248,7 @@ export default {
     this.fetchAllUsers();
   },
 
-  mixins: [BreakpointsCond],
+  mixins: [BreakpointsCond, DataHelper],
 
 };
 </script>
@@ -342,7 +293,7 @@ h1, .icon-shadow {
 }
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 /* Track */
