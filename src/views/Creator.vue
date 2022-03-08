@@ -92,7 +92,10 @@
     </v-slide-y-reverse-transition>
 
     <v-slide-y-transition hide-on-leave>
-      <v-container v-if="isMyMatches && !isOverview" class="pt-8">
+      <v-container
+      v-if="isMyMatches"
+      v-show="!isOverview"
+      class="pt-8">
 
           <my-matches  />
 

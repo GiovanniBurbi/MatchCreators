@@ -29,7 +29,7 @@
         <v-icon
         left
         size="22"
-        color="indigo lighten-1"
+        :color="darkMode ? 'indigo lighten-1' : 'indigo darken-2'"
         >
           mdi-clock-outline
         </v-icon>
@@ -44,7 +44,7 @@
       <v-row class="py-1">
         <v-icon
         left
-        color="indigo lighten-1"
+        :color="darkMode ? 'indigo lighten-1' : 'indigo darken-2'"
         size="24"
         >
           mdi-map-marker-outline
@@ -59,7 +59,7 @@
 
       <v-row>
         <v-icon
-        class="pl-1 icon-indigo-lighten1"
+        :class="['pl-1', darkMode ? 'icon-indigo-lighten1' : 'icon-indigo-darken2']"
         size="23"
         >
           $player-icon
@@ -89,7 +89,7 @@
           <v-row justify="center" class="pt-2">
             <h1
             :class="[posInfo,
-            gkFilled ? 'red--text text--darken-1': 'indigo--text']"
+            gkFilled ? 'red--text text--darken-1': 'indigo--text text--darken-1']"
             >
               {{ match.positions.goalkeepers }} / 2
             </h1>
@@ -111,7 +111,7 @@
           <v-row justify="center" class="pt-2">
             <h1
             :class="[posInfo,
-            defFilled ? 'red--text text--darken-1': 'indigo--text']"
+            defFilled ? 'red--text text--darken-1': 'indigo--text text--darken-1']"
             >
               {{ match.positions.defenders }} / 4
             </h1>
@@ -133,7 +133,7 @@
           <v-row justify="center">
             <h1
             :class="[posInfo,
-            fwFilled ? 'red--text text--darken-1': 'indigo--text']"
+            fwFilled ? 'red--text text--darken-1': 'indigo--text text--darken-1']"
             >
               {{ match.positions.forwards }} / 4
             </h1>
