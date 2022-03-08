@@ -13,7 +13,7 @@ export default {
     teamSelected: 'black',
     invitationDialog: false,
     invitationCardId: null,
-    details: ['2022-03-29', '10:30 - 11:30', 'Albereta'],
+    details: [],
     teamBlack: [
       { team: 'Black' },
       {
@@ -139,6 +139,12 @@ export default {
     setInvitationCardId(state, value) {
       state.invitationCardId = value;
     },
+
+    deletePlayerFromOverviewTeam(state, spotId) {
+      if (state.teamSelected === 'black') {
+        state.matchToOverview.blackTeam[spotId].user = {};
+      } else state.matchToOverview.whiteTeam[spotId].user = {};
+    },
   },
 
   actions: {
@@ -152,6 +158,11 @@ export default {
     async fetchAllMatches({ commit }) {
       const matches = await MatchService.getAllMatches();
       commit('setMatches', matches);
+    },
+
+    async updateMatches({ dispatch, commit, state }) {
+      await dispatch('fetchAllMatches');
+      commit('setFilteredMatches', state.matches);
     },
 
     addFilterMatches({ state, commit }, newFilter) {
@@ -176,7 +187,7 @@ export default {
       commit('setLoading', true);
       commit('setMatchCreated', false);
       await MatchService.createMatch(state.details, state.teamBlack, state.teamWhite)
-        .then(async () => {
+        .then(() => {
           commit('setLoading', false);
           commit('setMatchCreated', true);
           commit('clearMatchTmp');
@@ -189,7 +200,7 @@ export default {
     }) {
       commit('setLoading', true);
       await dispatch('fetchAllMatches');
-      await MatchService.findUserMatches(state.matches, rootGetters['auth/getUser'])
+      await MatchService.findUserMatches(state.matches, rootGetters['auth/getUser'].id)
         .then((res) => {
           commit('setUserMatches', res);
           commit('setLoading', false);
@@ -200,6 +211,16 @@ export default {
       const res = MatchService.findPlayerInsideMatch(state.matchToOverview, rootGetters['auth/getUser'].id);
       if (res.isPresent) commit('setTeamSelected', res.team);
       else commit('setTeamSelected', 'black');
+    },
+
+    async deletePlayerFromMatch({ commit, dispatch, state }, spotId) {
+      commit('setLoading', true);
+      await MatchService.deletePlayerInMatch(state.matchToOverview, state.teamSelected, spotId)
+        .then(async () => {
+          await dispatch('updateMatches');
+          commit('deletePlayerFromOverviewTeam', spotId);
+          commit('setLoading', false);
+        });
     },
   },
 

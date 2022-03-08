@@ -168,10 +168,9 @@ export default {
     return 'forwards';
   },
 
-  findUserMatches(matches, user) {
+  findUserMatches(matches, userId) {
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
-        const userId = user.id;
         let teamBlack = [];
         let teamWhite = [];
         const userMatches = [];
@@ -220,5 +219,27 @@ export default {
       isPresent,
       team,
     };
+  },
+
+  deletePlayerInMatch(match, team, spotId) {
+    const promise = new Promise((resolve) => {
+      window.setTimeout(() => {
+        const matchCopy = JSON.parse(JSON.stringify(match));
+        if (team === 'black') {
+          matchCopy.blackTeam[spotId].user = {};
+          const updatedTeam = {
+            blackTeam: matchCopy.blackTeam,
+          };
+          resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
+        } else {
+          matchCopy.whiteTeam[spotId].user = {};
+          const updatedTeam = {
+            whiteTeam: matchCopy.whiteTeam,
+          };
+          resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
+        }
+      }, 1000);
+    });
+    return promise;
   },
 };

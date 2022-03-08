@@ -49,6 +49,7 @@
                 small
                 text
                 color="red"
+                :disabled=loading
                 @click="dialogDelete = false"
                 >
                   back
@@ -58,6 +59,7 @@
                 dark
                 small
                 color="green"
+                :loading=loading
                 @click="removeFromExistingMatch()"
                 >
                   yes
@@ -151,7 +153,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex';
+import { mapMutations, mapGetters, mapActions } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 /* eslint-disable global-require */
@@ -177,6 +179,7 @@ export default {
       teamSelected: 'matches/getTeamSelected',
       isOverview: 'app/isMatchOverview',
       isCreator: 'app/isCreator',
+      loading: 'matches/getLoading',
     }),
 
     invitationDialog: {
@@ -238,6 +241,7 @@ export default {
 
   methods: {
     ...mapMutations({ removePlayer: 'matches/removePlayer' }),
+    ...mapActions({ deletePlayerFromExistingMatch: 'matches/deletePlayerFromMatch' }),
 
     deletePlayer() {
       /* if i'm creating a match */
@@ -247,9 +251,11 @@ export default {
     },
 
     removeFromExistingMatch() {
-      console.log('remove definitely');
-      /* loading button while deleting the player from match */
-      this.dialogDelete = false;
+      this.deletePlayerFromExistingMatch(this.spot.id).then(() => {
+        /* loading button while deleting the player from match,
+        disabled back button also */
+        this.dialogDelete = false;
+      });
     },
   },
 

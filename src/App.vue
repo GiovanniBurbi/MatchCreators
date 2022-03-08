@@ -10,7 +10,7 @@
     <v-snackbar
      v-model="snackbar"
      color="green"
-     style="z-index: 100"
+     style="z-index: 9000"
      top
      :right="lgAndUp"
      :timeout="3000"
