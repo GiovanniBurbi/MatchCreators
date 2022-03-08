@@ -11,7 +11,7 @@
     <v-divider></v-divider>
 
     <v-card-text
-    :class="['px-2', teamSelected === 'black' ? 'scroll-black' : 'scroll-white']"
+    :class="['px-2 scrollable', teamSelected === 'black' ? 'scroll-black' : 'scroll-white']"
     :style="xsOnly ? 'height:320px' : 'height: 400px;'"
     >
       <v-container fluid class="pt-4 pb-0">
