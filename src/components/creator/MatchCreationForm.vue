@@ -204,14 +204,14 @@
         <div class="d-inline-flex">
 
           <div
-          :class="[xsOnly ? 'px-3' : 'pr-1 pl-2',
+          :class="[xsOnly ? 'px-3' : 'px-1',
           'custom-label deep-purple darken-2',
           'd-inline-flex justify-center align-center elevation-2']"
           >
 
             <h1
             v-if="smAndUp"
-            class="text-button white--text btn-shadow pr-1"
+            class="text-button white--text btn-shadow "
             >
               Location
             </h1>

@@ -1,23 +1,24 @@
 <template>
   <v-card
-  :class="['indigo lighten-5 ma-2 hover']"
+  :class="['ma-2 hover', darkMode ? 'card-color-dark' : 'card-color-light']"
   :elevation="hover ? 12 : 8"
   width="340"
   rounded="lg"
   @click="setOverview(match), setAppSection('match-overview')"
   >
 
-    <v-card-title class="pl-2 pt-2 pb-1 indigo">
+    <v-card-title :class="['pl-2 pt-2 pb-1', darkMode ? 'grey darken-4' : 'indigo']">
       <v-icon
       left
       size="22"
-      color="white"
+      :color="darkMode ? 'indigo lighten-1' : 'white'"
       class="icon-shadow"
       >
         mdi-calendar
       </v-icon>
       <h1
-      :class="['white--text text-shadow font-weight-bold text-subtitle-1']"
+      :class="['text-shadow font-weight-bold text-subtitle-1',
+      darkMode ? 'indigo--text text--lighten-1' : 'white--text']"
       >
         {{ fullDate(this.match.date) }}
       </h1>
@@ -29,12 +30,13 @@
         <v-icon
         left
         size="22"
-        color="indigo"
+        :color="darkMode ? 'white' : 'indigo'"
         >
           mdi-clock-outline
         </v-icon>
         <h1
-        :class="[infoText, 'font-weight-medium']"
+        :class="[darkMode ? 'white--text' : 'grey--text text--darken-4',
+        'font-weight-medium text-subtitle-2']"
         >
           {{ match.startTime }} - {{ match.endTime }}
         </h1>
@@ -43,13 +45,14 @@
       <v-row class="py-1">
         <v-icon
         left
-        color="indigo"
+        :color="darkMode ? 'white' : 'indigo'"
         size="24"
         >
           mdi-map-marker-outline
         </v-icon>
         <h1
-        :class="[infoText, 'font-weight-medium']"
+        :class="[darkMode ? 'white--text' : 'grey--text text--darken-4',
+        'font-weight-medium text-subtitle-2']"
         >
           {{ match.location }}
         </h1>
@@ -57,13 +60,14 @@
 
       <v-row>
         <v-icon
-        class="pl-1 icon-indigo"
+        :class="['pl-1', darkMode ? 'icon-white' : 'icon-indigo']"
         size="23"
         >
           $player-icon
         </v-icon>
         <h1
-        :class="[infoText, 'font-weight-regular pl-2']"
+        :class="[darkMode ? 'white--text' : 'grey--text text--darken-4',
+        'font-weight-regular text-subtitle-2 pl-2']"
         >
           Participants:
         </h1>
@@ -75,7 +79,8 @@
           <v-row justify="center">
             <v-icon
             size="34"
-            :class="[gkFilled ? 'filled-pos' : null]"
+            :class="[gkFilled ? 'filled-pos' : null,
+            darkMode ? 'icon-white' : '']"
             >
               $goalkeeper-icon
             </v-icon>
@@ -95,7 +100,8 @@
           <v-row justify="center">
             <v-icon
             size="34"
-            :class="[defFilled ? 'filled-pos' : null]"
+            :class="[defFilled ? 'filled-pos' : null,
+            darkMode ? 'icon-white' : '']"
             >
               $defender-icon
             </v-icon>
@@ -115,7 +121,8 @@
           <v-row justify="center">
             <v-icon
             size="42"
-            :class="['pb-1', fwFilled ? 'filled-pos' : null]"
+            :class="['pb-1', fwFilled ? 'filled-pos' : null,
+            darkMode ? 'icon-white' : '']"
             >
               $forward-icon
             </v-icon>
@@ -244,5 +251,11 @@ export default {
 .hover:hover {
   transform: scale(1.05);
   cursor: pointer;
+}
+.card-color-dark {
+  background: rgba(0, 0, 0, 0.6);
+}
+.card-color-light {
+  background: rgba(255, 255, 255, 0.7);
 }
 </style>

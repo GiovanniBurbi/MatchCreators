@@ -53,8 +53,7 @@ export default {
 
   computed: {
     isTeamWhite() {
-      const type = this.team[0].team;
-      if (type === 'Black') return false;
+      if (this.team[0].team === 'Black') return false;
       return true;
     },
   },
