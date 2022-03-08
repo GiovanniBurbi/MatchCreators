@@ -197,4 +197,28 @@ export default {
     });
     return promise;
   },
+
+  findPlayerInsideMatch(match, playerId) {
+    let isPresent = false;
+    let team = '';
+    for (let i = 1; i <= this.teamSize; i += 1) {
+      if (!this.isEmpty(match.blackTeam[i].user)) {
+        if (match.blackTeam[i].user.id === playerId) {
+          isPresent = true;
+          team = 'black';
+          break;
+        }
+      } else if (!this.isEmpty(match.whiteTeam[i].user)) {
+        if (match.whiteTeam[i].user.id === playerId) {
+          isPresent = true;
+          team = 'white';
+          break;
+        }
+      }
+    }
+    return {
+      isPresent,
+      team,
+    };
+  },
 };

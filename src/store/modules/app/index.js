@@ -4,6 +4,7 @@ export default {
   state: {
     mode: '',
     section: '',
+    overview: false,
   },
 
   mutations: {
@@ -17,6 +18,9 @@ export default {
       if (state.section !== section) {
         state.section = section;
       }
+    },
+    setOverview(state, value) {
+      state.overview = value;
     },
   },
 
@@ -44,8 +48,7 @@ export default {
     },
 
     isMatchOverview(state) {
-      if (state.section === 'match-overview') return true;
-      return false;
+      return state.overview;
     },
   },
 };

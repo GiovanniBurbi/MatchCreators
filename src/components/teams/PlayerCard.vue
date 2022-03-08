@@ -25,7 +25,7 @@
             <v-icon class="shadow" :x-small="xsOnly">mdi-close</v-icon>
           </v-btn>
 
-         <!--  <v-dialog
+          <v-dialog
           v-model="dialogDelete"
           max-width="290"
           persistent
@@ -34,7 +34,7 @@
               <v-card-text class="pt-3 pb-2">
                 <h1
                 :class="['text-subtitle-1 font-weight-regular',
-                darkMode ? '' : 'grey--text text--darken-3']"
+                {'grey--text text--darken-3': !darkMode}]"
                 >
                   Do you want to leave this match?
                 </h1>
@@ -58,14 +58,14 @@
                 dark
                 small
                 color="green"
-                @click="dialogDelete = false"
+                @click="removeFromExistingMatch()"
                 >
                   yes
                 </v-btn>
               </v-card-actions>
             </v-card>
 
-          </v-dialog> -->
+          </v-dialog>
 
         </div>
 
@@ -160,7 +160,7 @@ export default {
 
   data() {
     return {
-      /* dialogDelete: false, */
+      dialogDelete: false,
     };
   },
 
@@ -243,15 +243,13 @@ export default {
       /* if i'm creating a match */
       if (!this.isOverview) {
         this.removePlayer(this.spot.id);
-      }
-      /* if (this.builder) {
-        this.removePlayer({
-          isWhite: this.teamSelected === 'white',
-          spot: this.player.id,
-        });
-      } else {
-        this.dialogDelete = true;
-      } */
+      } else this.dialogDelete = true;
+    },
+
+    removeFromExistingMatch() {
+      console.log('remove definitely');
+      /* loading button while deleting the player from match */
+      this.dialogDelete = false;
     },
   },
 

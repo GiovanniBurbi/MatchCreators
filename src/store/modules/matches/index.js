@@ -195,6 +195,12 @@ export default {
           commit('setLoading', false);
         });
     },
+
+    selectTeamBasedOnUser({ state, commit, rootGetters }) {
+      const res = MatchService.findPlayerInsideMatch(state.matchToOverview, rootGetters['auth/getUser'].id);
+      if (res.isPresent) commit('setTeamSelected', res.team);
+      else commit('setTeamSelected', 'black');
+    },
   },
 
   getters: {

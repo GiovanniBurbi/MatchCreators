@@ -14,7 +14,7 @@
           :x-large="mdAndUp"
           :large="smAndDown"
           dark
-          @click="setAppSection('')"
+          @click="setOverview(false)"
           >
             <v-icon>mdi-arrow-left</v-icon>
             <span>back</span>
@@ -189,7 +189,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import DataHelper from '@/mixins/DataHelper';
 import Field from '../teams/Field.vue';
@@ -232,8 +232,13 @@ export default {
   methods: {
     ...mapMutations({
       resetMatchOverview: 'matches/setMatchToOverview',
-      setAppSection: 'app/setAppSection',
+      setOverview: 'app/setOverview',
     }),
+    ...mapActions({ selectTeamWithUser: 'matches/selectTeamBasedOnUser' }),
+  },
+
+  created() {
+    this.selectTeamWithUser();
   },
 
   destroyed() {

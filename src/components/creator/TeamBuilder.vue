@@ -11,6 +11,7 @@
     <v-dialog
     v-model="invitationDialog"
     :max-width="xsOnly ? 320 : 400"
+    style="z-index: 2000"
     scrollable
     transition="scale-transition"
     >

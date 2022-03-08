@@ -4,7 +4,7 @@
   :elevation="hover ? 12 : 8"
   width="340"
   rounded="lg"
-  @click="setOverview(match), setAppSection('match-overview')"
+  @click="setMatchOverview(match), setOverview(true)"
   >
 
     <v-card-title :class="['pl-2 pt-2 pb-1', darkMode ? 'grey darken-4' : 'indigo']">
@@ -228,8 +228,8 @@ export default {
 
   methods: {
     ...mapMutations({
-      setOverview: 'matches/setMatchToOverview',
-      setAppSection: 'app/setAppSection',
+      setMatchOverview: 'matches/setMatchToOverview',
+      setOverview: 'app/setOverview',
     }),
   },
 
