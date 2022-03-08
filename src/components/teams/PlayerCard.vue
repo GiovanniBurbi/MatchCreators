@@ -45,7 +45,7 @@
                 <v-spacer></v-spacer>
 
                 <v-btn
-                dark
+                :dark="darkMode"
                 small
                 text
                 color="red"
