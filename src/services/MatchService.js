@@ -178,12 +178,15 @@ export default {
           teamBlack = matches[i].blackTeam;
           teamWhite = matches[i].whiteTeam;
           for (let j = 1; j <= this.teamSize; j += 1) {
+            /* search in teams */
             if (!this.isEmpty(teamBlack[j].user)) {
               if (teamBlack[j].user.id === userId) {
                 userMatches.push(matches[i]);
                 break;
               }
-            } else if (!this.isEmpty(teamWhite[j].user)) {
+            }
+
+            if (!this.isEmpty(teamWhite[j].user)) {
               if (teamWhite[j].user.id === userId) {
                 userMatches.push(matches[i]);
                 break;
@@ -201,13 +204,16 @@ export default {
     let isPresent = false;
     let team = '';
     for (let i = 1; i <= this.teamSize; i += 1) {
+      /* search in teams */
       if (!this.isEmpty(match.blackTeam[i].user)) {
         if (match.blackTeam[i].user.id === playerId) {
           isPresent = true;
           team = 'black';
           break;
         }
-      } else if (!this.isEmpty(match.whiteTeam[i].user)) {
+      }
+
+      if (!this.isEmpty(match.whiteTeam[i].user)) {
         if (match.whiteTeam[i].user.id === playerId) {
           isPresent = true;
           team = 'white';
