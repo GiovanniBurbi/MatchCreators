@@ -244,7 +244,7 @@ export default {
           };
           resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
         }
-      }, 1000);
+      }, 500);
     });
     return promise;
   },

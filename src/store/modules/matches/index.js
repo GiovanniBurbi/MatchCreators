@@ -207,6 +207,13 @@ export default {
         });
     },
 
+    async updateUserMatches({ state, commit, rootGetters }) {
+      await MatchService.findUserMatches(state.matches, rootGetters['auth/getUser'].id)
+        .then((res) => {
+          commit('setUserMatches', res);
+        });
+    },
+
     selectTeamBasedOnUser({ state, commit, rootGetters }) {
       const res = MatchService.findPlayerInsideMatch(state.matchToOverview, rootGetters['auth/getUser'].id);
       if (res.isPresent) commit('setTeamSelected', res.team);
@@ -218,6 +225,7 @@ export default {
       await MatchService.deletePlayerInMatch(state.matchToOverview, state.teamSelected, spotId)
         .then(async () => {
           await dispatch('updateMatches');
+          await dispatch('updateUserMatches');
           commit('deletePlayerFromOverviewTeam', spotId);
           commit('setLoading', false);
         });
