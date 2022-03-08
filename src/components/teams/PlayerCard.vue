@@ -83,7 +83,7 @@
           <h1
           :class="['text-center font-weight-light',
           xsOnly ? 'text-caption' : 'text-subtitle-1 pb-4',
-          white ? '' : 'white--text']"
+          {'white--text': teamSelected === 'black'}]"
           >
             {{ player.user.username }}
           </h1>
@@ -91,15 +91,16 @@
 
         <v-row>
           <v-divider
-          :class="['divide', white ? 'divide-opacity' : '',
-          xsOnly ? 'divide-spacing' : '']"
+          :class="['divide',
+          {'divide-opacity': teamSelected === 'white'},
+          {'divide-spacing': xsOnly}]"
           style="border-color: grey !important"
           ></v-divider>
         </v-row>
 
         <v-row justify="center">
           <v-icon
-          :class="[white ? null : 'white-icon',
+          :class="[{'icon-white': teamSelected === 'black'},
           xsOnly ? 'pb-1' : 'pb-6']"
           :size="iconSize"
           >
@@ -120,7 +121,7 @@
           fab
           outlined
           :x-small="xsOnly"
-          :dark="!white"
+          :dark="teamSelected === 'black'"
           @click.stop="dialog = true"
           >
 
@@ -140,7 +141,6 @@
           >
 
             <player-selection
-            :white="white"
             :reset="!dialog"
             :cardId="player.id"
             @closeDialog="dialog = false" />
@@ -150,7 +150,8 @@
 
         <v-row justify="center">
           <v-icon
-          :class="['pt-0', white ? null : 'white-icon']"
+          :class="['pt-0',
+          {'icon-white': teamSelected === 'black'}]"
           :size="iconSize"
           >
             {{ positionIcon }}
@@ -183,16 +184,25 @@ export default {
     PlayerSelection,
   },
 
+  props: {
+    position: {
+      type: String,
+    },
+    player: {
+      type: Object,
+    },
+  },
+
   computed: {
     ...mapGetters({
       user: 'auth/getUser',
       darkMode: 'theme/getDarkMode',
+      teamSelected: 'matches/getTeamSelected',
     }),
 
     getCard() {
-      if (this.white) {
-        return require('@/assets/teamCreator/white-card.png');
-      } return require('@/assets/teamCreator/black-card.png');
+      if (this.teamSelected === 'white') return require('@/assets/teamCreator/white-card.png');
+      return require('@/assets/teamCreator/black-card.png');
     },
 
     getPicture() {
@@ -227,25 +237,13 @@ export default {
     },
   },
 
-  props: {
-    white: {
-      type: Boolean,
-    },
-    position: {
-      type: String,
-    },
-    player: {
-      type: Object,
-    },
-  },
-
   methods: {
     ...mapMutations({ removePlayer: 'matches/removePlayer' }),
 
     deletePlayer() {
       if (this.builder) {
         this.removePlayer({
-          isWhite: this.white,
+          isWhite: this.teamSelected === 'white',
           spot: this.player.id,
         });
       } else {
@@ -279,10 +277,6 @@ export default {
   position: absolute;
   width: 80px;
   height: 110px;
-}
-.white-icon {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg) brightness(122%) contrast(100%);
 }
 .close-button {
   position: absolute;

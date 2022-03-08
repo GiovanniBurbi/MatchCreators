@@ -74,7 +74,7 @@ export default {
     },
 
     addPlayer(state, payload) {
-      if (payload.isWhite) {
+      if (state.teamSelected === 'white') {
         state.teamWhite[payload.spot].user = payload.user;
       } else {
         state.teamBlack[payload.spot].user = payload.user;

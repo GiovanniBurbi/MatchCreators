@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import PlayersCardsGroup from './PlayersCardsGroup.vue';
 import TeamSwitcher from './TeamSwitcher.vue';
@@ -57,14 +57,6 @@ export default {
 
   computed: {
     ...mapGetters({ teamSelected: 'matches/getTeamSelected' }),
-  },
-
-  methods: {
-    ...mapActions({ fetchAllUsers: 'users/fetchAllUsers' }),
-  },
-
-  created() {
-    this.fetchAllUsers();
   },
 
   mixins: [BreakpointsCond],
