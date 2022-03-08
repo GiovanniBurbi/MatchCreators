@@ -114,5 +114,14 @@ export default {
     fullDate(date) {
       return date ? format(parseISO(date), 'EEEE, d MMMM yyyy') : '';
     },
+
+    positionIcon(position) {
+      if (position === 'Goalkeeper') {
+        return '$goalkeeper-icon';
+      }
+      if (position === 'Defender') {
+        return '$defender-icon';
+      } return '$forward-icon';
+    },
   },
 };

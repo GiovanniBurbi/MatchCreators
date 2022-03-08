@@ -117,6 +117,7 @@
 /* eslint-disable global-require */
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
+import DataHelper from '@/mixins/DataHelper';
 
 export default {
   name: 'PlayerSelection',
@@ -159,7 +160,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ getUsers: 'users/getUsers' }),
+    ...mapGetters({
+      users: 'users/getUsers',
+      loading: 'users/getLoading',
+    }),
 
     posIconSize() {
       if (this.$vuetify.breakpoint.name === 'xs') {
@@ -176,27 +180,14 @@ export default {
 
   methods: {
     ...mapMutations({ invitePlayer: 'matches/addPlayer' }),
-    ...mapActions({ validateAddition: 'matches/inviteValidation' }),
+    ...mapActions({
+      validateAddition: 'matches/inviteValidation',
+      fetchUsers: 'users/fetchAllUsers',
+    }),
 
     getPicture(path) {
       // eslint-disable-next-line import/no-dynamic-require
       return require(`@/${path}`);
-    },
-
-    positionIcon(position) {
-      if (position === 'Goalkeeper') {
-        return '$goalkeeper-icon';
-      }
-      if (position === 'Defender') {
-        return '$defender-icon';
-      } return '$forward-icon';
-    },
-
-    getAge(birthday) {
-      const bday = new Date(birthday);
-      const ageDiffMs = Date.now() - bday.getTime();
-      const ageDate = new Date(ageDiffMs);
-      return Math.abs(ageDate.getUTCFullYear() - 1970);
     },
 
     onResize() {
@@ -232,14 +223,14 @@ export default {
   },
 
   created() {
-    this.users = this.getUsers;
+    this.fetchUsers();
   },
 
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize);
   },
 
-  mixins: [BreakpointsCond],
+  mixins: [BreakpointsCond, DataHelper],
 };
 
 </script>

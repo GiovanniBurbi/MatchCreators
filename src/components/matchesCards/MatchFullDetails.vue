@@ -9,12 +9,12 @@
 
         <v-row>
           <v-btn
-          :class="mdAndUp ? 'pl-6' : 'pl-4'"
+          :class="[mdAndUp ? 'pl-6' : 'pl-4', 'btn-icon-shadow']"
           plain
           :x-large="mdAndUp"
           :large="smAndDown"
           dark
-          @click="resetMatchOverview({}), setAppSection('')"
+          @click="setAppSection('')"
           >
             <v-icon>mdi-arrow-left</v-icon>
             <span>back</span>
@@ -24,8 +24,8 @@
 
         <v-row justify="center" class="pb-2 mt-0">
           <h1
-          :class="['title white--text',
-          smAndUp ? 'text-h4' : 'text-h5 font-weight-medium']"
+          :class="['header white--text',
+          smAndUp ? 'text-h4 font-weight-medium' : 'text-h5 font-weight-medium']"
           >
             Match Overview
           </h1>
@@ -37,7 +37,7 @@
 
     <v-card-text :class="['px-0 card-content', dark ? 'dark overview' : 'light overview-light']">
 
-      <div :class="mdAndDown ? 'padding-info-small' : 'info-padding'">
+      <div class="px-3">
 
         <v-row justify="center" class="mt-0">
 
@@ -104,7 +104,7 @@
 
         <v-divider dark class="mt-4 mb-6" style="width: 80%; margin:0 auto;"></v-divider>
 
-        <v-row justify="center" class="pb-4">
+        <v-row justify="center" :class="[{'px-2': xsOnly}, 'pb-4']">
 
           <v-col :class="{'ml-1': xsOnly}">
             <v-row justify="center" :class="xsOnly ? 'pr-9' : 'pr-16'">
@@ -129,7 +129,7 @@
 
             </v-row>
 
-            <v-row justify="center" :class="xsOnly ? '' : 'pr-3'">
+            <v-row justify="center" :class="xsOnly ? 'mt-2 pr-10' : 'mt-2 pr-3'">
               <div>
                 <h1
                 :class="['text-shadow', secondaryTextSize]"
@@ -148,7 +148,7 @@
 
               <div style="white-space:nowrap;" class="d-inline-flex">
                 <v-icon
-                class="icon-shadow white-icon pt-1"
+                class="icon-white-shadow pt-1"
                 :size="iconSize - 1"
                 >
                   $player-icon
@@ -162,7 +162,7 @@
 
             </v-row>
 
-            <v-row justify="center" :class="xsOnly ? 'pl-16' : 'ml-16'">
+            <v-row justify="center" :class="xsOnly ? 'mt-2 pl-16' : 'mt-2 ml-16'">
               <div>
                 <h1
                 :class="['text-shadow', secondaryTextSize]"
@@ -189,7 +189,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import DataHelper from '@/mixins/DataHelper';
 import Field from '../teams/Field.vue';
@@ -230,22 +230,14 @@ export default {
   },
 
   methods: {
-    getAge(birthday) {
-      const bday = new Date(birthday);
-      const ageDiffMs = Date.now() - bday.getTime();
-      const ageDate = new Date(ageDiffMs);
-      return Math.abs(ageDate.getUTCFullYear() - 1970);
-    },
-
-    ...mapActions({ fetchAllUsers: 'users/fetchAllUsers' }),
     ...mapMutations({
       resetMatchOverview: 'matches/setMatchToOverview',
       setAppSection: 'app/setAppSection',
     }),
   },
 
-  created() {
-    this.fetchAllUsers();
+  destroyed() {
+    this.resetMatchOverview('');
   },
 
   mixins: [BreakpointsCond, DataHelper],
@@ -259,56 +251,32 @@ export default {
   overflow-x:hidden;
 }
 .light {
-  background: rgba(0, 0, 0, 0.4);
-  /* background:linear-gradient(to bottom,rgba(0, 0, 0, 0.7),
-  rgba(0, 0, 0, 0.2)); */
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.5),
+  rgba(0, 0, 0, 0.3));
 }
 .dark {
-  background: rgba(0, 0, 0, 0.7);
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.7),
+  rgba(0, 0, 0, 0.3));
 }
 h1 {
   white-space: nowrap;
   cursor: default;
 }
-h1, .icon-shadow {
-  text-shadow: 2px 2px black;
-}
-.white-icon {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
-  brightness(122%) contrast(100%) drop-shadow(2px 2px black);
-}
-.title {
-  /* border-bottom: 1px solid white; */
-  cursor: default;
-}
-.info-padding {
-  /* padding: 0 8vw 0; */
-}
-.padding-info-small {
-  padding: 0 4vw 0;
-}
-.text-shadow {
-  text-shadow: 1px 1px black;
-}
 /* width */
 ::-webkit-scrollbar {
   width: 6px;
 }
-
 /* Track */
 .overview::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
 
 }
-
 /* Handle */
 .overview::-webkit-scrollbar-thumb {
   background: #424242;
   border-radius: 16px;
 }
-
 /* Handle on hover */
 .overview::-webkit-scrollbar-thumb:hover {
   background: #3F51B5;
