@@ -1,33 +1,23 @@
 <template>
   <v-container fluid class="formation">
 
-    <div class="row-1">
+    <div class="row-fw">
       <player-card
-      :player="team[5]"
-      :white="isTeamWhite"
-      :position="'Forward'" />
+      :spot="team[5]" />
       <player-card
-      :player="team[4]"
-      :white="isTeamWhite"
-      :position="'Forward'" />
+      :spot="team[4]" />
     </div>
 
-    <div class="row-2">
+    <div class="row-def">
       <player-card
-      :player="team[3]"
-      :white="isTeamWhite"
-      :position="'Defender'" />
+      :spot="team[3]" />
       <player-card
-      :player="team[2]"
-      :white="isTeamWhite"
-      :position="'Defender'" />
+      :spot="team[2]" />
     </div>
 
-    <div class="row-3">
+    <div class="row-gk">
       <player-card
-      :player="team[1]"
-      :white="isTeamWhite"
-      :position="'Goalkeeper'" />
+      :spot="team[1]" />
     </div>
 
   </v-container>
@@ -67,7 +57,7 @@ export default {
   margin-top: 10px;
   height: 90%;
 }
-.row-1 {
+.row-fw {
   height: 33.3%;
   width: 30%;
   margin: 0 auto;
@@ -75,7 +65,7 @@ export default {
   align-items: center;
   justify-content: space-around;
 }
-.row-2 {
+.row-def {
   height: 33.4%;
   width: 60%;
   margin: 0 auto;
@@ -83,7 +73,7 @@ export default {
   align-items: center;
   justify-content: space-around;
 }
-.row-3 {
+.row-gk {
   height: 33.3%;
   width: 100%;
   display: flex;
@@ -92,18 +82,18 @@ export default {
 }
 
 @media screen and (max-width: 430px) {
-  .row-2 {
+  .row-def {
     max-width: 40%;
   }
-  .row-1 {
+  .row-gk {
     max-width: 24%;
   }
 }
 @media screen and (max-width: 300px) {
-  .row-2 {
+  .row-def {
     max-width: 34%;
   }
-  .row-1 {
+  .row-gk {
     max-width: 20%;
   }
 }

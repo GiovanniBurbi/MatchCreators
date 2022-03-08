@@ -14,7 +14,7 @@
         <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
 
           <v-btn
-          v-if="!isOverview || user.id === player.user.id"
+          v-if="!isOverview || user.id === spot.user.id"
           style="z-index: 1000;"
           x-small
           :width="xsOnly ? 20 : null"
@@ -25,7 +25,7 @@
             <v-icon class="shadow" :x-small="xsOnly">mdi-close</v-icon>
           </v-btn>
 
-          <v-dialog
+         <!--  <v-dialog
           v-model="dialogDelete"
           max-width="290"
           persistent
@@ -65,7 +65,7 @@
               </v-card-actions>
             </v-card>
 
-          </v-dialog>
+          </v-dialog> -->
 
         </div>
 
@@ -85,7 +85,7 @@
           xsOnly ? 'text-caption' : 'text-subtitle-1 pb-4',
           {'white--text': teamSelected === 'black'}]"
           >
-            {{ player.user.username }}
+            {{ spot.user.username }}
           </h1>
         </v-row>
 
@@ -160,15 +160,12 @@ export default {
 
   data() {
     return {
-      dialogDelete: false,
+      /* dialogDelete: false, */
     };
   },
 
   props: {
-    position: {
-      type: String,
-    },
-    player: {
+    spot: {
       type: Object,
     },
   },
@@ -179,6 +176,7 @@ export default {
       darkMode: 'theme/getDarkMode',
       teamSelected: 'matches/getTeamSelected',
       isOverview: 'app/isMatchOverview',
+      isCreator: 'app/isCreator',
     }),
 
     invitationDialog: {
@@ -188,9 +186,15 @@ export default {
       set(value) {
         this.$store.commit('matches/setInvitationDialog', value);
         if (value) {
-          this.$store.commit('matches/setInvitationCardId', this.player.id);
+          this.$store.commit('matches/setInvitationCardId', this.spot.id);
         }
       },
+    },
+
+    position() {
+      if (this.spot.id === 1) return 'Goalkeeper';
+      if (this.spot.id === 2 || this.spot.id === 3) return 'Defender';
+      return 'Forward';
     },
 
     getCard() {
@@ -202,7 +206,7 @@ export default {
 
     getPicture() {
       // eslint-disable-next-line import/no-dynamic-require
-      return require(`@/${this.player.user.picture}`);
+      return require(`@/${this.spot.user.picture}`);
     },
 
     positionIcon() {
@@ -226,7 +230,7 @@ export default {
     },
 
     spotTaken() {
-      if (Object.keys(this.player.user).length === 0) {
+      if (Object.keys(this.spot.user).length === 0) {
         return false;
       } return true;
     },
@@ -236,14 +240,18 @@ export default {
     ...mapMutations({ removePlayer: 'matches/removePlayer' }),
 
     deletePlayer() {
-      if (this.builder) {
+      /* if i'm creating a match */
+      if (!this.isOverview) {
+        this.removePlayer(this.spot.id);
+      }
+      /* if (this.builder) {
         this.removePlayer({
           isWhite: this.teamSelected === 'white',
           spot: this.player.id,
         });
       } else {
         this.dialogDelete = true;
-      }
+      } */
     },
   },
 

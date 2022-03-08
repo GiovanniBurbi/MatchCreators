@@ -93,11 +93,11 @@ export default {
       state.teamBlack[pos].user = user;
     },
 
-    removePlayer(state, payload) {
-      if (payload.isWhite) {
-        state.teamWhite[payload.spot].user = {};
+    removePlayer(state, spot) {
+      if (state.teamSelected === 'white') {
+        state.teamWhite[spot].user = {};
       } else {
-        state.teamBlack[payload.spot].user = {};
+        state.teamBlack[spot].user = {};
       }
     },
 
