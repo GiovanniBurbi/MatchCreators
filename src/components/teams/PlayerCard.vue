@@ -13,8 +13,8 @@
 
         <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
 
-          <!-- v-if="builder || user.id === player.user.id" -->
           <v-btn
+          v-if="!isOverview || user.id === player.user.id"
           style="z-index: 1000;"
           x-small
           :width="xsOnly ? 20 : null"
@@ -122,7 +122,7 @@
           outlined
           :x-small="xsOnly"
           :dark="teamSelected === 'black'"
-          @click.stop="dialog = true"
+          @click.stop="invitationDialog = true"
           >
 
             <v-icon
@@ -132,20 +132,6 @@
             </v-icon>
 
           </v-btn>
-
-          <v-dialog
-          v-model="dialog"
-          :max-width="xsOnly ? 320 : 400"
-          scrollable
-          transition="scale-transition"
-          >
-
-            <player-selection
-            :reset="!dialog"
-            :cardId="player.id"
-            @closeDialog="dialog = false" />
-
-          </v-dialog>
         </v-row>
 
         <v-row justify="center">
@@ -167,7 +153,6 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
-import PlayerSelection from './PlayerSelection.vue';
 
 /* eslint-disable global-require */
 export default {
@@ -175,13 +160,8 @@ export default {
 
   data() {
     return {
-      dialog: false,
       dialogDelete: false,
     };
-  },
-
-  components: {
-    PlayerSelection,
   },
 
   props: {
@@ -198,10 +178,25 @@ export default {
       user: 'auth/getUser',
       darkMode: 'theme/getDarkMode',
       teamSelected: 'matches/getTeamSelected',
+      isOverview: 'app/isMatchOverview',
     }),
 
+    invitationDialog: {
+      get() {
+        return this.$store.state.matches.invitationDialog;
+      },
+      set(value) {
+        this.$store.commit('matches/setInvitationDialog', value);
+        if (value) {
+          this.$store.commit('matches/setInvitationCardId', this.player.id);
+        }
+      },
+    },
+
     getCard() {
-      if (this.teamSelected === 'white') return require('@/assets/teamCreator/white-card.png');
+      if (this.teamSelected === 'white') {
+        return require('@/assets/teamCreator/white-card.png');
+      }
       return require('@/assets/teamCreator/black-card.png');
     },
 

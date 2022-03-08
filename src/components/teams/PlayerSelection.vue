@@ -11,7 +11,7 @@
     <v-divider></v-divider>
 
     <v-card-text
-    class="px-2"
+    class="px-2 scrollable"
     :style="xsOnly ? 'height:320px' : 'height: 400px;'"
     >
       <v-container fluid class="pt-4 pb-0">
@@ -147,35 +147,12 @@ export default {
     };
   },
 
-  props: {
-    reset: {
-      type: Boolean,
-      required: true,
-    },
-    cardId: {
-      type: Number,
-      required: true,
-    },
-  },
-
-  watch: {
-    windowWidth(newVal) {
-      this.windowWidth = newVal;
-    },
-
-    reset(newVal) {
-      if (newVal) {
-        this.selection = '';
-        this.error = false;
-      }
-    },
-  },
-
   computed: {
     ...mapGetters({
       users: 'users/getUsers',
       loading: 'users/getLoading',
       teamSelected: 'matches/getTeamSelected',
+      invitationDialog: 'matches/getInvitationDialog',
     }),
 
     posIconSize() {
@@ -189,8 +166,25 @@ export default {
     },
   },
 
+  watch: {
+    windowWidth(newVal) {
+      this.windowWidth = newVal;
+    },
+
+    invitationDialog(newVal) {
+      if (!newVal) {
+        this.selection = '';
+        this.error = false;
+        document.getElementsByClassName('scrollable')[0].scrollTop = 0;
+      }
+    },
+  },
+
   methods: {
-    ...mapMutations({ invitePlayer: 'matches/addPlayer' }),
+    ...mapMutations({
+      invitePlayer: 'matches/addPlayer',
+      setInvitationDialog: 'matches/setInvitationDialog',
+    }),
     ...mapActions({
       validateAddition: 'matches/inviteValidation',
       fetchUsers: 'users/fetchAllUsers',
@@ -217,12 +211,8 @@ export default {
       vuex actions. */
       this.validateAddition(userSelected.id).then((val) => {
         if (val) {
-          const payload = {
-            spot: this.cardId,
-            user: userSelected,
-          };
-          this.invitePlayer(payload);
-          this.$emit('closeDialog');
+          this.invitePlayer(userSelected);
+          this.setInvitationDialog(false);
         } else this.error = true;
       });
     },

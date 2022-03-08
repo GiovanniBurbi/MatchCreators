@@ -11,6 +11,8 @@ export default {
     loading: false,
     matchCreated: false,
     teamSelected: 'black',
+    invitationDialog: false,
+    invitationCardId: null,
     details: ['2022-03-29', '10:30 - 11:30', 'Albereta'],
     teamBlack: [
       { team: 'Black' },
@@ -73,11 +75,11 @@ export default {
       state.details = details.slice();
     },
 
-    addPlayer(state, payload) {
+    addPlayer(state, user) {
       if (state.teamSelected === 'white') {
-        state.teamWhite[payload.spot].user = payload.user;
+        state.teamWhite[state.invitationCardId].user = user;
       } else {
-        state.teamBlack[payload.spot].user = payload.user;
+        state.teamBlack[state.invitationCardId].user = user;
       }
     },
 
@@ -127,6 +129,15 @@ export default {
 
     setTeamSelected(state, team) {
       if (state.teamSelected !== team) state.teamSelected = team;
+    },
+
+    setInvitationDialog(state, value) {
+      state.invitationDialog = value;
+      if (!value) state.invitationCardId = null;
+    },
+
+    setInvitationCardId(state, value) {
+      state.invitationCardId = value;
     },
   },
 
@@ -235,6 +246,14 @@ export default {
 
     getTeamSelected(state) {
       return state.teamSelected;
+    },
+
+    getInvitationDialog(state) {
+      return state.invitationDialog;
+    },
+
+    getInvitationCardId(state) {
+      return state.invitationCardId;
     },
   },
 };

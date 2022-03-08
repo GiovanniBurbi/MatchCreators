@@ -65,7 +65,7 @@
 
               <details-recap
               v-if="!xsOnly"
-              class="infos"
+              class="infos pt-8"
               />
 
               <v-row justify="center" :class="xsOnly ? 'pt-8 pb-6' : 'pt-12 pb-4'">

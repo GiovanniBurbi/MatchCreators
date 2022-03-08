@@ -8,6 +8,17 @@
       />
     </v-row>
 
+    <v-dialog
+    v-model="invitationDialog"
+    :max-width="xsOnly ? 320 : 400"
+    scrollable
+    transition="scale-transition"
+    >
+
+      <player-selection />
+
+    </v-dialog>
+
   </v-container>
 </template>
 
@@ -15,9 +26,15 @@
 import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import Field from '../teams/Field.vue';
+import PlayerSelection from '../teams/PlayerSelection.vue';
 
 export default {
   name: 'TeamBuilder',
+
+  components: {
+    Field,
+    PlayerSelection,
+  },
 
   computed: {
     ...mapGetters({
@@ -25,14 +42,19 @@ export default {
       teamBlack: 'matches/getTeamBlack',
       teamWhite: 'matches/getTeamWhite',
     }),
+
+    invitationDialog: {
+      get() {
+        return this.$store.state.matches.invitationDialog;
+      },
+      set(value) {
+        this.$store.commit('matches/setInvitationDialog', value);
+      },
+    },
   },
 
   methods: {
     ...mapMutations({ addUser: 'matches/addUser' }),
-  },
-
-  components: {
-    Field,
   },
 
   mounted() {
