@@ -202,6 +202,10 @@ export default {
   filter: invert(26%) sepia(55%) saturate(2295%) hue-rotate(217deg)
   brightness(90%) contrast(83%);
 }
+.icon-indigo-lighten1 {
+  /* indigo lighten-1 */
+  filter: invert(42%) sepia(80%) saturate(420%) hue-rotate(194deg) brightness(85%) contrast(88%);
+}
 .icon-white {
   /* white */
   filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)

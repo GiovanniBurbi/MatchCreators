@@ -11,14 +11,13 @@
       <v-icon
       left
       size="22"
-      :color="darkMode ? 'indigo lighten-1' : 'white'"
+      color="white"
       class="icon-shadow"
       >
         mdi-calendar
       </v-icon>
       <h1
-      :class="['text-shadow font-weight-bold text-subtitle-1',
-      darkMode ? 'indigo--text text--lighten-1' : 'white--text']"
+      class="white--text text-shadow font-weight-bold text-subtitle-1"
       >
         {{ fullDate(this.match.date) }}
       </h1>
@@ -30,7 +29,7 @@
         <v-icon
         left
         size="22"
-        :color="darkMode ? 'white' : 'indigo'"
+        color="indigo lighten-1"
         >
           mdi-clock-outline
         </v-icon>
@@ -45,7 +44,7 @@
       <v-row class="py-1">
         <v-icon
         left
-        :color="darkMode ? 'white' : 'indigo'"
+        color="indigo lighten-1"
         size="24"
         >
           mdi-map-marker-outline
@@ -60,7 +59,7 @@
 
       <v-row>
         <v-icon
-        :class="['pl-1', darkMode ? 'icon-white' : 'icon-indigo']"
+        class="pl-1 icon-indigo-lighten1"
         size="23"
         >
           $player-icon
@@ -79,7 +78,8 @@
           <v-row justify="center">
             <v-icon
             size="34"
-            :class="[gkFilled ? 'filled-pos' : null,
+            :class="[gkFilled && !darkMode ? 'filled-pos' : null,
+            gkFilled && darkMode ? 'filled-pos-dark' : null,
             darkMode ? 'icon-white' : '']"
             >
               $goalkeeper-icon
@@ -100,7 +100,8 @@
           <v-row justify="center">
             <v-icon
             size="34"
-            :class="[defFilled ? 'filled-pos' : null,
+            :class="[defFilled && !darkMode ? 'filled-pos' : null,
+            defFilled && darkMode ? 'filled-pos-dark' : null,
             darkMode ? 'icon-white' : '']"
             >
               $defender-icon
@@ -121,7 +122,8 @@
           <v-row justify="center">
             <v-icon
             size="42"
-            :class="['pb-1', fwFilled ? 'filled-pos' : null,
+            :class="['pb-1', fwFilled && !darkMode ? 'filled-pos' : null,
+            fwFilled && darkMode ? 'filled-pos-dark' : null,
             darkMode ? 'icon-white' : '']"
             >
               $forward-icon
@@ -237,6 +239,9 @@ export default {
 
 <style scoped>
 .filled-pos {
+  opacity: 40%;
+}
+.filled-pos-dark {
   opacity: 20%;
 }
 .overlay {
@@ -253,9 +258,9 @@ export default {
   cursor: pointer;
 }
 .card-color-dark {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
 }
 .card-color-light {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
 }
 </style>

@@ -24,7 +24,8 @@
 
         <v-row justify="center" class="pb-2 mt-0">
           <h1
-          :class="['title', titleSize, dark ? 'white--text' : 'white--text']"
+          :class="['title white--text',
+          smAndUp ? 'text-h4' : 'text-h5 font-weight-medium']"
           >
             Match Overview
           </h1>
@@ -34,7 +35,7 @@
 
     </v-card-title>
 
-    <v-card-text :class="['px-0 card-content', dark ? 'dark' : 'light']">
+    <v-card-text :class="['px-0 card-content', dark ? 'dark overview' : 'light overview-light']">
 
       <div :class="mdAndDown ? 'padding-info-small' : 'info-padding'">
 
@@ -269,12 +270,6 @@ export default {
       return `white--text ${type}`;
     },
 
-    titleSize() {
-      let type = '';
-      if (this.$vuetify.breakpoint.smAndUp) type = 'text-h4';
-      if (this.$vuetify.breakpoint.xsOnly) type = 'text-h5 font-weight-medium';
-      return `white--text ${type}`;
-    },
     iconSize() {
       if (this.$vuetify.breakpoint.smAndUp) return '28';
       if (this.$vuetify.breakpoint.xsOnly) return '20';
@@ -345,23 +340,37 @@ h1, .icon-shadow {
 .text-shadow {
   text-shadow: 1px 1px black;
 }
-  /* width */
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #ff2929;
-  }
+/* Track */
+.overview::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(255, 219, 219);
-  }
+}
 
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+/* Handle */
+.overview::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 16px;
+}
+
+/* Handle on hover */
+.overview::-webkit-scrollbar-thumb:hover {
+  background: #3F51B5;
+}
+.overview-light::-webkit-scrollbar-track {
+  background: rgba(189, 189, 189, 0.3);
+  border-radius: 16px;
+}
+.overview-light::-webkit-scrollbar-thumb {
+  background: #7986CB;
+  border-radius: 16px;
+}
+.overview-light::-webkit-scrollbar-thumb:hover {
+  background: #E8EAF6;
+}
 </style>
