@@ -2,19 +2,23 @@
   <v-row justify="space-between" align="center">
 
     <div
-    class="d-inline-flex align-center"
+    class="d-inline-flex align-center pb-1"
+    :style="change ? 'cursor: pointer;' : 'pointer-events:none'"
     @click = "$emit('back')"
-    :style="change ? 'cursor: pointer;' : 'cursor: default'">
+    >
 
       <div
-      :class="['icon', {'icon-big': lgAndUp},
+      :class="['icon',
+      {'icon-big': lgAndUp},
       {'icon-medium': mdAndDown},
+      {'icon-small': xsOnly},
       {'icon-back' : change && smAndDown}]"
       >
         <h1
         v-if="!change"
-        :class="['white--text font-weight-bold number',
-        {'text-big': lgAndUp}]"
+        :class="['header',
+        {'text-h4': lgAndUp},
+        {'text-h5': xsOnly}]"
         >
           1
         </h1>
@@ -22,8 +26,9 @@
         <v-fab-transition hide-on-leave>
           <v-icon
           v-if="change"
-          color="white"
-          :size="lgAndUp ? 40 : 32"
+          color="white icon-shadow"
+          :size="iconSize"
+          style="cursor:pointer;"
           >
             mdi-check
           </v-icon>
@@ -34,8 +39,9 @@
       <v-slide-x-transition hide-on-leave>
         <h1
         v-if="mdAndUp"
-        :class="['white--text font-weight-bold header pl-2',
-        {'text-back': change}, {'text-big': lgAndUp}]"
+        :class="['header pl-2',
+        {'text-back': change},
+        {'text-h4': lgAndUp}]"
         >
           Define the Details
         </h1>
@@ -43,18 +49,24 @@
 
     </div>
 
-    <v-divider class="mx-2 divider"></v-divider>
+    <v-divider class="mx-2 divider-stepper"></v-divider>
 
     <div
     class="d-inline-flex align-center"
     style="cursor: default;"
     >
 
-      <div :class="['icon', {'icon-disable': !change},
-      {'icon-big': lgAndUp}, {'icon-medium': mdAndDown}]">
+      <div :class="['icon',
+      {'icon-big': lgAndUp},
+      {'icon-medium': mdAndDown},
+      {'icon-small': xsOnly},
+      {'icon-disable': !change}]"
+      >
         <h1
-        :class="['white--text font-weight-bold number',
-        {'text-disable': !change}, {'text-big': lgAndUp}]"
+        :class="['header',
+        {'text-disable': !change},
+        {'text-h4': lgAndUp},
+        {'text-h5': xsOnly}]"
         >
           2
         </h1>
@@ -63,8 +75,9 @@
       <v-slide-x-transition hide-on-leave>
         <h1
         v-if="mdAndUp"
-        :class="['white--text font-weight-bold header pl-2',
-        {'text-disable': !change}, {'text-big': lgAndUp}]"
+        :class="['header pl-2',
+        {'text-disable': !change},
+        {'text-h4': lgAndUp}]"
         >
           Build the Teams
         </h1>
@@ -75,7 +88,7 @@
 </template>
 
 <script>
-import BreakpointsCond from '../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
   name: 'Stepper',
@@ -87,31 +100,27 @@ export default {
     },
   },
 
+  computed: {
+    iconSize() {
+      if (this.$vuetify.breakpoint.lgAndUp) return 40;
+      if (this.$vuetify.breakpoint.name === 'md'
+      || this.$vuetify.breakpoint.name === 'sm') return 32;
+      return 26;
+    },
+  },
+
   mixins: [BreakpointsCond],
 
 };
 </script>
 
 <style scoped>
-.header {
-  text-shadow: 2px 3px rgba(100, 100, 100, 0.4);
-  white-space: nowrap;
-}
-.text-big {
-  font-size: 2rem;
-}
-.number {
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.6);
-}
 .icon {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #4527A0;
   border-radius: 50%;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  margin-top: 0.3vw;
   cursor: default;
 }
 .icon-back {
@@ -121,6 +130,7 @@ export default {
 .icon-back:hover {
   opacity: 100%;
 }
+
 .icon-big {
   height: 3.2rem;
   width: 3.2rem;
@@ -129,8 +139,12 @@ export default {
   height: 3rem;
   width: 3rem;
 }
+.icon-small {
+  height: 2.4rem;
+  width: 2.4rem;
+}
 .icon-disable {
-  background-color: rgba(158, 158, 158, 0.3);
+  background-color: rgba(158, 158, 158, 0.2);
 }
 .text-disable {
   opacity: 30%;
@@ -139,9 +153,10 @@ export default {
   opacity: 30%;
 }
 .text-back:hover {
+  cursor: pointer;
   opacity: 100%;
 }
-.divider {
+.divider-stepper {
  border-color: #9E9E9E !important;
  opacity: 50%;
 }

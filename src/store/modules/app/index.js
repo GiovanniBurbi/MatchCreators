@@ -4,14 +4,23 @@ export default {
   state: {
     mode: '',
     section: '',
+    overview: false,
   },
 
   mutations: {
     setAppMode(state, mode) {
-      state.mode = mode;
+      if (state.mode !== mode) {
+        state.mode = mode;
+        state.section = '';
+      }
     },
     setAppSection(state, section) {
-      state.section = section;
+      if (state.section !== section) {
+        state.section = section;
+      }
+    },
+    setOverview(state, value) {
+      state.overview = value;
     },
   },
 
@@ -39,8 +48,7 @@ export default {
     },
 
     isMatchOverview(state) {
-      if (state.section === 'match-overview') return true;
-      return false;
+      return state.overview;
     },
   },
 };

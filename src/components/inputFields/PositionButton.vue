@@ -7,7 +7,7 @@
   >
     <v-row justify="center">
       <img
-      :class="[fieldPos, 'playerImg']"
+      :class="[fieldPos, 'playerImg visibility']"
       :src="require(`@/assets/myButtons/${fieldPos}.png`)"
       />
     </v-row>
@@ -26,7 +26,7 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex';
-import BreakpointsCond from '../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 
 export default {
   name: 'PositionButton',
@@ -68,20 +68,23 @@ export default {
   },
 
   methods: {
+    /* declare vuex mutation for state registrationPositionSelection */
+    ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
+
     hoverOver() {
       /* if button has not been pressed */
       if (!this.click) {
         this.classes.push('zoom');
       }
     },
+
     hoverOut() {
       /* if button has not been pressed */
       if (!this.click) {
         this.classes.pop();
       }
     },
-    /* declare vuex mutation for state registrationPositionSelection */
-    ...mapMutations({ setSelection: 'posInputField/setPosSelection' }),
+
     clicked() {
       /* if button was not pressed, change styling class to be permanent */
       if (!this.click) {
@@ -107,24 +110,9 @@ export default {
   transform: scale(1);
   transition: transform 150ms ease-in-out;
 }
-.playerImg {
-  /* centering img and default opacity*/
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.visibility {
   opacity: 40%;
   transition: 150ms;
-}
-/* custom sizes and opacity based on type of button */
-.goalkeeper {
-  max-width: 58px;
-}
-.defender {
-  max-width: 28px;
-}
-.forward {
-  max-width: 80px;
-  opacity: 35%;
 }
 /* name of the type of button */
 .position {
@@ -154,7 +142,7 @@ export default {
 .zoom {
   transform: scale(1.1);
 }
-.zoom .playerImg {
+.zoom .visibility {
   opacity: 100%;
   filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.6));
 }

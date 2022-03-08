@@ -1,30 +1,47 @@
 <template>
-  <v-container fluid class="background px-0">
+  <div class="background">
+
+    <v-snackbar
+     v-model="snackbar"
+     color="green darken-2"
+     style="z-index: 9000"
+     top
+     :right="lgAndUp"
+     :min-width="xsOnly ? '80vw' : null"
+    >
+      <v-icon
+       class="pb-2 icon-white-shadow"
+       size=32
+      >
+        $ball-icon
+      </v-icon>
+      <span class="pl-2 text-h6 text-shadow">
+        Match Created!
+      </span>
+    </v-snackbar>
 
     <v-slide-y-reverse-transition hide-on-leave>
-      <div v-show="!showMyMatches && !isOverview">
+      <div v-show="!isMyMatches && !isOverview">
 
         <v-container
-        :class="['header',
-        {'header-sm' : smAndDown},
-        {'header-md' : lgOnly || mdOnly}]"
+        fluid
+        :class="['pt-10', {'content-padding': mdAndUp}, {'px-6': smAndDown}]"
         >
           <h1
-          :class="['white--text header-shadow text-size font-weight-bold',
-          {'big': lgAndUp}, {'small': xsOnly}]"
+          :class="['text-big header',
+          {'text-h4' : mdAndDown},
+          {'text-h5': xsOnly}]"
           >
             Create a Match
             <v-icon
-            class="white-icon pb-2 pl-1"
-            :size="lgAndUp ? 54 : 40"
+            :class="[lgAndUp ? 'pb-3' : 'pb-2', 'icon-white-shadow']"
+            :size="iconSize"
             >
               $creator-icon
             </v-icon>
           </h1>
 
-          <v-divider
-          style="border-color: grey !important; opacity: 30%;"
-          ></v-divider>
+          <v-divider class="divider-dark" />
 
           <stepper
           :class="['stepper-margin-lg mb-0',
@@ -36,7 +53,7 @@
 
         </v-container>
 
-        <v-window v-model="step">
+        <v-window v-model="step" touchless>
           <v-window-item :value="1">
 
             <match-creation-form @detailsPassed="step++" />
@@ -45,13 +62,14 @@
 
           <v-window-item :value="2">
             <v-container fluid class="px-0">
+
               <details-recap
               v-if="!xsOnly"
-              :class="['header px-16 pt-0',
-              {'header-sm' : smAndDown},
-              {'header-md' : lgOnly || mdOnly}]"
+              class="infos pt-8"
               />
-              <v-row justify="center" :class="xsOnly ? 'pt-4 pb-6' : 'pt-10 pb-4'">
+
+              <v-row justify="center" :class="xsOnly ? 'pt-8 pb-6' : 'pt-12 pb-4'">
+
                 <v-btn
                 color="green darken-4"
                 dark
@@ -59,10 +77,13 @@
                 @click="createMatch()"
                 :loading="loading"
                 >
-                  <span class="text-shadow">create the match</span>
+                  <span class="btn-shadow">create the match</span>
                 </v-btn>
+
               </v-row>
-              <team-builder :reset.sync="reset" class="pb-0"/>
+
+              <team-builder class="pb-0"/>
+
             </v-container>
           </v-window-item>
 
@@ -71,29 +92,32 @@
     </v-slide-y-reverse-transition>
 
     <v-slide-y-transition hide-on-leave>
-      <div v-if="showMyMatches && !isOverview">
+      <v-container
+      v-if="isMyMatches"
+      v-show="!isOverview"
+      class="pt-8">
 
-        <my-matches :isFinder="false" :dark="true" />
+          <my-matches  />
 
-        <v-fade-transition hide-on-leave>
-          <v-btn
-          v-if="!loadingUserMatches"
-          class="stick"
-          large
-          fab
-          dark
-          color="deep-purple darken-2"
-          @click="showMyMatches = false, step = 1"
-          >
+          <v-fab-transition hide-on-leave>
+            <v-btn
+            v-if="!loading"
+            class="stick"
+            large
+            fab
+            dark
+            color="deep-purple darken-2"
+            @click="setAppSection(''), step = 1"
+            >
 
-            <v-icon size="44">
-              mdi-plus
-            </v-icon>
+              <v-icon size="44">
+                mdi-plus
+              </v-icon>
 
-          </v-btn>
-        </v-fade-transition>
+            </v-btn>
+          </v-fab-transition>
+        </v-container>
 
-      </div>
     </v-slide-y-transition>
 
     <v-dialog
@@ -109,18 +133,18 @@
       :match="matchToOverview" />
     </v-dialog>
 
-  </v-container>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '../mixins/BreakpointsCond';
-import Stepper from '../components/Stepper.vue';
-import MatchCreationForm from '../components/MatchCreationForm.vue';
-import TeamBuilder from '../components/TeamBuilder.vue';
-import DetailsRecap from '../components/DetailsRecap.vue';
-import MyMatches from '../components/MyMatches.vue';
-import MatchFullDetails from '../components/MatchFullDetails.vue';
+import Stepper from '../components/creator/Stepper.vue';
+import MatchCreationForm from '../components/creator/MatchCreationForm.vue';
+import TeamBuilder from '../components/creator/TeamBuilder.vue';
+import DetailsRecap from '../components/creator/DetailsRecap.vue';
+import MyMatches from '../components/myMatches/MyMatches.vue';
+import MatchFullDetails from '../components/matchesCards/MatchFullDetails.vue';
 
 export default {
   name: 'Creator',
@@ -137,95 +161,65 @@ export default {
   data() {
     return {
       step: 1,
-      showMyMatches: false,
-      reset: false,
+      snackbar: false,
     };
   },
 
-  props: {
-    goToMyMatches: {
-      type: Boolean,
-    },
-  },
-
   computed: {
-    ...mapGetters({ nPlayers: 'matches/getNumPlayers' }),
-    ...mapGetters({ loading: 'matches/getLoading' }),
-    ...mapGetters({ loadingUserMatches: 'matches/getLoadingUserMatches' }),
-    ...mapGetters({ matchToOverview: 'matches/getMatchToOverview' }),
-    ...mapGetters({ isOverview: 'matches/getIsOverview' }),
+    ...mapGetters({
+      isOverview: 'app/isMatchOverview',
+      isMyMatches: 'app/isMyMatches',
+      matchToOverview: 'matches/getMatchToOverview',
+      loading: 'matches/getLoading',
+      nPlayers: 'matches/getNumPlayers',
+      matchCreated: 'matches/getMatchCreated',
+    }),
+
+    iconSize() {
+      if (this.$vuetify.breakpoint.lgAndUp) return 58;
+      if (this.$vuetify.breakpoint.name === 'md'
+        || this.$vuetify.breakpoint.name === 'sm') return 44;
+      return 36;
+    },
   },
 
   watch: {
     loading(val) {
       if (!val) {
-        this.showMyMatches = true;
-        this.reset = true;
+        this.setAppSection('my-matches');
+        this.step = 1;
       }
     },
-    goToMyMatches(newVal) {
-      if (newVal) {
-        this.showMyMatches = true;
-        this.step = 1;
-        this.$emit('update:goToMyMatches', false);
-      }
+
+    matchCreated(newVal) {
+      if (newVal) this.snackbar = true;
     },
   },
 
   methods: {
-    ...mapActions({ newMatch: 'matches/createMatch' }),
-    ...mapActions({ fetchUserMatches: 'matches/findUserMatches' }),
-
-    createMatch() {
-      this.newMatch();
-    },
+    ...mapMutations({ setAppSection: 'app/setAppSection' }),
+    ...mapActions({ createMatch: 'matches/createMatch' }),
   },
 
-  mixins: [
-    BreakpointsCond,
-  ],
+  mixins: [BreakpointsCond],
 };
 </script>
 
 <style scoped>
 .background {
   height: 100%;
-  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.3),
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.7),
   rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/night.jpg') center center no-repeat fixed;
   background-size: cover;
-}
-.header {
-  max-width: 85%;
-}
-.header-md {
-  max-width: 90%;
-}
-.header-sm {
-  max-width: 97%;
-}
-.text-size {
-  font-size: 2.2rem;
-}
-.big{
-  font-size: 3rem;
-}
-.small{
-  font-size: 1.75rem;
 }
 .stepper-margin-lg {
   margin: 16px 8vw;
 }
 .stepper-margin-md {
-  margin: 16px 4vw;
+  margin: 16px 2vw;
 }
 .stepper-margin-sm {
   margin: 16px 6vw;
-}
-.white-icon {
-  /* white */
-  filter: invert(99%) sepia(3%) saturate(1032%) hue-rotate(291deg)
-  brightness(122%) contrast(100%)
-  drop-shadow( 1px 2px rgba(100, 100, 100, 0.4))
 }
 .stick {
   z-index: 9000;
@@ -234,10 +228,7 @@ export default {
   left: 50%;
   transform: translateX(-50%);
 }
-.header-shadow {
-  text-shadow: 1px 2px rgba(100, 100, 100, 0.8);
-}
-.text-shadow {
-   text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
+.infos {
+  max-width: 1000px;
 }
 </style>

@@ -168,10 +168,9 @@ export default {
     return 'forwards';
   },
 
-  findUserMatches(matches, user) {
+  findUserMatches(matches, userId) {
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
-        const userId = user.id;
         let teamBlack = [];
         let teamWhite = [];
         const userMatches = [];
@@ -179,12 +178,15 @@ export default {
           teamBlack = matches[i].blackTeam;
           teamWhite = matches[i].whiteTeam;
           for (let j = 1; j <= this.teamSize; j += 1) {
+            /* search in teams */
             if (!this.isEmpty(teamBlack[j].user)) {
               if (teamBlack[j].user.id === userId) {
                 userMatches.push(matches[i]);
                 break;
               }
-            } else if (!this.isEmpty(teamWhite[j].user)) {
+            }
+
+            if (!this.isEmpty(teamWhite[j].user)) {
               if (teamWhite[j].user.id === userId) {
                 userMatches.push(matches[i]);
                 break;
@@ -193,6 +195,55 @@ export default {
           }
         }
         resolve(userMatches);
+      }, 500);
+    });
+    return promise;
+  },
+
+  findPlayerInsideMatch(match, playerId) {
+    let isPresent = false;
+    let team = '';
+    for (let i = 1; i <= this.teamSize; i += 1) {
+      /* search in teams */
+      if (!this.isEmpty(match.blackTeam[i].user)) {
+        if (match.blackTeam[i].user.id === playerId) {
+          isPresent = true;
+          team = 'black';
+          break;
+        }
+      }
+
+      if (!this.isEmpty(match.whiteTeam[i].user)) {
+        if (match.whiteTeam[i].user.id === playerId) {
+          isPresent = true;
+          team = 'white';
+          break;
+        }
+      }
+    }
+    return {
+      isPresent,
+      team,
+    };
+  },
+
+  deletePlayerInMatch(match, team, spotId) {
+    const promise = new Promise((resolve) => {
+      window.setTimeout(() => {
+        const matchCopy = JSON.parse(JSON.stringify(match));
+        if (team === 'black') {
+          matchCopy.blackTeam[spotId].user = {};
+          const updatedTeam = {
+            blackTeam: matchCopy.blackTeam,
+          };
+          resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
+        } else {
+          matchCopy.whiteTeam[spotId].user = {};
+          const updatedTeam = {
+            whiteTeam: matchCopy.whiteTeam,
+          };
+          resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
+        }
       }, 500);
     });
     return promise;

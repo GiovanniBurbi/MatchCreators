@@ -5,7 +5,8 @@
     <v-row justify="start">
 
       <v-icon
-      :class="[error ? 'icon-red' : 'icon-grey', color]">
+      :class="iconColor"
+      >
         $position-icon
       </v-icon>
 
@@ -24,46 +25,36 @@
     justify="center"
     >
 
-      <v-col>
+      <v-col
+      v-for="pos in ['goalkeeper', 'defender', 'forward']"
+      :key="pos"
+      >
+
         <position-button
-          @clicked="buttonClick"
-          field-pos="goalkeeper">
+          @clicked="error ? error = false : null"
+          :field-pos="pos">
         </position-button>
-      </v-col>
 
-      <v-col>
-        <position-button
-          @clicked="buttonClick"
-          field-pos="defender"
-        ></position-button>
       </v-col>
-
-      <v-col>
-        <position-button
-          @clicked="buttonClick"
-          field-pos="forward"
-        ></position-button>
-      </v-col>
-
     </v-row>
 
     <v-divider
-    v-if="appMode.mode === 'authentication'"
+    v-if="isAuth"
     :class="error ? 'red accent-2' : 'grey darken-1'"
     ></v-divider>
 
     <v-slide-y-transition hide-on-leave>
-      <div
-      v-if="appMode.mode === 'authentication' && error"
+      <h1
+      v-if="isAuth && error"
       :class="['text-caption font-weight-regular red--text text-accent-2']"
       >
         Required
-      </div>
+      </h1>
     </v-slide-y-transition>
 
     <v-slide-y-transition hide-on-leave>
       <h1
-      v-if="appMode.mode === 'authentication' && !error"
+      v-if="isAuth && !error"
       class="text-caption"
       style="color:transparent;"
       >
@@ -76,8 +67,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import PositionButton from '@/components/PositionButton.vue';
-import BreakpointsCond from '../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
+import PositionButton from './PositionButton.vue';
 
 export default {
   name: 'PositionField',
@@ -86,9 +77,6 @@ export default {
     label: {
       type: String,
       required: true,
-    },
-    color: {
-      type: String,
     },
   },
 
@@ -106,8 +94,14 @@ export default {
     /* define getter of vuex state registrationPositionSelection */
     ...mapGetters({
       currentSelection: 'posInputField/getPosSelection',
-      appMode: 'app/getAppMode',
+      isAuth: 'app/isAuth',
     }),
+
+    iconColor() {
+      if (this.error) return 'icon-red';
+      if (!this.error && this.isAuth) return 'icon-grey';
+      return 'icon-indigo';
+    },
   },
 
   methods: {
@@ -118,12 +112,6 @@ export default {
         this.error = true;
         return false;
       } return true;
-    },
-    buttonClick() {
-      /* reset error on position form selection if error had happened */
-      if (this.error) {
-        this.error = false;
-      }
     },
   },
 

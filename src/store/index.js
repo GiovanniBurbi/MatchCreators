@@ -6,6 +6,7 @@ import matches from './modules/matches/index';
 import users from './modules/users/index';
 import theme from './modules/theme/index';
 import app from './modules/app/index';
+import filters from './modules/filters/index';
 
 Vue.use(Vuex);
 
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     users,
     app,
     theme,
+    filters,
   },
   getters: {
   },

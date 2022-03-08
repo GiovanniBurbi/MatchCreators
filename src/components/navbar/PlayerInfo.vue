@@ -1,7 +1,7 @@
 <template>
   <v-card :dark="darkMode">
 
-    <v-card-title :class="darkMode ? 'indigo darken-2' : 'indigo'">
+    <v-card-title :class="darkMode ? 'indigo darken-1' : 'indigo'">
       <h1 class="text-h5 white--text card-title-shadow">Player Info</h1>
     </v-card-title>
 
@@ -40,7 +40,7 @@
 
       <v-row justify="center" class="mt-5 mb-2">
         <img
-        :class="[positionImage, 'playerImg']"
+        :class="[positionImage, 'playerImg pos-shadow']"
         :src="require(`@/assets/myButtons/${positionImage}.png`)"
         />
       </v-row>
@@ -52,64 +52,33 @@
 <script>
 /* eslint-disable global-require */
 
+import { mapGetters } from 'vuex';
+import DataHelper from '@/mixins/DataHelper';
+
 export default {
   name: 'PlayerInfo',
 
-  props: {
-    darkMode: {
-      type: Boolean,
-    },
-    user: {
-      type: Object,
-      required: true,
-    },
-  },
-
   computed: {
+    ...mapGetters({
+      darkMode: 'theme/getDarkMode',
+      user: 'auth/getUser',
+    }),
+
     getAvatarPicture() {
       // eslint-disable-next-line import/no-dynamic-require
-      return require(`../${this.user.picture}`);
+      return require(`@/${this.user.picture}`);
     },
     positionImage() {
       return this.user.position.toLowerCase();
     },
   },
 
-  methods: {
-    getAge(birthday) {
-      const bday = new Date(birthday);
-      const ageDiffMs = Date.now() - bday.getTime();
-      const ageDate = new Date(ageDiffMs);
-      return Math.abs(ageDate.getUTCFullYear() - 1970);
-    },
-  },
-
+  mixins: [DataHelper],
 };
 </script>
 
 <style scoped>
-.card-title-shadow {
-  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
-}
-.playerImg {
-  /* centering img and default opacity*/
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.pos-shadow {
   filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.6));
-}
-/* custom sizes and opacity based on type of button */
-.goalkeeper {
-  max-width: 58px;
-}
-.defender {
-  max-width: 28px;
-}
-.forward {
-  max-width: 70px;
-}
-.avatar-shadow {
-  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 </style>

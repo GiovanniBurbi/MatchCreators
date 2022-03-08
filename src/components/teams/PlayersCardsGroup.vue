@@ -1,49 +1,30 @@
 <template>
   <v-container fluid class="formation">
 
-    <div class="row-1">
+    <div class="row-fw">
       <player-card
-      :player="team[5]"
-      :white="isTeamWhite"
-      :builder="builder"
-      :position="'Forward'"
-      :darkMode="darkMode" />
+      :spot="team[5]" />
       <player-card
-      :player="team[4]"
-      :white="isTeamWhite"
-      :builder="builder"
-      :position="'Forward'"
-      :darkMode="darkMode" />
+      :spot="team[4]" />
     </div>
 
-    <div class="row-2">
+    <div class="row-def">
       <player-card
-      :player="team[3]"
-      :white="isTeamWhite"
-      :builder="builder"
-      :position="'Defender'" />
+      :spot="team[3]" />
       <player-card
-      :player="team[2]"
-      :white="isTeamWhite"
-      :builder="builder"
-      :position="'Defender'"
-      :darkMode="darkMode" />
+      :spot="team[2]" />
     </div>
 
-    <div class="row-3">
+    <div class="row-gk">
       <player-card
-      :player="team[1]"
-      :white="isTeamWhite"
-      :builder="builder"
-      :position="'Goalkeeper'"
-      :darkMode="darkMode" />
+      :spot="team[1]" />
     </div>
 
   </v-container>
 </template>
 
 <script>
-import BreakpointsCond from '../mixins/BreakpointsCond';
+import BreakpointsCond from '@/mixins/BreakpointsCond';
 import PlayerCard from './PlayerCard.vue';
 
 export default {
@@ -58,19 +39,11 @@ export default {
       type: Array,
       required: true,
     },
-    builder: {
-      type: Boolean,
-      required: true,
-    },
-    darkMode: {
-      type: Boolean,
-    },
   },
 
   computed: {
     isTeamWhite() {
-      const type = this.team[0].team;
-      if (type === 'Black') return false;
+      if (this.team[0].team === 'Black') return false;
       return true;
     },
   },
@@ -84,7 +57,7 @@ export default {
   margin-top: 10px;
   height: 90%;
 }
-.row-1 {
+.row-fw {
   height: 33.3%;
   width: 30%;
   margin: 0 auto;
@@ -92,7 +65,7 @@ export default {
   align-items: center;
   justify-content: space-around;
 }
-.row-2 {
+.row-def {
   height: 33.4%;
   width: 60%;
   margin: 0 auto;
@@ -100,7 +73,7 @@ export default {
   align-items: center;
   justify-content: space-around;
 }
-.row-3 {
+.row-gk {
   height: 33.3%;
   width: 100%;
   display: flex;
@@ -109,18 +82,18 @@ export default {
 }
 
 @media screen and (max-width: 430px) {
-  .row-2 {
+  .row-def {
     max-width: 40%;
   }
-  .row-1 {
+  .row-gk {
     max-width: 24%;
   }
 }
 @media screen and (max-width: 300px) {
-  .row-2 {
+  .row-def {
     max-width: 34%;
   }
-  .row-1 {
+  .row-gk {
     max-width: 20%;
   }
 }
