@@ -37,7 +37,7 @@ export default {
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
         resolve(apiClient.get('/users'));
-      }, 500);
+      }, 1000);
     });
     return promise;
   },

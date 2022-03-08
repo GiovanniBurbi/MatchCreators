@@ -11,7 +11,7 @@
     <v-divider></v-divider>
 
     <v-card-text
-    class="px-2 scrollable"
+    :class="['px-2', teamSelected === 'black' ? 'scroll-black' : 'scroll-white']"
     :style="xsOnly ? 'height:320px' : 'height: 400px;'"
     >
       <v-container fluid class="pt-4 pb-0">
@@ -225,7 +225,6 @@ export default {
   },
 
   created() {
-    /* non lo deve fare lui, ma il componente che lo usa */
     this.fetchUsers();
   },
 
@@ -289,22 +288,34 @@ export default {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 /* Track */
-::-webkit-scrollbar-track {
+.scroll-black::-webkit-scrollbar-track {
   background: #424242;
   border-radius: 16px;
 
 }
 /* Handle */
-::-webkit-scrollbar-thumb {
+.scroll-black::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
 }
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #4527A0;
+.scroll-black::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+.scroll-white::-webkit-scrollbar-track {
+  background: rgba(100, 100, 100, 0.6);
+  border-radius: 16px;
+}
+.scroll-white::-webkit-scrollbar-thumb {
+  background: #626262;
+  border-radius: 16px;
+}
+.scroll-white::-webkit-scrollbar-thumb:hover {
+  background: #424242;
 }
 
 /* shake on error animation */
