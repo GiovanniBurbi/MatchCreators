@@ -86,7 +86,8 @@ export default {
 <style scoped>
 .switcher::after {
   display: block;
-  margin-left: 0px;
+  margin-left: 5px;
+  padding-top: 2px;
   content: "";
   border-bottom: solid 2px rgb(255, 255, 255);
   transform: scaleX(0);

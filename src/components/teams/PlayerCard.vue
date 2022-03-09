@@ -33,7 +33,7 @@
             <v-card :dark="darkMode" tile>
               <v-card-text class="pt-3 pb-2">
                 <h1
-                :class="['text-subtitle-1 font-weight-regular',
+                :class="['text-subtitle-1 font-weight-medium',
                 {'grey--text text--darken-3': !darkMode}]"
                 >
                   Do you want to leave this match?
@@ -45,7 +45,7 @@
                 <v-spacer></v-spacer>
 
                 <v-btn
-                dark
+                :dark="darkMode"
                 small
                 text
                 color="red"
@@ -189,7 +189,7 @@ export default {
       set(value) {
         this.$store.commit('matches/setInvitationDialog', value);
         if (value) {
-          this.$store.commit('matches/setInvitationCardId', this.spot.id);
+          this.$store.commit('matches/setCardIdSelected', this.spot.id);
         }
       },
     },
@@ -252,8 +252,6 @@ export default {
 
     removeFromExistingMatch() {
       this.deletePlayerFromExistingMatch(this.spot.id).then(() => {
-        /* loading button while deleting the player from match,
-        disabled back button also */
         this.dialogDelete = false;
       });
     },

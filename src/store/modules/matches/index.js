@@ -11,8 +11,9 @@ export default {
     loading: false,
     matchCreated: false,
     teamSelected: 'black',
+    userIsPresentInOverview: false,
     invitationDialog: false,
-    invitationCardId: null,
+    cardIdSelected: null,
     details: [],
     teamBlack: [
       { team: 'Black' },
@@ -77,9 +78,9 @@ export default {
 
     addPlayer(state, user) {
       if (state.teamSelected === 'white') {
-        state.teamWhite[state.invitationCardId].user = user;
+        state.teamWhite[state.cardIdSelected].user = user;
       } else {
-        state.teamBlack[state.invitationCardId].user = user;
+        state.teamBlack[state.cardIdSelected].user = user;
       }
     },
 
@@ -133,17 +134,27 @@ export default {
 
     setInvitationDialog(state, value) {
       state.invitationDialog = value;
-      if (!value) state.invitationCardId = null;
+      if (!value) state.cardIdSelected = null;
     },
 
-    setInvitationCardId(state, value) {
-      state.invitationCardId = value;
+    setCardIdSelected(state, value) {
+      state.cardIdSelected = value;
     },
 
     deletePlayerFromOverviewTeam(state, spotId) {
       if (state.teamSelected === 'black') {
         state.matchToOverview.blackTeam[spotId].user = {};
       } else state.matchToOverview.whiteTeam[spotId].user = {};
+    },
+
+    setUserIsPresentInOverview(state, value) {
+      if (state.userIsPresentInOverview !== value) state.userIsPresentInOverview = value;
+    },
+
+    addPlayerInOverviewTeam(state, player) {
+      if (state.teamSelected === 'black') {
+        state.matchToOverview.blackTeam[state.cardIdSelected].user = player;
+      } else state.matchToOverview.whiteTeam[state.cardIdSelected].user = player;
     },
   },
 
@@ -178,6 +189,12 @@ export default {
 
     async inviteValidation({ state }, playerId) {
       const res = await MatchService.validateNewPlayer(playerId, state.teamWhite, state.teamBlack);
+      return res;
+    },
+
+    async overviewAddValidation({ state }, playerId) {
+      const res = await MatchService.validateNewPlayer(playerId,
+        state.matchToOverview.whiteTeam, state.matchToOverview.blackTeam);
       return res;
     },
 
@@ -216,8 +233,10 @@ export default {
 
     selectTeamBasedOnUser({ state, commit, rootGetters }) {
       const res = MatchService.findPlayerInsideMatch(state.matchToOverview, rootGetters['auth/getUser'].id);
-      if (res.isPresent) commit('setTeamSelected', res.team);
-      else commit('setTeamSelected', 'black');
+      if (res.isPresent) {
+        commit('setTeamSelected', res.team);
+      } else commit('setTeamSelected', 'black');
+      commit('setUserIsPresentInOverview', res.isPresent);
     },
 
     async deletePlayerFromMatch({ commit, dispatch, state }, spotId) {
@@ -227,6 +246,38 @@ export default {
           await dispatch('updateMatches');
           await dispatch('updateUserMatches');
           commit('deletePlayerFromOverviewTeam', spotId);
+          commit('setUserIsPresentInOverview', false);
+          commit('setLoading', false);
+        });
+    },
+
+    async addPlayerInMatch({
+      state, commit, dispatch, rootGetters,
+    }, player) {
+      commit('setLoading', true);
+      await MatchService.addPlayerInMatch(state.matchToOverview,
+        state.teamSelected, state.cardIdSelected, player)
+        .then(async () => {
+          await dispatch('updateMatches');
+          if (player.id === rootGetters['auth/getUser'].id) {
+            await dispatch('updateUserMatches');
+          }
+          commit('addPlayerInOverviewTeam', player);
+          commit('setLoading', false);
+        });
+    },
+
+    async addUserInMatch({
+      state, commit, dispatch, rootGetters,
+    }) {
+      commit('setLoading', true);
+      const user = rootGetters['auth/getUser'];
+      await MatchService.addPlayerInMatch(state.matchToOverview,
+        state.teamSelected, state.cardIdSelected, user)
+        .then(async () => {
+          await dispatch('updateMatches');
+          await dispatch('updateUserMatches');
+          commit('addPlayerInOverviewTeam', user);
           commit('setLoading', false);
         });
     },
@@ -287,8 +338,12 @@ export default {
       return state.invitationDialog;
     },
 
-    getInvitationCardId(state) {
-      return state.invitationCardId;
+    getCardIdSelected(state) {
+      return state.cardIdSelected;
+    },
+
+    getUserIsPresentInOverview(state) {
+      return state.userIsPresentInOverview;
     },
   },
 };

@@ -183,6 +183,74 @@
       :teamBlack="match.blackTeam"
       :teamWhite="match.whiteTeam" />
 
+       <v-dialog
+        v-model="invitationDialog"
+        :max-width="xsOnly ? 320 : 400"
+        style="z-index: 2000"
+        scrollable
+        transition="scale-transition"
+        >
+
+          <v-scale-transition origin="center center 0" hide-on-leave>
+            <v-card
+            v-if="!inviteFriend && invitationDialog"
+            tile
+            :dark="dark"
+            >
+
+              <v-card-text class="pt-3 pb-2">
+                <h1
+                :class="['text-wrap text-subtitle-1 font-weight-medium',
+                {'grey--text text--darken-3': !dark}]"
+                >
+                  Who do you want to add in this match?
+                </h1>
+              </v-card-text>
+
+              <v-card-actions>
+
+                <v-spacer v-if="!xsOnly"></v-spacer>
+
+                <v-btn
+                small
+                color="deep-purple"
+                :disabled="loading"
+                @click="inviteFriend = true"
+                >
+                  <span
+                  :class="{'white--text': !loading}"
+                  >
+                    Add a Friend
+                  </span>
+                </v-btn>
+
+                <v-spacer v-if="xsOnly"></v-spacer>
+
+                <v-btn
+                small
+                color="green"
+                :disabled="userPresent"
+                :loading=loading
+                @click="addUser()"
+                >
+                  <span
+                  :class="{'white--text': !userPresent}"
+                  >
+                    Add myself
+                  </span>
+                </v-btn>
+
+              </v-card-actions>
+            </v-card>
+
+          </v-scale-transition>
+
+          <v-scale-transition origin="center center 0">
+            <player-selection v-if="inviteFriend" />
+          </v-scale-transition>
+
+        </v-dialog>
+
     </v-card-text>
 
   </v-card>
@@ -193,19 +261,44 @@ import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import DataHelper from '@/mixins/DataHelper';
 import Field from '../teams/Field.vue';
+import PlayerSelection from '../teams/PlayerSelection.vue';
 
 export default {
-  name: 'MatchFullDetails',
+  name: 'MatchOverview',
+
+  data() {
+    return {
+      inviteFriend: false,
+    };
+  },
 
   components: {
     Field,
+    PlayerSelection,
+  },
+
+  watch: {
+    invitationDialog(newVal) {
+      if (!newVal) this.inviteFriend = false;
+    },
   },
 
   computed: {
     ...mapGetters({
       match: 'matches/getMatchToOverview',
       dark: 'theme/getDarkMode',
+      userPresent: 'matches/getUserIsPresentInOverview',
+      loading: 'matches/getLoading',
     }),
+
+    invitationDialog: {
+      get() {
+        return this.$store.state.matches.invitationDialog;
+      },
+      set(value) {
+        this.$store.commit('matches/setInvitationDialog', value);
+      },
+    },
 
     textSize() {
       let type = '';
@@ -234,7 +327,16 @@ export default {
       resetMatchOverview: 'matches/setMatchToOverview',
       setOverview: 'app/setOverview',
     }),
-    ...mapActions({ selectTeamWithUser: 'matches/selectTeamBasedOnUser' }),
+    ...mapActions({
+      selectTeamWithUser: 'matches/selectTeamBasedOnUser',
+      addUserInMatch: 'matches/addUserInMatch',
+    }),
+
+    addUser() {
+      this.addUserInMatch().then(() => {
+        this.invitationDialog = false;
+      });
+    },
   },
 
   created() {

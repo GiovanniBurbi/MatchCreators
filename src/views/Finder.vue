@@ -43,7 +43,7 @@
     fullscreen
     >
 
-      <match-full-details
+      <match-overview
       v-if="isOverview"
       />
 
@@ -57,11 +57,18 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 import FinderHeader from '../components/finder/FinderHeader.vue';
 import MatchCardsGroup from '../components/matchesCards/MatchCardsGroup.vue';
 import MyMatches from '../components/myMatches/MyMatches.vue';
-import MatchFullDetails from '../components/matchesCards/MatchFullDetails.vue';
+import MatchOverview from '../components/matchesCards/MatchOverview.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Finder',
+
+  components: {
+    FinderHeader,
+    MatchCardsGroup,
+    MyMatches,
+    MatchOverview,
+  },
 
   computed: {
     ...mapGetters({
@@ -85,13 +92,6 @@ export default {
     this.clearChips();
   },
 
-  components: {
-    FinderHeader,
-    MatchCardsGroup,
-    MyMatches,
-    MatchFullDetails,
-  },
-
   mixins: [BreakpointsCond],
 };
 </script>
@@ -101,8 +101,8 @@ export default {
   display: flex;
   justify-content: center;
   height: 100%;
-  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.4),
-  rgba(0, 0, 0, 0.1)), url('../assets/backgrounds/daylight.jpg')
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.45),
+  rgba(0, 0, 0, 0.3)), url('../assets/backgrounds/daylight.jpg')
   no-repeat center center fixed;
   background-size: cover;
 }

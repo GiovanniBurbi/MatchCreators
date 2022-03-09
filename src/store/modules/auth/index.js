@@ -16,7 +16,7 @@ export default {
     },
 
     setLoginStatus(state, logged) {
-      state.loginStatus = logged;
+      if (state.loginStatus !== logged) state.loginStatus = logged;
     },
   },
 
@@ -26,6 +26,7 @@ export default {
       if (!credentials) {
         return null;
       }
+      commit('setLoginStatus', false);
       const res = await UserService.getUser(credentials);
       const userData = res.data[0];
       if (userData) {
