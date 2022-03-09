@@ -266,6 +266,21 @@ export default {
           commit('setLoading', false);
         });
     },
+
+    async addUserInMatch({
+      state, commit, dispatch, rootGetters,
+    }) {
+      commit('setLoading', true);
+      const user = rootGetters['auth/getUser'];
+      await MatchService.addPlayerInMatch(state.matchToOverview,
+        state.teamSelected, state.cardIdSelected, user)
+        .then(async () => {
+          await dispatch('updateMatches');
+          await dispatch('updateUserMatches');
+          commit('addPlayerInOverviewTeam', user);
+          commit('setLoading', false);
+        });
+    },
   },
 
   getters: {

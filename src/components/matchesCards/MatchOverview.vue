@@ -214,19 +214,30 @@
                 <v-btn
                 small
                 color="deep-purple"
+                :disabled="loading"
                 @click="inviteFriend = true"
                 >
-                  <span class="white--text">Add a Friend</span>
+                  <span
+                  :class="{'white--text': !loading}"
+                  >
+                    Add a Friend
+                  </span>
                 </v-btn>
 
                 <v-spacer v-if="xsOnly"></v-spacer>
 
                 <v-btn
                 small
-                :disabled="userPresent"
                 color="green"
+                :disabled="userPresent"
+                :loading=loading
+                @click="addUser()"
                 >
-                  <span :class="{'white--text': !userPresent}">Add myself</span>
+                  <span
+                  :class="{'white--text': !userPresent}"
+                  >
+                    Add myself
+                  </span>
                 </v-btn>
 
               </v-card-actions>
@@ -277,6 +288,7 @@ export default {
       match: 'matches/getMatchToOverview',
       dark: 'theme/getDarkMode',
       userPresent: 'matches/getUserIsPresentInOverview',
+      loading: 'matches/getLoading',
     }),
 
     invitationDialog: {
@@ -315,7 +327,16 @@ export default {
       resetMatchOverview: 'matches/setMatchToOverview',
       setOverview: 'app/setOverview',
     }),
-    ...mapActions({ selectTeamWithUser: 'matches/selectTeamBasedOnUser' }),
+    ...mapActions({
+      selectTeamWithUser: 'matches/selectTeamBasedOnUser',
+      addUserInMatch: 'matches/addUserInMatch',
+    }),
+
+    addUser() {
+      this.addUserInMatch().then(() => {
+        this.invitationDialog = false;
+      });
+    },
   },
 
   created() {
