@@ -100,21 +100,43 @@
           <my-matches  />
 
           <v-fab-transition hide-on-leave>
-            <v-btn
-            v-if="!loading"
-            class="stick"
-            large
-            fab
-            dark
-            color="deep-purple darken-2"
-            @click="setAppSection(''), step = 1"
+            <div
+            v-if="userMatches.length < 2"
+            style="display:flex; justify-content: center;"
             >
+              <v-btn
+              v-if="!loading"
+              :large="!xsOnly"
+              fab
+              dark
+              color="deep-purple darken-2"
+              @click="setAppSection(''), step = 1"
+              >
 
-              <v-icon size="44">
-                mdi-plus
-              </v-icon>
+                <v-icon :size="xsOnly ? 36 : 44">
+                  mdi-plus
+                </v-icon>
 
-            </v-btn>
+              </v-btn>
+            </div>
+          </v-fab-transition>
+
+          <v-fab-transition>
+            <v-btn
+              v-if="!loading && userMatches.length >= 2"
+              class="stick"
+              :large="!xsOnly"
+              fab
+              dark
+              color="deep-purple darken-2"
+              @click="setAppSection(''), step = 1"
+              >
+
+                <v-icon :size="xsOnly ? 36 : 44">
+                  mdi-plus
+                </v-icon>
+
+              </v-btn>
           </v-fab-transition>
         </v-container>
 
@@ -173,6 +195,7 @@ export default {
       loading: 'matches/getLoading',
       nPlayers: 'matches/getNumPlayers',
       matchCreated: 'matches/getMatchCreated',
+      userMatches: 'matches/getUserMatches',
     }),
 
     iconSize() {
@@ -222,7 +245,7 @@ export default {
   margin: 16px 6vw;
 }
 .stick {
-  z-index: 9000;
+  z-index: 4000;
   position: sticky;
   bottom: 20px;
   left: 50%;

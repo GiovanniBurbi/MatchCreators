@@ -19,6 +19,31 @@
         class="py-2"
         />
 
+        <v-container v-if="matches.length === 0">
+          <v-row justify="center">
+            <h1
+            style="white-space:nowrap"
+            :class="['text-shadow white--text font-weight-medium',
+            {'text-h4': mdAndUp},
+            {'text-h5': smOnly},
+            {'text-body-1': xsOnly}]"
+            >
+              There are no match available now
+            </h1>
+          </v-row>
+          <v-row justify="center">
+            <h1
+            style="white-space:nowrap"
+            :class="['text-shadow white--text font-weight-medium',
+            {'text-h6': mdAndUp},
+            {'text-subtitle-1': smOnly},
+            {'text-caption': xsOnly}]"
+            >
+              Try again later or create a new match yourself!
+            </h1>
+          </v-row>
+        </v-container>
+
       </v-container>
     </v-slide-y-reverse-transition>
 

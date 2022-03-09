@@ -143,8 +143,8 @@ export default {
 
     deletePlayerFromOverviewTeam(state, spotId) {
       if (state.teamSelected === 'black') {
-        state.matchToOverview.blackTeam[spotId].user = {};
-      } else state.matchToOverview.whiteTeam[spotId].user = {};
+        state.matchToOverview.teamBlack[spotId].user = {};
+      } else state.matchToOverview.teamWhite[spotId].user = {};
     },
 
     setUserIsPresentInOverview(state, value) {
@@ -153,8 +153,8 @@ export default {
 
     addPlayerInOverviewTeam(state, player) {
       if (state.teamSelected === 'black') {
-        state.matchToOverview.blackTeam[state.cardIdSelected].user = player;
-      } else state.matchToOverview.whiteTeam[state.cardIdSelected].user = player;
+        state.matchToOverview.teamBlack[state.cardIdSelected].user = player;
+      } else state.matchToOverview.teamWhite[state.cardIdSelected].user = player;
     },
   },
 
@@ -194,7 +194,7 @@ export default {
 
     async overviewAddValidation({ state }, playerId) {
       const res = await MatchService.validateNewPlayer(playerId,
-        state.matchToOverview.whiteTeam, state.matchToOverview.blackTeam);
+        state.matchToOverview.teamWhite, state.matchToOverview.teamBlack);
       return res;
     },
 

@@ -59,13 +59,13 @@ export default {
       let sumAge = 0;
       let numPlayers = 0;
       for (let i = 1; i <= 5; i += 1) {
-        player = this.match.blackTeam[i].user;
+        player = this.match.teamBlack[i].user;
         if (Object.keys(player).length !== 0) {
           playerAge = this.getAge(player.birthday);
           sumAge += playerAge;
           numPlayers += 1;
         }
-        player = this.match.whiteTeam[i].user;
+        player = this.match.teamWhite[i].user;
         if (Object.keys(player).length !== 0) {
           playerAge = this.getAge(player.birthday);
           sumAge += playerAge;
