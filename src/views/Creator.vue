@@ -127,7 +127,7 @@
     scrollable
     fullscreen
     >
-      <match-full-details
+      <match-overview
       v-if="isOverview"
       :dark="true"
       :match="matchToOverview" />
@@ -144,7 +144,7 @@ import MatchCreationForm from '../components/creator/MatchCreationForm.vue';
 import TeamBuilder from '../components/creator/TeamBuilder.vue';
 import DetailsRecap from '../components/creator/DetailsRecap.vue';
 import MyMatches from '../components/myMatches/MyMatches.vue';
-import MatchFullDetails from '../components/matchesCards/MatchFullDetails.vue';
+import MatchOverview from '../components/matchesCards/MatchOverview.vue';
 
 export default {
   name: 'Creator',
@@ -155,7 +155,7 @@ export default {
     TeamBuilder,
     DetailsRecap,
     MyMatches,
-    MatchFullDetails,
+    MatchOverview,
   },
 
   data() {

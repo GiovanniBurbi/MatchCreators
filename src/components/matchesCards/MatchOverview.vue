@@ -195,7 +195,7 @@ import DataHelper from '@/mixins/DataHelper';
 import Field from '../teams/Field.vue';
 
 export default {
-  name: 'MatchFullDetails',
+  name: 'MatchOverview',
 
   components: {
     Field,

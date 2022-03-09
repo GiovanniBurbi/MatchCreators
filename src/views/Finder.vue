@@ -43,7 +43,7 @@
     fullscreen
     >
 
-      <match-full-details
+      <match-overview
       v-if="isOverview"
       />
 
@@ -57,11 +57,18 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 import FinderHeader from '../components/finder/FinderHeader.vue';
 import MatchCardsGroup from '../components/matchesCards/MatchCardsGroup.vue';
 import MyMatches from '../components/myMatches/MyMatches.vue';
-import MatchFullDetails from '../components/matchesCards/MatchFullDetails.vue';
+import MatchOverview from '../components/matchesCards/MatchOverview.vue';
 import BreakpointsCond from '../mixins/BreakpointsCond';
 
 export default {
   name: 'Finder',
+
+  components: {
+    FinderHeader,
+    MatchCardsGroup,
+    MyMatches,
+    MatchOverview,
+  },
 
   computed: {
     ...mapGetters({
@@ -83,13 +90,6 @@ export default {
   destroyed() {
     /* when component is destroyed clear the filters */
     this.clearChips();
-  },
-
-  components: {
-    FinderHeader,
-    MatchCardsGroup,
-    MyMatches,
-    MatchFullDetails,
   },
 
   mixins: [BreakpointsCond],

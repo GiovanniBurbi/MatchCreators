@@ -252,8 +252,6 @@ export default {
 
     removeFromExistingMatch() {
       this.deletePlayerFromExistingMatch(this.spot.id).then(() => {
-        /* loading button while deleting the player from match,
-        disabled back button also */
         this.dialogDelete = false;
       });
     },
