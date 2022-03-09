@@ -151,8 +151,8 @@ export default {
           endTime: times[1],
           location,
           positions,
-          blackTeam: teamBlack,
-          whiteTeam: teamWhite,
+          teamBlack,
+          teamWhite,
         };
 
         const matchData = JSON.stringify(match);
@@ -175,8 +175,8 @@ export default {
         let teamWhite = [];
         const userMatches = [];
         for (let i = 0; i < matches.length; i += 1) {
-          teamBlack = matches[i].blackTeam;
-          teamWhite = matches[i].whiteTeam;
+          teamBlack = matches[i].teamBlack;
+          teamWhite = matches[i].teamWhite;
           for (let j = 1; j <= this.teamSize; j += 1) {
             /* search in teams */
             if (!this.isEmpty(teamBlack[j].user)) {
@@ -205,16 +205,16 @@ export default {
     let team = '';
     for (let i = 1; i <= this.teamSize; i += 1) {
       /* search in teams */
-      if (!this.isEmpty(match.blackTeam[i].user)) {
-        if (match.blackTeam[i].user.id === playerId) {
+      if (!this.isEmpty(match.teamBlack[i].user)) {
+        if (match.teamBlack[i].user.id === playerId) {
           isPresent = true;
           team = 'black';
           break;
         }
       }
 
-      if (!this.isEmpty(match.whiteTeam[i].user)) {
-        if (match.whiteTeam[i].user.id === playerId) {
+      if (!this.isEmpty(match.teamWhite[i].user)) {
+        if (match.teamWhite[i].user.id === playerId) {
           isPresent = true;
           team = 'white';
           break;
@@ -232,15 +232,15 @@ export default {
       window.setTimeout(() => {
         const matchCopy = JSON.parse(JSON.stringify(match));
         if (team === 'black') {
-          matchCopy.blackTeam[spotId].user = {};
+          matchCopy.teamBlack[spotId].user = {};
           const updatedTeam = {
-            blackTeam: matchCopy.blackTeam,
+            teamBlack: matchCopy.teamBlack,
           };
           resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
         } else {
-          matchCopy.whiteTeam[spotId].user = {};
+          matchCopy.teamWhite[spotId].user = {};
           const updatedTeam = {
-            whiteTeam: matchCopy.whiteTeam,
+            teamWhite: matchCopy.teamWhite,
           };
           resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
         }
@@ -254,15 +254,15 @@ export default {
       window.setTimeout(() => {
         const matchCopy = JSON.parse(JSON.stringify(match));
         if (team === 'black') {
-          matchCopy.blackTeam[spotId].user = player;
+          matchCopy.teamBlack[spotId].user = player;
           const updatedTeam = {
-            blackTeam: matchCopy.blackTeam,
+            teamBlack: matchCopy.teamBlack,
           };
           resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
         } else {
-          matchCopy.whiteTeam[spotId].user = player;
+          matchCopy.teamWhite[spotId].user = player;
           const updatedTeam = {
-            whiteTeam: matchCopy.whiteTeam,
+            teamWhite: matchCopy.teamWhite,
           };
           resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
         }

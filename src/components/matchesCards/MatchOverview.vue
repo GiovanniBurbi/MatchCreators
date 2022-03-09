@@ -180,8 +180,8 @@
 
       <field
       class="pt-16 mt-8"
-      :teamBlack="match.blackTeam"
-      :teamWhite="match.whiteTeam" />
+      :teamBlack="match.teamBlack"
+      :teamWhite="match.teamWhite" />
 
        <v-dialog
         v-model="invitationDialog"
