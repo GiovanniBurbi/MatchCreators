@@ -34,7 +34,7 @@
           mdi-clock-outline
         </v-icon>
         <h1
-        :class="[darkMode ? 'white--text' : 'grey--text text--darken-4',
+        :class="[darkMode ? 'white--text' : 'black--text',
         'font-weight-medium text-subtitle-2']"
         >
           {{ match.startTime }} - {{ match.endTime }}
@@ -50,7 +50,7 @@
           mdi-map-marker-outline
         </v-icon>
         <h1
-        :class="[darkMode ? 'white--text' : 'grey--text text--darken-4',
+        :class="[darkMode ? 'white--text' : 'black--text',
         'font-weight-medium text-subtitle-2']"
         >
           {{ match.location }}
@@ -65,7 +65,7 @@
           $player-icon
         </v-icon>
         <h1
-        :class="[darkMode ? 'white--text' : 'grey--text text--darken-4',
+        :class="[darkMode ? 'white--text' : 'black--text',
         'font-weight-regular text-subtitle-2 pl-2']"
         >
           Participants:
@@ -144,13 +144,13 @@
 
     </v-card-text>
 
-    <v-fade-transition origin="center center 0">
+    <v-slide-x-transition origin="center center 0">
       <v-overlay
         v-if="hover"
         absolute
-        color="grey darken-4"
+        :color="isFinder ? 'grey darken-4' : 'black'"
         class="overlay"
-        :opacity="0.6"
+        :opacity="isFinder ? 0.8 : 0.6"
       >
 
         <div class="d-inline-flex pr-2">
@@ -169,7 +169,7 @@
         </div>
 
       </v-overlay>
-    </v-fade-transition>
+    </v-slide-x-transition>
 
   </v-card>
 </template>
@@ -260,7 +260,13 @@ export default {
 .card-color-dark {
   background: rgba(0, 0, 0, 0.8);
 }
+.card-color-dark:hover {
+  background:black;
+}
 .card-color-light {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
+}
+.card-color-light:hover {
+  background: white;
 }
 </style>

@@ -17,13 +17,13 @@
      :min-width="xsOnly ? '80vw' : null"
     >
       <v-icon
-       class="pb-2"
+       class="pb-2 icon-shadow"
        size=32
        left
       >
         mdi-check-circle-outline
       </v-icon>
-      <span class="text-h6">
+      <span class="text-h6 text-shadow">
         Hello, {{ username }}
       </span>
     </v-snackbar>

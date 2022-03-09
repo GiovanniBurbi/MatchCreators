@@ -183,6 +183,49 @@
       :teamBlack="match.blackTeam"
       :teamWhite="match.whiteTeam" />
 
+       <v-dialog
+        v-model="invitationDialog"
+        :max-width="xsOnly ? 320 : 400"
+        style="z-index: 2000"
+        scrollable
+        transition="scale-transition"
+        >
+
+          <v-card :dark="dark" tile>
+            <v-card-text class="pt-3 pb-2">
+              <h1
+              :class="['text-subtitle-1 font-weight-regular',
+              {'grey--text text--darken-3': !dark}]"
+              >
+                Do you want to leave this match?
+              </h1>
+            </v-card-text>
+
+            <v-card-actions>
+
+              <v-spacer></v-spacer>
+
+              <v-btn
+              :dark="darkMode"
+              small
+              text
+              color="indigo"
+              >
+                Add a Friend
+              </v-btn>
+
+              <v-btn
+              dark
+              small
+              color="green"
+              >
+                Add myself
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+
+        </v-dialog>
+
     </v-card-text>
 
   </v-card>
@@ -206,6 +249,15 @@ export default {
       match: 'matches/getMatchToOverview',
       dark: 'theme/getDarkMode',
     }),
+
+    invitationDialog: {
+      get() {
+        return this.$store.state.matches.invitationDialog;
+      },
+      set(value) {
+        this.$store.commit('matches/setInvitationDialog', value);
+      },
+    },
 
     textSize() {
       let type = '';
