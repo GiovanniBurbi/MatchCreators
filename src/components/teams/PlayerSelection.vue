@@ -106,6 +106,7 @@
       :small="xsOnly"
       :class="error ? 'shake' : ''"
       :disabled="!selection"
+      :loading=invitationLoading
       @click="sendInvite()"
       >
         <span
@@ -154,6 +155,7 @@ export default {
       teamSelected: 'matches/getTeamSelected',
       invitationDialog: 'matches/getInvitationDialog',
       isOverview: 'app/isMatchOverview',
+      invitationLoading: 'matches/getLoading',
     }),
 
     posIconSize() {
@@ -222,8 +224,9 @@ export default {
       } else {
         this.validateAdditionOverview(userSelected.id).then((val) => {
           if (val) {
-            this.invitePlayerOverview(userSelected);
-            this.setInvitationDialog(false);
+            this.invitePlayerOverview(userSelected).then(() => {
+              this.setInvitationDialog(false);
+            });
           } else this.error = true;
         });
       }

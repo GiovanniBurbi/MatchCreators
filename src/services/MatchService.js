@@ -248,4 +248,26 @@ export default {
     });
     return promise;
   },
+
+  addPlayerInMatch(match, team, spotId, player) {
+    const promise = new Promise((resolve) => {
+      window.setTimeout(() => {
+        const matchCopy = JSON.parse(JSON.stringify(match));
+        if (team === 'black') {
+          matchCopy.blackTeam[spotId].user = player;
+          const updatedTeam = {
+            blackTeam: matchCopy.blackTeam,
+          };
+          resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
+        } else {
+          matchCopy.whiteTeam[spotId].user = player;
+          const updatedTeam = {
+            whiteTeam: matchCopy.whiteTeam,
+          };
+          resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
+        }
+      }, 500);
+    });
+    return promise;
+  },
 };

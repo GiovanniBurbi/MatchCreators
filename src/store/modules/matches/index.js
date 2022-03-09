@@ -13,7 +13,7 @@ export default {
     teamSelected: 'black',
     userIsPresentInOverview: false,
     invitationDialog: false,
-    invitationCardId: null,
+    cardIdSelected: null,
     details: [],
     teamBlack: [
       { team: 'Black' },
@@ -78,9 +78,9 @@ export default {
 
     addPlayer(state, user) {
       if (state.teamSelected === 'white') {
-        state.teamWhite[state.invitationCardId].user = user;
+        state.teamWhite[state.cardIdSelected].user = user;
       } else {
-        state.teamBlack[state.invitationCardId].user = user;
+        state.teamBlack[state.cardIdSelected].user = user;
       }
     },
 
@@ -134,11 +134,11 @@ export default {
 
     setInvitationDialog(state, value) {
       state.invitationDialog = value;
-      if (!value) state.invitationCardId = null;
+      if (!value) state.cardIdSelected = null;
     },
 
-    setInvitationCardId(state, value) {
-      state.invitationCardId = value;
+    setCardIdSelected(state, value) {
+      state.cardIdSelected = value;
     },
 
     deletePlayerFromOverviewTeam(state, spotId) {
@@ -153,8 +153,8 @@ export default {
 
     addPlayerInOverviewTeam(state, player) {
       if (state.teamSelected === 'black') {
-        state.matchToOverview.blackTeam[state.invitationCardId].user = player;
-      } else state.matchToOverview.whiteTeam[state.invitationCardId].user = player;
+        state.matchToOverview.blackTeam[state.cardIdSelected].user = player;
+      } else state.matchToOverview.whiteTeam[state.cardIdSelected].user = player;
     },
   },
 
@@ -251,8 +251,20 @@ export default {
         });
     },
 
-    async addPlayerInMatch({ commit }, player) {
-      commit('addPlayerInOverviewTeam', player);
+    async addPlayerInMatch({
+      state, commit, dispatch, rootGetters,
+    }, player) {
+      commit('setLoading', true);
+      await MatchService.addPlayerInMatch(state.matchToOverview,
+        state.teamSelected, state.cardIdSelected, player)
+        .then(async () => {
+          await dispatch('updateMatches');
+          if (player.id === rootGetters['auth/getUser'].id) {
+            await dispatch('updateUserMatches');
+          }
+          commit('addPlayerInOverviewTeam', player);
+          commit('setLoading', false);
+        });
     },
   },
 
@@ -311,8 +323,8 @@ export default {
       return state.invitationDialog;
     },
 
-    getInvitationCardId(state) {
-      return state.invitationCardId;
+    getCardIdSelected(state) {
+      return state.cardIdSelected;
     },
 
     getUserIsPresentInOverview(state) {

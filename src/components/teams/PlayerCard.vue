@@ -189,7 +189,7 @@ export default {
       set(value) {
         this.$store.commit('matches/setInvitationDialog', value);
         if (value) {
-          this.$store.commit('matches/setInvitationCardId', this.spot.id);
+          this.$store.commit('matches/setCardIdSelected', this.spot.id);
         }
       },
     },
