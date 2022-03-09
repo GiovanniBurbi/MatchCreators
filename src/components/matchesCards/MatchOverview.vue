@@ -266,6 +266,12 @@ export default {
     PlayerSelection,
   },
 
+  watch: {
+    invitationDialog(newVal) {
+      if (!newVal) this.inviteFriend = false;
+    },
+  },
+
   computed: {
     ...mapGetters({
       match: 'matches/getMatchToOverview',
@@ -279,7 +285,6 @@ export default {
       },
       set(value) {
         this.$store.commit('matches/setInvitationDialog', value);
-        if (!value) this.inviteFriend = false;
       },
     },
 

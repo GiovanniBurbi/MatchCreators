@@ -153,6 +153,7 @@ export default {
       loading: 'users/getLoading',
       teamSelected: 'matches/getTeamSelected',
       invitationDialog: 'matches/getInvitationDialog',
+      isOverview: 'app/isMatchOverview',
     }),
 
     posIconSize() {
@@ -182,12 +183,14 @@ export default {
 
   methods: {
     ...mapMutations({
-      invitePlayer: 'matches/addPlayer',
+      invitePlayerBuilder: 'matches/addPlayer',
       setInvitationDialog: 'matches/setInvitationDialog',
     }),
     ...mapActions({
-      validateAddition: 'matches/inviteValidation',
+      validateAdditionBuilder: 'matches/inviteValidation',
+      validateAdditionOverview: 'matches/overviewAddValidation',
       fetchUsers: 'users/fetchAllUsers',
+      invitePlayerOverview: 'matches/addPlayerInMatch',
     }),
 
     getPicture(path) {
@@ -209,12 +212,21 @@ export default {
       const userSelected = this.users[this.selection - 1];
       /* maybe is better to do this operation here instead of calling a
       vuex actions. */
-      this.validateAddition(userSelected.id).then((val) => {
-        if (val) {
-          this.invitePlayer(userSelected);
-          this.setInvitationDialog(false);
-        } else this.error = true;
-      });
+      if (!this.isOverview) {
+        this.validateAdditionBuilder(userSelected.id).then((val) => {
+          if (val) {
+            this.invitePlayerBuilder(userSelected);
+            this.setInvitationDialog(false);
+          } else this.error = true;
+        });
+      } else {
+        this.validateAdditionOverview(userSelected.id).then((val) => {
+          if (val) {
+            this.invitePlayerOverview(userSelected);
+            this.setInvitationDialog(false);
+          } else this.error = true;
+        });
+      }
     },
   },
 

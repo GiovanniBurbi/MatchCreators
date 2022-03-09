@@ -150,6 +150,12 @@ export default {
     setUserIsPresentInOverview(state, value) {
       if (state.userIsPresentInOverview !== value) state.userIsPresentInOverview = value;
     },
+
+    addPlayerInOverviewTeam(state, player) {
+      if (state.teamSelected === 'black') {
+        state.matchToOverview.blackTeam[state.invitationCardId].user = player;
+      } else state.matchToOverview.whiteTeam[state.invitationCardId].user = player;
+    },
   },
 
   actions: {
@@ -183,6 +189,12 @@ export default {
 
     async inviteValidation({ state }, playerId) {
       const res = await MatchService.validateNewPlayer(playerId, state.teamWhite, state.teamBlack);
+      return res;
+    },
+
+    async overviewAddValidation({ state }, playerId) {
+      const res = await MatchService.validateNewPlayer(playerId,
+        state.matchToOverview.whiteTeam, state.matchToOverview.blackTeam);
       return res;
     },
 
@@ -237,6 +249,10 @@ export default {
           commit('setUserIsPresentInOverview', false);
           commit('setLoading', false);
         });
+    },
+
+    async addPlayerInMatch({ commit }, player) {
+      commit('addPlayerInOverviewTeam', player);
     },
   },
 
