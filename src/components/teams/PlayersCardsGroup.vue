@@ -85,7 +85,7 @@ export default {
   .row-def {
     max-width: 40%;
   }
-  .row-gk {
+  .row-fw {
     max-width: 24%;
   }
 }
@@ -93,7 +93,7 @@ export default {
   .row-def {
     max-width: 34%;
   }
-  .row-gk {
+  .row-fw {
     max-width: 20%;
   }
 }
