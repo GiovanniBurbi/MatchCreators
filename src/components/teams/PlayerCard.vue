@@ -33,7 +33,7 @@
             <v-card :dark="darkMode" tile>
               <v-card-text class="pt-3 pb-2">
                 <h1
-                :class="['text-subtitle-1 font-weight-regular',
+                :class="['text-subtitle-1 font-weight-medium',
                 {'grey--text text--darken-3': !darkMode}]"
                 >
                   Do you want to leave this match?

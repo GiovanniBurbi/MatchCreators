@@ -150,7 +150,7 @@
         absolute
         :color="isFinder ? 'grey darken-4' : 'black'"
         class="overlay"
-        :opacity="isFinder ? 0.8 : 0.6"
+        :opacity="isFinder ? 0.7 : 0.6"
       >
 
         <div class="d-inline-flex pr-2">
@@ -264,7 +264,7 @@ export default {
   background:black;
 }
 .card-color-light {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 }
 .card-color-light:hover {
   background: white;

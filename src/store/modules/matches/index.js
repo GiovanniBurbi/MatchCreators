@@ -11,6 +11,7 @@ export default {
     loading: false,
     matchCreated: false,
     teamSelected: 'black',
+    userIsPresentInOverview: false,
     invitationDialog: false,
     invitationCardId: null,
     details: [],
@@ -145,6 +146,10 @@ export default {
         state.matchToOverview.blackTeam[spotId].user = {};
       } else state.matchToOverview.whiteTeam[spotId].user = {};
     },
+
+    setUserIsPresentInOverview(state, value) {
+      if (state.userIsPresentInOverview !== value) state.userIsPresentInOverview = value;
+    },
   },
 
   actions: {
@@ -216,8 +221,10 @@ export default {
 
     selectTeamBasedOnUser({ state, commit, rootGetters }) {
       const res = MatchService.findPlayerInsideMatch(state.matchToOverview, rootGetters['auth/getUser'].id);
-      if (res.isPresent) commit('setTeamSelected', res.team);
-      else commit('setTeamSelected', 'black');
+      if (res.isPresent) {
+        commit('setTeamSelected', res.team);
+      } else commit('setTeamSelected', 'black');
+      commit('setUserIsPresentInOverview', res.isPresent);
     },
 
     async deletePlayerFromMatch({ commit, dispatch, state }, spotId) {
@@ -227,6 +234,7 @@ export default {
           await dispatch('updateMatches');
           await dispatch('updateUserMatches');
           commit('deletePlayerFromOverviewTeam', spotId);
+          commit('setUserIsPresentInOverview', false);
           commit('setLoading', false);
         });
     },
@@ -289,6 +297,10 @@ export default {
 
     getInvitationCardId(state) {
       return state.invitationCardId;
+    },
+
+    getUserIsPresentInOverview(state) {
+      return state.userIsPresentInOverview;
     },
   },
 };

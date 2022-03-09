@@ -191,38 +191,52 @@
         transition="scale-transition"
         >
 
-          <v-card :dark="dark" tile>
-            <v-card-text class="pt-3 pb-2">
-              <h1
-              :class="['text-subtitle-1 font-weight-regular',
-              {'grey--text text--darken-3': !dark}]"
-              >
-                Do you want to leave this match?
-              </h1>
-            </v-card-text>
+          <v-scale-transition origin="center center 0" hide-on-leave>
+            <v-card
+            v-if="!inviteFriend && invitationDialog"
+            tile
+            :dark="dark"
+            >
 
-            <v-card-actions>
+              <v-card-text class="pt-3 pb-2">
+                <h1
+                :class="['text-wrap text-subtitle-1 font-weight-medium',
+                {'grey--text text--darken-3': !dark}]"
+                >
+                  Who do you want to add in this match?
+                </h1>
+              </v-card-text>
 
-              <v-spacer></v-spacer>
+              <v-card-actions>
 
-              <v-btn
-              :dark="darkMode"
-              small
-              text
-              color="indigo"
-              >
-                Add a Friend
-              </v-btn>
+                <v-spacer v-if="!xsOnly"></v-spacer>
 
-              <v-btn
-              dark
-              small
-              color="green"
-              >
-                Add myself
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+                <v-btn
+                small
+                color="deep-purple"
+                @click="inviteFriend = true"
+                >
+                  <span class="white--text">Add a Friend</span>
+                </v-btn>
+
+                <v-spacer v-if="xsOnly"></v-spacer>
+
+                <v-btn
+                small
+                :disabled="userPresent"
+                color="green"
+                >
+                  <span :class="{'white--text': !userPresent}">Add myself</span>
+                </v-btn>
+
+              </v-card-actions>
+            </v-card>
+
+          </v-scale-transition>
+
+          <v-scale-transition origin="center center 0">
+            <player-selection v-if="inviteFriend" />
+          </v-scale-transition>
 
         </v-dialog>
 
@@ -236,18 +250,27 @@ import { mapActions, mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import DataHelper from '@/mixins/DataHelper';
 import Field from '../teams/Field.vue';
+import PlayerSelection from '../teams/PlayerSelection.vue';
 
 export default {
   name: 'MatchOverview',
 
+  data() {
+    return {
+      inviteFriend: false,
+    };
+  },
+
   components: {
     Field,
+    PlayerSelection,
   },
 
   computed: {
     ...mapGetters({
       match: 'matches/getMatchToOverview',
       dark: 'theme/getDarkMode',
+      userPresent: 'matches/getUserIsPresentInOverview',
     }),
 
     invitationDialog: {
@@ -256,6 +279,7 @@ export default {
       },
       set(value) {
         this.$store.commit('matches/setInvitationDialog', value);
+        if (!value) this.inviteFriend = false;
       },
     },
 
