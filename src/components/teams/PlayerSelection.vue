@@ -1,5 +1,5 @@
 <template>
-  <v-card :dark="teamSelected === 'black'">
+  <v-card :dark="darkMode">
     <v-card-title class="deep-purple darken-3">
       <h1
       class="text-h5 font-weight-bold white--text"
@@ -11,7 +11,7 @@
     <v-divider></v-divider>
 
     <v-card-text
-    :class="['px-2 scrollable', teamSelected === 'black' ? 'scroll-black' : 'scroll-white']"
+    :class="['px-2 scrollable', darkMode ? 'scroll-black' : 'scroll-white']"
     :style="xsOnly ? 'height:320px' : 'height: 400px;'"
     >
       <v-container fluid class="pt-4 pb-0">
@@ -47,7 +47,7 @@
                   <h1
                   :class="[
                   xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
-                  teamSelected === 'white' ?
+                  !darkMode ?
                   'black-text font-weight-medium' : 'font-weight-medium']"
                   >
                     {{user.username}}
@@ -58,7 +58,7 @@
                   <h1
                   :class="[
                   xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
-                  teamSelected === 'white' ?
+                  !darkMode ?
                   'black-text font-weight-medium' : 'font-weight-medium']"
                   >
                     {{getAge(user.birthday)}}y/o
@@ -68,7 +68,7 @@
                 <v-col class="d-flex justify-center">
                   <v-icon
                   :size="windowWidth <= 336 ? '20' : posIconSize"
-                  :class="teamSelected === 'white' ? 'posIcon icon-grey' : 'icon-white'"
+                  :class="!darkMode ? 'posIcon icon-grey' : 'icon-white'"
                   >
                     {{positionIcon(user.position)}}
                   </v-icon>
@@ -152,10 +152,10 @@ export default {
     ...mapGetters({
       users: 'users/getUsers',
       loading: 'users/getLoading',
-      teamSelected: 'matches/getTeamSelected',
       invitationDialog: 'matches/getInvitationDialog',
       isOverview: 'app/isMatchOverview',
       invitationLoading: 'matches/getLoading',
+      darkMode: 'theme/getDarkMode',
     }),
 
     posIconSize() {
@@ -212,8 +212,6 @@ export default {
 
     sendInvite() {
       const userSelected = this.users[this.selection - 1];
-      /* maybe is better to do this operation here instead of calling a
-      vuex actions. */
       if (!this.isOverview) {
         this.validateAdditionBuilder(userSelected.id).then((val) => {
           if (val) {
