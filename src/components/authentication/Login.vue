@@ -1,6 +1,7 @@
 <template>
   <v-card
-  :width="xsOnly ? '96vw' : 390"
+  :width="xsOnly ? null : 390"
+  class="login-card"
   rounded="xl"
   elevation="10"
   >
@@ -182,6 +183,7 @@
             transition="scale-transition"
             offset-y
             min-width="auto"
+            :nudge-top="18"
             >
 
               <template v-slot:activator="{ on, attrs }">
@@ -202,6 +204,7 @@
               <v-date-picker
               v-model="date"
               color="indigo"
+              :width="xsOnly ? 220 : 280"
               :active-picker.sync="activePicker"
               :max="(new Date(Date.now() - (new Date()).
               getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
@@ -282,10 +285,7 @@ export default {
       signup: 'auth/signup',
     }),
 
-    ...mapMutations({
-      resetSelection: 'posInputField/setPosSelection',
-      setLogged: 'auth/setLoginStatus',
-    }),
+    ...mapMutations({ resetSelection: 'posInputField/setPosSelection' }),
 
     save(date) {
       this.$refs.menu.save(date);
@@ -305,7 +305,6 @@ export default {
           { name: this.username, psw: this.password },
         ).then((val) => {
           if (val) {
-            this.setLogged(true);
             this.$router.push({ name: 'Finder' });
           } else {
             this.loginErrorMsg.push('Invalid access');
@@ -345,6 +344,9 @@ export default {
 <style scoped>
 .text-size {
   font-size: 1.5rem;
+}
+.login-card {
+  margin: 0 10px 0
 }
 
 @media screen and (max-width: 295px) {

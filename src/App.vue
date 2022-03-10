@@ -57,12 +57,20 @@ export default {
 
     $route() {
       if (this.$route.name === 'Finder') {
-        this.setDarkMode(false);
-        this.setAppMode('finder');
+        if (!this.logged) {
+          this.$router.replace({ name: 'Authentication' });
+        } else {
+          this.setDarkMode(false);
+          this.setAppMode('finder');
+        }
       }
       if (this.$route.name === 'Creator') {
-        this.setDarkMode(true);
-        this.setAppMode('creator');
+        if (!this.logged) {
+          this.$router.replace({ name: 'Authentication' });
+        } else {
+          this.setDarkMode(true);
+          this.setAppMode('creator');
+        }
       }
     },
   },

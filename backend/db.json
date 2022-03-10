@@ -102,75 +102,18 @@
   ],
   "matches": [
     {
-      "date": "2022-03-10",
-      "startTime": "12:00",
-      "endTime": "13:00",
-      "location": "Galluzzo",
+      "date": "2022-03-16",
+      "startTime": "18:30",
+      "endTime": "19:30",
+      "location": "Albereta",
       "positions": {
         "goalkeepers": 2,
-        "defenders": 3,
-        "forwards": 2
+        "defenders": 1,
+        "forwards": 3
       },
-      "blackTeam": [
+      "teamBlack": [
         {
           "team": "Black"
-        },
-        {
-          "id": 1,
-          "user": {
-            "id": 10,
-            "username": "Robert",
-            "password": "match123",
-            "email": "Robert12@gmail.com",
-            "birthday": "2003-12-7",
-            "position": "Goalkeeper",
-            "picture": "assets/users/Robert.jpg"
-          }
-        },
-        {
-          "id": 2,
-          "user": {
-            "id": 1,
-            "username": "Carl",
-            "password": "match123",
-            "email": "Carl4@gmail.com",
-            "birthday": "1990-07-05",
-            "position": "Defender",
-            "picture": "assets/users/Carl.jpg"
-          }
-        },
-        {
-          "id": 3,
-          "user": {
-            "id": 3,
-            "username": "Joseph",
-            "password": "match123",
-            "email": "Joseph5@gmail.com",
-            "birthday": "2005-04-01",
-            "position": "Defender",
-            "picture": "assets/users/Joseph.jpg"
-          }
-        },
-        {
-          "id": 4,
-          "user": {
-            "id": 7,
-            "username": "Matthew",
-            "password": "match123",
-            "email": "Matthew7@gmail.com",
-            "birthday": "1978-08-31",
-            "position": "Forward",
-            "picture": "assets/users/Matthew.jpg"
-          }
-        },
-        {
-          "id": 5,
-          "user": {}
-        }
-      ],
-      "whiteTeam": [
-        {
-          "team": "White"
         },
         {
           "id": 1,
@@ -190,22 +133,59 @@
         },
         {
           "id": 3,
-          "user": {
-            "id": 2,
-            "username": "Tony",
-            "password": "match123",
-            "email": "Tony3@gmail.com",
-            "birthday": "1988-02-21",
-            "position": "Defender",
-            "picture": "assets/users/Tony.jpg"
-          }
-        },
-        {
-          "id": 4,
           "user": {}
         },
         {
+          "id": 4,
+          "user": {
+            "id": 7,
+            "username": "Matthew",
+            "password": "match123",
+            "email": "Matthew7@gmail.com",
+            "birthday": "1978-08-31",
+            "position": "Forward",
+            "picture": "assets/users/Matthew.jpg"
+          }
+        },
+        {
           "id": 5,
+          "user": {
+            "id": 5,
+            "username": "Henry",
+            "password": "match123",
+            "email": "Henry6@gmail.com",
+            "birthday": "1985-05-17",
+            "position": "Forward",
+            "picture": "assets/users/Henry.jpg"
+          }
+        }
+      ],
+      "teamWhite": [
+        {
+          "team": "White"
+        },
+        {
+          "id": 1,
+          "user": {
+            "id": 10,
+            "username": "Robert",
+            "password": "match123",
+            "email": "Robert12@gmail.com",
+            "birthday": "2003-12-7",
+            "position": "Goalkeeper",
+            "picture": "assets/users/Robert.jpg"
+          }
+        },
+        {
+          "id": 2,
+          "user": {}
+        },
+        {
+          "id": 3,
+          "user": {}
+        },
+        {
+          "id": 4,
           "user": {
             "id": 6,
             "username": "Stephan",
@@ -215,21 +195,25 @@
             "position": "Forward",
             "picture": "assets/users/Stephan.jpg"
           }
+        },
+        {
+          "id": 5,
+          "user": {}
         }
       ],
       "id": 1
     },
     {
       "date": "2022-03-22",
-      "startTime": "17:00",
-      "endTime": "18:00",
-      "location": "Albereta",
+      "startTime": "15:00",
+      "endTime": "17:00",
+      "location": "Galluzzo",
       "positions": {
         "goalkeepers": 1,
-        "defenders": 3,
+        "defenders": 2,
         "forwards": 3
       },
-      "blackTeam": [
+      "teamBlack": [
         {
           "team": "Black"
         },
@@ -247,15 +231,7 @@
         },
         {
           "id": 2,
-          "user": {
-            "id": 1,
-            "username": "Carl",
-            "password": "match123",
-            "email": "Carl4@gmail.com",
-            "birthday": "1990-07-05",
-            "position": "Defender",
-            "picture": "assets/users/Carl.jpg"
-          }
+          "user": {}
         },
         {
           "id": 3,
@@ -263,6 +239,10 @@
         },
         {
           "id": 4,
+          "user": {}
+        },
+        {
+          "id": 5,
           "user": {
             "id": 5,
             "username": "Henry",
@@ -272,21 +252,9 @@
             "position": "Forward",
             "picture": "assets/users/Henry.jpg"
           }
-        },
-        {
-          "id": 5,
-          "user": {
-            "id": 8,
-            "username": "Vince",
-            "password": "match123",
-            "email": "Vince9@gmail.com",
-            "birthday": "1992-09-20",
-            "position": "Forward",
-            "picture": "assets/users/Vince.jpg"
-          }
         }
       ],
-      "whiteTeam": [
+      "teamWhite": [
         {
           "team": "White"
         },
@@ -297,18 +265,6 @@
         {
           "id": 2,
           "user": {
-            "id": 2,
-            "username": "Tony",
-            "password": "match123",
-            "email": "Tony3@gmail.com",
-            "birthday": "1988-02-21",
-            "position": "Defender",
-            "picture": "assets/users/Tony.jpg"
-          }
-        },
-        {
-          "id": 3,
-          "user": {
             "id": 3,
             "username": "Joseph",
             "password": "match123",
@@ -317,6 +273,10 @@
             "position": "Defender",
             "picture": "assets/users/Joseph.jpg"
           }
+        },
+        {
+          "id": 3,
+          "user": {}
         },
         {
           "id": 4,
@@ -332,22 +292,30 @@
         },
         {
           "id": 5,
-          "user": {}
+          "user": {
+            "id": 8,
+            "username": "Vince",
+            "password": "match123",
+            "email": "Vince9@gmail.com",
+            "birthday": "1992-09-20",
+            "position": "Forward",
+            "picture": "assets/users/Vince.jpg"
+          }
         }
       ],
       "id": 2
     },
     {
-      "date": "2022-03-29",
-      "startTime": "21:00",
-      "endTime": "22:00",
+      "date": "2022-03-30",
+      "startTime": "11:00",
+      "endTime": "12:00",
       "location": "Scandicci",
       "positions": {
         "goalkeepers": 2,
-        "defenders": 1,
-        "forwards": 4
+        "defenders": 3,
+        "forwards": 1
       },
-      "blackTeam": [
+      "teamBlack": [
         {
           "team": "Black"
         },
@@ -365,34 +333,22 @@
         },
         {
           "id": 2,
-          "user": {
-            "id": 1,
-            "username": "Carl",
-            "password": "match123",
-            "email": "Carl4@gmail.com",
-            "birthday": "1990-07-05",
-            "position": "Defender",
-            "picture": "assets/users/Carl.jpg"
-          }
-        },
-        {
-          "id": 3,
           "user": {}
         },
         {
-          "id": 4,
+          "id": 3,
           "user": {
-            "id": 6,
-            "username": "Stephan",
+            "id": 4,
+            "username": "Anthony",
             "password": "match123",
-            "email": "Stephan8@gmail.com",
-            "birthday": "1960-11-11",
-            "position": "Forward",
-            "picture": "assets/users/Stephan.jpg"
+            "email": "Anthony2@gmail.com",
+            "birthday": "1999-01-03",
+            "position": "Defender",
+            "picture": "assets/users/Anthony.jpg"
           }
         },
         {
-          "id": 5,
+          "id": 4,
           "user": {
             "id": 5,
             "username": "Henry",
@@ -402,9 +358,13 @@
             "position": "Forward",
             "picture": "assets/users/Henry.jpg"
           }
+        },
+        {
+          "id": 5,
+          "user": {}
         }
       ],
-      "whiteTeam": [
+      "teamWhite": [
         {
           "team": "White"
         },
@@ -422,246 +382,50 @@
         },
         {
           "id": 2,
-          "user": {}
+          "user": {
+            "id": 2,
+            "username": "Tony",
+            "password": "match123",
+            "email": "Tony3@gmail.com",
+            "birthday": "1988-02-21",
+            "position": "Defender",
+            "picture": "assets/users/Tony.jpg"
+          }
         },
         {
           "id": 3,
-          "user": {}
+          "user": {
+            "id": 3,
+            "username": "Joseph",
+            "password": "match123",
+            "email": "Joseph5@gmail.com",
+            "birthday": "2005-04-01",
+            "position": "Defender",
+            "picture": "assets/users/Joseph.jpg"
+          }
         },
         {
           "id": 4,
-          "user": {
-            "id": 7,
-            "username": "Matthew",
-            "password": "match123",
-            "email": "Matthew7@gmail.com",
-            "birthday": "1978-08-31",
-            "position": "Forward",
-            "picture": "assets/users/Matthew.jpg"
-          }
+          "user": {}
         },
         {
           "id": 5,
-          "user": {
-            "id": 8,
-            "username": "Vince",
-            "password": "match123",
-            "email": "Vince9@gmail.com",
-            "birthday": "1992-09-20",
-            "position": "Forward",
-            "picture": "assets/users/Vince.jpg"
-          }
+          "user": {}
         }
       ],
       "id": 3
     },
     {
-      "date": "2022-03-23",
-      "startTime": "18:30",
-      "endTime": "19:30",
-      "location": "Cerbaia",
-      "positions": {
-        "goalkeepers": 1,
-        "defenders": 1,
-        "forwards": 2
-      },
-      "blackTeam": [
-        {
-          "team": "Black"
-        },
-        {
-          "id": 1,
-          "user": {}
-        },
-        {
-          "id": 2,
-          "user": {
-            "id": 1,
-            "username": "Carl",
-            "password": "match123",
-            "email": "Carl4@gmail.com",
-            "birthday": "1990-07-05",
-            "position": "Defender",
-            "picture": "assets/users/Carl.jpg"
-          }
-        },
-        {
-          "id": 3,
-          "user": {}
-        },
-        {
-          "id": 4,
-          "user": {
-            "id": 7,
-            "username": "Matthew",
-            "password": "match123",
-            "email": "Matthew7@gmail.com",
-            "birthday": "1978-08-31",
-            "position": "Forward",
-            "picture": "assets/users/Matthew.jpg"
-          }
-        },
-        {
-          "id": 5,
-          "user": {}
-        }
-      ],
-      "whiteTeam": [
-        {
-          "team": "White"
-        },
-        {
-          "id": 1,
-          "user": {
-            "id": 9,
-            "username": "Paul",
-            "password": "match123",
-            "email": "Paul1@gmail.com",
-            "birthday": "2003-10-09",
-            "position": "Goalkeeper",
-            "picture": "assets/users/Paul.jpg"
-          }
-        },
-        {
-          "id": 2,
-          "user": {}
-        },
-        {
-          "id": 3,
-          "user": {}
-        },
-        {
-          "id": 4,
-          "user": {}
-        },
-        {
-          "id": 5,
-          "user": {
-            "id": 5,
-            "username": "Henry",
-            "password": "match123",
-            "email": "Henry6@gmail.com",
-            "birthday": "1985-05-17",
-            "position": "Forward",
-            "picture": "assets/users/Henry.jpg"
-          }
-        }
-      ],
-      "id": 4
-    },
-    {
-      "date": "2022-03-08",
-      "startTime": "11:00",
-      "endTime": "12:30",
-      "location": "Albereta",
-      "positions": {
-        "goalkeepers": 0,
-        "defenders": 4,
-        "forwards": 1
-      },
-      "blackTeam": [
-        {
-          "team": "Black"
-        },
-        {
-          "id": 1,
-          "user": {}
-        },
-        {
-          "id": 2,
-          "user": {
-            "id": 1,
-            "username": "Carl",
-            "password": "match123",
-            "email": "Carl4@gmail.com",
-            "birthday": "1990-07-05",
-            "position": "Defender",
-            "picture": "assets/users/Carl.jpg"
-          }
-        },
-        {
-          "id": 3,
-          "user": {
-            "id": 3,
-            "username": "Joseph",
-            "password": "match123",
-            "email": "Joseph5@gmail.com",
-            "birthday": "2005-04-01",
-            "position": "Defender",
-            "picture": "assets/users/Joseph.jpg"
-          }
-        },
-        {
-          "id": 4,
-          "user": {
-            "id": 7,
-            "username": "Matthew",
-            "password": "match123",
-            "email": "Matthew7@gmail.com",
-            "birthday": "1978-08-31",
-            "position": "Forward",
-            "picture": "assets/users/Matthew.jpg"
-          }
-        },
-        {
-          "id": 5,
-          "user": {}
-        }
-      ],
-      "whiteTeam": [
-        {
-          "team": "White"
-        },
-        {
-          "id": 1,
-          "user": {}
-        },
-        {
-          "id": 2,
-          "user": {
-            "id": 4,
-            "username": "Anthony",
-            "password": "match123",
-            "email": "Anthony2@gmail.com",
-            "birthday": "1999-01-03",
-            "position": "Defender",
-            "picture": "assets/users/Anthony.jpg"
-          }
-        },
-        {
-          "id": 3,
-          "user": {
-            "id": 2,
-            "username": "Tony",
-            "password": "match123",
-            "email": "Tony3@gmail.com",
-            "birthday": "1988-02-21",
-            "position": "Defender",
-            "picture": "assets/users/Tony.jpg"
-          }
-        },
-        {
-          "id": 4,
-          "user": {}
-        },
-        {
-          "id": 5,
-          "user": {}
-        }
-      ],
-      "id": 5
-    },
-    {
       "date": "2022-03-15",
-      "startTime": "15:00",
-      "endTime": "16:15",
-      "location": "Impruneta",
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "location": "Fiesole",
       "positions": {
         "goalkeepers": 1,
-        "defenders": 0,
+        "defenders": 3,
         "forwards": 4
       },
-      "blackTeam": [
+      "teamBlack": [
         {
           "team": "Black"
         },
@@ -683,48 +447,15 @@
         },
         {
           "id": 3,
-          "user": {}
-        },
-        {
-          "id": 4,
           "user": {
-            "id": 7,
-            "username": "Matthew",
+            "id": 4,
+            "username": "Anthony",
             "password": "match123",
-            "email": "Matthew7@gmail.com",
-            "birthday": "1978-08-31",
-            "position": "Forward",
-            "picture": "assets/users/Matthew.jpg"
+            "email": "Anthony2@gmail.com",
+            "birthday": "1999-01-03",
+            "position": "Defender",
+            "picture": "assets/users/Anthony.jpg"
           }
-        },
-        {
-          "id": 5,
-          "user": {
-            "id": 5,
-            "username": "Henry",
-            "password": "match123",
-            "email": "Henry6@gmail.com",
-            "birthday": "1985-05-17",
-            "position": "Forward",
-            "picture": "assets/users/Henry.jpg"
-          }
-        }
-      ],
-      "whiteTeam": [
-        {
-          "team": "White"
-        },
-        {
-          "id": 1,
-          "user": {}
-        },
-        {
-          "id": 2,
-          "user": {}
-        },
-        {
-          "id": 3,
-          "user": {}
         },
         {
           "id": 4,
@@ -741,303 +472,6 @@
         {
           "id": 5,
           "user": {
-            "id": 8,
-            "username": "Vince",
-            "password": "match123",
-            "email": "Vince9@gmail.com",
-            "birthday": "1992-09-20",
-            "position": "Forward",
-            "picture": "assets/users/Vince.jpg"
-          }
-        }
-      ],
-      "id": 6
-    },
-    {
-      "date": "2022-03-08",
-      "startTime": "16:00",
-      "endTime": "17:30",
-      "location": "Galluzzo",
-      "positions": {
-        "goalkeepers": 2,
-        "defenders": 2,
-        "forwards": 2
-      },
-      "blackTeam": [
-        {
-          "team": "Black"
-        },
-        {
-          "id": 1,
-          "user": {
-            "id": 10,
-            "username": "Robert",
-            "password": "match123",
-            "email": "Robert12@gmail.com",
-            "birthday": "2003-12-7",
-            "position": "Goalkeeper",
-            "picture": "assets/users/Robert.jpg"
-          }
-        },
-        {
-          "id": 2,
-          "user": {
-            "id": 1,
-            "username": "Carl",
-            "password": "match123",
-            "email": "Carl4@gmail.com",
-            "birthday": "1990-07-05",
-            "position": "Defender",
-            "picture": "assets/users/Carl.jpg"
-          }
-        },
-        {
-          "id": 3,
-          "user": {
-            "id": 4,
-            "username": "Anthony",
-            "password": "match123",
-            "email": "Anthony2@gmail.com",
-            "birthday": "1999-01-03",
-            "position": "Defender",
-            "picture": "assets/users/Anthony.jpg"
-          }
-        },
-        {
-          "id": 4,
-          "user": {
-            "id": 7,
-            "username": "Matthew",
-            "password": "match123",
-            "email": "Matthew7@gmail.com",
-            "birthday": "1978-08-31",
-            "position": "Forward",
-            "picture": "assets/users/Matthew.jpg"
-          }
-        },
-        {
-          "id": 5,
-          "user": {}
-        }
-      ],
-      "whiteTeam": [
-        {
-          "team": "White"
-        },
-        {
-          "id": 1,
-          "user": {
-            "id": 9,
-            "username": "Paul",
-            "password": "match123",
-            "email": "Paul1@gmail.com",
-            "birthday": "2003-10-09",
-            "position": "Goalkeeper",
-            "picture": "assets/users/Paul.jpg"
-          }
-        },
-        {
-          "id": 2,
-          "user": {}
-        },
-        {
-          "id": 3,
-          "user": {}
-        },
-        {
-          "id": 4,
-          "user": {
-            "id": 8,
-            "username": "Vince",
-            "password": "match123",
-            "email": "Vince9@gmail.com",
-            "birthday": "1992-09-20",
-            "position": "Forward",
-            "picture": "assets/users/Vince.jpg"
-          }
-        },
-        {
-          "id": 5,
-          "user": {}
-        }
-      ],
-      "id": 7
-    },
-    {
-      "date": "2022-06-15",
-      "startTime": "16:25",
-      "endTime": "17:25",
-      "location": "Settignano",
-      "positions": {
-        "goalkeepers": 2,
-        "defenders": 2,
-        "forwards": 3
-      },
-      "blackTeam": [
-        {
-          "team": "Black"
-        },
-        {
-          "id": 1,
-          "user": {
-            "id": 9,
-            "username": "Paul",
-            "password": "match123",
-            "email": "Paul1@gmail.com",
-            "birthday": "2003-10-09",
-            "position": "Goalkeeper",
-            "picture": "assets/users/Paul.jpg"
-          }
-        },
-        {
-          "id": 2,
-          "user": {
-            "id": 1,
-            "username": "Carl",
-            "password": "match123",
-            "email": "Carl4@gmail.com",
-            "birthday": "1990-07-05",
-            "position": "Defender",
-            "picture": "assets/users/Carl.jpg"
-          }
-        },
-        {
-          "id": 3,
-          "user": {}
-        },
-        {
-          "id": 4,
-          "user": {
-            "id": 5,
-            "username": "Henry",
-            "password": "match123",
-            "email": "Henry6@gmail.com",
-            "birthday": "1985-05-17",
-            "position": "Forward",
-            "picture": "assets/users/Henry.jpg"
-          }
-        },
-        {
-          "id": 5,
-          "user": {
-            "id": 7,
-            "username": "Matthew",
-            "password": "match123",
-            "email": "Matthew7@gmail.com",
-            "birthday": "1978-08-31",
-            "position": "Forward",
-            "picture": "assets/users/Matthew.jpg"
-          }
-        }
-      ],
-      "whiteTeam": [
-        {
-          "team": "White"
-        },
-        {
-          "id": 1,
-          "user": {
-            "id": 10,
-            "username": "Robert",
-            "password": "match123",
-            "email": "Robert12@gmail.com",
-            "birthday": "2003-12-7",
-            "position": "Goalkeeper",
-            "picture": "assets/users/Robert.jpg"
-          }
-        },
-        {
-          "id": 2,
-          "user": {
-            "id": 4,
-            "username": "Anthony",
-            "password": "match123",
-            "email": "Anthony2@gmail.com",
-            "birthday": "1999-01-03",
-            "position": "Defender",
-            "picture": "assets/users/Anthony.jpg"
-          }
-        },
-        {
-          "id": 3,
-          "user": {}
-        },
-        {
-          "id": 4,
-          "user": {
-            "id": 3,
-            "username": "Joseph",
-            "password": "match123",
-            "email": "Joseph5@gmail.com",
-            "birthday": "2005-04-01",
-            "position": "Defender",
-            "picture": "assets/users/Joseph.jpg"
-          }
-        },
-        {
-          "id": 5,
-          "user": {}
-        }
-      ],
-      "id": 8
-    },
-    {
-      "date": "2022-03-09",
-      "startTime": "18:30",
-      "endTime": "19:30",
-      "location": "Impruneta",
-      "positions": {
-        "goalkeepers": 1,
-        "defenders": 3,
-        "forwards": 3
-      },
-      "blackTeam": [
-        {
-          "team": "Black"
-        },
-        {
-          "id": 1,
-          "user": {}
-        },
-        {
-          "id": 2,
-          "user": {
-            "id": 1,
-            "username": "Carl",
-            "password": "match123",
-            "email": "Carl4@gmail.com",
-            "birthday": "1990-07-05",
-            "position": "Defender",
-            "picture": "assets/users/Carl.jpg"
-          }
-        },
-        {
-          "id": 3,
-          "user": {
-            "id": 2,
-            "username": "Tony",
-            "password": "match123",
-            "email": "Tony3@gmail.com",
-            "birthday": "1988-02-21",
-            "position": "Defender",
-            "picture": "assets/users/Tony.jpg"
-          }
-        },
-        {
-          "id": 4,
-          "user": {
-            "id": 7,
-            "username": "Matthew",
-            "password": "match123",
-            "email": "Matthew7@gmail.com",
-            "birthday": "1978-08-31",
-            "position": "Forward",
-            "picture": "assets/users/Matthew.jpg"
-          }
-        },
-        {
-          "id": 5,
-          "user": {
             "id": 5,
             "username": "Henry",
             "password": "match123",
@@ -1048,21 +482,13 @@
           }
         }
       ],
-      "whiteTeam": [
+      "teamWhite": [
         {
           "team": "White"
         },
         {
           "id": 1,
-          "user": {
-            "id": 9,
-            "username": "Paul",
-            "password": "match123",
-            "email": "Paul1@gmail.com",
-            "birthday": "2003-10-09",
-            "position": "Goalkeeper",
-            "picture": "assets/users/Paul.jpg"
-          }
+          "user": {}
         },
         {
           "id": 2,
@@ -1082,10 +508,6 @@
         },
         {
           "id": 4,
-          "user": {}
-        },
-        {
-          "id": 5,
           "user": {
             "id": 8,
             "username": "Vince",
@@ -1095,9 +517,21 @@
             "position": "Forward",
             "picture": "assets/users/Vince.jpg"
           }
+        },
+        {
+          "id": 5,
+          "user": {
+            "id": 7,
+            "username": "Matthew",
+            "password": "match123",
+            "email": "Matthew7@gmail.com",
+            "birthday": "1978-08-31",
+            "position": "Forward",
+            "picture": "assets/users/Matthew.jpg"
+          }
         }
       ],
-      "id": 9
+      "id": 4
     }
   ]
 }

@@ -31,6 +31,7 @@ export default {
       const userData = res.data[0];
       if (userData) {
         commit('setUser', userData);
+        commit('setLoginStatus', true);
         return true;
       } return false;
     },

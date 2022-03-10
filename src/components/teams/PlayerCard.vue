@@ -9,144 +9,151 @@
 
     <div :class="xsOnly ? 'overCard-small' : 'overCard'">
 
-      <v-container fill-height v-if="spotTaken">
+      <v-slide-y-transition hide-on-leave>
 
-        <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
+        <v-container fill-height v-if="spotTaken">
 
-          <v-btn
-          v-if="!isOverview || user.id === spot.user.id"
-          style="z-index: 1000;"
-          x-small
-          :width="xsOnly ? 20 : null"
-          :height="xsOnly ? 20 : null"
-          fab color="red darken-4" dark
-          @click.stop="deletePlayer()"
-          >
-            <v-icon class="shadow" :x-small="xsOnly">mdi-close</v-icon>
-          </v-btn>
+          <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
 
-          <v-dialog
-          v-model="dialogDelete"
-          max-width="290"
-          persistent
-          >
-            <v-card :dark="darkMode" tile>
-              <v-card-text class="pt-3 pb-2">
-                <h1
-                :class="['text-subtitle-1 font-weight-medium',
-                {'grey--text text--darken-3': !darkMode}]"
-                >
-                  Do you want to leave this match?
-                </h1>
-              </v-card-text>
-
-              <v-card-actions>
-
-                <v-spacer></v-spacer>
-
-                <v-btn
-                :dark="darkMode"
-                small
-                text
-                color="red"
-                :disabled=loading
-                @click="dialogDelete = false"
-                >
-                  back
-                </v-btn>
-
-                <v-btn
-                dark
-                small
-                color="green"
-                :loading=loading
-                @click="removeFromExistingMatch()"
-                >
-                  yes
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-
-          </v-dialog>
-
-        </div>
-
-        <v-row justify="center">
-          <v-avatar
-          rounded="sm"
-          :size="xsOnly ? 51 : 71"
-          :class="[xsOnly ? 'mt-1' : 'mt-4', 'avatar-contrast']"
-          >
-            <img :src="getPicture" >
-          </v-avatar>
-        </v-row>
-
-        <v-row justify="center">
-          <h1
-          :class="['text-center font-weight-light',
-          xsOnly ? 'text-caption' : 'text-subtitle-1 pb-4',
-          {'white--text': teamSelected === 'black'}]"
-          >
-            {{ spot.user.username }}
-          </h1>
-        </v-row>
-
-        <v-row>
-          <v-divider
-          :class="['divide',
-          {'divide-opacity': teamSelected === 'white'},
-          {'divide-spacing': xsOnly}]"
-          style="border-color: grey !important"
-          ></v-divider>
-        </v-row>
-
-        <v-row justify="center">
-          <v-icon
-          :class="[{'icon-white': teamSelected === 'black'},
-          xsOnly ? 'pb-1' : 'pb-6']"
-          :size="iconSize"
-          >
-            {{ positionIcon }}
-          </v-icon>
-        </v-row>
-
-      </v-container>
-
-      <v-container fill-height v-else>
-
-        <v-row
-        justify="center"
-        no-gutters
-        :class="xsOnly ? '' : 'mt-1'"
-        >
-          <v-btn
-          fab
-          outlined
-          :x-small="xsOnly"
-          :dark="teamSelected === 'black'"
-          @click.stop="invitationDialog = true"
-          >
-
-            <v-icon
-            :size="xsOnly ? 26 : 38"
+            <v-btn
+            v-if="!isOverview || user.id === spot.user.id"
+            style="z-index: 1000;"
+            x-small
+            :width="xsOnly ? 20 : null"
+            :height="xsOnly ? 20 : null"
+            fab color="red darken-4" dark
+            @click.stop="deletePlayer()"
             >
-              mdi-plus
+              <v-icon class="shadow" :x-small="xsOnly">mdi-close</v-icon>
+            </v-btn>
+
+            <v-dialog
+            v-model="dialogDelete"
+            max-width="290"
+            persistent
+            >
+              <v-card :dark="darkMode" tile>
+                <v-card-text class="pt-3 pb-2">
+                  <h1
+                  :class="['text-subtitle-1 font-weight-medium',
+                  {'grey--text text--darken-3': !darkMode}]"
+                  >
+                    Do you want to leave this match?
+                  </h1>
+                </v-card-text>
+
+                <v-card-actions>
+
+                  <v-spacer></v-spacer>
+
+                  <v-btn
+                  :dark="darkMode"
+                  small
+                  text
+                  color="red"
+                  :disabled=loading
+                  @click="dialogDelete = false"
+                  >
+                    back
+                  </v-btn>
+
+                  <v-btn
+                  dark
+                  small
+                  color="green"
+                  :loading=loading
+                  @click="removeFromExistingMatch()"
+                  >
+                    yes
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+
+            </v-dialog>
+
+          </div>
+
+          <v-row justify="center">
+            <v-avatar
+            rounded="sm"
+            :size="xsOnly ? 51 : 71"
+            :class="[xsOnly ? 'mt-1' : 'mt-4', 'avatar-contrast']"
+            >
+              <img :src="getPicture" >
+            </v-avatar>
+          </v-row>
+
+          <v-row justify="center">
+            <h1
+            :class="['text-center font-weight-light',
+            xsOnly ? 'text-caption' : 'text-subtitle-1 pb-4',
+            {'white--text': teamSelected === 'black'}]"
+            >
+              {{ spot.user.username }}
+            </h1>
+          </v-row>
+
+          <v-row>
+            <v-divider
+            :class="['divide',
+            {'divide-opacity': teamSelected === 'white'},
+            {'divide-spacing': xsOnly}]"
+            style="border-color: grey !important"
+            ></v-divider>
+          </v-row>
+
+          <v-row justify="center">
+            <v-icon
+            :class="[{'icon-white': teamSelected === 'black'},
+            xsOnly ? 'pb-1' : 'pb-6']"
+            :size="iconSize"
+            >
+              {{ positionIcon }}
             </v-icon>
+          </v-row>
 
-          </v-btn>
-        </v-row>
+        </v-container>
 
-        <v-row justify="center">
-          <v-icon
-          :class="['pt-0',
-          {'icon-white': teamSelected === 'black'}]"
-          :size="iconSize"
+      </v-slide-y-transition>
+
+      <v-slide-y-reverse-transition hide-on-leave>
+
+        <v-container fill-height v-if="!spotTaken">
+
+          <v-row
+          justify="center"
+          no-gutters
+          :class="xsOnly ? '' : 'mt-1'"
           >
-            {{ positionIcon }}
-          </v-icon>
-        </v-row>
+            <v-btn
+            fab
+            outlined
+            :x-small="xsOnly"
+            :dark="teamSelected === 'black'"
+            @click.stop="invitationDialog = true"
+            >
 
-      </v-container>
+              <v-icon
+              :size="xsOnly ? 26 : 38"
+              >
+                mdi-plus
+              </v-icon>
+
+            </v-btn>
+          </v-row>
+
+          <v-row justify="center">
+            <v-icon
+            :class="['pt-0',
+            {'icon-white': teamSelected === 'black'}]"
+            :size="iconSize"
+            >
+              {{ positionIcon }}
+            </v-icon>
+          </v-row>
+
+        </v-container>
+      </v-slide-y-reverse-transition>
 
     </div>
   </div>

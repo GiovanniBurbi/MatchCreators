@@ -48,6 +48,32 @@
     :matches="userMatches"
     class="pt-6"/>
 
+    <v-container v-if="userMatches.length === 0">
+      <v-row justify="center">
+        <h1
+        style="white-space:nowrap"
+        :class="['text-shadow white--text font-weight-medium',
+        {'text-h4': mdAndUp},
+        {'text-h5': smOnly},
+        {'text-subtitle-1': xsOnly}]"
+        >
+          No upcoming matches to play
+        </h1>
+      </v-row>
+      <v-row justify="center">
+        <h1
+        style="white-space:nowrap"
+        :class="['text-shadow white--text font-weight-medium',
+        {'text-h6': mdAndUp},
+        {'text-subtitle-1': smOnly},
+        {'text-caption': xsOnly}]"
+        >
+        <span v-if="isFinder">Search a new match and join it!</span>
+        <span v-if="!isFinder">Try to create a new match!</span>
+        </h1>
+      </v-row>
+    </v-container>
+
   </v-container>
 </template>
 
