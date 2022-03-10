@@ -2,11 +2,6 @@
 node_modules
 /dist
 
-.editorconfig
-babel.config.js
-jsconfig.json
-
-
 # local env files
 .env.local
 .env.*.local
