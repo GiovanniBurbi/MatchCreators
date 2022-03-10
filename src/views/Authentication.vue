@@ -38,6 +38,7 @@ export default {
   },
 
   created() {
+    /* set the app mode to authentication when this component is created */
     this.appMode('authentication');
   },
 

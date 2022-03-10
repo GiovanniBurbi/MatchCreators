@@ -85,3 +85,6 @@ Now you can use the application from your mobile device:
   ```
   This will start also json-server on '< *your IPV4 Address* >:3000'
 * **From a mobile device** start a browser and **use the Network URL generated in the above step**.
+
+
+Some icons and images are taken from internet for educational purposes.

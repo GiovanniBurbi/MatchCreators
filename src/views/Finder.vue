@@ -109,6 +109,7 @@ export default {
   },
 
   created() {
+    /* when the component is created fetch all matches */
     this.fetchMatches();
   },
 

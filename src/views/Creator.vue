@@ -209,6 +209,7 @@ export default {
   watch: {
     loading(val) {
       if (!val) {
+        /* after the creation of the match go to my matches section */
         this.setAppSection('my-matches');
         this.step = 1;
       }
@@ -219,6 +220,8 @@ export default {
     },
 
     step(newVal) {
+      /* set team selected to black when step is 2,
+      the user will be placed in team black by default */
       if (newVal === 2) this.setTeamSelected('black');
     },
   },
