@@ -1,7 +1,9 @@
 <template>
+<div>
+  <div class="background"></div>
   <v-container
   fluid
-  :class="['background', {'content-padding': mdAndUp}]"
+  :class="['content', {'content-padding': mdAndUp}]"
   >
 
     <v-slide-y-reverse-transition hide-on-leave>
@@ -75,6 +77,7 @@
     </v-dialog>
 
   </v-container>
+</div>
 </template>
 
 <script>
@@ -124,13 +127,18 @@ export default {
 
 <style scoped>
 .background {
+  position: fixed;
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   background:linear-gradient(to bottom,rgba(0, 0, 0, 0.4),
   rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/daylight.jpg')
   no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
+}
+.content {
+  position: absolute;
 }
 </style>
