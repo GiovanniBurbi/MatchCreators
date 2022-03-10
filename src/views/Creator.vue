@@ -238,8 +238,8 @@ export default {
 <style scoped>
 .background {
   height: 100%;
-  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.5),
-  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/night.jpg') center center no-repeat;
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.6),
+  rgba(0, 0, 0, 0.4)), url('../assets/backgrounds/night.jpg') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
