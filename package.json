@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "npx json-server --watch backend/db.json & vue-cli-service serve",
+    "serve": "npx json-server --watch backend/db.json --host 192.168.1.196 & vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
