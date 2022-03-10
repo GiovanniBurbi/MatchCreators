@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import PositionButton from './PositionButton.vue';
 
@@ -105,6 +105,8 @@ export default {
   },
 
   methods: {
+    ...mapMutations({ resetSelection: 'posInputField/setPosSelection' }),
+
     /* method that verify if position form has been completed */
     validate() {
       if (this.currentSelection === '') {
@@ -113,6 +115,10 @@ export default {
         return false;
       } return true;
     },
+  },
+
+  beforeDestroy() {
+    this.resetSelection('');
   },
 
   mixins: [BreakpointsCond],

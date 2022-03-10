@@ -38,7 +38,7 @@ export default {
 
     async signup({ commit }, userData) {
       /* register user in db */
-      await UserService.registerUser(JSON.stringify(userData));
+      await UserService.registerUser(userData);
       /* set the user in the vuex auth/state */
       commit('setUser', userData);
       commit('setLoginStatus', true);

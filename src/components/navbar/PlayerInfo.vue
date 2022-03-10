@@ -26,7 +26,9 @@
       </v-row>
 
       <v-row justify="center" class="mt-4">
-        <h1 class="text-subtitle-2 font-weight-regular">{{getAge(user.birthday)}} years old</h1>
+        <h1 class="text-subtitle-2 font-weight-regular">
+          {{getAge(user.birthday)}} years old
+        </h1>
       </v-row>
 
       <v-row justify="center" class="mt-6">

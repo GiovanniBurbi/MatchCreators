@@ -129,25 +129,30 @@ export default {
     return false;
   },
 
+  computePositionsFill(teamBlack, teamWhite) {
+    const positions = {
+      goalkeepers: 0,
+      defenders: 0,
+      forwards: 0,
+    };
+    for (let i = 1; i <= this.teamSize; i += 1) {
+      if (!this.isEmpty(teamBlack[i].user)) {
+        positions[this.extractPositions(i)] += 1;
+      }
+      if (!this.isEmpty(teamWhite[i].user)) {
+        positions[this.extractPositions(i)] += 1;
+      }
+    }
+    return positions;
+  },
+
   createMatch(details, teamBlack, teamWhite) {
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
         const date = details[0];
         const location = details[2];
         const times = details[1].split(' - ');
-        const positions = {
-          goalkeepers: 0,
-          defenders: 0,
-          forwards: 0,
-        };
-        for (let i = 1; i <= this.teamSize; i += 1) {
-          if (!this.isEmpty(teamBlack[i].user)) {
-            positions[this.extractPositions(i)] += 1;
-          }
-          if (!this.isEmpty(teamWhite[i].user)) {
-            positions[this.extractPositions(i)] += 1;
-          }
-        }
+        const positions = this.computePositionsFill(teamBlack, teamWhite);
 
         const match = {
           date,
@@ -237,14 +242,22 @@ export default {
         const matchCopy = JSON.parse(JSON.stringify(match));
         if (team === 'black') {
           matchCopy.teamBlack[spotId].user = {};
+          const updatedPositions = this.computePositionsFill(
+            matchCopy.teamBlack, matchCopy.teamWhite,
+          );
           const updatedTeam = {
             teamBlack: matchCopy.teamBlack,
+            positions: updatedPositions,
           };
           resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
         } else {
           matchCopy.teamWhite[spotId].user = {};
+          const updatedPositions = this.computePositionsFill(
+            matchCopy.teamBlack, matchCopy.teamWhite,
+          );
           const updatedTeam = {
             teamWhite: matchCopy.teamWhite,
+            positions: updatedPositions,
           };
           resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
         }
@@ -259,14 +272,23 @@ export default {
         const matchCopy = JSON.parse(JSON.stringify(match));
         if (team === 'black') {
           matchCopy.teamBlack[spotId].user = player;
+          const updatedPositions = this.computePositionsFill(
+            matchCopy.teamBlack, matchCopy.teamWhite,
+          );
           const updatedTeam = {
             teamBlack: matchCopy.teamBlack,
+            positions: updatedPositions,
           };
           resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
         } else {
           matchCopy.teamWhite[spotId].user = player;
+          const updatedPositions = this.computePositionsFill(
+            matchCopy.teamBlack, matchCopy.teamWhite,
+          );
+          this.countParticipants(matchCopy.teamBlack, matchCopy.teamWhite);
           const updatedTeam = {
             teamWhite: matchCopy.teamWhite,
+            positions: updatedPositions,
           };
           resolve(apiClient.patch(`/matches/${match.id}`, JSON.stringify(updatedTeam)));
         }

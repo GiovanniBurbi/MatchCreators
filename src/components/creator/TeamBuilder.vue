@@ -9,6 +9,7 @@
     </v-row>
 
     <v-dialog
+    v-if="!isOverview"
     v-model="invitationDialog"
     :max-width="xsOnly ? 320 : 400"
     style="z-index: 2000"
@@ -42,6 +43,7 @@ export default {
       user: 'auth/getUser',
       teamBlack: 'matches/getTeamBlack',
       teamWhite: 'matches/getTeamWhite',
+      isOverview: 'app/isMatchOverview',
     }),
 
     invitationDialog: {

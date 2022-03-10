@@ -56,6 +56,9 @@ export default {
     },
 
     $route() {
+      /* If route is Finder or Creator and logged is not done,
+      then redirect to the authentication page.
+      It also sets the mode of the app. */
       if (this.$route.name === 'Finder') {
         if (!this.logged) {
           this.$router.replace({ name: 'Authentication' });
@@ -106,6 +109,7 @@ export default {
 </script>
 
 <style>
+/* Global css style */
 .content-padding {
   padding: 0 5vw 0;
 }

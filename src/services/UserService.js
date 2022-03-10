@@ -31,7 +31,10 @@ export default {
   registerUser(userData) {
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
-        resolve(apiClient.post('/users', userData));
+        const user = userData;
+        user.picture = 'assets/users/match.jpg';
+        resolve(apiClient.post('/users', JSON.stringify(user)));
+        resolve('ciao');
       }, 500);
     });
     return promise;

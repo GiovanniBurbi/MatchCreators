@@ -145,6 +145,13 @@ export default {
       if (state.teamSelected === 'black') {
         state.matchToOverview.teamBlack[spotId].user = {};
       } else state.matchToOverview.teamWhite[spotId].user = {};
+      if (state.cardIdSelected === 1) {
+        state.matchToOverview.positions.goalkeepers -= 1;
+      }
+      if (state.cardIdSelected === 2 || state.cardIdSelected === 3) {
+        state.matchToOverview.positions.defenders -= 1;
+      }
+      state.matchToOverview.positions.forwards -= 1;
     },
 
     setUserIsPresentInOverview(state, value) {
@@ -155,6 +162,13 @@ export default {
       if (state.teamSelected === 'black') {
         state.matchToOverview.teamBlack[state.cardIdSelected].user = player;
       } else state.matchToOverview.teamWhite[state.cardIdSelected].user = player;
+      if (state.cardIdSelected === 1) {
+        state.matchToOverview.positions.goalkeepers += 1;
+      }
+      if (state.cardIdSelected === 2 || state.cardIdSelected === 3) {
+        state.matchToOverview.positions.defenders += 1;
+      }
+      state.matchToOverview.positions.forwards += 1;
     },
   },
 
@@ -251,17 +265,13 @@ export default {
         });
     },
 
-    async addPlayerInMatch({
-      state, commit, dispatch, rootGetters,
-    }, player) {
+    async addPlayerInMatch({ state, commit, dispatch }, player) {
       commit('setLoading', true);
       await MatchService.addPlayerInMatch(state.matchToOverview,
         state.teamSelected, state.cardIdSelected, player)
         .then(async () => {
           await dispatch('updateMatches');
-          if (player.id === rootGetters['auth/getUser'].id) {
-            await dispatch('updateUserMatches');
-          }
+          await dispatch('updateUserMatches');
           commit('addPlayerInOverviewTeam', player);
           commit('setLoading', false);
         });
