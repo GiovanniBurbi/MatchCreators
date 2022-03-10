@@ -1,7 +1,11 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://192.168.1.196:3000',
+  /* baseURL: 'http://192.168.x.x:3000', */
+
+  /* for mobile comment the next line (baseURL) and change the first line
+  with your local ip replacing the two 'x' with your values */
+  baseURL: 'http://localhost:3000',
   withCredentials: false,
   headers: {
     Accept: 'application/json',
