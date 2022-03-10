@@ -217,10 +217,17 @@ export default {
     matchCreated(newVal) {
       if (newVal) this.snackbar = true;
     },
+
+    step(newVal) {
+      if (newVal === 2) this.setTeamSelected('black');
+    },
   },
 
   methods: {
-    ...mapMutations({ setAppSection: 'app/setAppSection' }),
+    ...mapMutations({
+      setAppSection: 'app/setAppSection',
+      setTeamSelected: 'matches/setTeamSelected',
+    }),
     ...mapActions({ createMatch: 'matches/createMatch' }),
   },
 
@@ -231,9 +238,10 @@ export default {
 <style scoped>
 .background {
   height: 100%;
-  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.7),
-  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/night.jpg') center center no-repeat fixed;
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.5),
+  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/night.jpg') center center no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 .stepper-margin-lg {
   margin: 16px 8vw;

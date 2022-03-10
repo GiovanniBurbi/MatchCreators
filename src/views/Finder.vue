@@ -126,9 +126,10 @@ export default {
   display: flex;
   justify-content: center;
   height: 100%;
-  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.45),
-  rgba(0, 0, 0, 0.3)), url('../assets/backgrounds/daylight.jpg')
-  no-repeat center center fixed;
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.2),
+  rgba(0, 0, 0, 0.1)), url('../assets/backgrounds/daylight.jpg')
+  no-repeat center center;
   background-size: cover;
+  background-attachment: fixed;
 }
 </style>
