@@ -285,10 +285,7 @@ export default {
       signup: 'auth/signup',
     }),
 
-    ...mapMutations({
-      resetSelection: 'posInputField/setPosSelection',
-      setLogged: 'auth/setLoginStatus',
-    }),
+    ...mapMutations({ resetSelection: 'posInputField/setPosSelection' }),
 
     save(date) {
       this.$refs.menu.save(date);
@@ -308,7 +305,6 @@ export default {
           { name: this.username, psw: this.password },
         ).then((val) => {
           if (val) {
-            this.setLogged(true);
             this.$router.push({ name: 'Finder' });
           } else {
             this.loginErrorMsg.push('Invalid access');
