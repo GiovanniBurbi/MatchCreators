@@ -21,7 +21,7 @@ The goal of this project is apply the methodologies learned in the course of HCI
 
 The backend is not the focus of this project, so has been used **JSON-server**, a full fake REST API with CRUD operations, and using some timeouts to fake backend delays. To make HTTP requests has been used **Axios**, a promise based HTTP client for the browser and node.js.
 
-For more details on the development process of the project and the tools used see the [Final Report](TODO).
+For more details on the development process of the project and the tools used see the [Final Report]().
 ## Getting started
 ### Using IDE
 * **Clone this repository** in your IDE, **Visual Studio Code** has been used for this project.
