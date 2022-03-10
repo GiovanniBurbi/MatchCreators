@@ -1,3 +1,5 @@
+/* Some data and methods common to some components. */
+
 import { format, parseISO } from 'date-fns';
 
 export default {
@@ -35,14 +37,18 @@ export default {
     },
 
     getTime() {
+      /* format start and end times in a single
+      string */
       return `${this.start} - ${this.end}`;
     },
 
     matchDay() {
+      /* format iso date in the correspondent day of the week */
       return format(parseISO(this.match.date), 'EEEE');
     },
 
     matchDate() {
+      /* format date based on breakpoint */
       if (this.$vuetify.breakpoint.xsOnly) {
         return format(parseISO(this.match.date), 'd MMM yyyy');
       }
@@ -54,6 +60,7 @@ export default {
     },
 
     teamsAverageAge() {
+      /* compute the average age of the participants of a match */
       let player = {};
       let playerAge = null;
       let sumAge = 0;
@@ -78,6 +85,7 @@ export default {
     },
 
     nMatchParticipants() {
+      /* return the number of total participants in a match */
       return (
         this.match.positions.goalkeepers
         + this.match.positions.defenders
@@ -88,6 +96,7 @@ export default {
 
   methods: {
     getAge(birthday) {
+      /* compute age based on birthday iso date */
       const bday = new Date(birthday);
       const ageDiffMs = Date.now() - bday.getTime();
       const ageDate = new Date(ageDiffMs);
@@ -116,6 +125,7 @@ export default {
     },
 
     positionIcon(position) {
+      /* return the icon defined in vuetify.js based on string value */
       if (position === 'Goalkeeper') {
         return '$goalkeeper-icon';
       }

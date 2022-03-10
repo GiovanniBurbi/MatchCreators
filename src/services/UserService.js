@@ -1,4 +1,5 @@
 import axios from 'axios';
+/* define axios client to the url of the fake backend */
 
 const apiClient = axios.create({
   /* baseURL: 'http://192.168.x.x:3000', */
@@ -29,18 +30,19 @@ export default {
   },
 
   registerUser(userData) {
+    /* write the new user in the db and set a default picture. */
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
         const user = userData;
         user.picture = 'assets/users/match.jpg';
         resolve(apiClient.post('/users', JSON.stringify(user)));
-        resolve('ciao');
       }, 500);
     });
     return promise;
   },
 
   getUsers() {
+    /* fetch all users from the db */
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
         resolve(apiClient.get('/users'));

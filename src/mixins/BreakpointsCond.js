@@ -1,3 +1,4 @@
+/* mixin for vuetify breakpoints */
 export default {
   computed: {
     /* Vuetify conditionals for responsive */

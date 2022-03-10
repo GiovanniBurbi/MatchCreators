@@ -15,7 +15,7 @@ export default {
 
   mutations: {
     addFilter(state, newFilter) {
-      /* Needed for reactivity for Vue */
+      /* Needed for Vue's reactivity */
       Vue.set(state.filter, 'type', newFilter.type);
       Vue.set(state.filter, 'icon', newFilter.icon);
       Vue.set(state.filter, 'msg', newFilter.msg);
@@ -28,6 +28,7 @@ export default {
     },
 
     deleteFilter(state, indexFilter) {
+      /* delete a filter by id in the filters array */
       const removed = state.filters.splice(indexFilter, 1);
       state.currentRemoved = removed[0].type;
     },
@@ -46,11 +47,14 @@ export default {
   actions: {
     newFilter({ commit, dispatch }, filter) {
       commit('addFilter', filter);
+      /* dispatch an action from matches module, to apply the new filter */
       dispatch('matches/addFilterMatches', filter, { root: true });
     },
 
     removeFilter({ commit, dispatch, state }, indexFilter) {
       commit('deleteFilter', indexFilter);
+      /* dispatch an action from matches module, to apply all filters
+      minus the one removed to all matches */
       dispatch('matches/multipleFiltersMatch', state.filters, { root: true });
     },
   },

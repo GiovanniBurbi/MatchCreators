@@ -9,17 +9,20 @@ export default {
 
   mutations: {
     setAppMode(state, mode) {
+      /* sets the mode of the app: Creator or Finder. It resets the section */
       if (state.mode !== mode) {
         state.mode = mode;
         state.section = '';
       }
     },
     setAppSection(state, section) {
+      /* set the section of the app. There is only my-matches for now */
       if (state.section !== section) {
         state.section = section;
       }
     },
     setOverview(state, value) {
+      /* flag overview for match full details */
       state.overview = value;
     },
   },
