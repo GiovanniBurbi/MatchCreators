@@ -105,6 +105,7 @@ export default {
 
   watch: {
     windowWidth(newVal) {
+      /* listen to window width change of the window */
       this.windowWidth = newVal;
     },
   },
@@ -114,6 +115,7 @@ export default {
     ...mapMutations({ setAppSection: 'app/setAppSection' }),
 
     onResize() {
+      /* update local variable with new value of window width */
       this.windowWidth = window.innerWidth;
     },
   },

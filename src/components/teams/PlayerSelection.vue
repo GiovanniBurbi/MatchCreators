@@ -211,6 +211,7 @@ export default {
     },
 
     sendInvite() {
+      /* change behaviour based on app mode/section */
       const userSelected = this.users[this.selection - 1];
       if (!this.isOverview) {
         this.validateAdditionBuilder(userSelected.id).then((val) => {

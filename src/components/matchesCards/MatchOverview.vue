@@ -153,6 +153,7 @@ export default {
       loading: 'matches/getLoading',
     }),
 
+    /* two way binding with vuex state */
     invitationDialog: {
       get() {
         return this.$store.state.matches.invitationDialog;
@@ -174,6 +175,8 @@ export default {
     }),
 
     addUser() {
+      /* wait for the end of addUserInMatch and then set invitation dialog
+      to false */
       this.addUserInMatch().then(() => {
         this.invitationDialog = false;
       });
@@ -181,10 +184,12 @@ export default {
   },
 
   created() {
+    /* select team to the one where the user is present */
     this.selectTeamWithUser();
   },
 
   destroyed() {
+    /* reset match overview when this component is destroyed */
     this.resetMatchOverview('');
   },
 

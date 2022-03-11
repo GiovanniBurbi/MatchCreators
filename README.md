@@ -84,7 +84,7 @@ Now you can use the application from your mobile device:
   npm run serve
   ```
   This will start also json-server on '< *your IPV4 Address* >:3000'
-* **From a mobile device** start a browser and **use the Network URL generated in the above step**.
+* **From a mobile device** connect to the same network of your computer and start a browser. At last, **use the Network URL generated in the above step**.
 
 
 Some icons and images are taken from internet for educational purposes.

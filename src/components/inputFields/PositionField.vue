@@ -118,6 +118,7 @@ export default {
   },
 
   beforeDestroy() {
+    /* reset current pos selection in vuex */
     this.resetSelection('');
   },
 

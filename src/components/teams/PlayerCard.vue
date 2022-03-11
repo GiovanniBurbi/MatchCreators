@@ -13,8 +13,10 @@
 
         <v-container fill-height v-if="spotTaken">
 
+          <!-- close button on top of a filled card -->
           <div :class="['close-button', xsOnly ? 'upper' : 'normal']">
-
+            <!-- close button always on match creation.
+            Only on user if is not match creation  -->
             <v-btn
             v-if="!isOverview || user.id === spot.user.id"
             style="z-index: 1000;"
@@ -189,6 +191,7 @@ export default {
       loading: 'matches/getLoading',
     }),
 
+    /* two way binding to vuex state, set card id when this card sets it to true */
     invitationDialog: {
       get() {
         return this.$store.state.matches.invitationDialog;
@@ -251,7 +254,7 @@ export default {
     ...mapActions({ deletePlayerFromExistingMatch: 'matches/deletePlayerFromMatch' }),
 
     deletePlayer() {
-      /* if i'm creating a match */
+      /* if i'm creating a match and is not the overview */
       if (!this.isOverview) {
         this.removePlayer(this.spot.id);
       } else this.dialogDelete = true;

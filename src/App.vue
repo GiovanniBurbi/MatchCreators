@@ -1,6 +1,8 @@
 <template>
   <v-app>
+    <!-- fixed bg to solve the url bar hiding problem -->
     <div :class="bgToUse"></div>
+
     <v-slide-y-transition>
       <navbar
       v-if="!isAuth"

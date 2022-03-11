@@ -303,6 +303,7 @@ export default {
     ...mapMutations({ sendDetails: 'matches/setDetails' }),
 
     proceed() {
+      /* validate only on submit */
       this.rulesVector.push(this.rules.required);
       if (this.$refs.details.validate()) {
         const details = [

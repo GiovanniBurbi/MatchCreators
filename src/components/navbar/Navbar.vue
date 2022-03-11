@@ -128,6 +128,7 @@ export default {
 
     goHome() {
       if (this.$route.name === 'Finder') {
+        /* refresh current page */
         this.$router.go();
       } else this.$router.push({ name: 'Finder' });
     },

@@ -316,6 +316,8 @@ export default {
     },
 
     submitFullReg() {
+      /* validate the vuetify form and simulate validation with the
+      custom pos input field */
       const posValid = this.$refs.pos.validate();
       const dateValid = this.$refs.fullReg.validate();
       if (posValid && dateValid) {
