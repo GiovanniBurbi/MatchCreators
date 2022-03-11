@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <div :class="bgToUse"></div>
     <v-slide-y-transition>
       <navbar
       v-if="!isAuth"
@@ -84,11 +85,19 @@ export default {
       logged: 'auth/getLoginStatus',
       isAuth: 'app/isAuth',
       isMatchOverview: 'app/isMatchOverview',
+      isFinder: 'app/isFinder',
     }),
 
     username() {
       if (!this.logged) return 'Error, user not found';
       return this.user.username;
+    },
+
+    bgToUse() {
+      if (!this.isAuth) {
+        if (this.isFinder) return 'bg-light';
+        return 'bg-dark';
+      } return 'bg-auth';
     },
   },
 
@@ -109,6 +118,33 @@ export default {
 </script>
 
 <style>
+.bg-light {
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.4),
+  rgba(0, 0, 0, 0.2)), url('./assets/backgrounds/daylight.jpg') no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+.bg-dark {
+  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.4),
+  rgba(0, 0, 0, 0.2)), url('./assets/backgrounds/night.jpg') no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+.bg-auth {
+  background-image: linear-gradient(to left top, #673ab7, #6b40b9,
+  #7045bb, #744bbd, #7850bf, #7c55c1, #805ac3, #845fc5,
+  #8865c7, #8d6ac9, #9170cb, #9575cd);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  display: flex;
+  align-items: center;
+}
+
 /* Global css style */
 .content-padding {
   padding: 0 5vw 0;

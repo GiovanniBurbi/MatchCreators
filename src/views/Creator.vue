@@ -1,5 +1,5 @@
 <template>
-  <div class="background">
+  <div>
 
     <v-snackbar
      v-model="snackbar"
@@ -239,13 +239,6 @@ export default {
 </script>
 
 <style scoped>
-.background {
-  height: 100%;
-  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.6),
-  rgba(0, 0, 0, 0.4)), url('../assets/backgrounds/night.jpg') center center no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
 .stepper-margin-lg {
   margin: 16px 8vw;
 }
