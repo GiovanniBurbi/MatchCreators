@@ -33,7 +33,7 @@
 
       <v-row justify="center" class="mt-6">
         <h1
-        :class="['text-caption font-weight-medium',
+        :class="['text-caption text-capitalize font-weight-medium',
         darkMode ? 'white--text' : 'black--text']"
         >
           {{user.position}}

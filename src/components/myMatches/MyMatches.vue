@@ -12,17 +12,21 @@
         @click="setAppSection('')"
         >
 
+          <v-icon class="btn-shadow pr-1">
+            mdi-arrow-left
+          </v-icon>
+
+          <span class="btn-shadow" v-if="!xsOnly">
+            find matches
+          </span>
+
           <v-icon
-          :left="!xsOnly"
-          class="icon-white-shadow"
-          :size="xsOnly ? 25 : 28"
+          v-if="xsOnly"
+          class="icon-white-shadow pl-1"
+          :size="xsOnly ? 24 : 26"
           >
             $finder-icon
           </v-icon>
-
-          <span class="btn-shadow hidden-xs-only">
-            find new match
-          </span>
 
         </v-btn>
       </v-col>

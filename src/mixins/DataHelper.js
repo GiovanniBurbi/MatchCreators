@@ -9,7 +9,7 @@ export default {
       /* rules for validate input in text-fields */
       rules: {
         required: (v) => !!v || 'Required',
-        userMax: (v) => v?.length <= 8 || 'Username must be less than 10 characters',
+        userMax: (v) => v?.length <= 8 || 'Username must be less than 8 characters',
         pswMin: (v) => v?.length >= 8 || 'Password must be at least 8 characters',
         emailFormat: (v) => /.+@.+\...+/.test(v) || 'Email must be valid',
         noSpaces: (v) => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',

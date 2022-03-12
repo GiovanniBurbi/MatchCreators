@@ -11,7 +11,7 @@
     <v-btn
     icon
     :small="xsOnly"
-    class="pl-2"
+    class="hidden-xs-only pl-2"
     >
       <v-icon
       :size=" xsOnly ? 32 : 36"
@@ -41,7 +41,7 @@
 
     <v-spacer v-if="mdAndUp"></v-spacer>
 
-    <mode-switcher :class="{'pl-4': xsOnly}"/>
+    <mode-switcher :class="{'pl-0': xsOnly}"/>
 
     <v-spacer></v-spacer>
 

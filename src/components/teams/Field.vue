@@ -12,17 +12,13 @@
       src="@/assets/teamCreator/pitch.png"
       >
 
-        <v-scale-transition hide-on-leave>
-          <players-cards-group
-          v-show="teamSelected === 'black'"
-          :team="teamBlack"/>
-        </v-scale-transition>
+        <players-cards-group
+        v-show="teamSelected === 'black'"
+        :team="teamBlack"/>
 
-        <v-scale-transition hide-on-leave>
-          <players-cards-group
-          v-show="teamSelected === 'white'"
-          :team="teamWhite"/>
-        </v-scale-transition>
+        <players-cards-group
+        v-show="teamSelected === 'white'"
+        :team="teamWhite"/>
 
       </v-img>
     </v-row>
