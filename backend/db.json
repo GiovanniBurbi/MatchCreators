@@ -116,6 +116,33 @@
       "position": "Goalkeeper",
       "picture": "https://randomuser.me/api/portraits/med/men/85.jpg",
       "id": 13
+    },
+    {
+      "username": "Michael",
+      "password": "match123",
+      "email": "michael45@gmail.com",
+      "birthday": "2001-08-14",
+      "position": "defender",
+      "picture": "https://randomuser.me/api/portraits/med/men/97.jpg",
+      "id": 14
+    },
+    {
+      "username": "John",
+      "password": "match123",
+      "email": "john23@gmail.com",
+      "birthday": "1996-07-29",
+      "position": "forward",
+      "picture": "https://randomuser.me/api/portraits/med/men/22.jpg",
+      "id": 15
+    },
+    {
+      "username": "William",
+      "password": "match123",
+      "email": "william24@gmail.com",
+      "birthday": "2002-08-04",
+      "position": "forward",
+      "picture": "https://randomuser.me/api/portraits/med/men/62.jpg",
+      "id": 16
     }
   ],
   "matches": [
@@ -163,10 +190,6 @@
         },
         {
           "id": 4,
-          "user": {}
-        },
-        {
-          "id": 5,
           "user": {
             "id": 6,
             "username": "Stephan",
@@ -176,6 +199,10 @@
             "position": "Forward",
             "picture": "assets/users/Stephan.jpg"
           }
+        },
+        {
+          "id": 5,
+          "user": {}
         }
       ],
       "teamWhite": [
@@ -583,7 +610,7 @@
       "positions": {
         "goalkeepers": 1,
         "defenders": 3,
-        "forwards": 1
+        "forwards": 2
       },
       "teamBlack": [
         {
@@ -631,7 +658,15 @@
         },
         {
           "id": 5,
-          "user": {}
+          "user": {
+            "username": "William",
+            "password": "match123",
+            "email": "william24@gmail.com",
+            "birthday": "2002-08-04",
+            "position": "forward",
+            "picture": "https://randomuser.me/api/portraits/med/men/62.jpg",
+            "id": 16
+          }
         }
       ],
       "teamWhite": [
@@ -1250,6 +1285,116 @@
         }
       ],
       "id": 10
+    },
+    {
+      "date": "2022-03-25",
+      "startTime": "15:00",
+      "endTime": "16:00",
+      "location": "Galluzzo",
+      "positions": {
+        "goalkeepers": 1,
+        "defenders": 2,
+        "forwards": 3
+      },
+      "teamBlack": [
+        {
+          "team": "Black"
+        },
+        {
+          "id": 1,
+          "user": {
+            "username": "Jason",
+            "password": "match123",
+            "email": "jason84@gmail.com",
+            "birthday": "2004-05-03",
+            "position": "Goalkeeper",
+            "picture": "https://randomuser.me/api/portraits/med/men/85.jpg",
+            "id": 13
+          }
+        },
+        {
+          "id": 2,
+          "user": {}
+        },
+        {
+          "id": 3,
+          "user": {
+            "id": 4,
+            "username": "Anthony",
+            "password": "match123",
+            "email": "Anthony2@gmail.com",
+            "birthday": "1999-01-03",
+            "position": "Defender",
+            "picture": "assets/users/Anthony.jpg"
+          }
+        },
+        {
+          "id": 4,
+          "user": {
+            "id": 6,
+            "username": "Stephan",
+            "password": "match123",
+            "email": "Stephan8@gmail.com",
+            "birthday": "1960-11-11",
+            "position": "Forward",
+            "picture": "assets/users/Stephan.jpg"
+          }
+        },
+        {
+          "id": 5,
+          "user": {}
+        }
+      ],
+      "teamWhite": [
+        {
+          "team": "White"
+        },
+        {
+          "id": 1,
+          "user": {}
+        },
+        {
+          "id": 2,
+          "user": {
+            "id": 3,
+            "username": "Joseph",
+            "password": "match123",
+            "email": "Joseph5@gmail.com",
+            "birthday": "2005-04-01",
+            "position": "Defender",
+            "picture": "assets/users/Joseph.jpg"
+          }
+        },
+        {
+          "id": 3,
+          "user": {}
+        },
+        {
+          "id": 4,
+          "user": {
+            "id": 8,
+            "username": "Vince",
+            "password": "match123",
+            "email": "Vince9@gmail.com",
+            "birthday": "1992-09-20",
+            "position": "Forward",
+            "picture": "assets/users/Vince.jpg"
+          }
+        },
+        {
+          "id": 5,
+          "user": {
+            "id": 5,
+            "username": "Henry",
+            "password": "match123",
+            "email": "Henry6@gmail.com",
+            "birthday": "1985-05-17",
+            "position": "Forward",
+            "picture": "assets/users/Henry.jpg"
+          }
+        }
+      ],
+      "id": 11
     }
   ]
 }

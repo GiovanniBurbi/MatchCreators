@@ -32,8 +32,10 @@ export default {
   registerUser(user) {
     /* write the new user in the db and set a default picture. */
     const promise = new Promise((resolve) => {
-      window.setTimeout(() => {
-        resolve(apiClient.post('/users', JSON.stringify(user)));
+      window.setTimeout(async () => {
+        apiClient.post('/users', JSON.stringify(user));
+        const userWithId = await this.getUser({ name: user.username, psw: user.password });
+        resolve(userWithId.data[0]);
       }, 500);
     });
     return promise;

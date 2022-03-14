@@ -48,9 +48,9 @@ export default {
       user.picture = picture;
 
       /* register user in db */
-      await UserService.registerUser(user);
+      const userWithId = await UserService.registerUser(user);
       /* set the user in the vuex auth/state */
-      commit('setUser', userData);
+      commit('setUser', userWithId);
       commit('setLoginStatus', true);
     },
   },
