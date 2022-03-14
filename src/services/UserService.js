@@ -29,12 +29,10 @@ export default {
     return promise;
   },
 
-  registerUser(userData) {
+  registerUser(user) {
     /* write the new user in the db and set a default picture. */
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
-        const user = userData;
-        user.picture = 'assets/users/match.jpg';
         resolve(apiClient.post('/users', JSON.stringify(user)));
       }, 500);
     });

@@ -22,7 +22,7 @@ export default {
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
         resolve(apiClient.get('/matches'));
-      }, 500);
+      }, 700);
     });
     return promise;
   },

@@ -211,6 +211,7 @@ export default {
     },
 
     getPicture() {
+      if (this.spot.user.id > 11) return this.spot.user.picture;
       // eslint-disable-next-line import/no-dynamic-require
       return require(`@/${this.spot.user.picture}`);
     },

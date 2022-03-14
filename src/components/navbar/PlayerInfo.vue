@@ -67,6 +67,7 @@ export default {
     }),
 
     getAvatarPicture() {
+      if (this.user.id > 11) return this.user.picture;
       // eslint-disable-next-line import/no-dynamic-require
       return require(`@/${this.user.picture}`);
     },

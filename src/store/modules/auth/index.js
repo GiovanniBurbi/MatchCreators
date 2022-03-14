@@ -40,8 +40,15 @@ export default {
     },
 
     async signup({ commit }, userData) {
+      const res = await fetch('https://randomuser.me/api/?gender=male');
+      const { results } = await res.json();
+
+      const picture = results[0].picture.medium;
+      const user = userData;
+      user.picture = picture;
+
       /* register user in db */
-      await UserService.registerUser(userData);
+      await UserService.registerUser(user);
       /* set the user in the vuex auth/state */
       commit('setUser', userData);
       commit('setLoginStatus', true);

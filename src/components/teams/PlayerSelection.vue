@@ -38,7 +38,7 @@
 
               <v-col class="d-flex justify-center">
                 <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize" class="avatar-contrast">
-                  <img :src="getPicture(user.picture)">
+                  <img :src="getPicture(user)">
                 </v-avatar>
               </v-col>
 
@@ -193,9 +193,10 @@ export default {
       invitePlayerOverview: 'matches/addPlayerInMatch',
     }),
 
-    getPicture(path) {
+    getPicture(user) {
+      if (user.id > 11) return user.picture;
       // eslint-disable-next-line import/no-dynamic-require
-      return require(`@/${path}`);
+      return require(`@/${user.picture}`);
     },
 
     onResize() {
