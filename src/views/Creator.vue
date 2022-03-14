@@ -64,8 +64,7 @@
             <v-container fluid class="px-0">
 
               <details-recap
-              v-if="!xsOnly"
-              class="infos pt-8"
+              class="hidden-xs-only infos pt-8"
               />
 
               <v-row justify="center" :class="xsOnly ? 'pt-8 pb-6' : 'pt-12 pb-4'">

@@ -5,8 +5,7 @@ const apiClient = axios.create({
 
   /* for MOBILE --> comment the next line (baseURL) and change the first line
   with your local ip replacing the two 'x' with your values */
-  baseURL: 'http://192.168.1.196:3000',
-  /* baseURL: 'http://localhost:3000', */
+  baseURL: 'http://localhost:3000',
   withCredentials: false,
   headers: {
     Accept: 'application/json',
