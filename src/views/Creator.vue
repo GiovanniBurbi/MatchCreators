@@ -208,14 +208,16 @@ export default {
   watch: {
     loading(val) {
       if (!val) {
-        /* after the creation of the match go to my matches section */
-        this.setAppSection('my-matches');
         this.step = 1;
       }
     },
 
     matchCreated(newVal) {
-      if (newVal) this.snackbar = true;
+      if (newVal) {
+        this.snackbar = true;
+        /* after the creation of the match go to my matches section */
+        this.setAppSection('my-matches');
+      }
     },
 
     step(newVal) {

@@ -139,7 +139,7 @@
                     :max="end"
                     format="24hr"
                     color="deep-purple darken-2"
-                    width="270"
+                    width="280"
                   >
                   </v-time-picker>
                 </v-card-text>
@@ -174,7 +174,7 @@
                     :min="start"
                     format="24hr"
                     color="deep-purple darken-2"
-                    width="270"
+                    width="280"
                   >
                   </v-time-picker>
                 </v-card-text>

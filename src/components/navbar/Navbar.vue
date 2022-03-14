@@ -1,7 +1,7 @@
 <template>
   <v-app-bar
   app
-  hide-on-scroll
+  :hide-on-scroll="!xsOnly"
   scroll-threshold=70
   :color="darkMode ? null : 'grey lighten-5'"
   :dark="darkMode"

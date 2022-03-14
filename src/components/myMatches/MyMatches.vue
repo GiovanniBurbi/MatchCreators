@@ -12,11 +12,11 @@
         @click="setAppSection('')"
         >
 
-          <v-icon class="btn-shadow pr-1">
+          <v-icon class="btn-shadow">
             mdi-arrow-left
           </v-icon>
 
-          <span class="btn-shadow" v-if="!xsOnly">
+          <span class="btn-shadow pl-1" v-if="!xsOnly">
             find matches
           </span>
 

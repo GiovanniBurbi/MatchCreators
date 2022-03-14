@@ -9,7 +9,7 @@
 
         <v-row>
           <v-btn
-          :class="[mdAndUp ? 'pl-6' : 'pl-4', 'btn-icon-shadow']"
+          :class="[mdAndUp ? 'pl-4' : 'pl-2', 'btn-icon-shadow']"
           plain
           :x-large="mdAndUp"
           :large="smAndDown"

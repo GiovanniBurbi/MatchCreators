@@ -126,10 +126,10 @@ export default {
 
     positionIcon(position) {
       /* return the icon defined in vuetify.js based on string value */
-      if (position === 'Goalkeeper') {
+      if (position.toLowerCase() === 'goalkeeper') {
         return '$goalkeeper-icon';
       }
-      if (position === 'Defender') {
+      if (position.toLowerCase() === 'defender') {
         return '$defender-icon';
       } return '$forward-icon';
     },
