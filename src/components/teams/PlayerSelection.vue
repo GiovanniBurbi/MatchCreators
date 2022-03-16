@@ -194,7 +194,7 @@ export default {
     }),
 
     getPicture(user) {
-      if (user.id > 11) return user.picture;
+      if (user.id > 10) return user.picture;
       // eslint-disable-next-line import/no-dynamic-require
       return require(`@/${user.picture}`);
     },

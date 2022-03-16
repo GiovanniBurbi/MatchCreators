@@ -117,7 +117,7 @@ export default {
 
     getAvatarPicture() {
       if (this.user) {
-        if (this.user.id > 11) return this.user.picture;
+        if (this.user.id > 10) return this.user.picture;
         // eslint-disable-next-line import/no-dynamic-require
         return require(`@/${this.user.picture}`);
       } return require('@/assets/users/match.jpg');

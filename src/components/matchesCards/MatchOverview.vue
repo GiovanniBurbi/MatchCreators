@@ -235,10 +235,10 @@ export default {
   border-radius: 16px;
 }
 .overview-light::-webkit-scrollbar-thumb {
-  background: #7986CB;
+  background: #E8EAF6;
   border-radius: 16px;
 }
 .overview-light::-webkit-scrollbar-thumb:hover {
-  background: #E8EAF6;
+  background: #7986CB;
 }
 </style>

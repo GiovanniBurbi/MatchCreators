@@ -92,12 +92,12 @@
     },
     {
       "id": 11,
-      "username": "admin",
-      "password": "admin",
-      "email": "MatchCreators@gmail.com",
-      "birthday": "2021-01-29",
-      "position": "Forward",
-      "picture": "assets/users/match.jpg"
+      "username": "Mike",
+      "password": "match123",
+      "email": "mike8@gmail.com",
+      "birthday": "2001-01-29",
+      "position": "Goalkeeper",
+      "picture": "https://randomuser.me/api/portraits/med/men/18.jpg"
     },
     {
       "username": "Neal",
@@ -143,6 +143,42 @@
       "position": "forward",
       "picture": "https://randomuser.me/api/portraits/med/men/62.jpg",
       "id": 16
+    },
+    {
+      "username": "Noah",
+      "password": "match123",
+      "email": "noah83@gmail.com",
+      "birthday": "1992-10-13",
+      "position": "forward",
+      "picture": "https://randomuser.me/api/portraits/med/men/46.jpg",
+      "id": 17
+    },
+    {
+      "username": "James",
+      "password": "match123",
+      "email": "james45@gmail.com",
+      "birthday": "1985-03-04",
+      "position": "defender",
+      "picture": "https://randomuser.me/api/portraits/med/men/12.jpg",
+      "id": 18
+    },
+    {
+      "username": "Daniel",
+      "password": "match123",
+      "email": "daniel92@gmail.com",
+      "birthday": "1974-12-11",
+      "position": "goalkeeper",
+      "picture": "https://randomuser.me/api/portraits/med/men/38.jpg",
+      "id": 19
+    },
+    {
+      "username": "Damiano",
+      "password": "match123",
+      "email": "Shagahav@gmail.com",
+      "birthday": "1980-05-08",
+      "position": "defender",
+      "picture": "https://randomuser.me/api/portraits/med/men/23.jpg",
+      "id": 20
     }
   ],
   "matches": [
@@ -836,8 +872,8 @@
       "endTime": "22:30",
       "location": "Albereta",
       "positions": {
-        "goalkeepers": 0,
-        "defenders": 3,
+        "goalkeepers": 1,
+        "defenders": 4,
         "forwards": 4
       },
       "teamBlack": [
@@ -846,11 +882,27 @@
         },
         {
           "id": 1,
-          "user": {}
+          "user": {
+            "username": "James",
+            "password": "match123",
+            "email": "james45@gmail.com",
+            "birthday": "1985-03-04",
+            "position": "defender",
+            "picture": "https://randomuser.me/api/portraits/med/men/12.jpg",
+            "id": 18
+          }
         },
         {
           "id": 2,
-          "user": {}
+          "user": {
+            "username": "Damiano",
+            "password": "match123",
+            "email": "Shagahav@gmail.com",
+            "birthday": "1980-05-08",
+            "position": "defender",
+            "picture": "https://randomuser.me/api/portraits/med/men/23.jpg",
+            "id": 20
+          }
         },
         {
           "id": 3,
@@ -1395,6 +1447,320 @@
         }
       ],
       "id": 11
+    },
+    {
+      "date": "2022-03-26",
+      "startTime": "15:00",
+      "endTime": "16:00",
+      "location": "Mercatale",
+      "positions": {
+        "goalkeepers": 2,
+        "defenders": 3,
+        "forwards": 2
+      },
+      "teamBlack": [
+        {
+          "team": "Black"
+        },
+        {
+          "id": 1,
+          "user": {
+            "username": "Jason",
+            "password": "match123",
+            "email": "jason84@gmail.com",
+            "birthday": "2004-05-03",
+            "position": "Goalkeeper",
+            "picture": "https://randomuser.me/api/portraits/med/men/85.jpg",
+            "id": 13
+          }
+        },
+        {
+          "id": 2,
+          "user": {
+            "username": "Michael",
+            "password": "match123",
+            "email": "michael45@gmail.com",
+            "birthday": "2001-08-14",
+            "position": "defender",
+            "picture": "https://randomuser.me/api/portraits/med/men/97.jpg",
+            "id": 14
+          }
+        },
+        {
+          "id": 3,
+          "user": {
+            "id": 3,
+            "username": "Joseph",
+            "password": "match123",
+            "email": "Joseph5@gmail.com",
+            "birthday": "2005-04-01",
+            "position": "Defender",
+            "picture": "assets/users/Joseph.jpg"
+          }
+        },
+        {
+          "id": 4,
+          "user": {
+            "username": "John",
+            "password": "match123",
+            "email": "john23@gmail.com",
+            "birthday": "1996-07-29",
+            "position": "forward",
+            "picture": "https://randomuser.me/api/portraits/med/men/22.jpg",
+            "id": 15
+          }
+        },
+        {
+          "id": 5,
+          "user": {}
+        }
+      ],
+      "teamWhite": [
+        {
+          "team": "White"
+        },
+        {
+          "id": 1,
+          "user": {
+            "id": 11,
+            "username": "Mike",
+            "password": "match123",
+            "email": "mike8@gmail.com",
+            "birthday": "2001-01-29",
+            "position": "Goalkeeper",
+            "picture": "https://randomuser.me/api/portraits/med/men/18.jpg"
+          }
+        },
+        {
+          "id": 2,
+          "user": {
+            "id": 4,
+            "username": "Anthony",
+            "password": "match123",
+            "email": "Anthony2@gmail.com",
+            "birthday": "1999-01-03",
+            "position": "Defender",
+            "picture": "assets/users/Anthony.jpg"
+          }
+        },
+        {
+          "id": 3,
+          "user": {}
+        },
+        {
+          "id": 4,
+          "user": {
+            "id": 5,
+            "username": "Henry",
+            "password": "match123",
+            "email": "Henry6@gmail.com",
+            "birthday": "1985-05-17",
+            "position": "Forward",
+            "picture": "assets/users/Henry.jpg"
+          }
+        },
+        {
+          "id": 5,
+          "user": {}
+        }
+      ],
+      "id": 12
+    },
+    {
+      "date": "2022-03-28",
+      "startTime": "09:30",
+      "endTime": "11:30",
+      "location": "Fiesole",
+      "positions": {
+        "goalkeepers": 1,
+        "defenders": 1,
+        "forwards": 4
+      },
+      "teamBlack": [
+        {
+          "team": "Black"
+        },
+        {
+          "id": 1,
+          "user": {
+            "username": "Jason",
+            "password": "match123",
+            "email": "jason84@gmail.com",
+            "birthday": "2004-05-03",
+            "position": "Goalkeeper",
+            "picture": "https://randomuser.me/api/portraits/med/men/85.jpg",
+            "id": 13
+          }
+        },
+        {
+          "id": 2,
+          "user": {}
+        },
+        {
+          "id": 3,
+          "user": {
+            "id": 4,
+            "username": "Anthony",
+            "password": "match123",
+            "email": "Anthony2@gmail.com",
+            "birthday": "1999-01-03",
+            "position": "Defender",
+            "picture": "assets/users/Anthony.jpg"
+          }
+        },
+        {
+          "id": 4,
+          "user": {
+            "username": "Neal",
+            "password": "match123",
+            "email": "neal23@gmail.com",
+            "birthday": "1986-09-17",
+            "position": "Forward",
+            "picture": "https://randomuser.me/api/portraits/med/men/86.jpg",
+            "id": 12
+          }
+        },
+        {
+          "id": 5,
+          "user": {
+            "username": "John",
+            "password": "match123",
+            "email": "john23@gmail.com",
+            "birthday": "1996-07-29",
+            "position": "forward",
+            "picture": "https://randomuser.me/api/portraits/med/men/22.jpg",
+            "id": 15
+          }
+        }
+      ],
+      "teamWhite": [
+        {
+          "team": "White"
+        },
+        {
+          "id": 1,
+          "user": {}
+        },
+        {
+          "id": 2,
+          "user": {}
+        },
+        {
+          "id": 3,
+          "user": {}
+        },
+        {
+          "id": 4,
+          "user": {
+            "id": 5,
+            "username": "Henry",
+            "password": "match123",
+            "email": "Henry6@gmail.com",
+            "birthday": "1985-05-17",
+            "position": "Forward",
+            "picture": "assets/users/Henry.jpg"
+          }
+        },
+        {
+          "id": 5,
+          "user": {
+            "id": 6,
+            "username": "Stephan",
+            "password": "match123",
+            "email": "Stephan8@gmail.com",
+            "birthday": "1960-11-11",
+            "position": "Forward",
+            "picture": "assets/users/Stephan.jpg"
+          }
+        }
+      ],
+      "id": 13
+    },
+    {
+      "date": "2022-04-10",
+      "startTime": "11:00",
+      "endTime": "12:01",
+      "location": "Albereta",
+      "positions": {
+        "goalkeepers": 1,
+        "defenders": 1,
+        "forwards": 1
+      },
+      "teamBlack": [
+        {
+          "team": "Black"
+        },
+        {
+          "id": 1,
+          "user": {
+            "username": "Daniel",
+            "password": "match123",
+            "email": "daniel92@gmail.com",
+            "birthday": "1974-12-11",
+            "position": "goalkeeper",
+            "picture": "https://randomuser.me/api/portraits/med/men/38.jpg",
+            "id": 19
+          }
+        },
+        {
+          "id": 2,
+          "user": {}
+        },
+        {
+          "id": 3,
+          "user": {
+            "username": "James",
+            "password": "match123",
+            "email": "james45@gmail.com",
+            "birthday": "1985-03-04",
+            "position": "defender",
+            "picture": "https://randomuser.me/api/portraits/med/men/12.jpg",
+            "id": 18
+          }
+        },
+        {
+          "id": 4,
+          "user": {}
+        },
+        {
+          "id": 5,
+          "user": {
+            "username": "Noah",
+            "password": "match123",
+            "email": "noah83@gmail.com",
+            "birthday": "1992-10-13",
+            "position": "forward",
+            "picture": "https://randomuser.me/api/portraits/med/men/46.jpg",
+            "id": 17
+          }
+        }
+      ],
+      "teamWhite": [
+        {
+          "team": "White"
+        },
+        {
+          "id": 1,
+          "user": {}
+        },
+        {
+          "id": 2,
+          "user": {}
+        },
+        {
+          "id": 3,
+          "user": {}
+        },
+        {
+          "id": 4,
+          "user": {}
+        },
+        {
+          "id": 5,
+          "user": {}
+        }
+      ],
+      "id": 14
     }
   ]
 }
