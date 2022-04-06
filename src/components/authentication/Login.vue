@@ -77,7 +77,7 @@
               style="padding-top:2px"
               class="text-decoration-underline"
               >
-                Sing up
+                Sign up
               </span>
             </v-btn>
           </div>
@@ -136,7 +136,7 @@
             rounded block
             elevation="2"
           >
-            Sign up
+            Next
           </v-btn>
         </v-card-actions>
 
