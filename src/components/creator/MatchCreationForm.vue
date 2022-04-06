@@ -35,7 +35,7 @@
           transition="scale-transition"
           offset-y
           min-width="auto"
-          :nudge-left="xsOnly ? 40 : 0"
+          :nudge-left="xsOnly ? 30 : 0"
           nudge-top="20"
           >
 
@@ -59,6 +59,7 @@
             <v-date-picker
             v-model="date"
             dark
+            :width="xsOnly ? 230 : 300"
             color="deep-purple darken-2"
             :active-picker.sync="activePicker"
             :min="(new Date(Date.now() - (new Date()).
@@ -102,7 +103,8 @@
           v-model="modal"
           :return-value.sync="time"
           persistent
-          width="340"
+          :fullscreen="xsOnly"
+          width="320"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
@@ -121,11 +123,15 @@
               @click:clear="start=null, end=null, step=1"
             ></v-text-field>
           </template>
-          <v-card dark min-width="280">
+          <v-card
+          dark
+          :min-width="320"
+          class="d-flex align-center justify-center"
+          >
             <v-window v-model="step" touchless>
 
               <v-window-item :value="1">
-                <v-card-text class="pl-6">
+                <v-card-text>
                   <h1 class="text-h4 white--text font-weight-medium">Start:</h1>
                   <v-time-picker
                     v-if="modal"
@@ -133,7 +139,7 @@
                     :max="end"
                     format="24hr"
                     color="deep-purple darken-2"
-                    full-width
+                    width="280"
                   >
                   </v-time-picker>
                 </v-card-text>
@@ -168,7 +174,7 @@
                     :min="start"
                     format="24hr"
                     color="deep-purple darken-2"
-                    full-width
+                    width="280"
                   >
                   </v-time-picker>
                 </v-card-text>
@@ -279,6 +285,7 @@ export default {
       end: null,
       location: null,
       rulesVector: [],
+      windowWidth: window.innerWidth,
     };
   },
 
@@ -297,12 +304,17 @@ export default {
         this.location = null;
       }
     },
+
+    windowWidth(newVal) {
+      this.windowWidth = newVal;
+    },
   },
 
   methods: {
     ...mapMutations({ sendDetails: 'matches/setDetails' }),
 
     proceed() {
+      /* validate only on submit */
       this.rulesVector.push(this.rules.required);
       if (this.$refs.details.validate()) {
         const details = [
@@ -315,6 +327,20 @@ export default {
       }
       this.rulesVector.pop();
     },
+
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
   },
 
   mixins: [BreakpointsCond, DataHelper],

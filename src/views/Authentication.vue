@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="background px-0">
+  <v-container fluid class="padding-login px-0">
 
     <v-container fluid>
       <v-row justify="center" class="pb-12">
@@ -38,6 +38,7 @@ export default {
   },
 
   created() {
+    /* set the app mode to authentication when this component is created */
     this.appMode('authentication');
   },
 
@@ -46,13 +47,8 @@ export default {
 </script>
 
 <style scoped>
-.background {
-  background-image: linear-gradient(to left top, #673ab7, #6b40b9,
-  #7045bb, #744bbd, #7850bf, #7c55c1, #805ac3, #845fc5,
-  #8865c7, #8d6ac9, #9170cb, #9575cd);
-  height: 100%;
-  display: flex;
-  align-items: center;
+.padding-login {
+  padding-top: 14vh;
 }
 .logo {
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);

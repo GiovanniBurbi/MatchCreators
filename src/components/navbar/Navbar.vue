@@ -1,7 +1,7 @@
 <template>
   <v-app-bar
   app
-  hide-on-scroll
+  :hide-on-scroll="!xsOnly"
   scroll-threshold=70
   :color="darkMode ? null : 'grey lighten-5'"
   :dark="darkMode"
@@ -11,7 +11,7 @@
     <v-btn
     icon
     :small="xsOnly"
-    class="pl-2"
+    class="hidden-xs-only pl-2"
     >
       <v-icon
       :size=" xsOnly ? 32 : 36"
@@ -41,7 +41,7 @@
 
     <v-spacer v-if="mdAndUp"></v-spacer>
 
-    <mode-switcher :class="{'pl-4': xsOnly}"/>
+    <mode-switcher :class="{'pl-0': xsOnly}"/>
 
     <v-spacer></v-spacer>
 
@@ -117,6 +117,7 @@ export default {
 
     getAvatarPicture() {
       if (this.user) {
+        if (this.user.id > 10) return this.user.picture;
         // eslint-disable-next-line import/no-dynamic-require
         return require(`@/${this.user.picture}`);
       } return require('@/assets/users/match.jpg');
@@ -128,6 +129,7 @@ export default {
 
     goHome() {
       if (this.$route.name === 'Finder') {
+        /* refresh current page */
         this.$router.go();
       } else this.$router.push({ name: 'Finder' });
     },

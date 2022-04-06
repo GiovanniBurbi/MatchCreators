@@ -1,9 +1,10 @@
 import axios from 'axios';
+/* define axios client to the url of the fake backend */
 
 const apiClient = axios.create({
   /* baseURL: 'http://192.168.x.x:3000', */
 
-  /* for mobile comment the next line (baseURL) and change the first line
+  /* for MOBILE --> comment the next line (baseURL) and change the first line
   with your local ip replacing the two 'x' with your values */
   baseURL: 'http://localhost:3000',
   withCredentials: false,
@@ -28,16 +29,20 @@ export default {
     return promise;
   },
 
-  registerUser(userData) {
+  registerUser(user) {
+    /* write the new user in the db and set a default picture. */
     const promise = new Promise((resolve) => {
-      window.setTimeout(() => {
-        resolve(apiClient.post('/users', userData));
+      window.setTimeout(async () => {
+        apiClient.post('/users', JSON.stringify(user));
+        const userWithId = await this.getUser({ name: user.username, psw: user.password });
+        resolve(userWithId.data[0]);
       }, 500);
     });
     return promise;
   },
 
   getUsers() {
+    /* fetch all users from the db */
     const promise = new Promise((resolve) => {
       window.setTimeout(() => {
         resolve(apiClient.get('/users'));

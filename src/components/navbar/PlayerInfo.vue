@@ -26,12 +26,14 @@
       </v-row>
 
       <v-row justify="center" class="mt-4">
-        <h1 class="text-subtitle-2 font-weight-regular">{{getAge(user.birthday)}} years old</h1>
+        <h1 class="text-subtitle-2 font-weight-regular">
+          {{getAge(user.birthday)}} years old
+        </h1>
       </v-row>
 
       <v-row justify="center" class="mt-6">
         <h1
-        :class="['text-caption font-weight-medium',
+        :class="['text-caption text-capitalize font-weight-medium',
         darkMode ? 'white--text' : 'black--text']"
         >
           {{user.position}}
@@ -65,6 +67,7 @@ export default {
     }),
 
     getAvatarPicture() {
+      if (this.user.id > 10) return this.user.picture;
       // eslint-disable-next-line import/no-dynamic-require
       return require(`@/${this.user.picture}`);
     },

@@ -24,61 +24,59 @@
           </v-row>
         </div>
 
-        <v-slide-y-transition>
-          <div v-if="!loading">
-            <v-row
-            justify="center"
-            align="center"
-            v-for="user in users" :key="user.id"
-            class="px-0"
-            @click="select(user.id)"
-            >
+        <div v-if="!loading">
+          <v-row
+          justify="center"
+          align="center"
+          v-for="user in users" :key="user.id"
+          class="px-0"
+          @click="select(user.id)"
+          >
 
-              <div
-              :class="['selector', selection === user.id ? 'selected' : '']">
+            <div
+            :class="['selector', selection === user.id ? 'selected' : '']">
 
-                <v-col class="d-flex justify-center">
-                  <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize" class="avatar-contrast">
-                    <img :src="getPicture(user.picture)">
-                  </v-avatar>
-                </v-col>
+              <v-col class="d-flex justify-center">
+                <v-avatar :size="windowWidth <= 336 ? 24 : avatarSize" class="avatar-contrast">
+                  <img :src="getPicture(user)">
+                </v-avatar>
+              </v-col>
 
-                <v-col class="d-flex justify-center">
-                  <h1
-                  :class="[
-                  xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
-                  !darkMode ?
-                  'black-text font-weight-medium' : 'font-weight-medium']"
-                  >
-                    {{user.username}}
-                  </h1>
-                </v-col>
+              <v-col class="d-flex justify-center">
+                <h1
+                :class="[
+                xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
+                !darkMode ?
+                'black-text font-weight-medium' : 'font-weight-medium']"
+                >
+                  {{user.username}}
+                </h1>
+              </v-col>
 
-                <v-col class="d-flex justify-center">
-                  <h1
-                  :class="[
-                  xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
-                  !darkMode ?
-                  'black-text font-weight-medium' : 'font-weight-medium']"
-                  >
-                    {{getAge(user.birthday)}}y/o
-                  </h1>
-                </v-col>
+              <v-col class="d-flex justify-center">
+                <h1
+                :class="[
+                xsOnly ? 'text-subtitle-2 x-small' : 'text-subtitle-1',
+                !darkMode ?
+                'black-text font-weight-medium' : 'font-weight-medium']"
+                >
+                  {{getAge(user.birthday)}}y/o
+                </h1>
+              </v-col>
 
-                <v-col class="d-flex justify-center">
-                  <v-icon
-                  :size="windowWidth <= 336 ? '20' : posIconSize"
-                  :class="!darkMode ? 'posIcon icon-grey' : 'icon-white'"
-                  >
-                    {{positionIcon(user.position)}}
-                  </v-icon>
-                </v-col>
+              <v-col class="d-flex justify-center">
+                <v-icon
+                :size="windowWidth <= 336 ? '20' : posIconSize"
+                :class="!darkMode ? 'posIcon icon-grey' : 'icon-white'"
+                >
+                  {{positionIcon(user.position)}}
+                </v-icon>
+              </v-col>
 
-              </div>
+            </div>
 
-            </v-row>
-          </div>
-        </v-slide-y-transition>
+          </v-row>
+        </div>
 
       </v-container>
     </v-card-text>
@@ -195,9 +193,10 @@ export default {
       invitePlayerOverview: 'matches/addPlayerInMatch',
     }),
 
-    getPicture(path) {
+    getPicture(user) {
+      if (user.id > 10) return user.picture;
       // eslint-disable-next-line import/no-dynamic-require
-      return require(`@/${path}`);
+      return require(`@/${user.picture}`);
     },
 
     onResize() {
@@ -211,6 +210,7 @@ export default {
     },
 
     sendInvite() {
+      /* change behaviour based on app mode/section */
       const userSelected = this.users[this.selection - 1];
       if (!this.isOverview) {
         this.validateAdditionBuilder(userSelected.id).then((val) => {

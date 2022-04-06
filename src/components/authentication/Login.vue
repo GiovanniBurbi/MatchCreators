@@ -77,7 +77,7 @@
               style="padding-top:2px"
               class="text-decoration-underline"
               >
-                Sing up
+                Sign up
               </span>
             </v-btn>
           </div>
@@ -136,7 +136,7 @@
             rounded block
             elevation="2"
           >
-            Sign up
+            Next
           </v-btn>
         </v-card-actions>
 
@@ -240,7 +240,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import BreakpointsCond from '@/mixins/BreakpointsCond';
 import DataHelper from '@/mixins/DataHelper';
 import PositionField from '../inputFields/PositionField.vue';
@@ -285,8 +285,6 @@ export default {
       signup: 'auth/signup',
     }),
 
-    ...mapMutations({ resetSelection: 'posInputField/setPosSelection' }),
-
     save(date) {
       this.$refs.menu.save(date);
     },
@@ -298,9 +296,12 @@ export default {
     },
 
     /* submit handlers of all windows */
+
     submitLogin() {
+      /* validate form compilation based on rules defined in mixin */
       if (this.$refs.login.validate()) {
         this.loading = true;
+        /* wait for the login attempt response and then choice the course of action */
         this.loginAttempt(
           { name: this.username, psw: this.password },
         ).then((val) => {
@@ -315,6 +316,8 @@ export default {
     },
 
     submitFullReg() {
+      /* validate the vuetify form and simulate validation with the
+      custom pos input field */
       const posValid = this.$refs.pos.validate();
       const dateValid = this.$refs.fullReg.validate();
       if (posValid && dateValid) {
@@ -324,11 +327,10 @@ export default {
             username: this.username,
             password: this.password,
             email: this.email,
-            date: this.date,
+            birthday: this.date,
             position: this.getPos,
           },
         ).then(() => {
-          this.resetSelection('');
           this.loading = false;
           this.$router.push({ name: 'Finder' });
         });

@@ -2,23 +2,7 @@
   <v-container fluid class="pt-4">
     <v-row justify="space-between" align="center">
 
-      <v-col :cols="windowWidth < 310 ? 12 : null" :class="[{'pb-1': windowWidth < 310}, 'pb-0']">
-        <h1
-        :class="['text-big header',
-        {'text-h4' : mdAndDown},
-        {'text-h5': xsOnly}]"
-        >
-          My Matches
-          <v-icon
-          :class="['pb-3 icon-white-shadow']"
-          :size="lgAndUp ? 46 : 34"
-          >
-            $player-2-icon
-          </v-icon>
-        </h1>
-      </v-col>
-
-      <v-col :class="windowWidth < 310 ? 'd-flex justify-start pt-0 pb-1' : 'd-flex justify-end'">
+      <v-col class="d-flex justify-start pb-1">
         <v-btn
         v-if="isFinder"
         color="deep-purple"
@@ -27,18 +11,43 @@
         rounded
         @click="setAppSection('')"
         >
-          <span class="btn-shadow hidden-xs-only">
-            find new match
+
+          <v-icon class="btn-shadow">
+            mdi-arrow-left
+          </v-icon>
+
+          <span class="btn-shadow pl-1" v-if="!xsOnly">
+            find matches
           </span>
 
           <v-icon
-          class="icon-white-shadow"
-          :size="xsOnly ? 25 : 28"
+          v-if="xsOnly"
+          class="icon-white-shadow pl-1"
+          :size="xsOnly ? 24 : 26"
           >
             $finder-icon
           </v-icon>
 
         </v-btn>
+      </v-col>
+
+      <v-col
+      class="d-flex justify-end pb-0"
+      >
+        <h1
+        :class="['text-big header',
+        {'text-h4' : mdAndDown},
+        {'text-h5': xsOnly},
+        {'text-h6': windowWidth < 310}]"
+        >
+          <v-icon
+          :class="['pb-3 icon-white-shadow']"
+          :size=iconSize
+          >
+            $player-2-icon
+          </v-icon>
+          My Matches
+        </h1>
       </v-col>
     </v-row>
 
@@ -101,10 +110,19 @@ export default {
       isFinder: 'app/isFinder',
       dark: 'theme/getDarkMode',
     }),
+
+    iconSize() {
+      if (this.$vuetify.breakpoint.lgAndUp) return 46;
+      if (this.$vuetify.breakpoint.mdOnly) return 40;
+      if (this.$vuetify.breakpoint.xsOnly) return 30;
+      if (this.windowWidth < 310) return 28;
+      return 34;
+    },
   },
 
   watch: {
     windowWidth(newVal) {
+      /* listen to window width change of the window */
       this.windowWidth = newVal;
     },
   },
@@ -114,6 +132,7 @@ export default {
     ...mapMutations({ setAppSection: 'app/setAppSection' }),
 
     onResize() {
+      /* update local variable with new value of window width */
       this.windowWidth = window.innerWidth;
     },
   },

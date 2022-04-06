@@ -10,6 +10,8 @@ export default {
 
   mutations: {
     setUser(state, userData) {
+      /* sets the user in vuex storage and save it in the local storage of the browser.
+      To use it after refresh */
       state.user = userData;
       const credentials = { name: userData.username, psw: userData.password };
       localStorage.setItem('userInfo', JSON.stringify(credentials));
@@ -27,6 +29,7 @@ export default {
         return null;
       }
       commit('setLoginStatus', false);
+      /* verify if there is a user that match the credentials provided */
       const res = await UserService.getUser(credentials);
       const userData = res.data[0];
       if (userData) {
@@ -37,10 +40,17 @@ export default {
     },
 
     async signup({ commit }, userData) {
+      const res = await fetch('https://randomuser.me/api/?gender=male');
+      const { results } = await res.json();
+
+      const picture = results[0].picture.medium;
+      const user = userData;
+      user.picture = picture;
+
       /* register user in db */
-      await UserService.registerUser(JSON.stringify(userData));
+      const userWithId = await UserService.registerUser(user);
       /* set the user in the vuex auth/state */
-      commit('setUser', userData);
+      commit('setUser', userWithId);
       commit('setLoginStatus', true);
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="background">
+  <div>
 
     <v-snackbar
      v-model="snackbar"
@@ -64,8 +64,7 @@
             <v-container fluid class="px-0">
 
               <details-recap
-              v-if="!xsOnly"
-              class="infos pt-8"
+              class="hidden-xs-only infos pt-8"
               />
 
               <v-row justify="center" :class="xsOnly ? 'pt-8 pb-6' : 'pt-12 pb-4'">
@@ -209,16 +208,21 @@ export default {
   watch: {
     loading(val) {
       if (!val) {
-        this.setAppSection('my-matches');
         this.step = 1;
       }
     },
 
     matchCreated(newVal) {
-      if (newVal) this.snackbar = true;
+      if (newVal) {
+        this.snackbar = true;
+        /* after the creation of the match go to my matches section */
+        this.setAppSection('my-matches');
+      }
     },
 
     step(newVal) {
+      /* set team selected to black when step is 2,
+      the user will be placed in team black by default */
       if (newVal === 2) this.setTeamSelected('black');
     },
   },
@@ -236,13 +240,6 @@ export default {
 </script>
 
 <style scoped>
-.background {
-  height: 100%;
-  background:linear-gradient(to bottom,rgba(0, 0, 0, 0.5),
-  rgba(0, 0, 0, 0.2)), url('../assets/backgrounds/night.jpg') center center no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
 .stepper-margin-lg {
   margin: 16px 8vw;
 }

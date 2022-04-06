@@ -9,7 +9,7 @@
 
         <v-row>
           <v-btn
-          :class="[mdAndUp ? 'pl-6' : 'pl-4', 'btn-icon-shadow']"
+          :class="[mdAndUp ? 'pl-4' : 'pl-2', 'btn-icon-shadow']"
           plain
           :x-large="mdAndUp"
           :large="smAndDown"
@@ -153,6 +153,7 @@ export default {
       loading: 'matches/getLoading',
     }),
 
+    /* two way binding with vuex state */
     invitationDialog: {
       get() {
         return this.$store.state.matches.invitationDialog;
@@ -174,6 +175,8 @@ export default {
     }),
 
     addUser() {
+      /* wait for the end of addUserInMatch and then set invitation dialog
+      to false */
       this.addUserInMatch().then(() => {
         this.invitationDialog = false;
       });
@@ -181,10 +184,12 @@ export default {
   },
 
   created() {
+    /* select team to the one where the user is present */
     this.selectTeamWithUser();
   },
 
   destroyed() {
+    /* reset match overview when this component is destroyed */
     this.resetMatchOverview('');
   },
 
@@ -230,10 +235,10 @@ export default {
   border-radius: 16px;
 }
 .overview-light::-webkit-scrollbar-thumb {
-  background: #7986CB;
+  background: #E8EAF6;
   border-radius: 16px;
 }
 .overview-light::-webkit-scrollbar-thumb:hover {
-  background: #E8EAF6;
+  background: #7986CB;
 }
 </style>

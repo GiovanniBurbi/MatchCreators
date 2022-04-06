@@ -15,23 +15,20 @@
     </v-row>
 
     <!-- list of cards representing available matches -->
-    <v-slide-x-transition>
 
-      <v-row justify="center" v-if="!loading">
-          <template v-for="match in matches">
+    <v-row justify="center" v-if="!loading">
+        <template v-for="match in matches">
 
-            <!-- component over handler with vuetify -->
-            <v-hover v-slot="{ hover }" :key="match.id">
-              <match-card
-              :match="match"
-              :hover="hover"
-              />
-            </v-hover>
+          <!-- component over handler with vuetify -->
+          <v-hover v-slot="{ hover }" :key="match.id">
+            <match-card
+            :match="match"
+            :hover="hover"
+            />
+          </v-hover>
 
-          </template>
-      </v-row>
-
-    </v-slide-x-transition>
+        </template>
+    </v-row>
 
   </v-container>
 </template>
